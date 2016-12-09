@@ -1,0 +1,414 @@
+//
+//  CoreDataManager.swift
+//  BookCities
+//
+//  Created by Sushobhit_BuiltByBlank on 11/30/16.
+//  Copyright © 2016 Built by Blank India Pvt. Ltd. All rights reserved.
+//
+
+import UIKit
+import CoreData
+class CoreDataManager: NSObject {
+    
+    // MARK: - SINGLETON CALSS METHOD TO GET GET SHARED OBJECT
+    class func sharedInstance() -> CoreDataManager {
+        struct Singleton {
+            static var sharedInstance = CoreDataManager()
+        }
+        return Singleton.sharedInstance
+    }
+    
+    // MARK: - Core Data stack
+    
+    lazy var persistentContainer: NSPersistentContainer = {
+        /*
+         The persistent container for the application. This implementation
+         creates and returns a container, having loaded the store for the
+         application to it. This property is optional since there are legitimate
+         error conditions that could cause the creation of the store to fail.
+         */
+        let container = NSPersistentContainer(name: "BookCities")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                
+                /*
+                 Typical reasons for an error here include:
+                 * The parent directory does not exist, cannot be created, or disallows writing.
+                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
+                 * The device is out of space.
+                 * The store could not be migrated to the current model version.
+                 Check the error message to determine what the actual problem was.
+                 */
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
+    
+    // MARK: - Core Data Saving support
+    
+    func saveContext () {
+        let context = persistentContainer.viewContext
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
+    }
+
+    // MARK: - METHOD TO SAVE a Category ON CORE DATA
+    func saveCategory(_ name: String , id: String) {
+//        guard let appDelegate =
+//            UIApplication.shared.delegate as? AppDelegate else {
+//                return
+//        }
+        // 1
+        let managedContext =
+            self.persistentContainer.viewContext
+        
+        // 2
+        let entity =
+            NSEntityDescription.entity(forEntityName: Constants.Entity.Category,
+                                       in: managedContext)!
+        
+        let category = NSManagedObject(entity: entity,
+                                     insertInto: managedContext)
+        
+        // 3
+        category.setValue(name, forKeyPath: "name")
+        category.setValue(id, forKey: "id")
+        
+        // 4
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
+    
+    //MARK: -  FATCH Category FROM CORE DATA
+    func getCategories() -> Array<Any> {
+        
+        var data = Array<Any>()
+        
+        //1
+//        guard let appDelegate =
+//            UIApplication.shared.delegate as? AppDelegate else {
+//                return Array()
+//        }
+        
+        let managedContext =
+            self.persistentContainer.viewContext
+        
+        //2
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: Constants.Entity.Category)
+        
+        //3
+        do {
+            data = try managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        return data
+    }
+
+    // MARK: - check whether category already exists or not
+    func haveCategories() -> Bool {
+        var count:Int?
+//        guard let appDelegate =
+//            UIApplication.shared.delegate as? AppDelegate else {
+//                return false
+//        }
+        let managedContext =
+            self.persistentContainer.viewContext
+        
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: Constants.Entity.Category)
+        do{
+            count = try managedContext.count(for: fetchRequest)
+        }
+        catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        if count == 0 {
+            return false
+        }
+        else{
+            return true
+        }
+    }
+    
+     // MARK: - METHOD TO SAVE a City ON CORE DATA
+    func saveCity(_ name: String , id: String, stateId:String, countryId:String) {
+//        guard let appDelegate =
+//            UIApplication.shared.delegate as? AppDelegate else {
+//                return
+//        }
+        // 1
+        let managedContext =
+            self.persistentContainer.viewContext
+        
+        let privateMOC = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        privateMOC.parent = managedContext
+        // 2
+        
+        
+        privateMOC.perform {
+            let entity =
+                NSEntityDescription.entity(forEntityName: Constants.Entity.City,
+                                           in: privateMOC)!
+            
+            let city = NSManagedObject(entity: entity,
+                                       insertInto: privateMOC)
+            
+            // 3
+            city.setValue(name, forKeyPath: Constants.JSONCityResponseKey.Name)
+            city.setValue(id, forKey: Constants.JSONCityResponseKey.Id)
+            city.setValue(stateId, forKey: Constants.JSONCityResponseKey.State_id)
+            city.setValue(countryId, forKey: Constants.JSONCityResponseKey.Country_id)
+            // 4
+            do {
+                try privateMOC.save()
+                managedContext.performAndWait {
+                    do {
+                        try managedContext.save()
+                    } catch {
+                        fatalError("Failure to save context: \(error)")
+                    }
+                }
+            } catch {
+                fatalError("Failure to save context: \(error)")
+            }
+            
+        }
+        
+    }
+    
+  
+    //MARK: -  FATCH Cities FROM CORE DATA
+    func getCities() -> Array<Any> {
+        
+        var data = Array<Any>()
+        
+        //1
+//        guard let appDelegate =
+//            UIApplication.shared.delegate as? AppDelegate else {
+//                return Array()
+//        }
+        
+        let managedContext =
+            self.persistentContainer.viewContext
+        
+        //2
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: Constants.Entity.City)
+        //3
+        do {
+            data = try managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        return data
+    }
+    
+    // MARK: - check wether the City is already exists or not
+    func haveCity(_ Id: String) -> Bool {
+        var count:Int?
+//        guard let appDelegate =
+//            UIApplication.shared.delegate as? AppDelegate else {
+//                return false
+//        }
+        let managedContext =
+            self.persistentContainer.viewContext
+        
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: Constants.Entity.City)
+        let predicate = NSPredicate(format: "id == %@",Id)
+        fetchRequest.predicate = predicate
+        do{
+            count = try managedContext.count(for: fetchRequest)
+        }
+        catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        if count == 0 {
+            return false
+        }
+        else{
+            return true
+        }
+    }
+
+    // MARK: - Check wether the core data contain city or empty
+    func haveCity() -> Bool {
+        var count:Int?
+//        guard let appDelegate =
+//            UIApplication.shared.delegate as? AppDelegate else {
+//                return false
+//        }
+        let managedContext =
+            self.persistentContainer.viewContext
+        
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: Constants.Entity.City)
+        do{
+            count = try managedContext.count(for: fetchRequest)
+        }
+        catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        if count == 0 {
+            return false
+        }
+        else{
+            return true
+        }
+    }
+    // MARK: - METHOD TO SAVE a Store ON CORE DATA
+    func saveStores(_ store: JSONStore) {
+//        guard let appDelegate =
+//            UIApplication.shared.delegate as? AppDelegate else {
+//                return
+//        }
+        // 1
+        let managedContext =
+            self.persistentContainer.viewContext
+        
+        let privateMOC = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        privateMOC.parent = managedContext
+        // 2
+        
+        
+        privateMOC.perform {
+            let entity =
+                NSEntityDescription.entity(forEntityName:Constants.Entity.Store,
+                                           in: privateMOC)!
+            
+            let storeEntity = NSManagedObject(entity: entity,
+                                       insertInto: privateMOC)
+            
+            // 3
+            storeEntity.setValue(store.name, forKeyPath: Constants.JSONStoreResponseKey.Name)
+            storeEntity.setValue(store.id, forKey: Constants.JSONStoreResponseKey.Id)
+            storeEntity.setValue(store.city, forKey: Constants.JSONStoreResponseKey.City)
+            storeEntity.setValue(store.country, forKey: Constants.JSONStoreResponseKey.Country)
+            storeEntity.setValue(store.address, forKey: Constants.JSONStoreResponseKey.Address)
+            storeEntity.setValue(store.address_2, forKey: Constants.JSONStoreResponseKey.Address_2)
+            storeEntity.setValue(store.books_category_ids, forKey: Constants.JSONStoreResponseKey.BookCategoryIds)
+            storeEntity.setValue(store.is_museumshops, forKey: Constants.JSONStoreResponseKey.IsMuseumshops)
+            storeEntity.setValue(store.is_new_books, forKey: Constants.JSONStoreResponseKey.IsNewBooks)
+            storeEntity.setValue(store.is_used_books, forKey: Constants.JSONStoreResponseKey.IsUsedBooks)
+            storeEntity.setValue(store.latitude, forKey: Constants.JSONStoreResponseKey.Latitude)
+            storeEntity.setValue(store.longitude, forKey: Constants.JSONStoreResponseKey.Longitude)
+            storeEntity.setValue(store.state, forKey: Constants.JSONStoreResponseKey.State)
+            storeEntity.setValue(store.website, forKey: Constants.JSONStoreResponseKey.Website)
+            storeEntity.setValue(store.working_hours, forKey: Constants.JSONStoreResponseKey.WorkingHours)
+            storeEntity.setValue(store.zipcode, forKey: Constants.JSONStoreResponseKey.Zipcode)
+            // 4
+            do {
+                try privateMOC.save()
+                managedContext.performAndWait {
+                    do {
+                        try managedContext.save()
+                    } catch {
+                        fatalError("Failure to save context: \(error)")
+                    }
+                }
+            } catch {
+                fatalError("Failure to save context: \(error)")
+            }
+        }
+    }
+    
+    // MARK: - Check wether the core data contain stores or empty
+    func haveStore() -> Bool {
+        var count:Int?
+//        guard let appDelegate =
+//            UIApplication.shared.delegate as? AppDelegate else {
+//                return false
+//        }
+        let managedContext =
+            self.persistentContainer.viewContext
+        
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: Constants.Entity.Store)
+        do{
+            count = try managedContext.count(for: fetchRequest)
+        }
+        catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        if count == 0 {
+            return false
+        }
+        else{
+            return true
+        }
+    }
+    
+    // MARK: - check wether the Store is already exists or not
+    func haveStore(_ Id: String) -> Bool {
+//        guard let appDelegate =
+//            UIApplication.shared.delegate as? AppDelegate else {
+//                return false
+//        }
+        let managedContext =
+            self.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.Entity.Store)
+        let predicate = NSPredicate(format: "id == %@", Id)
+        fetchRequest.predicate = predicate
+        do
+        {
+            let fetchResults = try managedContext.fetch(fetchRequest)
+            if fetchResults.count > 0 {
+                return true
+            }
+            else{
+                return false
+            }
+        }
+        catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+             return false
+        }
+       
+}
+
+    
+    //MARK: -  FATCH Stores FROM CORE DATA
+    func getStores() -> Array<Any> {
+        
+        var data = Array<Any>()
+        
+        //1
+//        guard let appDelegate =
+//            UIApplication.shared.delegate as? AppDelegate else {
+//                return Array()
+//        }
+        
+        let managedContext =
+            self.persistentContainer.viewContext
+        
+        //2
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: Constants.Entity.Store)
+        //3
+        do {
+            data = try managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        return data
+    }
+
+
+}

@@ -7,23 +7,91 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B4B90F31DF161E7008FE99B /* ReachabilitySwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B4B90F21DF161E7008FE99B /* ReachabilitySwift.framework */; };
+		2B4B90F51DF19802008FE99B /* Reachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4B90F41DF19802008FE99B /* Reachable.swift */; };
+		2B7662E41DEC526300987F40 /* JSONCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7662E31DEC526300987F40 /* JSONCity.swift */; };
 		2B81934F1DE6FD69008879B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81934E1DE6FD69008879B2 /* AppDelegate.swift */; };
-		2B8193511DE6FD69008879B2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8193501DE6FD69008879B2 /* ViewController.swift */; };
 		2B8193541DE6FD69008879B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B8193521DE6FD69008879B2 /* Main.storyboard */; };
 		2B8193571DE6FD69008879B2 /* BookCities.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2B8193551DE6FD69008879B2 /* BookCities.xcdatamodeld */; };
 		2B8193591DE6FD69008879B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B8193581DE6FD69008879B2 /* Assets.xcassets */; };
 		2B81935C1DE6FD69008879B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B81935A1DE6FD69008879B2 /* LaunchScreen.storyboard */; };
+		2B8193831DE6FE34008879B2 /* CitiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8193641DE6FE34008879B2 /* CitiesVC.swift */; };
+		2B8193841DE6FE34008879B2 /* InfosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8193651DE6FE34008879B2 /* InfosVC.swift */; };
+		2B8193851DE6FE34008879B2 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8193661DE6FE34008879B2 /* MainView.swift */; };
+		2B8193861DE6FE34008879B2 /* MyListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8193671DE6FE34008879B2 /* MyListVC.swift */; };
+		2B8193871DE6FE34008879B2 /* MyMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8193681DE6FE34008879B2 /* MyMapVC.swift */; };
+		2B8193881DE6FE34008879B2 /* ShopDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8193691DE6FE34008879B2 /* ShopDetailVC.swift */; };
+		2B81938A1DE6FE34008879B2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81936C1DE6FE34008879B2 /* Constants.swift */; };
+		2B81938B1DE6FE34008879B2 /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81936D1DE6FE34008879B2 /* GCDBlackBox.swift */; };
+		2B81938C1DE6FE34008879B2 /* BookStoreAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8193701DE6FE34008879B2 /* BookStoreAnnotation.swift */; };
+		2B81938D1DE6FE34008879B2 /* BridgeAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8193711DE6FE34008879B2 /* BridgeAnnotation.swift */; };
+		2B81938E1DE6FE34008879B2 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8193721DE6FE34008879B2 /* CustomAnnotation.swift */; };
+		2B81938F1DE6FE34008879B2 /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8193731DE6FE34008879B2 /* CustomAnnotationView.swift */; };
+		2B8193901DE6FE34008879B2 /* SFAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8193741DE6FE34008879B2 /* SFAnnotation.swift */; };
+		2B8193911DE6FE34008879B2 /* WharfAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8193751DE6FE34008879B2 /* WharfAnnotation.swift */; };
+		2B8193921DE6FE34008879B2 /* BookCitiesClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8193771DE6FE34008879B2 /* BookCitiesClient.swift */; };
+		2B8193931DE6FE34008879B2 /* BookCitiesConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8193781DE6FE34008879B2 /* BookCitiesConvenience.swift */; };
+		2B8193941DE6FE34008879B2 /* BorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81937A1DE6FE34008879B2 /* BorderButton.swift */; };
+		2B8193951DE6FE34008879B2 /* BookStoreTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81937C1DE6FE34008879B2 /* BookStoreTVCell.swift */; };
+		2B8193961DE6FE34008879B2 /* BookStoreTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B81937D1DE6FE34008879B2 /* BookStoreTVCell.xib */; };
+		2B8193971DE6FE34008879B2 /* CitiesTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81937E1DE6FE34008879B2 /* CitiesTVCell.swift */; };
+		2B8193981DE6FE34008879B2 /* CitiesTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B81937F1DE6FE34008879B2 /* CitiesTVCell.xib */; };
+		2B8193991DE6FE34008879B2 /* splash_screen.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B8193821DE6FE34008879B2 /* splash_screen.png */; };
+		2B81939D1DE709EE008879B2 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B81939C1DE709EE008879B2 /* Alamofire.framework */; };
+		2B81939F1DE709FA008879B2 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B81939E1DE709FA008879B2 /* MapKit.framework */; };
+		2B8193A11DE70A02008879B2 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8193A01DE70A02008879B2 /* CoreLocation.framework */; };
+		2B81BB161DEEF18800318859 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81BB151DEEF18800318859 /* CoreDataManager.swift */; };
+		2B81BB181DEEFFF400318859 /* JSONCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81BB171DEEFFF400318859 /* JSONCategory.swift */; };
+		2B8AA7D21DEDAFEC0024F011 /* JSONStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8AA7D11DEDAFEC0024F011 /* JSONStore.swift */; };
+		2B9ADB571DFACDD800DD96EA /* MapDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9ADB561DFACDD800DD96EA /* MapDataController.swift */; };
+		2BDB3DC61DF1B616004AC4FC /* categoriescdExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDB3DC51DF1B616004AC4FC /* categoriescdExtension.swift */; };
+		90A10771576CFEA06A1F17FA /* Pods_BookCities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4E7342CCD0E719848D26A94 /* Pods_BookCities.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B4B90F21DF161E7008FE99B /* ReachabilitySwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReachabilitySwift.framework; path = "../../../../Library/Developer/Xcode/DerivedData/BookCities-fdagecfuoyvlxsaabdajemrbsgur/Build/Products/Debug-iphoneos/ReachabilitySwift/ReachabilitySwift.framework"; sourceTree = "<group>"; };
+		2B4B90F41DF19802008FE99B /* Reachable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachable.swift; sourceTree = "<group>"; };
+		2B7662E31DEC526300987F40 /* JSONCity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONCity.swift; sourceTree = "<group>"; };
 		2B81934B1DE6FD69008879B2 /* BookCities.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookCities.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B81934E1DE6FD69008879B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2B8193501DE6FD69008879B2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2B8193531DE6FD69008879B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2B8193561DE6FD69008879B2 /* BookCities.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BookCities.xcdatamodel; sourceTree = "<group>"; };
 		2B8193581DE6FD69008879B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2B81935B1DE6FD69008879B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2B81935D1DE6FD69008879B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2B8193641DE6FE34008879B2 /* CitiesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CitiesVC.swift; sourceTree = "<group>"; };
+		2B8193651DE6FE34008879B2 /* InfosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfosVC.swift; sourceTree = "<group>"; };
+		2B8193661DE6FE34008879B2 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		2B8193671DE6FE34008879B2 /* MyListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyListVC.swift; sourceTree = "<group>"; };
+		2B8193681DE6FE34008879B2 /* MyMapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMapVC.swift; sourceTree = "<group>"; };
+		2B8193691DE6FE34008879B2 /* ShopDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopDetailVC.swift; sourceTree = "<group>"; };
+		2B81936C1DE6FE34008879B2 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		2B81936D1DE6FE34008879B2 /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
+		2B8193701DE6FE34008879B2 /* BookStoreAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookStoreAnnotation.swift; sourceTree = "<group>"; };
+		2B8193711DE6FE34008879B2 /* BridgeAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BridgeAnnotation.swift; sourceTree = "<group>"; };
+		2B8193721DE6FE34008879B2 /* CustomAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
+		2B8193731DE6FE34008879B2 /* CustomAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
+		2B8193741DE6FE34008879B2 /* SFAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SFAnnotation.swift; sourceTree = "<group>"; };
+		2B8193751DE6FE34008879B2 /* WharfAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WharfAnnotation.swift; sourceTree = "<group>"; };
+		2B8193771DE6FE34008879B2 /* BookCitiesClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookCitiesClient.swift; sourceTree = "<group>"; };
+		2B8193781DE6FE34008879B2 /* BookCitiesConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookCitiesConvenience.swift; sourceTree = "<group>"; };
+		2B81937A1DE6FE34008879B2 /* BorderButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderButton.swift; sourceTree = "<group>"; };
+		2B81937C1DE6FE34008879B2 /* BookStoreTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookStoreTVCell.swift; sourceTree = "<group>"; };
+		2B81937D1DE6FE34008879B2 /* BookStoreTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookStoreTVCell.xib; sourceTree = "<group>"; };
+		2B81937E1DE6FE34008879B2 /* CitiesTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CitiesTVCell.swift; sourceTree = "<group>"; };
+		2B81937F1DE6FE34008879B2 /* CitiesTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CitiesTVCell.xib; sourceTree = "<group>"; };
+		2B8193821DE6FE34008879B2 /* splash_screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash_screen.png; sourceTree = "<group>"; };
+		2B81939C1DE709EE008879B2 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "Pods/../build/Release-iphoneos/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
+		2B81939E1DE709FA008879B2 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		2B8193A01DE70A02008879B2 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		2B81BB151DEEF18800318859 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		2B81BB171DEEFFF400318859 /* JSONCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONCategory.swift; sourceTree = "<group>"; };
+		2B8AA7D11DEDAFEC0024F011 /* JSONStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONStore.swift; sourceTree = "<group>"; };
+		2B9ADB561DFACDD800DD96EA /* MapDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDataController.swift; sourceTree = "<group>"; };
+		2BDB3DC51DF1B616004AC4FC /* categoriescdExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = categoriescdExtension.swift; sourceTree = "<group>"; };
+		A240B5DB20F3E8440EBDF64C /* Pods-BookCities.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookCities.release.xcconfig"; path = "Pods/Target Support Files/Pods-BookCities/Pods-BookCities.release.xcconfig"; sourceTree = "<group>"; };
+		AF25DD344DE010CE098E7B94 /* Pods-BookCities.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookCities.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BookCities/Pods-BookCities.debug.xcconfig"; sourceTree = "<group>"; };
+		C4E7342CCD0E719848D26A94 /* Pods_BookCities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BookCities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +99,34 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B4B90F31DF161E7008FE99B /* ReachabilitySwift.framework in Frameworks */,
+				2B8193A11DE70A02008879B2 /* CoreLocation.framework in Frameworks */,
+				2B81939F1DE709FA008879B2 /* MapKit.framework in Frameworks */,
+				2B81939D1DE709EE008879B2 /* Alamofire.framework in Frameworks */,
+				90A10771576CFEA06A1F17FA /* Pods_BookCities.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B7662E21DEC019600987F40 /* ResponseObject */ = {
+			isa = PBXGroup;
+			children = (
+				2B7662E31DEC526300987F40 /* JSONCity.swift */,
+				2B8AA7D11DEDAFEC0024F011 /* JSONStore.swift */,
+				2B81BB171DEEFFF400318859 /* JSONCategory.swift */,
+			);
+			path = ResponseObject;
+			sourceTree = "<group>";
+		};
 		2B8193421DE6FD69008879B2 = {
 			isa = PBXGroup;
 			children = (
 				2B81934D1DE6FD69008879B2 /* BookCities */,
 				2B81934C1DE6FD69008879B2 /* Products */,
+				85D2C2ECB6ABC9303B86A60D /* Pods */,
+				EFBD2AB30B0D142B18346A67 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,8 +141,14 @@
 		2B81934D1DE6FD69008879B2 /* BookCities */ = {
 			isa = PBXGroup;
 			children = (
+				2B81BB141DEEE58100318859 /* Controllers */,
+				2B8193631DE6FE34008879B2 /* ViewControllers */,
+				2B81936B1DE6FE34008879B2 /* helper */,
+				2B8193761DE6FE34008879B2 /* Client */,
+				2B81936E1DE6FE34008879B2 /* Model */,
+				2B8193791DE6FE34008879B2 /* Views */,
+				2B8193811DE6FE34008879B2 /* assets */,
 				2B81934E1DE6FD69008879B2 /* AppDelegate.swift */,
-				2B8193501DE6FD69008879B2 /* ViewController.swift */,
 				2B8193521DE6FD69008879B2 /* Main.storyboard */,
 				2B8193581DE6FD69008879B2 /* Assets.xcassets */,
 				2B81935A1DE6FD69008879B2 /* LaunchScreen.storyboard */,
@@ -67,6 +158,137 @@
 			path = BookCities;
 			sourceTree = "<group>";
 		};
+		2B8193631DE6FE34008879B2 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2B8193641DE6FE34008879B2 /* CitiesVC.swift */,
+				2B8193651DE6FE34008879B2 /* InfosVC.swift */,
+				2B8193661DE6FE34008879B2 /* MainView.swift */,
+				2B8193671DE6FE34008879B2 /* MyListVC.swift */,
+				2B8193681DE6FE34008879B2 /* MyMapVC.swift */,
+				2B8193691DE6FE34008879B2 /* ShopDetailVC.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		2B81936B1DE6FE34008879B2 /* helper */ = {
+			isa = PBXGroup;
+			children = (
+				2B81936C1DE6FE34008879B2 /* Constants.swift */,
+				2B81936D1DE6FE34008879B2 /* GCDBlackBox.swift */,
+				2B4B90F41DF19802008FE99B /* Reachable.swift */,
+			);
+			path = helper;
+			sourceTree = "<group>";
+		};
+		2B81936E1DE6FE34008879B2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2BDB3DB21DF1A835004AC4FC /* Managed Objects */,
+				2B8193801DE6FE34008879B2 /* Extension */,
+				2B7662E21DEC019600987F40 /* ResponseObject */,
+				2B81936F1DE6FE34008879B2 /* Annotations */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2B81936F1DE6FE34008879B2 /* Annotations */ = {
+			isa = PBXGroup;
+			children = (
+				2B8193701DE6FE34008879B2 /* BookStoreAnnotation.swift */,
+				2B8193711DE6FE34008879B2 /* BridgeAnnotation.swift */,
+				2B8193721DE6FE34008879B2 /* CustomAnnotation.swift */,
+				2B8193731DE6FE34008879B2 /* CustomAnnotationView.swift */,
+				2B8193741DE6FE34008879B2 /* SFAnnotation.swift */,
+				2B8193751DE6FE34008879B2 /* WharfAnnotation.swift */,
+			);
+			path = Annotations;
+			sourceTree = "<group>";
+		};
+		2B8193761DE6FE34008879B2 /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				2B8193771DE6FE34008879B2 /* BookCitiesClient.swift */,
+				2B8193781DE6FE34008879B2 /* BookCitiesConvenience.swift */,
+			);
+			name = Client;
+			path = Model/Client;
+			sourceTree = "<group>";
+		};
+		2B8193791DE6FE34008879B2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2B81937A1DE6FE34008879B2 /* BorderButton.swift */,
+				2B81937B1DE6FE34008879B2 /* CustomTableViewCells */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2B81937B1DE6FE34008879B2 /* CustomTableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				2B81937C1DE6FE34008879B2 /* BookStoreTVCell.swift */,
+				2B81937D1DE6FE34008879B2 /* BookStoreTVCell.xib */,
+				2B81937E1DE6FE34008879B2 /* CitiesTVCell.swift */,
+				2B81937F1DE6FE34008879B2 /* CitiesTVCell.xib */,
+			);
+			path = CustomTableViewCells;
+			sourceTree = "<group>";
+		};
+		2B8193801DE6FE34008879B2 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				2BDB3DC51DF1B616004AC4FC /* categoriescdExtension.swift */,
+			);
+			name = Extension;
+			path = ../Views/Extension;
+			sourceTree = "<group>";
+		};
+		2B8193811DE6FE34008879B2 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				2B8193821DE6FE34008879B2 /* splash_screen.png */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
+		2B81BB141DEEE58100318859 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2B81BB151DEEF18800318859 /* CoreDataManager.swift */,
+				2B9ADB561DFACDD800DD96EA /* MapDataController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		2BDB3DB21DF1A835004AC4FC /* Managed Objects */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Managed Objects";
+			sourceTree = "<group>";
+		};
+		85D2C2ECB6ABC9303B86A60D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AF25DD344DE010CE098E7B94 /* Pods-BookCities.debug.xcconfig */,
+				A240B5DB20F3E8440EBDF64C /* Pods-BookCities.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		EFBD2AB30B0D142B18346A67 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2B4B90F21DF161E7008FE99B /* ReachabilitySwift.framework */,
+				2B8193A01DE70A02008879B2 /* CoreLocation.framework */,
+				2B81939E1DE709FA008879B2 /* MapKit.framework */,
+				2B81939C1DE709EE008879B2 /* Alamofire.framework */,
+				C4E7342CCD0E719848D26A94 /* Pods_BookCities.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +296,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2B8193601DE6FD69008879B2 /* Build configuration list for PBXNativeTarget "BookCities" */;
 			buildPhases = (
+				65D79D4EB8755F2160ED8D81 /* [CP] Check Pods Manifest.lock */,
 				2B8193471DE6FD69008879B2 /* Sources */,
 				2B8193481DE6FD69008879B2 /* Frameworks */,
 				2B8193491DE6FD69008879B2 /* Resources */,
+				31CCD22C125F880D2DC9C82A /* [CP] Embed Pods Frameworks */,
+				5D1BE634C8AE50C4338BD217 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -100,7 +325,8 @@
 					2B81934A1DE6FD69008879B2 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = GXTXWHR532;
-						ProvisioningStyle = Automatic;
+						LastSwiftMigration = 0820;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -129,20 +355,96 @@
 			files = (
 				2B81935C1DE6FD69008879B2 /* LaunchScreen.storyboard in Resources */,
 				2B8193591DE6FD69008879B2 /* Assets.xcassets in Resources */,
+				2B8193981DE6FE34008879B2 /* CitiesTVCell.xib in Resources */,
 				2B8193541DE6FD69008879B2 /* Main.storyboard in Resources */,
+				2B8193961DE6FE34008879B2 /* BookStoreTVCell.xib in Resources */,
+				2B8193991DE6FE34008879B2 /* splash_screen.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		31CCD22C125F880D2DC9C82A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BookCities/Pods-BookCities-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5D1BE634C8AE50C4338BD217 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BookCities/Pods-BookCities-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		65D79D4EB8755F2160ED8D81 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2B8193471DE6FD69008879B2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BDB3DC61DF1B616004AC4FC /* categoriescdExtension.swift in Sources */,
+				2B8193841DE6FE34008879B2 /* InfosVC.swift in Sources */,
+				2B8193971DE6FE34008879B2 /* CitiesTVCell.swift in Sources */,
+				2B81938D1DE6FE34008879B2 /* BridgeAnnotation.swift in Sources */,
 				2B8193571DE6FD69008879B2 /* BookCities.xcdatamodeld in Sources */,
-				2B8193511DE6FD69008879B2 /* ViewController.swift in Sources */,
+				2B8193931DE6FE34008879B2 /* BookCitiesConvenience.swift in Sources */,
+				2B8193911DE6FE34008879B2 /* WharfAnnotation.swift in Sources */,
+				2B81BB161DEEF18800318859 /* CoreDataManager.swift in Sources */,
+				2B81BB181DEEFFF400318859 /* JSONCategory.swift in Sources */,
+				2B81938E1DE6FE34008879B2 /* CustomAnnotation.swift in Sources */,
+				2B8193861DE6FE34008879B2 /* MyListVC.swift in Sources */,
+				2B8193921DE6FE34008879B2 /* BookCitiesClient.swift in Sources */,
+				2B8193881DE6FE34008879B2 /* ShopDetailVC.swift in Sources */,
+				2B81938B1DE6FE34008879B2 /* GCDBlackBox.swift in Sources */,
+				2B8193901DE6FE34008879B2 /* SFAnnotation.swift in Sources */,
+				2B7662E41DEC526300987F40 /* JSONCity.swift in Sources */,
+				2B8AA7D21DEDAFEC0024F011 /* JSONStore.swift in Sources */,
+				2B8193831DE6FE34008879B2 /* CitiesVC.swift in Sources */,
+				2B8193941DE6FE34008879B2 /* BorderButton.swift in Sources */,
+				2B8193871DE6FE34008879B2 /* MyMapVC.swift in Sources */,
+				2B81938C1DE6FE34008879B2 /* BookStoreAnnotation.swift in Sources */,
+				2B8193851DE6FE34008879B2 /* MainView.swift in Sources */,
+				2B9ADB571DFACDD800DD96EA /* MapDataController.swift in Sources */,
 				2B81934F1DE6FD69008879B2 /* AppDelegate.swift in Sources */,
+				2B81938F1DE6FE34008879B2 /* CustomAnnotationView.swift in Sources */,
+				2B4B90F51DF19802008FE99B /* Reachable.swift in Sources */,
+				2B8193951DE6FE34008879B2 /* BookStoreTVCell.swift in Sources */,
+				2B81938A1DE6FE34008879B2 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,10 +488,12 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Shivam Goyal (QQBLUMH2RR)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Shivam Goyal (QQBLUMH2RR)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -236,16 +540,19 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Shivam Goyal (QQBLUMH2RR)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Shivam Goyal (QQBLUMH2RR)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = fast;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -255,7 +562,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -263,26 +570,44 @@
 		};
 		2B8193611DE6FD69008879B2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AF25DD344DE010CE098E7B94 /* Pods-BookCities.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Shivam Goyal (QQBLUMH2RR)";
 				DEVELOPMENT_TEAM = GXTXWHR532;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = BookCities/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.builtbyblank.bookcities.BookCities;
+				LIBRARY_SEARCH_PATHS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.builtbyblank.bookcities;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "c6220058-eb65-480b-b786-dcd3d13de502";
+				PROVISIONING_PROFILE_SPECIFIER = BookCitiesDevPP;
+				SDKROOT = iphoneos;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		2B8193621DE6FD69008879B2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A240B5DB20F3E8440EBDF64C /* Pods-BookCities.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Shivam Goyal (QQBLUMH2RR)";
 				DEVELOPMENT_TEAM = GXTXWHR532;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = BookCities/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.builtbyblank.bookcities.BookCities;
+				LIBRARY_SEARCH_PATHS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.builtbyblank.bookcities;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "c6220058-eb65-480b-b786-dcd3d13de502";
+				PROVISIONING_PROFILE_SPECIFIER = BookCitiesDevPP;
+				SDKROOT = iphoneos;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -306,6 +631,7 @@
 				2B8193621DE6FD69008879B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
