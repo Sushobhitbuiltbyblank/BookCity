@@ -163,6 +163,15 @@ Walter Haas</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3A2-GC-pma" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
+                                <rect key="frame" x="77" y="454" width="166" height="30"/>
+                                <state key="normal" title="Save Offline Data">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="saveOfflineDataBtnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XNF-JV-qIh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.98039215686274506" blue="0.63921568627450975" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -170,6 +179,8 @@ Walter Haas</string>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="cig-Th-TVp" secondAttribute="bottom" id="1cz-GI-cKW"/>
                             <constraint firstItem="Waj-a9-Cbh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="1nu-9g-uDu"/>
                             <constraint firstItem="yiq-ay-8hS" firstAttribute="leading" secondItem="Q4h-yf-jI9" secondAttribute="trailing" constant="1" id="25Y-7d-U2N"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3A2-GC-pma" secondAttribute="trailing" constant="61" id="2me-T7-krP"/>
+                            <constraint firstItem="yMJ-DA-T0H" firstAttribute="top" secondItem="3A2-GC-pma" secondAttribute="bottom" constant="4" id="3lB-87-92T"/>
                             <constraint firstItem="cig-Th-TVp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="5HS-py-DqB"/>
                             <constraint firstAttribute="trailing" secondItem="yiq-ay-8hS" secondAttribute="trailing" constant="3" id="8iw-XW-L41"/>
                             <constraint firstAttribute="trailing" secondItem="U97-tF-LEU" secondAttribute="trailing" id="9Hd-zg-eSu"/>
@@ -179,6 +190,7 @@ Walter Haas</string>
                             <constraint firstItem="yiq-ay-8hS" firstAttribute="height" secondItem="yMJ-DA-T0H" secondAttribute="height" id="Nv6-Px-WhA"/>
                             <constraint firstItem="yMJ-DA-T0H" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Nxp-B7-3cA"/>
                             <constraint firstItem="cig-Th-TVp" firstAttribute="height" secondItem="yMJ-DA-T0H" secondAttribute="height" id="Pv2-RI-457"/>
+                            <constraint firstItem="3A2-GC-pma" firstAttribute="top" secondItem="Dnl-Yk-bcW" secondAttribute="bottom" constant="8" id="UoK-G5-sFl"/>
                             <constraint firstItem="Xlo-Lm-z1p" firstAttribute="top" secondItem="Waj-a9-Cbh" secondAttribute="bottom" id="Yuu-qf-as9"/>
                             <constraint firstItem="Waj-a9-Cbh" firstAttribute="top" secondItem="U97-tF-LEU" secondAttribute="bottom" constant="37" id="ZHL-bO-vpm"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Q4h-yf-jI9" secondAttribute="bottom" id="ZnV-YH-5UQ"/>
@@ -190,6 +202,7 @@ Walter Haas</string>
                             <constraint firstItem="U97-tF-LEU" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="naC-T4-Vdd"/>
                             <constraint firstItem="Q4h-yf-jI9" firstAttribute="height" secondItem="yMJ-DA-T0H" secondAttribute="height" id="o5U-zH-aHy"/>
                             <constraint firstItem="Dnl-Yk-bcW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sBE-cD-Mmq"/>
+                            <constraint firstItem="3A2-GC-pma" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="61" id="tms-4c-njq"/>
                             <constraint firstItem="Q4h-yf-jI9" firstAttribute="width" secondItem="cig-Th-TVp" secondAttribute="width" multiplier="5:3" constant="-136" id="usi-T9-lhV"/>
                             <constraint firstItem="Q4h-yf-jI9" firstAttribute="leading" secondItem="cig-Th-TVp" secondAttribute="trailing" constant="-4" id="vEU-uz-S2S"/>
                             <constraint firstItem="Dnl-Yk-bcW" firstAttribute="top" secondItem="Xlo-Lm-z1p" secondAttribute="bottom" id="xRG-e4-tlM"/>
@@ -200,6 +213,7 @@ Walter Haas</string>
                         <outlet property="infoBtn" destination="yiq-ay-8hS" id="E7v-8o-BpJ"/>
                         <outlet property="myListBtn" destination="Q4h-yf-jI9" id="IxD-5y-154"/>
                         <outlet property="nearMeBtn" destination="cig-Th-TVp" id="spM-hW-6fq"/>
+                        <outlet property="saveOfflineDataBtn" destination="3A2-GC-pma" id="Bxk-HI-gzv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -259,13 +273,13 @@ Walter Haas</string>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Yu-JK-PVt">
                                         <rect key="frame" x="0.0" y="0.0" width="321" height="227"/>
                                     </scrollView>
-                                    <pageControl opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="FJQ-65-1zu">
+                                    <pageControl opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="FJQ-65-1zu">
                                         <rect key="frame" x="141" y="190" width="39" height="37"/>
                                     </pageControl>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H8a-Xt-G3F">
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H8a-Xt-G3F">
                                         <rect key="frame" x="0.0" y="227" width="321" height="50"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Rv-ge-MCn" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Rv-ge-MCn" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="160" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <state key="normal" title="Show on Maps">
@@ -275,8 +289,8 @@ Walter Haas</string>
                                                     <action selector="showOnMapAction:" destination="O3l-Jp-kka" eventType="touchUpInside" id="TAi-g0-Qvc"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RgA-gn-NRV" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
-                                                <rect key="frame" x="160" y="0.0" width="80.5" height="50"/>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RgA-gn-NRV" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
+                                                <rect key="frame" x="160" y="0.0" width="81" height="50"/>
                                                 <state key="normal" image="share"/>
                                                 <state key="selected" image="selectedTriagle"/>
                                                 <state key="highlighted" image="selectedTriagle"/>
@@ -284,8 +298,8 @@ Walter Haas</string>
                                                     <action selector="shareBtnAction:" destination="O3l-Jp-kka" eventType="touchUpInside" id="Nq8-rc-mOj"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="euz-I6-Mmk" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
-                                                <rect key="frame" x="240.5" y="0.0" width="80.5" height="50"/>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="euz-I6-Mmk" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
+                                                <rect key="frame" x="241" y="0.0" width="80" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="lXW-gG-AvQ"/>
                                                 </constraints>
@@ -302,13 +316,13 @@ Walter Haas</string>
                                             <constraint firstItem="euz-I6-Mmk" firstAttribute="width" secondItem="RgA-gn-NRV" secondAttribute="width" id="AWS-DH-Oi5"/>
                                         </constraints>
                                     </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Art, Design, Photography, bla, bla, bla" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ghh-nt-Y3i">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Art, Design, Photography, bla, bla, bla" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ghh-nt-Y3i">
                                         <rect key="frame" x="8" y="318" width="288" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Store hours: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bhR-iE-hBK">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" ambiguous="YES" text="Store hours: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bhR-iE-hBK">
                                         <rect key="frame" x="8" y="388.5" width="305" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>

@@ -7,14 +7,15 @@
 //
 
 import UIKit
-import ReachabilitySwift
+import PKHUD
 class MainView: UIViewController {
 
     @IBOutlet weak var chooseACityBtn: BorderButton!
     @IBOutlet weak var nearMeBtn: BorderButton!
     @IBOutlet weak var myListBtn: BorderButton!
+    @IBOutlet weak var saveOfflineDataBtn: BorderButton!
+    
     @IBOutlet weak var infoBtn: UIButton!
-    let reachability = Reachability()!
     let appdelegate = UIApplication.shared.delegate as! AppDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,6 +96,105 @@ class MainView: UIViewController {
         let next = self.storyboard?.instantiateViewController(withIdentifier:"InfosVC") as! InfosVC
         let nv:UINavigationController = UINavigationController(rootViewController: next)
         present(nv, animated: true, completion: nil)
+    }
+    @IBAction func saveOfflineDataBtnAction(_ sender: Any) {
+        var storeCount = 0
+        HUD.show(.progress)
+//        let queue = DispatchQueue(label: "com.bookcity.getcities")
+//        queue.async{
+            if !CoreDataManager.sharedInstance().haveCity(){
+                BookCitiesClient.sharedInstance().getCities([String : AnyObject](), completionHandlerForCities:{
+                    (response, error) in
+                    if(error == nil)
+                    {
+                        //                        DispatchQueue.global(qos: .default).async{
+                        for data in response!{
+                            CoreDataManager.sharedInstance().saveCity(data.value(forKey:Constants.JSONCityResponseKey.Name) as! String, id: data.value(forKey:Constants.JSONCityResponseKey.Id) as! String, stateId: data.value(forKey:Constants.JSONCityResponseKey.State_id) as! String, countryId: data.value(forKey:Constants.JSONCityResponseKey.Country_id) as! String)
+                        }
+                        storeCount += 1
+                        HUD.flash(.success, delay: 1.0)
+                        print("offline city save")
+                        //                        }
+                    }
+                    
+                })
+            }
+            
+            if !CoreDataManager.sharedInstance().haveStore(){
+//                let storeQueue = DispatchQueue(label: "com.bookcity.getstores")
+//                storeQueue.async {
+                    BookCitiesClient.sharedInstance().getStores({
+                        (response, error) in
+                        if(error == nil)
+                        {
+                            //                        DispatchQueue.global(qos: .default).async{
+                            for data in response!{
+                                if !CoreDataManager.sharedInstance().haveStore(data.id!)
+                                {
+                                    CoreDataManager.sharedInstance().saveStores(data)
+                                }
+                            }
+                            storeCount += 1
+                            print("offline store save")
+                            //                        }
+                        }
+                    })
+                    
+//                }
+            }
+            
+            if !CoreDataManager.sharedInstance().haveState(){
+//                let stateQueue = DispatchQueue(label: "com.bookcity.getstates")
+//                stateQueue.async {
+                    BookCitiesClient.sharedInstance().getState({
+                        (response, error) in
+                        if(error == nil)
+                        {
+                            //                        DispatchQueue.global(qos: .default).async{
+                            for data in response!{
+                                CoreDataManager.sharedInstance().saveState(data.value(forKey:Constants.JSONStateResponseKey.Name) as! String, id: data.value(forKey:Constants.JSONStateResponseKey.Id) as! String, countryId: data.value(forKey:Constants.JSONStateResponseKey.Country_id) as! String)
+                            }
+                            //                        }
+                            storeCount += 1
+                            print("offline state save")
+                        }
+                    })
+                    
+//                }
+            }
+            
+            
+            if !CoreDataManager.sharedInstance().haveCountry(){
+//                let stateQueue = DispatchQueue(label: "com.bookcity.getcountry")
+//                stateQueue.async {
+                    BookCitiesClient.sharedInstance().getCountry({
+                        (response, error) in
+                        if(error == nil)
+                        {
+                            //                        DispatchQueue.global(qos: .default).async{
+                            for data in response!{
+                                CoreDataManager.sharedInstance().saveCountry(data.value(forKey:Constants.JSONCountryResponseKey.Name) as! String, id: data.value(forKey:Constants.JSONCountryResponseKey.Id) as! String, sortName:data.value(forKey:Constants.JSONCountryResponseKey.SortName) as! String)
+                            }
+                            //                        }
+                            storeCount += 1
+                            print("offline country save")
+                        }
+                    })
+                    
+                }
+//            }
+//            DispatchQueue.main.async {
+                if storeCount == 4 || storeCount == 0 {
+                    HUD.flash(.success, delay: 1.0)
+                }
+                if Reachable.isConnectedToNetwork() == false
+                {
+                    HUD.flash(.success, delay: 1.0)
+                }
+//            }
+        
+//        }
+        
     }
     
     // MARK: - Navigation

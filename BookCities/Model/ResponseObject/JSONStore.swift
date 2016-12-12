@@ -81,5 +81,27 @@ class JSONStore: NSObject {
         }
         return stores
     }
+    
+    static func getStoreFromCDRecord(_ store:Store)->JSONStore{
+        
+        var dictionary = [String:AnyObject]()
+        dictionary[Constants.JSONStoreResponseKey.Address] = store.value(forKeyPath: Constants.JSONStoreResponseKey.Address) as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.BookCategoryIds] = store.value(forKeyPath: Constants.JSONStoreResponseKey.BookCategoryIds)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.IsMuseumshops] = store.value(forKeyPath: Constants.JSONStoreResponseKey.IsMuseumshops)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.IsNewBooks] = store.value(forKeyPath: Constants.JSONStoreResponseKey.IsNewBooks)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.IsUsedBooks] = store.value(forKeyPath: Constants.JSONStoreResponseKey.IsUsedBooks)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.Latitude] = store.value(forKeyPath: Constants.JSONStoreResponseKey.Latitude)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.Longitude] = store.value(forKeyPath: Constants.JSONStoreResponseKey.Longitude)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.Name] = store.value(forKeyPath: Constants.JSONStoreResponseKey.Name)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.Website] = store.value(forKeyPath: Constants.JSONStoreResponseKey.Website)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.Address_2] = store.value(forKeyPath: Constants.JSONStoreResponseKey.Address_2)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.WorkingHours] = store.value(forKeyPath: Constants.JSONStoreResponseKey.WorkingHours)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.City] = store.value(forKeyPath: Constants.JSONStoreResponseKey.City)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.State] = store.value(forKeyPath: Constants.JSONStoreResponseKey.State)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.Country] = store.value(forKeyPath: Constants.JSONStoreResponseKey.Country)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.Zipcode] = store.value(forKeyPath: Constants.JSONStoreResponseKey.Zipcode)as AnyObject?
+        return JSONStore(dictionary:dictionary)
+
+    }
 
 }

@@ -28,7 +28,6 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
     // MARK: - Constraints
     @IBOutlet weak var categoryContainerBottomC: NSLayoutConstraint!
     @IBOutlet weak var topCOfTableView: NSLayoutConstraint!
-    
     @IBOutlet weak var heightOfResetC: NSLayoutConstraint!
     
     // MARK: - Other variables
@@ -36,7 +35,7 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
     var stores:Array<JSONStore>?
     var tit: String?
     var categories:Array<Any>?
-    
+    var city:JSONCity?
     override func viewDidLoad() {
         super.viewDidLoad()
         defaultViewSetting()
@@ -179,7 +178,14 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
     }
     
     @IBAction func showOnMapBtnAction(_ sender: Any) {
-        
+//        let store:JSONStore = JSONStore.getStoreFromCDRecord(CoreDataManager.sharedInstance().getStore("2"))
+        let next = self.storyboard?.instantiateViewController(withIdentifier:"MyMapVC") as! MyMapVC
+        if let currentCity = city{
+            next.tit = currentCity.name
+            next.city = currentCity
+            next.stores = stores
+        }
+        self.navigationController?.pushViewController(next, animated: true)
     }
     
     @IBAction func filterByCategoryBtnAction(_ sender: Any) {

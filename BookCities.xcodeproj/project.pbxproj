@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2B4B90F31DF161E7008FE99B /* ReachabilitySwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B4B90F21DF161E7008FE99B /* ReachabilitySwift.framework */; };
+		2B0C39821DFE784A00108B1A /* JSONCountry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0C39811DFE784A00108B1A /* JSONCountry.swift */; };
+		2B0C39841DFE7BA600108B1A /* JSONState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0C39831DFE7BA600108B1A /* JSONState.swift */; };
+		2B0C39861DFEB58E00108B1A /* ViewControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0C39851DFEB58E00108B1A /* ViewControllerHelper.swift */; };
+		2B0C398A1DFEC96B00108B1A /* PKHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B0C39891DFEC96B00108B1A /* PKHUD.framework */; };
 		2B4B90F51DF19802008FE99B /* Reachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4B90F41DF19802008FE99B /* Reachable.swift */; };
 		2B7662E41DEC526300987F40 /* JSONCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7662E31DEC526300987F40 /* JSONCity.swift */; };
 		2B81934F1DE6FD69008879B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81934E1DE6FD69008879B2 /* AppDelegate.swift */; };
@@ -49,6 +52,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B0C39811DFE784A00108B1A /* JSONCountry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONCountry.swift; sourceTree = "<group>"; };
+		2B0C39831DFE7BA600108B1A /* JSONState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONState.swift; sourceTree = "<group>"; };
+		2B0C39851DFEB58E00108B1A /* ViewControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerHelper.swift; sourceTree = "<group>"; };
+		2B0C39891DFEC96B00108B1A /* PKHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PKHUD.framework; path = "../../../../Library/Developer/Xcode/DerivedData/BookCities-fdagecfuoyvlxsaabdajemrbsgur/Build/Products/Debug-iphoneos/PKHUD/PKHUD.framework"; sourceTree = "<group>"; };
 		2B4B90F21DF161E7008FE99B /* ReachabilitySwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReachabilitySwift.framework; path = "../../../../Library/Developer/Xcode/DerivedData/BookCities-fdagecfuoyvlxsaabdajemrbsgur/Build/Products/Debug-iphoneos/ReachabilitySwift/ReachabilitySwift.framework"; sourceTree = "<group>"; };
 		2B4B90F41DF19802008FE99B /* Reachable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachable.swift; sourceTree = "<group>"; };
 		2B7662E31DEC526300987F40 /* JSONCity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONCity.swift; sourceTree = "<group>"; };
@@ -99,7 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B4B90F31DF161E7008FE99B /* ReachabilitySwift.framework in Frameworks */,
+				2B0C398A1DFEC96B00108B1A /* PKHUD.framework in Frameworks */,
 				2B8193A11DE70A02008879B2 /* CoreLocation.framework in Frameworks */,
 				2B81939F1DE709FA008879B2 /* MapKit.framework in Frameworks */,
 				2B81939D1DE709EE008879B2 /* Alamofire.framework in Frameworks */,
@@ -116,6 +123,8 @@
 				2B7662E31DEC526300987F40 /* JSONCity.swift */,
 				2B8AA7D11DEDAFEC0024F011 /* JSONStore.swift */,
 				2B81BB171DEEFFF400318859 /* JSONCategory.swift */,
+				2B0C39811DFE784A00108B1A /* JSONCountry.swift */,
+				2B0C39831DFE7BA600108B1A /* JSONState.swift */,
 			);
 			path = ResponseObject;
 			sourceTree = "<group>";
@@ -177,6 +186,7 @@
 				2B81936C1DE6FE34008879B2 /* Constants.swift */,
 				2B81936D1DE6FE34008879B2 /* GCDBlackBox.swift */,
 				2B4B90F41DF19802008FE99B /* Reachable.swift */,
+				2B0C39851DFEB58E00108B1A /* ViewControllerHelper.swift */,
 			);
 			path = helper;
 			sourceTree = "<group>";
@@ -280,6 +290,7 @@
 		EFBD2AB30B0D142B18346A67 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2B0C39891DFEC96B00108B1A /* PKHUD.framework */,
 				2B4B90F21DF161E7008FE99B /* ReachabilitySwift.framework */,
 				2B8193A01DE70A02008879B2 /* CoreLocation.framework */,
 				2B81939E1DE709FA008879B2 /* MapKit.framework */,
@@ -325,7 +336,7 @@
 					2B81934A1DE6FD69008879B2 = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = GXTXWHR532;
-						LastSwiftMigration = 0820;
+						LastSwiftMigration = 0810;
 						ProvisioningStyle = Manual;
 					};
 				};
@@ -430,7 +441,10 @@
 				2B8193861DE6FE34008879B2 /* MyListVC.swift in Sources */,
 				2B8193921DE6FE34008879B2 /* BookCitiesClient.swift in Sources */,
 				2B8193881DE6FE34008879B2 /* ShopDetailVC.swift in Sources */,
+				2B0C39861DFEB58E00108B1A /* ViewControllerHelper.swift in Sources */,
+				2B0C39841DFE7BA600108B1A /* JSONState.swift in Sources */,
 				2B81938B1DE6FE34008879B2 /* GCDBlackBox.swift in Sources */,
+				2B0C39821DFE784A00108B1A /* JSONCountry.swift in Sources */,
 				2B8193901DE6FE34008879B2 /* SFAnnotation.swift in Sources */,
 				2B7662E41DEC526300987F40 /* JSONCity.swift in Sources */,
 				2B8AA7D21DEDAFEC0024F011 /* JSONStore.swift in Sources */,

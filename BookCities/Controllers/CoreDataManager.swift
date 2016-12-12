@@ -47,7 +47,7 @@ class CoreDataManager: NSObject {
         return container
     }()
     
-    // MARK: - Core Data Saving support
+    // Core Data Saving support
     
     func saveContext () {
         let context = persistentContainer.viewContext
@@ -62,13 +62,15 @@ class CoreDataManager: NSObject {
             }
         }
     }
-
-    // MARK: - METHOD TO SAVE a Category ON CORE DATA
+    
+    // MARK: - METHOD TO SAVE
+    
+    // Save  a Category ON CORE DATA
     func saveCategory(_ name: String , id: String) {
-//        guard let appDelegate =
-//            UIApplication.shared.delegate as? AppDelegate else {
-//                return
-//        }
+        //        guard let appDelegate =
+        //            UIApplication.shared.delegate as? AppDelegate else {
+        //                return
+        //        }
         // 1
         let managedContext =
             self.persistentContainer.viewContext
@@ -79,7 +81,7 @@ class CoreDataManager: NSObject {
                                        in: managedContext)!
         
         let category = NSManagedObject(entity: entity,
-                                     insertInto: managedContext)
+                                       insertInto: managedContext)
         
         // 3
         category.setValue(name, forKeyPath: "name")
@@ -93,65 +95,12 @@ class CoreDataManager: NSObject {
         }
     }
     
-    //MARK: -  FATCH Category FROM CORE DATA
-    func getCategories() -> Array<Any> {
-        
-        var data = Array<Any>()
-        
-        //1
-//        guard let appDelegate =
-//            UIApplication.shared.delegate as? AppDelegate else {
-//                return Array()
-//        }
-        
-        let managedContext =
-            self.persistentContainer.viewContext
-        
-        //2
-        let fetchRequest =
-            NSFetchRequest<NSManagedObject>(entityName: Constants.Entity.Category)
-        
-        //3
-        do {
-            data = try managedContext.fetch(fetchRequest)
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
-        return data
-    }
-
-    // MARK: - check whether category already exists or not
-    func haveCategories() -> Bool {
-        var count:Int?
-//        guard let appDelegate =
-//            UIApplication.shared.delegate as? AppDelegate else {
-//                return false
-//        }
-        let managedContext =
-            self.persistentContainer.viewContext
-        
-        let fetchRequest =
-            NSFetchRequest<NSManagedObject>(entityName: Constants.Entity.Category)
-        do{
-            count = try managedContext.count(for: fetchRequest)
-        }
-        catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
-        if count == 0 {
-            return false
-        }
-        else{
-            return true
-        }
-    }
-    
-     // MARK: - METHOD TO SAVE a City ON CORE DATA
+    // Save  a City ON CORE DATA
     func saveCity(_ name: String , id: String, stateId:String, countryId:String) {
-//        guard let appDelegate =
-//            UIApplication.shared.delegate as? AppDelegate else {
-//                return
-//        }
+        //        guard let appDelegate =
+        //            UIApplication.shared.delegate as? AppDelegate else {
+        //                return
+        //        }
         // 1
         let managedContext =
             self.persistentContainer.viewContext
@@ -192,92 +141,101 @@ class CoreDataManager: NSObject {
         
     }
     
-  
-    //MARK: -  FATCH Cities FROM CORE DATA
-    func getCities() -> Array<Any> {
-        
-        var data = Array<Any>()
-        
-        //1
-//        guard let appDelegate =
-//            UIApplication.shared.delegate as? AppDelegate else {
-//                return Array()
-//        }
-        
+    // SAVE a State ON CORE DATA
+    func saveState(_ name: String , id: String, countryId:String) {
+        //        guard let appDelegate =
+        //            UIApplication.shared.delegate as? AppDelegate else {
+        //                return
+        //        }
+        // 1
         let managedContext =
             self.persistentContainer.viewContext
         
-        //2
-        let fetchRequest =
-            NSFetchRequest<NSManagedObject>(entityName: Constants.Entity.City)
-        //3
-        do {
-            data = try managedContext.fetch(fetchRequest)
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
+        let privateMOC = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        privateMOC.parent = managedContext
+        // 2
+        
+        
+        privateMOC.perform {
+            let entity =
+                NSEntityDescription.entity(forEntityName: Constants.Entity.State,
+                                           in: privateMOC)!
+            
+            let state = NSManagedObject(entity: entity,
+                                        insertInto: privateMOC)
+            
+            // 3
+            state.setValue(name, forKeyPath: Constants.JSONStateResponseKey.Name)
+            state.setValue(id, forKey: Constants.JSONStateResponseKey.Id)
+            state.setValue(countryId, forKey: Constants.JSONStateResponseKey.Country_id)
+            // 4
+            do {
+                try privateMOC.save()
+                managedContext.performAndWait {
+                    do {
+                        try managedContext.save()
+                    } catch {
+                        fatalError("Failure to save context: \(error)")
+                    }
+                }
+            } catch {
+                fatalError("Failure to save context: \(error)")
+            }
+            
         }
-        return data
+        
     }
     
-    // MARK: - check wether the City is already exists or not
-    func haveCity(_ Id: String) -> Bool {
-        var count:Int?
-//        guard let appDelegate =
-//            UIApplication.shared.delegate as? AppDelegate else {
-//                return false
-//        }
+    // SAVE a Country ON CORE DATA
+    func saveCountry(_ name: String , id: String, sortName:String) {
+        //        guard let appDelegate =
+        //            UIApplication.shared.delegate as? AppDelegate else {
+        //                return
+        //        }
+        // 1
         let managedContext =
             self.persistentContainer.viewContext
         
-        let fetchRequest =
-            NSFetchRequest<NSManagedObject>(entityName: Constants.Entity.City)
-        let predicate = NSPredicate(format: "id == %@",Id)
-        fetchRequest.predicate = predicate
-        do{
-            count = try managedContext.count(for: fetchRequest)
-        }
-        catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
-        if count == 0 {
-            return false
-        }
-        else{
-            return true
-        }
-    }
-
-    // MARK: - Check wether the core data contain city or empty
-    func haveCity() -> Bool {
-        var count:Int?
-//        guard let appDelegate =
-//            UIApplication.shared.delegate as? AppDelegate else {
-//                return false
-//        }
-        let managedContext =
-            self.persistentContainer.viewContext
+        let privateMOC = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        privateMOC.parent = managedContext
+        // 2
         
-        let fetchRequest =
-            NSFetchRequest<NSManagedObject>(entityName: Constants.Entity.City)
-        do{
-            count = try managedContext.count(for: fetchRequest)
-        }
-        catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
-        if count == 0 {
-            return false
-        }
-        else{
-            return true
+        
+        privateMOC.perform {
+            let entity =
+                NSEntityDescription.entity(forEntityName: Constants.Entity.Country,
+                                           in: privateMOC)!
+            
+            let country = NSManagedObject(entity: entity,
+                                          insertInto: privateMOC)
+            
+            // 3
+            country.setValue(name, forKeyPath: Constants.JSONCountryResponseKey.Name)
+            country.setValue(id, forKey: Constants.JSONCountryResponseKey.Id)
+            country.setValue(sortName, forKey: Constants.JSONCountryResponseKey.SortName)
+            // 4
+            do {
+                try privateMOC.save()
+                managedContext.performAndWait {
+                    do {
+                        try managedContext.save()
+                    } catch {
+                        fatalError("Failure to save context: \(error)")
+                    }
+                }
+            } catch {
+                fatalError("Failure to save context: \(error)")
+            }
+            
         }
     }
-    // MARK: - METHOD TO SAVE a Store ON CORE DATA
+    
+    // SAVE a Stores ON CORE DATA
     func saveStores(_ store: JSONStore) {
-//        guard let appDelegate =
-//            UIApplication.shared.delegate as? AppDelegate else {
-//                return
-//        }
+        //        guard let appDelegate =
+        //            UIApplication.shared.delegate as? AppDelegate else {
+        //                return
+        //        }
         // 1
         let managedContext =
             self.persistentContainer.viewContext
@@ -293,7 +251,7 @@ class CoreDataManager: NSObject {
                                            in: privateMOC)!
             
             let storeEntity = NSManagedObject(entity: entity,
-                                       insertInto: privateMOC)
+                                              insertInto: privateMOC)
             
             // 3
             storeEntity.setValue(store.name, forKeyPath: Constants.JSONStoreResponseKey.Name)
@@ -328,13 +286,195 @@ class CoreDataManager: NSObject {
         }
     }
     
-    // MARK: - Check wether the core data contain stores or empty
+    //MARK: -  FATCH DATA FROM CORE DATA
+    
+    //Fatch Categories
+    func getCategories() -> Array<Any> {
+        var data = Array<Any>()
+        //1
+        //        guard let appDelegate =
+        //            UIApplication.shared.delegate as? AppDelegate else {
+        //                return Array()
+        //        }
+        
+        let managedContext =
+            self.persistentContainer.viewContext
+        
+        //2
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: Constants.Entity.Category)
+        
+        //3
+        do {
+            data = try managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        return data
+    }
+    
+    // Fatch Cities
+    func getCities() -> Array<Any> {
+        
+        var data = Array<Any>()
+        
+        //1
+        //        guard let appDelegate =
+        //            UIApplication.shared.delegate as? AppDelegate else {
+        //                return Array()
+        //        }
+        
+        let managedContext =
+            self.persistentContainer.viewContext
+        
+        //2
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: Constants.Entity.City)
+        //3
+        do {
+            data = try managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        return data
+    }
+    
+    // Fatch Stores
+    func getStores() -> Array<Any> {
+        
+        var data = Array<Any>()
+        
+        //1
+        //        guard let appDelegate =
+        //            UIApplication.shared.delegate as? AppDelegate else {
+        //                return Array()
+        //        }
+        
+        let managedContext =
+            self.persistentContainer.viewContext
+        
+        //2
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: Constants.Entity.Store)
+        //3
+        do {
+            data = try managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        return data
+    }
+    
+    // Fatch State
+    func getState() -> Array<Any> {
+        var data = Array<Any>()
+        
+        //1
+        //        guard let appDelegate =
+        //            UIApplication.shared.delegate as? AppDelegate else {
+        //                return Array()
+        //        }
+        
+        let managedContext =
+            self.persistentContainer.viewContext
+        
+        //2
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: Constants.Entity.State)
+        //3
+        do {
+            data = try managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        return data
+        
+    }
+    
+    // Fatch Country
+    func getCountry() -> Array<Any> {
+        var data = Array<Any>()
+        
+        //1
+        //        guard let appDelegate =
+        //            UIApplication.shared.delegate as? AppDelegate else {
+        //                return Array()
+        //        }
+        
+        let managedContext =
+            self.persistentContainer.viewContext
+        
+        //2
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: Constants.Entity.Country)
+        //3
+        do {
+            data = try managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        return data
+        
+    }
+
+    // MARK: - Check whether Record already exists or not
+    
+    func haveCategories() -> Bool {
+        var count:Int?
+        //        guard let appDelegate =
+        //            UIApplication.shared.delegate as? AppDelegate else {
+        //                return false
+        //        }
+        let managedContext =
+            self.persistentContainer.viewContext
+        
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: Constants.Entity.Category)
+        do{
+            count = try managedContext.count(for: fetchRequest)
+        }
+        catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        if count == 0 {
+            return false
+        }
+        else{
+            return true
+        }
+    }
+    
+    func haveCity() -> Bool {
+        var count:Int?
+        //        guard let appDelegate =
+        //            UIApplication.shared.delegate as? AppDelegate else {
+        //                return false
+        //        }
+        let managedContext =
+            self.persistentContainer.viewContext
+        
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: Constants.Entity.City)
+        do{
+            count = try managedContext.count(for: fetchRequest)
+        }
+        catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        if count == 0 {
+            return false
+        }
+        else{
+            return true
+        }
+    }
+
     func haveStore() -> Bool {
         var count:Int?
-//        guard let appDelegate =
-//            UIApplication.shared.delegate as? AppDelegate else {
-//                return false
-//        }
+        //        guard let appDelegate =
+        //            UIApplication.shared.delegate as? AppDelegate else {
+        //                return false
+        //        }
         let managedContext =
             self.persistentContainer.viewContext
         
@@ -353,13 +493,92 @@ class CoreDataManager: NSObject {
             return true
         }
     }
+
+    func haveState() -> Bool {
+        var count:Int?
+        //        guard let appDelegate =
+        //            UIApplication.shared.delegate as? AppDelegate else {
+        //                return false
+        //        }
+        let managedContext =
+            self.persistentContainer.viewContext
+        
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: Constants.Entity.State)
+        do{
+            count = try managedContext.count(for: fetchRequest)
+        }
+        catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        if count == 0 {
+            return false
+        }
+        else{
+            return true
+        }
+    }
     
-    // MARK: - check wether the Store is already exists or not
+    func haveCountry() -> Bool {
+        var count:Int?
+        //        guard let appDelegate =
+        //            UIApplication.shared.delegate as? AppDelegate else {
+        //                return false
+        //        }
+        let managedContext =
+            self.persistentContainer.viewContext
+        
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: Constants.Entity.Country)
+        do{
+            count = try managedContext.count(for: fetchRequest)
+        }
+        catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        if count == 0 {
+            return false
+        }
+        else{
+            return true
+        }
+    }
+    
+    // MARK: - Check ID in Record is already exists or not
+    
+    
+    func haveCity(_ Id: String) -> Bool {
+        var count:Int?
+        //        guard let appDelegate =
+        //            UIApplication.shared.delegate as? AppDelegate else {
+        //                return false
+        //        }
+        let managedContext =
+            self.persistentContainer.viewContext
+        
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: Constants.Entity.City)
+        let predicate = NSPredicate(format: "id == %@",Id)
+        fetchRequest.predicate = predicate
+        do{
+            count = try managedContext.count(for: fetchRequest)
+        }
+        catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        if count == 0 {
+            return false
+        }
+        else{
+            return true
+        }
+    }
+    
     func haveStore(_ Id: String) -> Bool {
-//        guard let appDelegate =
-//            UIApplication.shared.delegate as? AppDelegate else {
-//                return false
-//        }
+        //        guard let appDelegate =
+        //            UIApplication.shared.delegate as? AppDelegate else {
+        //                return false
+        //        }
         let managedContext =
             self.persistentContainer.viewContext
         
@@ -370,6 +589,7 @@ class CoreDataManager: NSObject {
         {
             let fetchResults = try managedContext.fetch(fetchRequest)
             if fetchResults.count > 0 {
+                print(fetchResults)
                 return true
             }
             else{
@@ -378,34 +598,87 @@ class CoreDataManager: NSObject {
         }
         catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
-             return false
+            return false
         }
-       
-}
-
+        
+    }
     
-    //MARK: -  FATCH Stores FROM CORE DATA
-    func getStores() -> Array<Any> {
-        
-        var data = Array<Any>()
-        
-        //1
-//        guard let appDelegate =
-//            UIApplication.shared.delegate as? AppDelegate else {
-//                return Array()
-//        }
-        
+    // MARK: - Get the Record by ID
+    
+    func getStore(_ Id: String) -> Store {
+        var data:Store!
         let managedContext =
             self.persistentContainer.viewContext
         
-        //2
-        let fetchRequest =
-            NSFetchRequest<NSManagedObject>(entityName: Constants.Entity.Store)
-        //3
-        do {
-            data = try managedContext.fetch(fetchRequest)
-        } catch let error as NSError {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.Entity.Store)
+        let predicate = NSPredicate(format: "id == %@", Id)
+        fetchRequest.predicate = predicate
+        
+        do
+        {
+            let fetchResults = try managedContext.fetch(fetchRequest)
+            if fetchResults.count > 0 {
+               data = fetchResults[0] as! Store
+            }
+            else{
+                return data
+            }
+        }
+        catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
+            return data
+        }
+        return data
+    }
+    
+    func getState(_ Id: String) -> State {
+        var data:State!
+        let managedContext =
+            self.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.Entity.State)
+        let predicate = NSPredicate(format: "id == %@", Id)
+        fetchRequest.predicate = predicate
+        
+        do
+        {
+            let fetchResults = try managedContext.fetch(fetchRequest)
+            if fetchResults.count > 0 {
+                data = fetchResults[0] as! State
+            }
+            else{
+                return data
+            }
+        }
+        catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+            return data
+        }
+        return data
+    }
+    
+    func getCountry(_ Id: String) -> Country {
+        var data:Country!
+        let managedContext =
+            self.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.Entity.Country)
+        let predicate = NSPredicate(format: "id == %@", Id)
+        fetchRequest.predicate = predicate
+        
+        do
+        {
+            let fetchResults = try managedContext.fetch(fetchRequest)
+            if fetchResults.count > 0 {
+                data = fetchResults[0] as! Country
+            }
+            else{
+                return data
+            }
+        }
+        catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+            return data
         }
         return data
     }

@@ -126,13 +126,15 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - Table View Delegate Function
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let currentCity:JSONCity = cities[indexPath.row]
         let next = self.storyboard?.instantiateViewController(withIdentifier:"MyListVC") as! MyListVC
         if Reachable.isConnectedToNetwork() == true {
             tableView.isUserInteractionEnabled = false
             BookCitiesClient.sharedInstance().getStores({
                 (response,error) in
                 next.stores = response
-                next.tit = self.cities[indexPath.row].name
+                next.tit = currentCity.name
+                next.city = currentCity
                 tableView.isUserInteractionEnabled = true
                 self.navigationController?.pushViewController(next, animated: true)
             })

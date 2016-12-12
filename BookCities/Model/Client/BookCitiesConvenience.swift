@@ -39,4 +39,33 @@ extension BookCitiesClient
             completionHandlerForCategories(response as Array<JSONCategory>?,error)
         })
     }
+    
+    func getCountry(_ completionHandlerForCountry: @escaping (_ response : Array<JSONCountry>? ,_ error : Error?) -> Void) -> Void {
+        let mutableMethod: String = Constants.Methods.Countries
+        getMethod(mutableMethod, parameters: [String:AnyObject](), completionHandlerForGET: {
+            (response,error) in
+            let response = JSONCountry.countryFromResults(response as! [[String : AnyObject]])
+            completionHandlerForCountry(response as Array<JSONCountry>?,error)
+        })
+    }
+    
+    func getState(_ completionHandlerForState: @escaping (_ response : Array<JSONState>? ,_ error : Error?) -> Void) -> Void {
+        let mutableMethod: String = Constants.Methods.States
+        getMethod(mutableMethod, parameters: [String:AnyObject](), completionHandlerForGET: {
+            (response,error) in
+            let response = JSONState.stateFromResults(response as! [[String : AnyObject]])
+            completionHandlerForState(response as Array<JSONState>?,error)
+        })
+    }
+    
+    func getState(id:String ,_ completionHandlerForState: @escaping (_ response : Array<JSONState>? ,_ error : Error?) -> Void) -> Void {
+        let mutableMethod: String = Constants.Methods.States
+        getMethod(mutableMethod, parameters: [String:AnyObject](), completionHandlerForGET: {
+            (response,error) in
+            let response = JSONState.stateFromResults(response as! [[String : AnyObject]])
+            completionHandlerForState(response as Array<JSONState>?,error)
+        })
+    }
+    
+    
 }

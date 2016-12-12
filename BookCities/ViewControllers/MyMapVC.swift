@@ -17,16 +17,8 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     var mapAnnotations: [MKAnnotation] = []
     var tit:String?
     var currentLocation:MKUserLocation?
-    fileprivate func gotoDefaultLocation(newRegion:MKCoordinateRegion) {
-        // start off by default in San Francisco
-        //        var newRegion = MKCoordinateRegion()
-        //        newRegion.center.latitude = 37.786996
-        //        newRegion.center.longitude = -122.440100
-        //        newRegion.span.latitudeDelta = 0.2
-        //        newRegion.span.longitudeDelta = 0.2
-        
-        self.mapView.setRegion(newRegion, animated: true)
-    }
+    var city:JSONCity?
+    var stores:[JSONStore]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,15 +74,10 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         // add all the custom annotations
         self.mapView.addAnnotations(self.mapAnnotations)
         self.mapView.showsUserLocation = true
-        let address = ["city":"Noida","state":"Utter Pradesh","Country":"India"];
-        geocoder.geocodeAddressDictionary(address, completionHandler: { (placemark,error) in
-                let placemarkss:CLPlacemark = (placemark?.last)!
-                var region:MKCoordinateRegion = MKCoordinateRegion()
-                region.center.latitude = (placemarkss.location?.coordinate.latitude)!
-                region.center.longitude = (placemarkss.location?.coordinate.longitude)!
-                region.span = MKCoordinateSpanMake(0.00725, 0.00725)
-                self.gotoDefaultLocation(newRegion:self.mapView.regionThatFits(region))
-        })
+        if let currentCity = city {
+             self.gotoDefaultLocation(currentCity)
+        }
+        
         //        let region = MKCoordinateRegionMakeWithDistance((currentLocation!.coordinate),2000, 2000)
         //        self.gotoDefaultLocation(newRegion:mapView.regionThatFits(region))
         
@@ -122,40 +109,40 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-        // Center the map the first time we get a real location change.
+//         Center the map the first time we get a real location change.
         
-//        if userLocation.coordinate.latitude != 0.0 && userLocation.coordinate.longitude != 0.0 {
-//            if currentLocation == nil
-//            {
-//                currentLocation = userLocation
-//                self.mapView.setCenter(userLocation.coordinate, animated: true)
+        if userLocation.coordinate.latitude != 0.0 && userLocation.coordinate.longitude != 0.0 {
+            if currentLocation == nil && city == nil
+            {
+                currentLocation = userLocation
+                self.mapView.setCenter(userLocation.coordinate, animated: true)
+                let region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate,2000, 2000)
+                mapView.setRegion(mapView.regionThatFits(region), animated: true)
+            }
+        }
 //                let region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate,2000, 2000)
 //                mapView.setRegion(mapView.regionThatFits(region), animated: true)
-//            }
-//        }
-        //        let region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate,2000, 2000)
-        //        mapView.setRegion(mapView.regionThatFits(region), animated: true)
-        //        // Lookup the information for the current location of the user.
-        //        geocoder.reverseGeocodeLocation(mapView.userLocation.location!, completionHandler:{(placemarks, error) in
-        //            if placemarks != nil && (placemarks?.count)! > 0
-        //            {
-        //                self.placemark = (placemarks?[0])!
-        //                print(self.placemark.thoroughfare ?? "thoroughfare")
-        //                print(self.placemark.subThoroughfare ?? "subThoroughfare")
-        //                print(self.placemark.locality ?? "locality")
-        //                print(self.placemark.subLocality ?? "subLocality")
-        //                print(self.placemark.administrativeArea ?? "administrativeArea")
-        //                print(self.placemark.subAdministrativeArea ?? "subAdministrativeArea")
-        //                print(self.placemark.country ?? "country")
-        //                print(self.placemark.isoCountryCode ?? "isoCountryCode")
-        //                print(self.placemark.postalCode ?? "postalcode")
-        //            }
-        //            else
-        //            {
-        //                // Handle the nil case if necessary.
-        //            }
-        //
-        //        } )
+                // Lookup the information for the current location of the user.
+//                geocoder.reverseGeocodeLocation(mapView.userLocation.location!, completionHandler:{(placemarks, error) in
+//                    if placemarks != nil && (placemarks?.count)! > 0
+//                    {
+//                        self.placemark = (placemarks?[0])!
+//                        print(self.placemark.thoroughfare ?? "thoroughfare")
+//                        print(self.placemark.subThoroughfare ?? "subThoroughfare")
+//                        print(self.placemark.locality ?? "locality")
+//                        print(self.placemark.subLocality ?? "subLocality")
+//                        print(self.placemark.administrativeArea ?? "administrativeArea")
+//                        print(self.placemark.subAdministrativeArea ?? "subAdministrativeArea")
+//                        print(self.placemark.country ?? "country")
+//                        print(self.placemark.isoCountryCode ?? "isoCountryCode")
+//                        print(self.placemark.postalCode ?? "postalcode")
+//                    }
+//                    else
+//                    {
+//                        // Handle the nil case if necessary.
+//                    }
+//        
+//                } )
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -243,7 +230,34 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         
     }
     
-    
+    //MARK: -  Set map to default Location
+    fileprivate func gotoDefaultLocation(_ city:JSONCity) {
+        print(city.name ?? "")
+        print(city.state_id ?? "")
+        print(city.country_id ?? "")
+        print(JSONState.stateFromCDRecord(CoreDataManager.sharedInstance().getState(city.state_id)).name ?? "")
+        print(JSONCountry.countryForCDRecord(CoreDataManager.sharedInstance().getCountry(city.country_id)).name ?? "")
+        
+        let address = ["city":city.name ?? "",
+                       "state":JSONState.stateFromCDRecord(CoreDataManager.sharedInstance().getState(city.state_id)).name ?? "",
+                       "country":JSONCountry.countryForCDRecord(CoreDataManager.sharedInstance().getCountry(city.country_id)).name ?? ""];
+        geocoder.geocodeAddressDictionary(address, completionHandler: { (placemark,error) in
+            if(error == nil){
+                let placemarkss:CLPlacemark = (placemark?.last)!
+                var region:MKCoordinateRegion = MKCoordinateRegion()
+                region.center.latitude = (placemarkss.location?.coordinate.latitude)!
+                region.center.longitude = (placemarkss.location?.coordinate.longitude)!
+                region.span = MKCoordinateSpanMake(0.09, 0.09)
+                self.mapView.setRegion(region, animated: true)
+            }
+            else{
+                print(error ?? "erroroororror")
+            }
+        })
+        
+        
+    }
+
     /*
      // MARK: - Navigation
      

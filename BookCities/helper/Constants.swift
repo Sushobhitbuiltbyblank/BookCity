@@ -53,6 +53,17 @@ class Constants: NSObject {
         static let IsFavorate = "isFavorate"
     }
     
+    struct JSONCountryResponseKey {
+        static let Id = "id"
+        static let Name = "name"
+        static let SortName = "sortname"
+    }
+    
+    struct JSONStateResponseKey {
+        static let Id = "id"
+        static let Name = "name"
+        static let Country_id = "country_id"
+    }
     struct Alert {
         static let Title = "No internet connection"
         static let Message = "Please check your internet connectivity. "
@@ -62,6 +73,8 @@ class Constants: NSObject {
         static let City = "City"
         static let Store = "Store"
         static let Category = "Categories"
+        static let Country = "Country"
+        static let State = "State"
     }
     struct Font {
         static let Size = 18

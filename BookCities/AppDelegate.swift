@@ -8,58 +8,15 @@
 
 import UIKit
 import CoreData
-import ReachabilitySwift
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
     //declare this property where it won't go out of scope relative to your listener
-    let reachability = Reachability()!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        if !CoreDataManager.sharedInstance().haveCity(){
-            let queue = DispatchQueue(label: "com.bookcity.getcities")
-                queue.async{
-                BookCitiesClient.sharedInstance().getCities([String : AnyObject](), completionHandlerForCities:{
-                    (response, error) in
-                    if(error == nil)
-                    {
-                        DispatchQueue.global(qos: .default).async{
-                            for data in response!{
-                                CoreDataManager.sharedInstance().saveCity(data.value(forKey:Constants.JSONCityResponseKey.Name) as! String, id: data.value(forKey:Constants.JSONCityResponseKey.Id) as! String, stateId: data.value(forKey:Constants.JSONCityResponseKey.State_id) as! String, countryId: data.value(forKey:Constants.JSONCityResponseKey.Country_id) as! String)
-                            }
-                            print("offline city save")
-                        }
-                    }
-                    
-                })
-            }
-        }
-        
-        if !CoreDataManager.sharedInstance().haveStore(){
-            let storeQueue = DispatchQueue(label: "com.bookcity.getstores")
-            storeQueue.async {
-                BookCitiesClient.sharedInstance().getStores({
-                    (response, error) in
-                    if(error == nil)
-                    {
-                        DispatchQueue.global(qos: .default).async{
-                            for data in response!{
-                                if !CoreDataManager.sharedInstance().haveStore(data.id!)
-                                {
-                                    CoreDataManager.sharedInstance().saveStores(data)
-                                }
-                                
-                            }
-                            print("offline store save")
-                        }
-                    }
-                })
-
-            }
-        }
         return true
     }
     

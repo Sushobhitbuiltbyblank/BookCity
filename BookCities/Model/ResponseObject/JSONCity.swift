@@ -15,7 +15,7 @@ class JSONCity: NSObject {
     var name:String?
     var state_id:String!
     
-    // construct a TMDBMovie from a dictionary
+    // construct a JSONCity from a dictionary
     init(dictionary: [String:AnyObject]) {
         country_id = dictionary[Constants.JSONCityResponseKey.Country_id] as! String
         id = dictionary[Constants.JSONCityResponseKey.Id] as! String
