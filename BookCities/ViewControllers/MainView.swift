@@ -50,7 +50,7 @@ class MainView: UIViewController {
 // MARK: - Function to deal with view editing
     func setViews()
     {
-        
+        self.saveOfflineDataBtn.isHidden = true
     }
     
     // MARK: - Button Actions
@@ -73,6 +73,7 @@ class MainView: UIViewController {
         if CoreDataManager.sharedInstance().haveStore(){
             next.stores = JSONStore.storeFromCoreData(CoreDataManager.sharedInstance().getStores() as! [Store])
             let nv:UINavigationController = UINavigationController(rootViewController: next)
+            
             self.present(nv, animated: true, completion: nil)
         }
         else if Reachable.isConnectedToNetwork() == true
@@ -99,35 +100,46 @@ class MainView: UIViewController {
     }
     @IBAction func saveOfflineDataBtnAction(_ sender: Any) {
         var storeCount = 0
-        HUD.show(.progress)
-//        let queue = DispatchQueue(label: "com.bookcity.getcities")
-//        queue.async{
+       
+        DispatchQueue(label: "com.bookcity.coredata").async{
+        let queue = DispatchQueue(label: "com.bookcity.getcities")
+        queue.async{
             if !CoreDataManager.sharedInstance().haveCity(){
+                DispatchQueue.main.async {
+                    HUD.show(.progress)
+                }
                 BookCitiesClient.sharedInstance().getCities([String : AnyObject](), completionHandlerForCities:{
                     (response, error) in
                     if(error == nil)
                     {
-                        //                        DispatchQueue.global(qos: .default).async{
+                        print("get city")
+                        DispatchQueue.global(qos: .default).async{
                         for data in response!{
                             CoreDataManager.sharedInstance().saveCity(data.value(forKey:Constants.JSONCityResponseKey.Name) as! String, id: data.value(forKey:Constants.JSONCityResponseKey.Id) as! String, stateId: data.value(forKey:Constants.JSONCityResponseKey.State_id) as! String, countryId: data.value(forKey:Constants.JSONCityResponseKey.Country_id) as! String)
                         }
                         storeCount += 1
-                        HUD.flash(.success, delay: 1.0)
                         print("offline city save")
-                        //                        }
+                        DispatchQueue.main.async {
+                                HUD.flash(.success, delay: 1.0)
+                            }
+                      }
                     }
                     
                 })
             }
-            
+        }
             if !CoreDataManager.sharedInstance().haveStore(){
-//                let storeQueue = DispatchQueue(label: "com.bookcity.getstores")
-//                storeQueue.async {
+                let storeQueue = DispatchQueue(label: "com.bookcity.getstores")
+                storeQueue.async {
+                    DispatchQueue.main.async {
+                        HUD.show(.progress)
+                    }
                     BookCitiesClient.sharedInstance().getStores({
                         (response, error) in
                         if(error == nil)
                         {
-                            //                        DispatchQueue.global(qos: .default).async{
+                            print("get store")
+                            DispatchQueue.global(qos: .default).async{
                             for data in response!{
                                 if !CoreDataManager.sharedInstance().haveStore(data.id!)
                                 {
@@ -136,65 +148,86 @@ class MainView: UIViewController {
                             }
                             storeCount += 1
                             print("offline store save")
-                            //                        }
+                            DispatchQueue.main.async {
+                                    HUD.hide()
+                                }
+                            }
                         }
                     })
                     
-//                }
+                }
             }
             
             if !CoreDataManager.sharedInstance().haveState(){
-//                let stateQueue = DispatchQueue(label: "com.bookcity.getstates")
-//                stateQueue.async {
+                let stateQueue = DispatchQueue(label: "com.bookcity.getstates")
+                stateQueue.async {
+                    DispatchQueue.main.async {
+                        HUD.show(.progress)
+                    }
                     BookCitiesClient.sharedInstance().getState({
                         (response, error) in
                         if(error == nil)
                         {
-                            //                        DispatchQueue.global(qos: .default).async{
+                            print("get state")
+                            DispatchQueue.global(qos: .default).async{
                             for data in response!{
                                 CoreDataManager.sharedInstance().saveState(data.value(forKey:Constants.JSONStateResponseKey.Name) as! String, id: data.value(forKey:Constants.JSONStateResponseKey.Id) as! String, countryId: data.value(forKey:Constants.JSONStateResponseKey.Country_id) as! String)
                             }
-                            //                        }
+                            
                             storeCount += 1
                             print("offline state save")
+                            DispatchQueue.main.async {
+                                    HUD.hide()
+                                }
+                        }
                         }
                     })
                     
-//                }
+                }
             }
             
             
             if !CoreDataManager.sharedInstance().haveCountry(){
-//                let stateQueue = DispatchQueue(label: "com.bookcity.getcountry")
-//                stateQueue.async {
+                let stateQueue = DispatchQueue(label: "com.bookcity.getcountry")
+                stateQueue.async {
+                    DispatchQueue.main.async {
+                        HUD.show(.progress)
+                    }
                     BookCitiesClient.sharedInstance().getCountry({
                         (response, error) in
                         if(error == nil)
                         {
-                            //                        DispatchQueue.global(qos: .default).async{
+                            print("get country")
+                            DispatchQueue.global(qos: .default).async{
                             for data in response!{
                                 CoreDataManager.sharedInstance().saveCountry(data.value(forKey:Constants.JSONCountryResponseKey.Name) as! String, id: data.value(forKey:Constants.JSONCountryResponseKey.Id) as! String, sortName:data.value(forKey:Constants.JSONCountryResponseKey.SortName) as! String)
                             }
-                            //                        }
                             storeCount += 1
                             print("offline country save")
+                            DispatchQueue.main.async {
+                                HUD.hide()
+                                }
+                            }
                         }
                     })
                     
                 }
-//            }
-//            DispatchQueue.main.async {
-                if storeCount == 4 || storeCount == 0 {
-                    HUD.flash(.success, delay: 1.0)
-                }
+            }
+            DispatchQueue.main.async {
                 if Reachable.isConnectedToNetwork() == false
                 {
                     HUD.flash(.success, delay: 1.0)
                 }
-//            }
-        
+            }
+        }
+//        let  countries = JSONCountry.countryFromCoreData(CoreDataManager.sharedInstance().getCountry() as! [Country])
+//        for con in countries{
+//            print(con.id+"  "+con.name)
 //        }
-        
+        let  states = JSONState.stateFromCoreData(CoreDataManager.sharedInstance().getState() as! [State])
+        for stat in states{
+            print(stat.id+"  "+stat.name)
+        }
     }
     
     // MARK: - Navigation

@@ -11,7 +11,7 @@ import UIKit
 class JSONState: NSObject {
     
     var id:String!
-    var name:String?
+    var name:String!
     var country_id:String!
     
     // construct a JSONstates from a dictionary

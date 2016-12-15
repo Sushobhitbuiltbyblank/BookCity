@@ -10,18 +10,19 @@ import UIKit
 import MapKit
 
 class BookStoreAnnotation: NSObject, MKAnnotation {
-    
-    
+        
     var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2D()
     var title: String?
     var subtitle: String?
-    
+    var imageName:String?
+    var store:JSONStore?
+    var tag:Int?
     class func createViewAnnotationForMapView(_ mapview: MKMapView, annotation: MKAnnotation) -> MKAnnotationView {
     var returnedAnnotationView =
-    mapview.dequeueReusableAnnotationView(withIdentifier: String(describing: SFAnnotation.self))
+    mapview.dequeueReusableAnnotationView(withIdentifier: String(describing: BookStoreAnnotation.self))
     if returnedAnnotationView == nil {
     returnedAnnotationView =
-    MKAnnotationView(annotation: annotation, reuseIdentifier: String(describing: SFAnnotation.self))
+    MKAnnotationView(annotation: annotation, reuseIdentifier: String(describing: BookStoreAnnotation.self))
     
     returnedAnnotationView!.canShowCallout = true
     

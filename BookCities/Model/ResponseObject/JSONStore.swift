@@ -26,6 +26,46 @@ class JSONStore: NSObject {
     let working_hours:String?
     let zipcode:String?
     var isFavorate:Bool?
+    var store_image_dir:String?
+    let image1:String?
+    let image2:String?
+    let image3:String?
+    let image4:String?
+    let phone:String?
+    
+    let mon_from_hr:String?
+    let tue_from_hr:String?
+    let wed_from_hr:String?
+    let thurs_from_hr:String?
+    let fri_from_hr:String?
+    let sat_from_hr:String?
+    let sun_from_hr:String?
+    
+    let mon_from_mins:String?
+    let tue_from_mins:String?
+    let wed_from_mins:String?
+    let thurs_from_mins:String?
+    let fri_from_mins:String?
+    let sat_from_mins:String?
+    let sun_from_mins:String?
+    
+    let mon_to_hr:String?
+    let tue_to_hr:String?
+    let wed_to_hr:String?
+    let thurs_to_hr:String?
+    let fri_to_hr:String?
+    let sat_to_hr:String?
+    let sun_to_hr:String?
+    
+    let mon_to_mins:String?
+    let tue_to_mins:String?
+    let wed_to_mins:String?
+    let thurs_to_mins:String?
+    let fri_to_mins:String?
+    let sat_to_mins:String?
+    let sun_to_mins:String?
+    let descriptions:String?
+    
     init(dictionary: [String:AnyObject]) {
         self.address = dictionary[Constants.JSONStoreResponseKey.Address] as? String
         self.books_category_ids = dictionary[Constants.JSONStoreResponseKey.BookCategoryIds] as? String
@@ -44,14 +84,104 @@ class JSONStore: NSObject {
         self.country = dictionary[Constants.JSONStoreResponseKey.Country] as? String
         self.zipcode = dictionary[Constants.JSONStoreResponseKey.Zipcode] as? String
         self.isFavorate = false
+        self.image1 = dictionary[Constants.JSONStoreResponseKey.Image1] as? String
+        self.image2 = dictionary[Constants.JSONStoreResponseKey.Image2] as? String
+        self.image3 = dictionary[Constants.JSONStoreResponseKey.Image3] as? String
+        self.image4 = dictionary[Constants.JSONStoreResponseKey.Image4] as? String
+        self.phone = dictionary[Constants.JSONStoreResponseKey.phone] as? String
+        self.descriptions = dictionary[Constants.JSONStoreResponseKey.description] as? String
+        self.mon_from_hr = dictionary[Constants.JSONStoreResponseKey.mon_from_hr] as? String
+        self.mon_to_hr = dictionary[Constants.JSONStoreResponseKey.mon_to_hr] as? String
+        self.mon_from_mins = dictionary[Constants.JSONStoreResponseKey.mon_from_mins] as? String
+        self.mon_to_mins = dictionary[Constants.JSONStoreResponseKey.mon_to_mins] as? String
+        self.tue_from_hr = dictionary[Constants.JSONStoreResponseKey.tue_from_hr] as? String
+        self.tue_to_hr = dictionary[Constants.JSONStoreResponseKey.tue_to_hr] as? String
+        self.tue_to_mins = dictionary[Constants.JSONStoreResponseKey.tue_from_mins] as? String
+        self.tue_from_mins = dictionary[Constants.JSONStoreResponseKey.tue_to_mins] as? String
+        self.wed_from_hr = dictionary[Constants.JSONStoreResponseKey.wed_from_hr] as? String
+        self.wed_to_hr = dictionary[Constants.JSONStoreResponseKey.wed_to_hr] as? String
+        self.wed_from_mins = dictionary[Constants.JSONStoreResponseKey.wed_from_mins] as? String
+        self.wed_to_mins = dictionary[Constants.JSONStoreResponseKey.wed_to_mins] as? String
+        self.thurs_from_hr = dictionary[Constants.JSONStoreResponseKey.thurs_from_hr] as? String
+        self.thurs_to_hr = dictionary[Constants.JSONStoreResponseKey.thurs_to_hr] as? String
+        self.thurs_from_mins = dictionary[Constants.JSONStoreResponseKey.thurs_from_mins] as? String
+        self.thurs_to_mins = dictionary[Constants.JSONStoreResponseKey.thurs_to_mins] as? String
+        self.fri_from_hr = dictionary[Constants.JSONStoreResponseKey.fri_from_hr] as? String
+        self.fri_to_hr = dictionary[Constants.JSONStoreResponseKey.fri_to_hr] as? String
+        self.fri_from_mins = dictionary[Constants.JSONStoreResponseKey.fri_from_mins] as? String
+        self.fri_to_mins = dictionary[Constants.JSONStoreResponseKey.fri_to_mins] as? String
+        self.sat_from_hr = dictionary[Constants.JSONStoreResponseKey.sat_from_hr] as? String
+        self.sat_to_hr = dictionary[Constants.JSONStoreResponseKey.sat_to_hr] as? String
+        self.sat_from_mins = dictionary[Constants.JSONStoreResponseKey.sat_from_mins] as? String
+        self.sat_to_mins = dictionary[Constants.JSONStoreResponseKey.sat_to_mins] as? String
+        self.sun_from_hr = dictionary[Constants.JSONStoreResponseKey.sun_from_hr] as? String
+        self.sun_to_hr = dictionary[Constants.JSONStoreResponseKey.sun_to_hr] as? String
+        self.sun_from_mins = dictionary[Constants.JSONStoreResponseKey.sun_from_mins] as? String
+        self.sun_to_mins = dictionary[Constants.JSONStoreResponseKey.sun_to_mins] as? String
+        self.store_image_dir = ""
     }
     
-    static func storeFromResults(_ results: [[String:AnyObject]]) -> [JSONStore] {
-        
+    init(dictionary: [String:AnyObject],storeImageDir:String) {
+        self.address = dictionary[Constants.JSONStoreResponseKey.Address] as? String
+        self.books_category_ids = dictionary[Constants.JSONStoreResponseKey.BookCategoryIds] as? String
+        self.id = dictionary[Constants.JSONStoreResponseKey.Id] as? String
+        self.is_museumshops = dictionary[Constants.JSONStoreResponseKey.IsMuseumshops] as? String
+        self.is_new_books = dictionary[Constants.JSONStoreResponseKey.IsNewBooks] as? String
+        self.is_used_books = dictionary[Constants.JSONStoreResponseKey.IsUsedBooks] as? String
+        self.latitude = dictionary[Constants.JSONStoreResponseKey.Latitude] as? String
+        self.longitude = dictionary[Constants.JSONStoreResponseKey.Longitude] as? String
+        self.name = dictionary[Constants.JSONStoreResponseKey.Name] as? String
+        self.website = dictionary[Constants.JSONStoreResponseKey.Website] as? String
+        self.address_2 = dictionary[Constants.JSONStoreResponseKey.Address_2] as? String
+        self.working_hours = dictionary[Constants.JSONStoreResponseKey.WorkingHours] as? String
+        self.city = dictionary[Constants.JSONStoreResponseKey.City] as? String
+        self.state = dictionary[Constants.JSONStoreResponseKey.State] as? String
+        self.country = dictionary[Constants.JSONStoreResponseKey.Country] as? String
+        self.zipcode = dictionary[Constants.JSONStoreResponseKey.Zipcode] as? String
+        self.isFavorate = false
+        self.store_image_dir = storeImageDir
+        self.image1 = storeImageDir+(dictionary[Constants.JSONStoreResponseKey.Image1] as? String)!
+        self.image2 = storeImageDir+(dictionary[Constants.JSONStoreResponseKey.Image2] as? String)!
+        self.image3 = storeImageDir+(dictionary[Constants.JSONStoreResponseKey.Image3] as? String)!
+        self.image4 = storeImageDir+(dictionary[Constants.JSONStoreResponseKey.Image4] as? String)!
+        self.phone = dictionary[Constants.JSONStoreResponseKey.phone] as? String
+        self.descriptions = dictionary[Constants.JSONStoreResponseKey.description] as? String
+        self.mon_from_hr = dictionary[Constants.JSONStoreResponseKey.mon_from_hr] as? String
+        self.mon_to_hr = dictionary[Constants.JSONStoreResponseKey.mon_to_hr] as? String
+        self.mon_from_mins = dictionary[Constants.JSONStoreResponseKey.mon_from_mins] as? String
+        self.mon_to_mins = dictionary[Constants.JSONStoreResponseKey.mon_to_mins] as? String
+        self.tue_from_hr = dictionary[Constants.JSONStoreResponseKey.tue_from_hr] as? String
+        self.tue_to_hr = dictionary[Constants.JSONStoreResponseKey.tue_to_hr] as? String
+        self.tue_to_mins = dictionary[Constants.JSONStoreResponseKey.tue_from_mins] as? String
+        self.tue_from_mins = dictionary[Constants.JSONStoreResponseKey.tue_to_mins] as? String
+        self.wed_from_hr = dictionary[Constants.JSONStoreResponseKey.wed_from_hr] as? String
+        self.wed_to_hr = dictionary[Constants.JSONStoreResponseKey.wed_to_hr] as? String
+        self.wed_from_mins = dictionary[Constants.JSONStoreResponseKey.wed_from_mins] as? String
+        self.wed_to_mins = dictionary[Constants.JSONStoreResponseKey.wed_to_mins] as? String
+        self.thurs_from_hr = dictionary[Constants.JSONStoreResponseKey.thurs_from_hr] as? String
+        self.thurs_to_hr = dictionary[Constants.JSONStoreResponseKey.thurs_to_hr] as? String
+        self.thurs_from_mins = dictionary[Constants.JSONStoreResponseKey.thurs_from_mins] as? String
+        self.thurs_to_mins = dictionary[Constants.JSONStoreResponseKey.thurs_to_mins] as? String
+        self.fri_from_hr = dictionary[Constants.JSONStoreResponseKey.fri_from_hr] as? String
+        self.fri_to_hr = dictionary[Constants.JSONStoreResponseKey.fri_to_hr] as? String
+        self.fri_from_mins = dictionary[Constants.JSONStoreResponseKey.fri_from_mins] as? String
+        self.fri_to_mins = dictionary[Constants.JSONStoreResponseKey.fri_to_mins] as? String
+        self.sat_from_hr = dictionary[Constants.JSONStoreResponseKey.sat_from_hr] as? String
+        self.sat_to_hr = dictionary[Constants.JSONStoreResponseKey.sat_to_hr] as? String
+        self.sat_from_mins = dictionary[Constants.JSONStoreResponseKey.sat_from_mins] as? String
+        self.sat_to_mins = dictionary[Constants.JSONStoreResponseKey.sat_to_mins] as? String
+        self.sun_from_hr = dictionary[Constants.JSONStoreResponseKey.sun_from_hr] as? String
+        self.sun_to_hr = dictionary[Constants.JSONStoreResponseKey.sun_to_hr] as? String
+        self.sun_from_mins = dictionary[Constants.JSONStoreResponseKey.sun_from_mins] as? String
+        self.sun_to_mins = dictionary[Constants.JSONStoreResponseKey.sun_to_mins] as? String
+    }
+
+    
+    static func storeFromResults(_ results: [[String:AnyObject]],storeImageDir:String) -> [JSONStore] {
         var stores = [JSONStore]()
         // iterate through array of dictionaries, each Movie is a dictionary
         for result in results {
-            stores.append(JSONStore(dictionary: result))
+            stores.append(JSONStore(dictionary: result, storeImageDir: storeImageDir))
         }
         return stores
     }

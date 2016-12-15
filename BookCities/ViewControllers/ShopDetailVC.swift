@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import AlamofireImage
 class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -17,7 +17,22 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     @IBOutlet weak var favorateBtn: BorderButton!
     @IBOutlet weak var shareBtn: BorderButton!
     @IBOutlet weak var showOnMapBtn: BorderButton!
+    @IBOutlet weak var categoriesLabel: UILabel!
+    @IBOutlet weak var addressLable: UILabel!
+    @IBOutlet weak var address2Lable: UILabel!
+    @IBOutlet weak var websiteLable: UILabel!
+    @IBOutlet weak var descriptionLable: UILabel!
+    @IBOutlet weak var categoryLable: UILabel!
    
+    // add lable for daywise time.
+    @IBOutlet weak var monTimeL: UILabel!
+    @IBOutlet weak var tueTimeL: UILabel!
+    @IBOutlet weak var wedTimeL: UILabel!
+    @IBOutlet weak var thuTimeL: UILabel!
+    @IBOutlet weak var friTimeL: UILabel!
+    @IBOutlet weak var satTimeL: UILabel!
+    @IBOutlet weak var sunTimeL: UILabel!
+    
     var colors:[UIColor] = [UIColor.red, UIColor.blue, UIColor.green, UIColor.yellow]
     var frame: CGRect = CGRect(x: 0, y: 0, width: 0, height: 0)
     var tit:String?
@@ -33,9 +48,11 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(goBack))
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage(named: self.getStoreTypeImage())?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: .plain, target: nil, action: nil)
+        self.addressLable.text = store?.address
+        getcatergories()
         configurePageControl()
         configureImageScroller()
-        
+        setTimelable()
     }
     
     func configurePageControl() {
@@ -51,16 +68,16 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     {
         scrollView.delegate = self
         self.scrollView.isPagingEnabled = true
+        let imageUrls = getImageUrlArray()
         for index in 0..<4 {
             
             frame.origin.x = self.view.frame.size.width * CGFloat(index)
-            
             frame.size.height = self.view.frame.size.height*10/25
             frame.size.width = self.view.frame.size.width
             self.scrollView.isPagingEnabled = true
-            
             let imageV = UIImageView(frame: frame)
-            imageV.image = UIImage(named: "logo")
+            let url = URL(string:imageUrls[index])!
+            imageV.af_setImage(withURL: url, placeholderImage: UIImage(named: "placeholder"), filter: nil, imageTransition: .crossDissolve(0.2), runImageTransitionIfCached: true, completion: nil)
             imageV.backgroundColor = colors[index]
             self.scrollView.addSubview(imageV)
         }
@@ -86,20 +103,30 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     {
         self.navigationController!.popViewController(animated: true)
     }
+    
     @IBAction func showOnMapAction(_ sender: Any) {
-        
+        var stores = [JSONStore]()
+        stores.append(self.store!)
+        let next = self.storyboard?.instantiateViewController(withIdentifier:"MyMapVC") as! MyMapVC
+        next.tit = store?.name
+        next.stores = stores
+        self.navigationController?.pushViewController(next, animated: true)
     }
+    
     @IBAction func shareBtnAction(_ sender: Any) {
-        
     }
+
     @IBAction func favorateAction(_ sender: Any) {
         if favorateBtn.isSelected
         {
             favorateBtn.isSelected = false
+            store?.isFavorate = false
         }
         else{
             favorateBtn.isSelected = true
+            store?.isFavorate = true
         }
+
     }
     
     /*
@@ -144,4 +171,58 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         }
     }
 
+    
+    func getImageUrlArray () -> Array<String>
+    {
+        let image1:String = store?.image1 ?? ""
+        let image2:String = store?.image2 ?? ""
+        let image3:String = store?.image3 ?? ""
+        let image4:String = store?.image4 ?? ""
+        
+        let array = [image1,image2,image3,image4]
+        return array 
+    }
+    
+    func getcatergories()
+    {
+            
+    }
+    func setTimelable()
+    {
+        print(store?.mon_from_hr ?? "")
+        monTimeL.text = getString(fromHr: (store?.mon_from_hr)!, fromMin: (store?.mon_from_mins)!, toHr: (store?.mon_to_hr)!, toMin: (store?.mon_to_mins)!)
+        tueTimeL.text = getString(fromHr: (store?.tue_from_hr)!, fromMin: (store?.tue_from_mins)!, toHr: (store?.tue_to_hr)!, toMin: (store?.tue_to_mins)!)
+        tueTimeL.text = getString(fromHr: (store?.tue_from_hr)!, fromMin: (store?.tue_from_mins)!, toHr: (store?.tue_to_hr)!, toMin: (store?.tue_to_mins)!)
+        wedTimeL.text = getString(fromHr: (store?.wed_from_hr)!, fromMin: (store?.wed_from_mins)!, toHr: (store?.wed_to_hr)!, toMin: (store?.wed_to_mins)!)
+        thuTimeL.text = getString(fromHr: (store?.thurs_from_hr)!, fromMin: (store?.thurs_from_mins)!, toHr: (store?.thurs_to_hr)!, toMin: (store?.thurs_to_mins)!)
+        friTimeL.text = getString(fromHr: (store?.fri_from_hr)!, fromMin: (store?.fri_from_mins)!, toHr: (store?.fri_to_hr)!, toMin: (store?.fri_to_mins)!)
+        satTimeL.text = getString(fromHr: (store?.sat_from_hr)!, fromMin: (store?.sat_from_mins)!, toHr: (store?.sat_to_hr)!, toMin: (store?.sat_to_mins)!)
+        sunTimeL.text = getString(fromHr: (store?.sun_from_hr)!, fromMin: (store?.sun_from_mins)!, toHr: (store?.sun_to_hr)!, toMin: (store?.sun_to_mins)!)
+    }
+    
+    func getString(fromHr:String,fromMin:String,toHr:String,toMin:String) ->String
+    {
+        var fromhr = fromHr
+        var frommin = fromMin
+        var tohr = toHr
+        var tomin = toMin
+        
+        if fromHr == "0"&&toHr == "0" && fromMin == "0" && toMin == "0"
+        {
+            return "closed"
+        }
+        if fromMin == "0"{
+                frommin = "00"
+            }
+            if fromHr == "0"{
+                fromhr = "00"
+            }
+            if toMin == "0"{
+                tomin = "00"
+            }
+            if toHr == "00"{
+                tohr = "0"
+            }
+        return fromhr+":"+frommin+" - "+tohr+":"+tomin
+    }
 }

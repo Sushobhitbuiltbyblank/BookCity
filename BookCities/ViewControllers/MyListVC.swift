@@ -36,9 +36,11 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
     var tit: String?
     var categories:Array<Any>?
     var city:JSONCity?
+    var totalStores:Array<JSONStore>?
     override func viewDidLoad() {
         super.viewDidLoad()
         defaultViewSetting()
+        totalStores = stores
         categories = CoreDataManager.sharedInstance().getCategories()
         //registercellfor Table view
         cellIdentifier = "bookStoreCell"
@@ -148,6 +150,8 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
     @IBAction func resetFiltersBtnAction(_ sender: Any) {
         defaultViewSetting()
         showFilterView(false)
+        stores = totalStores
+        tableView.reloadData()
     }
     
     @IBAction func newBooksBtnAction(_ sender: Any) {
@@ -157,6 +161,14 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
         if self.heightOfResetC.constant == 0 {
             showFilterView(true)
         }
+        var storesData:Array<JSONStore> = Array()
+        for store in totalStores!{
+            if store.is_new_books == "1"{
+                storesData.append(store)
+            }
+        }
+        stores = storesData
+        tableView.reloadData()
     }
     
     @IBAction func usedBooksBtnAction(_ sender: Any) {
@@ -166,6 +178,14 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
         if self.heightOfResetC.constant == 0 {
             showFilterView(true)
         }
+        var storesData:Array<JSONStore> = Array()
+        for store in totalStores!{
+            if store.is_used_books == "1"{
+                storesData.append(store)
+            }
+        }
+        stores = storesData
+        tableView.reloadData()
     }
     
     @IBAction func museumshopsBtnAction(_ sender: Any) {
@@ -175,6 +195,14 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
         if self.heightOfResetC.constant == 0 {
             showFilterView(true)
         }
+        var storesData:Array<JSONStore> = Array()
+        for store in totalStores!{
+            if store.is_museumshops == "1"{
+                storesData.append(store)
+            }
+        }
+        stores = storesData
+        tableView.reloadData()
     }
     
     @IBAction func showOnMapBtnAction(_ sender: Any) {
@@ -197,6 +225,14 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
     @IBAction func doneBtnAction(_ sender: Any) {
         let row = categoryPicker.selectedRow(inComponent: 0)
         let value = categories?[row]
+        var storesData:Array<JSONStore> = Array()
+        for store in totalStores! {
+            if self.containCategory(store: store,category: value as Any){
+                storesData.append(store)
+            }
+        }
+        stores = storesData
+        tableView.reloadData()
         print(value ?? "no category from core data")
         showCategoryPicker(false)
     }
@@ -266,5 +302,18 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
         else {
             return ""
         }
+    }
+    
+    func containCategory(store:JSONStore,category:Any)-> Bool {
+        let categoryString = store.books_category_ids
+        let value:Categories = category as! Categories
+        let id = value.value(forKeyPath: "id") as! String
+        let catergoryArray = categoryString?.characters.split{$0 == ":"}.map(String.init)
+        for cat in catergoryArray! {
+            if cat == id {
+                return true
+            }
+        }
+        return false
     }
 }

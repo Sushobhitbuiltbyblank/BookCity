@@ -10,7 +10,7 @@ import UIKit
 
 class JSONCountry: NSObject {
     var id:String!
-    var name:String?
+    var name:String!
     var sortname:String!
     
     // construct a JSONCountry from a dictionary

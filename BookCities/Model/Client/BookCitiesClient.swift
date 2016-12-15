@@ -37,6 +37,19 @@ class BookCitiesClient: NSObject {
         }
  
     }
+    
+    func getMethodCall(_ method:String,parameters:[String:AnyObject], completionHandlerForGET: @escaping (_ response : Any?, _ error :Error?) -> Void)
+    {
+        let url = BookCitiesURLFromParameters(parameters as [String : AnyObject], withPathExtension: method)
+        Alamofire.request(String(describing: url)).responseJSON { response in switch response.result {
+        case .success(let JSON):
+            let response = JSON as! NSDictionary
+            completionHandlerForGET(response,nil)
+        case .failure(let error):
+            print("Request failed with error: \(error)")
+            }
+        }
+    }
     // MARK: Helpers
     
 

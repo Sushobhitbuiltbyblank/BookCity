@@ -381,6 +381,9 @@ class CoreDataManager: NSObject {
         //2
         let fetchRequest =
             NSFetchRequest<NSManagedObject>(entityName: Constants.Entity.State)
+        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        let sortDescriptors = [sortDescriptor]
+        fetchRequest.sortDescriptors = sortDescriptors
         //3
         do {
             data = try managedContext.fetch(fetchRequest)

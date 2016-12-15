@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B05367C1E0158B900021FC7 /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B05367B1E0158B900021FC7 /* AlamofireImage.framework */; };
 		2B0C39821DFE784A00108B1A /* JSONCountry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0C39811DFE784A00108B1A /* JSONCountry.swift */; };
 		2B0C39841DFE7BA600108B1A /* JSONState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0C39831DFE7BA600108B1A /* JSONState.swift */; };
 		2B0C39861DFEB58E00108B1A /* ViewControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0C39851DFEB58E00108B1A /* ViewControllerHelper.swift */; };
@@ -52,6 +53,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B05367B1E0158B900021FC7 /* AlamofireImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireImage.framework; path = "../../../../Library/Developer/Xcode/DerivedData/BookCities-fdagecfuoyvlxsaabdajemrbsgur/Build/Products/Debug-iphoneos/AlamofireImage/AlamofireImage.framework"; sourceTree = "<group>"; };
 		2B0C39811DFE784A00108B1A /* JSONCountry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONCountry.swift; sourceTree = "<group>"; };
 		2B0C39831DFE7BA600108B1A /* JSONState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONState.swift; sourceTree = "<group>"; };
 		2B0C39851DFEB58E00108B1A /* ViewControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerHelper.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B05367C1E0158B900021FC7 /* AlamofireImage.framework in Frameworks */,
 				2B0C398A1DFEC96B00108B1A /* PKHUD.framework in Frameworks */,
 				2B8193A11DE70A02008879B2 /* CoreLocation.framework in Frameworks */,
 				2B81939F1DE709FA008879B2 /* MapKit.framework in Frameworks */,
@@ -290,6 +293,7 @@
 		EFBD2AB30B0D142B18346A67 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2B05367B1E0158B900021FC7 /* AlamofireImage.framework */,
 				2B0C39891DFEC96B00108B1A /* PKHUD.framework */,
 				2B4B90F21DF161E7008FE99B /* ReachabilitySwift.framework */,
 				2B8193A01DE70A02008879B2 /* CoreLocation.framework */,

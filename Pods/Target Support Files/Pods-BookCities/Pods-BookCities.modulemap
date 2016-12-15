@@ -1,0 +1,6 @@
+framework module Pods_BookCities {
+  umbrella header "Pods-BookCities-umbrella.h"
+
+  export *
+  module * { export * }
+}

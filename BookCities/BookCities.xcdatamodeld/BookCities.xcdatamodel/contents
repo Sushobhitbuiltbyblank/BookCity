@@ -44,8 +44,8 @@
     <elements>
         <element name="Categories" positionX="-6957" positionY="-714" width="128" height="75"/>
         <element name="City" positionX="-6959" positionY="-828" width="128" height="118"/>
-        <element name="Store" positionX="-6759" positionY="-828" width="128" height="315"/>
         <element name="Country" positionX="-6858" positionY="-684" width="128" height="90"/>
         <element name="State" positionX="-6849" positionY="-675" width="128" height="90"/>
+        <element name="Store" positionX="-6759" positionY="-828" width="128" height="315"/>
     </elements>
 </model>

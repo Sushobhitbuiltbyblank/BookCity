@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:BookCities/Model/Managed Objects/Country+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
+      location = "group:BookCities/Model/Managed Objects/Country+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
+      location = "group:City+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
+      location = "group:City+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
+      location = "group:BookCities/Model/Managed Objects/Categories+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
+      location = "group:BookCities/Model/Managed Objects/Categories+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
+      location = "group:BookCities/State+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
+      location = "group:BookCities/State+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
+      location = "group:BookCities.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+</Workspace>
