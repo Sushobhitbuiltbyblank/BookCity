@@ -53,8 +53,14 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         configurePageControl()
         configureImageScroller()
         setTimelable()
+        setView()
     }
-    
+    func setView()
+    {
+        self.websiteLable.text = store?.website
+        self.address2Lable.text = store?.address_2
+        self.descriptionLable.text = store?.descriptions
+    }
     func configurePageControl() {
         // The total number of pages that are available is based on how many available colors we have.
         self.pageControl.numberOfPages = colors.count
@@ -189,7 +195,6 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     }
     func setTimelable()
     {
-        print(store?.mon_from_hr ?? "")
         monTimeL.text = getString(fromHr: (store?.mon_from_hr)!, fromMin: (store?.mon_from_mins)!, toHr: (store?.mon_to_hr)!, toMin: (store?.mon_to_mins)!)
         tueTimeL.text = getString(fromHr: (store?.tue_from_hr)!, fromMin: (store?.tue_from_mins)!, toHr: (store?.tue_to_hr)!, toMin: (store?.tue_to_mins)!)
         tueTimeL.text = getString(fromHr: (store?.tue_from_hr)!, fromMin: (store?.tue_from_mins)!, toHr: (store?.tue_to_hr)!, toMin: (store?.tue_to_mins)!)
