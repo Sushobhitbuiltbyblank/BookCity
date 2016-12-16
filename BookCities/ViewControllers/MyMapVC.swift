@@ -131,7 +131,7 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-//         Center the map the first time we get a real location change.
+        //         Center the map the first time we get a real location change.
         
         if userLocation.coordinate.latitude != 0.0 && userLocation.coordinate.longitude != 0.0 {
             
@@ -140,41 +140,41 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
                 self.mapView.setCenter(userLocation.coordinate, animated: true)
                 let region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate,2000, 2000)
                 mapView.setRegion(mapView.regionThatFits(region), animated: true)
+                
+                // Lookup the information for the current location of the user.
+                geocoder.reverseGeocodeLocation(mapView.userLocation.location!, completionHandler:{(placemarks, error) in
+                    if placemarks != nil && (placemarks?.count)! > 0
+                    {
+                        self.placemark = (placemarks?[0])!
+                        print(self.placemark.locality ?? "locality")
+                        print(self.placemark.administrativeArea ?? "administrativeArea")
+                        print(self.placemark.country ?? "country")
+                        if let cityName = self.placemark.locality
+                        {
+                        BookCitiesClient.sharedInstance().getStores(["city":cityName as AnyObject], { (response, error) in
+                            self.stores = response
+                        })
+                        }
+                    }
+                    else
+                    {
+                        // Handle the nil case if necessary.
+                    }
+                    
+                } )
+                
             }
             if (self.navigationController?.viewControllers.count)! > 1 {
-            if currentLocation == nil && city == nil && !(self.navigationController?.viewControllers[(self.navigationController?.viewControllers.endIndex)!-2] is ShopDetailVC)
-            {
-                currentLocation = userLocation
-                self.mapView.setCenter(userLocation.coordinate, animated: true)
-                let region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate,2000, 2000)
-                mapView.setRegion(mapView.regionThatFits(region), animated: true)
-            }
+                if currentLocation == nil && city == nil && !(self.navigationController?.viewControllers[(self.navigationController?.viewControllers.endIndex)!-2] is ShopDetailVC)
+                {
+                    currentLocation = userLocation
+                    self.mapView.setCenter(userLocation.coordinate, animated: true)
+                    let region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate,2000, 2000)
+                    mapView.setRegion(mapView.regionThatFits(region), animated: true)
+                }
             }
         }
-            
-//                let region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate,2000, 2000)
-//                mapView.setRegion(mapView.regionThatFits(region), animated: true)
-                // Lookup the information for the current location of the user.
-//                geocoder.reverseGeocodeLocation(mapView.userLocation.location!, completionHandler:{(placemarks, error) in
-//                    if placemarks != nil && (placemarks?.count)! > 0
-//                    {
-//                        self.placemark = (placemarks?[0])!
-//                        print(self.placemark.thoroughfare ?? "thoroughfare")
-//                        print(self.placemark.subThoroughfare ?? "subThoroughfare")
-//                        print(self.placemark.locality ?? "locality")
-//                        print(self.placemark.subLocality ?? "subLocality")
-//                        print(self.placemark.administrativeArea ?? "administrativeArea")
-//                        print(self.placemark.subAdministrativeArea ?? "subAdministrativeArea")
-//                        print(self.placemark.country ?? "country")
-//                        print(self.placemark.isoCountryCode ?? "isoCountryCode")
-//                        print(self.placemark.postalCode ?? "postalcode")
-//                    }
-//                    else
-//                    {
-//                        // Handle the nil case if necessary.
-//                    }
-//        
-//                } )
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

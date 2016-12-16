@@ -73,7 +73,6 @@ class MainView: UIViewController {
         if CoreDataManager.sharedInstance().haveStore(){
             next.stores = JSONStore.storeFromCoreData(CoreDataManager.sharedInstance().getStores() as! [Store])
             let nv:UINavigationController = UINavigationController(rootViewController: next)
-            
             self.present(nv, animated: true, completion: nil)
         }
         else if Reachable.isConnectedToNetwork() == true

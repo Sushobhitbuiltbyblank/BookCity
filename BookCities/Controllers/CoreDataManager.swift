@@ -237,9 +237,24 @@ class CoreDataManager: NSObject {
         //                return
         //        }
         // 1
+        
         let managedContext =
             self.persistentContainer.viewContext
         
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.Entity.Store)
+        let predicate = NSPredicate(format: "id == %@", store.id!)
+        fetchRequest.predicate = predicate
+        do
+        {
+            let fetchResults = try managedContext.fetch(fetchRequest)
+            for result in fetchResults{
+                managedContext.delete(result as! Store)
+            }
+        }
+        catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+
         let privateMOC = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         privateMOC.parent = managedContext
         // 2
@@ -252,7 +267,6 @@ class CoreDataManager: NSObject {
             
             let storeEntity = NSManagedObject(entity: entity,
                                               insertInto: privateMOC)
-            
             // 3
             storeEntity.setValue(store.name, forKeyPath: Constants.JSONStoreResponseKey.Name)
             storeEntity.setValue(store.id, forKey: Constants.JSONStoreResponseKey.Id)
@@ -270,6 +284,41 @@ class CoreDataManager: NSObject {
             storeEntity.setValue(store.website, forKey: Constants.JSONStoreResponseKey.Website)
             storeEntity.setValue(store.working_hours, forKey: Constants.JSONStoreResponseKey.WorkingHours)
             storeEntity.setValue(store.zipcode, forKey: Constants.JSONStoreResponseKey.Zipcode)
+            storeEntity.setValue(store.phone, forKey: Constants.JSONStoreResponseKey.phone)
+            storeEntity.setValue(store.descriptions, forKey: Constants.JSONStoreResponseKey.descriptions)
+            storeEntity.setValue(store.mon_from_hr, forKey: Constants.JSONStoreResponseKey.mon_from_hr)
+            storeEntity.setValue(store.mon_from_mins, forKey: Constants.JSONStoreResponseKey.mon_from_mins)
+            storeEntity.setValue(store.mon_to_hr, forKey: Constants.JSONStoreResponseKey.mon_to_hr)
+            storeEntity.setValue(store.mon_to_mins, forKey: Constants.JSONStoreResponseKey.mon_to_mins)
+            storeEntity.setValue(store.tue_from_hr, forKey: Constants.JSONStoreResponseKey.tue_from_hr)
+            storeEntity.setValue(store.tue_from_mins, forKey: Constants.JSONStoreResponseKey.tue_from_mins)
+            storeEntity.setValue(store.tue_to_hr, forKey: Constants.JSONStoreResponseKey.tue_to_hr)
+            storeEntity.setValue(store.tue_to_mins, forKey: Constants.JSONStoreResponseKey.tue_to_mins)
+            storeEntity.setValue(store.wed_from_hr, forKey: Constants.JSONStoreResponseKey.wed_from_hr)
+            storeEntity.setValue(store.wed_from_mins, forKey: Constants.JSONStoreResponseKey.wed_from_mins)
+            storeEntity.setValue(store.wed_to_hr, forKey: Constants.JSONStoreResponseKey.wed_to_hr)
+            storeEntity.setValue(store.wed_to_mins, forKey: Constants.JSONStoreResponseKey.wed_to_mins)
+            storeEntity.setValue(store.thurs_from_hr, forKey: Constants.JSONStoreResponseKey.thurs_from_hr)
+            storeEntity.setValue(store.thurs_from_mins, forKey: Constants.JSONStoreResponseKey.thurs_from_mins)
+            storeEntity.setValue(store.thurs_to_hr, forKey: Constants.JSONStoreResponseKey.thurs_to_hr)
+            storeEntity.setValue(store.thurs_to_mins, forKey: Constants.JSONStoreResponseKey.thurs_to_mins)
+            storeEntity.setValue(store.fri_from_hr, forKey: Constants.JSONStoreResponseKey.fri_from_hr)
+            storeEntity.setValue(store.fri_from_mins, forKey: Constants.JSONStoreResponseKey.fri_from_mins)
+            storeEntity.setValue(store.fri_to_hr, forKey: Constants.JSONStoreResponseKey.fri_to_hr)
+            storeEntity.setValue(store.fri_to_mins, forKey: Constants.JSONStoreResponseKey.fri_to_mins)
+            storeEntity.setValue(store.sat_from_hr, forKey: Constants.JSONStoreResponseKey.sat_from_hr)
+            storeEntity.setValue(store.sat_from_mins, forKey: Constants.JSONStoreResponseKey.sat_from_mins)
+            storeEntity.setValue(store.sat_to_hr, forKey: Constants.JSONStoreResponseKey.sat_to_hr)
+            storeEntity.setValue(store.sat_to_mins, forKey: Constants.JSONStoreResponseKey.sat_to_mins)
+            storeEntity.setValue(store.sun_to_hr, forKey: Constants.JSONStoreResponseKey.sun_to_hr)
+            storeEntity.setValue(store.sun_to_mins, forKey: Constants.JSONStoreResponseKey.sun_to_mins)
+            storeEntity.setValue(store.sun_from_hr, forKey: Constants.JSONStoreResponseKey.sun_from_hr)
+            storeEntity.setValue(store.sun_from_mins, forKey: Constants.JSONStoreResponseKey.sun_from_mins)
+            storeEntity.setValue(store.image1, forKey: Constants.JSONStoreResponseKey.Image1)
+            storeEntity.setValue(store.image2, forKey: Constants.JSONStoreResponseKey.Image2)
+            storeEntity.setValue(store.image3, forKey: Constants.JSONStoreResponseKey.Image3)
+            storeEntity.setValue(store.image4, forKey: Constants.JSONStoreResponseKey.Image4)
+            storeEntity.setValue(store.isFavorate, forKey: Constants.JSONStoreResponseKey.IsFavorate)
             // 4
             do {
                 try privateMOC.save()
@@ -365,6 +414,30 @@ class CoreDataManager: NSObject {
         return data
     }
     
+    // Fatch favorate Store from coreData 
+    func getFavorateStores() ->Array<Any>{
+        var data = Array<Any>()
+        let managedContext =
+            self.persistentContainer.viewContext
+        // 1
+        let idAttribute = "isFavorate"
+        // 2
+        let idPredicateFilter = true
+        //3
+        let idPredicate = NSPredicate(format: "%K == %@",   idAttribute , NSNumber(booleanLiteral: idPredicateFilter))
+
+        //2
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: Constants.Entity.Store)
+        fetchRequest.predicate = idPredicate
+        //3
+        do {
+            data = try managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        return data
+    }
     // Fatch State
     func getState() -> Array<Any> {
         var data = Array<Any>()
@@ -686,5 +759,26 @@ class CoreDataManager: NSObject {
         return data
     }
 
+    //Mark: Delete record from CoreData
+    
+    func deleteStore(storeID:String)
+    {
+        let managedContext =
+            self.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.Entity.Store)
+        let predicate = NSPredicate(format: "id == %@", storeID)
+        fetchRequest.predicate = predicate
+        do
+        {
+            let fetchResults = try managedContext.fetch(fetchRequest)
+            for result in fetchResults{
+                managedContext.delete(result as! Store)
+            }
+        }
+        catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+    }
 
 }

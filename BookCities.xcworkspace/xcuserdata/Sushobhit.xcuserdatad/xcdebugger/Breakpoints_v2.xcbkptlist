@@ -10,123 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BookCities/ViewControllers/MainView.swift"
-            timestampString = "503324643.542627"
+            timestampString = "503581202.557482"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
-            landmarkName = "saveOfflineDataBtnAction(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "BookCities.MainView.(saveOfflineDataBtnAction (Any) -&gt; ()).(closure #1).(closure #1)"
-                  moduleName = "BookCities"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Sushobhit/Desktop/BookMaps/Development/BookCities/BookCities/ViewControllers/MainView.swift"
-                  timestampString = "503505763.977159"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "111"
-                  endingLineNumber = "111"
-                  offsetFromSymbolStart = "284">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "BookCities.MainView.(saveOfflineDataBtnAction (Any) -&gt; ()).(closure #1).(closure #1).(closure #2)"
-                  moduleName = "BookCities"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Sushobhit/Desktop/BookMaps/Development/BookCities/BookCities/ViewControllers/MainView.swift"
-                  timestampString = "503505763.978431"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "102"
-                  endingLineNumber = "102"
-                  offsetFromSymbolStart = "24">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BookCities/Controllers/CoreDataManager.swift"
-            timestampString = "503314873.97085"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "221"
-            endingLineNumber = "221"
-            landmarkName = "saveCountry(_:id:sortName:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BookCities/Controllers/CoreDataManager.swift"
-            timestampString = "503314876.524651"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "219"
-            endingLineNumber = "219"
-            landmarkName = "saveCountry(_:id:sortName:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "BookCities.CoreDataManager.(saveCountry (Swift.String, id : Swift.String, sortName : Swift.String) -&gt; ()).(closure #1)"
-                  moduleName = "BookCities"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Sushobhit/Desktop/BookMaps/Development/BookCities/BookCities/Controllers/CoreDataManager.swift"
-                  timestampString = "503505763.983362"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "219"
-                  endingLineNumber = "219"
-                  offsetFromSymbolStart = "1052">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "BookCities.CoreDataManager.(saveCountry (Swift.String, id : Swift.String, sortName : Swift.String) -&gt; ()).(closure #1).(closure #1)"
-                  moduleName = "BookCities"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Sushobhit/Desktop/BookMaps/Development/BookCities/BookCities/Controllers/CoreDataManager.swift"
-                  timestampString = "503505763.98462"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "221"
-                  endingLineNumber = "221"
-                  offsetFromSymbolStart = "28">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BookCities/ViewControllers/MainView.swift"
-            timestampString = "503324643.542627"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
             landmarkName = "saveOfflineDataBtnAction(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BookCities/ViewControllers/MainView.swift"
-            timestampString = "503324643.542627"
+            timestampString = "503581202.557482"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
             landmarkName = "saveOfflineDataBtnAction(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -154,11 +42,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BookCities/ViewControllers/MainView.swift"
-            timestampString = "503414619.364226"
+            timestampString = "503581202.557482"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
+            landmarkName = "saveOfflineDataBtnAction(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BookCities/ViewControllers/MainView.swift"
+            timestampString = "503581202.557482"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
             landmarkName = "saveOfflineDataBtnAction(_:)"
             landmarkType = "7">
          </BreakpointContent>

@@ -78,4 +78,14 @@ extension BookCitiesClient
         })
 
     }
+    func getStores(_ parameteres:[String:AnyObject], _ completionHandlerForStores: @escaping (_ response : Array<JSONStore>? ,_ error : Error?) -> Void) -> Void {
+        let mutableMethod: String = Constants.Methods.Stores
+        getMethodCall(mutableMethod, parameters: [String:AnyObject](), completionHandlerForGET: {
+            (response,error) in
+            let res = response as! NSDictionary
+            let array = res.object(forKey:"stores")! as! NSArray
+            let response = JSONStore.storeFromResults(array as! [[String : AnyObject]],storeImageDir:res.object(forKey:"store_image_dir")! as! String)
+            completionHandlerForStores(response as Array<JSONStore>?,error)
+        })
+    }
 }

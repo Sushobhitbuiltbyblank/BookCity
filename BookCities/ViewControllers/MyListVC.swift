@@ -206,11 +206,13 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
     }
     
     @IBAction func showOnMapBtnAction(_ sender: Any) {
-//        let store:JSONStore = JSONStore.getStoreFromCDRecord(CoreDataManager.sharedInstance().getStore("2"))
         let next = self.storyboard?.instantiateViewController(withIdentifier:"MyMapVC") as! MyMapVC
         if let currentCity = city{
             next.tit = currentCity.name
             next.city = currentCity
+            next.stores = stores
+        }
+        else{
             next.stores = stores
         }
         self.navigationController?.pushViewController(next, animated: true)

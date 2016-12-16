@@ -89,7 +89,7 @@ class Constants: NSObject {
         static let fri_to_mins = "fri_to_mins"
         static let sat_to_mins = "sat_to_mins"
         static let sun_to_mins = "sun_to_mins"
-        static let description = "description"
+        static let descriptions = "descriptions"
     }
     
     struct JSONCountryResponseKey {

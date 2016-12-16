@@ -27,25 +27,59 @@
         <attribute name="books_category_ids" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="descriptions" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fri_from_hr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fri_from_mins" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fri_to_hr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fri_to_mins" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="image1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="image2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="image3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="image4" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="is_museumshops" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="is_new_books" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="is_used_books" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isFavorate" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mon_from_hr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mon_from_mins" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mon_to_hr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mon_to_mins" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sat_from_hr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sat_from_mins" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sat_to_hr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sat_to_mins" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sun_from_hr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sun_from_mins" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sun_to_hr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sun_to_mins" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thurs_from_hr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thurs_from_mins" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thurs_to_hr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thurs_to_mins" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tue_from_hr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tue_from_mins" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tue_to_hr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tue_to_mins" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="website" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="wed_from_hr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="wed_from_mins" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="wed_to_hr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="wed_to_mins" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="working_hours" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="zipcode" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="City" inverseName="relationship" inverseEntity="City" syncable="YES"/>
     </entity>
     <elements>
         <element name="Categories" positionX="-6957" positionY="-714" width="128" height="75"/>
-        <element name="City" positionX="-6959" positionY="-828" width="128" height="118"/>
-        <element name="Country" positionX="-6858" positionY="-684" width="128" height="90"/>
-        <element name="State" positionX="-6849" positionY="-675" width="128" height="90"/>
-        <element name="Store" positionX="-6759" positionY="-828" width="128" height="315"/>
+        <element name="City" positionX="-6806" positionY="-748" width="128" height="118"/>
+        <element name="Country" positionX="-6824" positionY="-576" width="128" height="90"/>
+        <element name="State" positionX="-7011" positionY="-549" width="128" height="90"/>
+        <element name="Store" positionX="-6626" positionY="-828" width="128" height="823"/>
     </elements>
 </model>

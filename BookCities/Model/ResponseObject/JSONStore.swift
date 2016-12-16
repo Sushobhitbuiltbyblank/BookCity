@@ -83,13 +83,19 @@ class JSONStore: NSObject {
         self.state = dictionary[Constants.JSONStoreResponseKey.State] as? String
         self.country = dictionary[Constants.JSONStoreResponseKey.Country] as? String
         self.zipcode = dictionary[Constants.JSONStoreResponseKey.Zipcode] as? String
-        self.isFavorate = false
+        if let favorate = dictionary[Constants.JSONStoreResponseKey.IsFavorate] as? Bool
+        {
+            self.isFavorate = favorate
+        }
+        else{
+            self.isFavorate = false
+        }
         self.image1 = dictionary[Constants.JSONStoreResponseKey.Image1] as? String
         self.image2 = dictionary[Constants.JSONStoreResponseKey.Image2] as? String
         self.image3 = dictionary[Constants.JSONStoreResponseKey.Image3] as? String
         self.image4 = dictionary[Constants.JSONStoreResponseKey.Image4] as? String
         self.phone = dictionary[Constants.JSONStoreResponseKey.phone] as? String
-        self.descriptions = dictionary[Constants.JSONStoreResponseKey.description] as? String
+        self.descriptions = dictionary[Constants.JSONStoreResponseKey.descriptions] as? String
         self.mon_from_hr = dictionary[Constants.JSONStoreResponseKey.mon_from_hr] as? String
         self.mon_to_hr = dictionary[Constants.JSONStoreResponseKey.mon_to_hr] as? String
         self.mon_from_mins = dictionary[Constants.JSONStoreResponseKey.mon_from_mins] as? String
@@ -138,14 +144,20 @@ class JSONStore: NSObject {
         self.state = dictionary[Constants.JSONStoreResponseKey.State] as? String
         self.country = dictionary[Constants.JSONStoreResponseKey.Country] as? String
         self.zipcode = dictionary[Constants.JSONStoreResponseKey.Zipcode] as? String
-        self.isFavorate = false
+        if let favorate = dictionary[Constants.JSONStoreResponseKey.IsFavorate] as? Bool
+        {
+            self.isFavorate = favorate
+        }
+        else{
+            self.isFavorate = false
+        }
         self.store_image_dir = storeImageDir
         self.image1 = storeImageDir+(dictionary[Constants.JSONStoreResponseKey.Image1] as? String)!
         self.image2 = storeImageDir+(dictionary[Constants.JSONStoreResponseKey.Image2] as? String)!
         self.image3 = storeImageDir+(dictionary[Constants.JSONStoreResponseKey.Image3] as? String)!
         self.image4 = storeImageDir+(dictionary[Constants.JSONStoreResponseKey.Image4] as? String)!
         self.phone = dictionary[Constants.JSONStoreResponseKey.phone] as? String
-        self.descriptions = dictionary[Constants.JSONStoreResponseKey.description] as? String
+        self.descriptions = dictionary[Constants.JSONStoreResponseKey.descriptions] as? String
         self.mon_from_hr = dictionary[Constants.JSONStoreResponseKey.mon_from_hr] as? String
         self.mon_to_hr = dictionary[Constants.JSONStoreResponseKey.mon_to_hr] as? String
         self.mon_from_mins = dictionary[Constants.JSONStoreResponseKey.mon_from_mins] as? String
@@ -193,6 +205,7 @@ class JSONStore: NSObject {
         for result in results {
             var dictionary = [String:AnyObject]()
             dictionary[Constants.JSONStoreResponseKey.Address] = result.value(forKeyPath: Constants.JSONStoreResponseKey.Address) as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.Id] = result.value(forKeyPath: Constants.JSONStoreResponseKey.Id) as AnyObject?
             dictionary[Constants.JSONStoreResponseKey.BookCategoryIds] = result.value(forKeyPath: Constants.JSONStoreResponseKey.BookCategoryIds)as AnyObject?
             dictionary[Constants.JSONStoreResponseKey.IsMuseumshops] = result.value(forKeyPath: Constants.JSONStoreResponseKey.IsMuseumshops)as AnyObject?
             dictionary[Constants.JSONStoreResponseKey.IsNewBooks] = result.value(forKeyPath: Constants.JSONStoreResponseKey.IsNewBooks)as AnyObject?
@@ -204,9 +217,44 @@ class JSONStore: NSObject {
             dictionary[Constants.JSONStoreResponseKey.Address_2] = result.value(forKeyPath: Constants.JSONStoreResponseKey.Address_2)as AnyObject?
             dictionary[Constants.JSONStoreResponseKey.WorkingHours] = result.value(forKeyPath: Constants.JSONStoreResponseKey.WorkingHours)as AnyObject?
             dictionary[Constants.JSONStoreResponseKey.City] = result.value(forKeyPath: Constants.JSONStoreResponseKey.City)as AnyObject?
-             dictionary[Constants.JSONStoreResponseKey.State] = result.value(forKeyPath: Constants.JSONStoreResponseKey.State)as AnyObject?
-             dictionary[Constants.JSONStoreResponseKey.Country] = result.value(forKeyPath: Constants.JSONStoreResponseKey.Country)as AnyObject?
-             dictionary[Constants.JSONStoreResponseKey.Zipcode] = result.value(forKeyPath: Constants.JSONStoreResponseKey.Zipcode)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.State] = result.value(forKeyPath: Constants.JSONStoreResponseKey.State)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.Country] = result.value(forKeyPath: Constants.JSONStoreResponseKey.Country)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.Zipcode] = result.value(forKeyPath: Constants.JSONStoreResponseKey.Zipcode)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.Image1] = result.value(forKeyPath: Constants.JSONStoreResponseKey.Image1)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.Image2] = result.value(forKeyPath: Constants.JSONStoreResponseKey.Image2)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.Image3] = result.value(forKeyPath: Constants.JSONStoreResponseKey.Image3)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.Image4] = result.value(forKeyPath: Constants.JSONStoreResponseKey.Image4)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.phone] = result.value(forKeyPath: Constants.JSONStoreResponseKey.phone)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.descriptions] = result.value(forKeyPath: Constants.JSONStoreResponseKey.descriptions)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.mon_from_hr] = result.value(forKeyPath: Constants.JSONStoreResponseKey.mon_from_hr)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.mon_from_mins] = result.value(forKeyPath: Constants.JSONStoreResponseKey.mon_from_mins)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.mon_to_hr] = result.value(forKeyPath: Constants.JSONStoreResponseKey.mon_to_hr)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.mon_to_mins] = result.value(forKeyPath: Constants.JSONStoreResponseKey.mon_to_mins)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.tue_from_hr] = result.value(forKeyPath: Constants.JSONStoreResponseKey.tue_from_hr)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.tue_from_mins] = result.value(forKeyPath: Constants.JSONStoreResponseKey.tue_from_mins)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.tue_to_hr] = result.value(forKeyPath: Constants.JSONStoreResponseKey.tue_to_hr)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.tue_to_mins] = result.value(forKeyPath: Constants.JSONStoreResponseKey.tue_to_mins)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.wed_from_hr] = result.value(forKeyPath: Constants.JSONStoreResponseKey.wed_from_hr)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.wed_from_mins] = result.value(forKeyPath: Constants.JSONStoreResponseKey.wed_from_mins)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.wed_to_hr] = result.value(forKeyPath: Constants.JSONStoreResponseKey.wed_to_hr)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.wed_to_mins] = result.value(forKeyPath: Constants.JSONStoreResponseKey.wed_to_mins)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.thurs_to_hr] = result.value(forKeyPath: Constants.JSONStoreResponseKey.thurs_to_hr)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.thurs_to_mins] = result.value(forKeyPath: Constants.JSONStoreResponseKey.thurs_to_mins)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.thurs_from_hr] = result.value(forKeyPath: Constants.JSONStoreResponseKey.thurs_from_hr)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.thurs_from_mins] = result.value(forKeyPath: Constants.JSONStoreResponseKey.thurs_from_mins)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.fri_to_hr] = result.value(forKeyPath: Constants.JSONStoreResponseKey.fri_to_hr)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.fri_to_mins] = result.value(forKeyPath: Constants.JSONStoreResponseKey.fri_to_mins)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.fri_from_hr] = result.value(forKeyPath: Constants.JSONStoreResponseKey.fri_from_hr)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.fri_from_mins] = result.value(forKeyPath: Constants.JSONStoreResponseKey.fri_from_mins)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.sat_from_hr] = result.value(forKeyPath: Constants.JSONStoreResponseKey.sat_from_hr)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.sat_from_mins] = result.value(forKeyPath: Constants.JSONStoreResponseKey.sat_from_mins)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.sat_to_hr] = result.value(forKeyPath: Constants.JSONStoreResponseKey.sat_to_hr)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.sat_to_mins] = result.value(forKeyPath: Constants.JSONStoreResponseKey.sat_to_mins)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.sun_from_hr] = result.value(forKeyPath: Constants.JSONStoreResponseKey.sun_from_hr)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.sun_from_mins] = result.value(forKeyPath: Constants.JSONStoreResponseKey.sun_from_mins)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.sun_to_hr] = result.value(forKeyPath: Constants.JSONStoreResponseKey.sun_to_hr)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.sun_to_mins] = result.value(forKeyPath: Constants.JSONStoreResponseKey.sun_to_mins)as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.IsFavorate] = result.value(forKeyPath: Constants.JSONStoreResponseKey.IsFavorate)as AnyObject?
             stores.append(JSONStore(dictionary: dictionary))
         }
         return stores
@@ -216,6 +264,7 @@ class JSONStore: NSObject {
         
         var dictionary = [String:AnyObject]()
         dictionary[Constants.JSONStoreResponseKey.Address] = store.value(forKeyPath: Constants.JSONStoreResponseKey.Address) as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.Id] = store.value(forKeyPath: Constants.JSONStoreResponseKey.Id) as AnyObject?
         dictionary[Constants.JSONStoreResponseKey.BookCategoryIds] = store.value(forKeyPath: Constants.JSONStoreResponseKey.BookCategoryIds)as AnyObject?
         dictionary[Constants.JSONStoreResponseKey.IsMuseumshops] = store.value(forKeyPath: Constants.JSONStoreResponseKey.IsMuseumshops)as AnyObject?
         dictionary[Constants.JSONStoreResponseKey.IsNewBooks] = store.value(forKeyPath: Constants.JSONStoreResponseKey.IsNewBooks)as AnyObject?
@@ -230,6 +279,41 @@ class JSONStore: NSObject {
         dictionary[Constants.JSONStoreResponseKey.State] = store.value(forKeyPath: Constants.JSONStoreResponseKey.State)as AnyObject?
         dictionary[Constants.JSONStoreResponseKey.Country] = store.value(forKeyPath: Constants.JSONStoreResponseKey.Country)as AnyObject?
         dictionary[Constants.JSONStoreResponseKey.Zipcode] = store.value(forKeyPath: Constants.JSONStoreResponseKey.Zipcode)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.Image1] = store.value(forKeyPath: Constants.JSONStoreResponseKey.Image1)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.Image2] = store.value(forKeyPath: Constants.JSONStoreResponseKey.Image2)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.Image3] = store.value(forKeyPath: Constants.JSONStoreResponseKey.Image3)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.Image4] = store.value(forKeyPath: Constants.JSONStoreResponseKey.Image4)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.phone] = store.value(forKeyPath: Constants.JSONStoreResponseKey.phone)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.descriptions] = store.value(forKeyPath: Constants.JSONStoreResponseKey.descriptions)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.mon_from_hr] = store.value(forKeyPath: Constants.JSONStoreResponseKey.mon_from_hr)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.mon_from_mins] = store.value(forKeyPath: Constants.JSONStoreResponseKey.mon_from_mins)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.mon_to_hr] = store.value(forKeyPath: Constants.JSONStoreResponseKey.mon_to_hr)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.mon_to_mins] = store.value(forKeyPath: Constants.JSONStoreResponseKey.mon_to_mins)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.tue_from_hr] = store.value(forKeyPath: Constants.JSONStoreResponseKey.tue_from_hr)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.tue_from_mins] = store.value(forKeyPath: Constants.JSONStoreResponseKey.tue_from_mins)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.tue_to_hr] = store.value(forKeyPath: Constants.JSONStoreResponseKey.tue_to_hr)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.tue_to_mins] = store.value(forKeyPath: Constants.JSONStoreResponseKey.tue_to_mins)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.wed_from_hr] = store.value(forKeyPath: Constants.JSONStoreResponseKey.wed_from_hr)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.wed_from_mins] = store.value(forKeyPath: Constants.JSONStoreResponseKey.wed_from_mins)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.wed_to_hr] = store.value(forKeyPath: Constants.JSONStoreResponseKey.wed_to_hr)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.wed_to_mins] = store.value(forKeyPath: Constants.JSONStoreResponseKey.wed_to_mins)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.thurs_to_hr] = store.value(forKeyPath: Constants.JSONStoreResponseKey.thurs_to_hr)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.thurs_to_mins] = store.value(forKeyPath: Constants.JSONStoreResponseKey.thurs_to_mins)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.thurs_from_hr] = store.value(forKeyPath: Constants.JSONStoreResponseKey.thurs_from_hr)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.thurs_from_mins] = store.value(forKeyPath: Constants.JSONStoreResponseKey.thurs_from_mins)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.fri_to_hr] = store.value(forKeyPath: Constants.JSONStoreResponseKey.fri_to_hr)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.fri_to_mins] = store.value(forKeyPath: Constants.JSONStoreResponseKey.fri_to_mins)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.fri_from_hr] = store.value(forKeyPath: Constants.JSONStoreResponseKey.fri_from_hr)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.fri_from_mins] = store.value(forKeyPath: Constants.JSONStoreResponseKey.fri_from_mins)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.sat_from_hr] = store.value(forKeyPath: Constants.JSONStoreResponseKey.sat_from_hr)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.sat_from_mins] = store.value(forKeyPath: Constants.JSONStoreResponseKey.sat_from_mins)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.sat_to_hr] = store.value(forKeyPath: Constants.JSONStoreResponseKey.sat_to_hr)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.sat_to_mins] = store.value(forKeyPath: Constants.JSONStoreResponseKey.sat_to_mins)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.sun_from_hr] = store.value(forKeyPath: Constants.JSONStoreResponseKey.sun_from_hr)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.sun_from_mins] = store.value(forKeyPath: Constants.JSONStoreResponseKey.sun_from_mins)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.sun_to_hr] = store.value(forKeyPath: Constants.JSONStoreResponseKey.sun_to_hr)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.sun_to_mins] = store.value(forKeyPath: Constants.JSONStoreResponseKey.sun_to_mins)as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.IsFavorate] = store.value(forKeyPath: Constants.JSONStoreResponseKey.IsFavorate)as AnyObject?
         return JSONStore(dictionary:dictionary)
 
     }

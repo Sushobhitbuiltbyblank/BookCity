@@ -20,9 +20,11 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     @IBOutlet weak var categoriesLabel: UILabel!
     @IBOutlet weak var addressLable: UILabel!
     @IBOutlet weak var address2Lable: UILabel!
-    @IBOutlet weak var websiteLable: UILabel!
-    @IBOutlet weak var descriptionLable: UILabel!
+    @IBOutlet weak var descriptionTV: UITextView!
     @IBOutlet weak var categoryLable: UILabel!
+    @IBOutlet weak var contentOfScrollView: UIView!
+    @IBOutlet weak var websiteLinkBtn: UIButton!
+    
    
     // add lable for daywise time.
     @IBOutlet weak var monTimeL: UILabel!
@@ -55,11 +57,30 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         setTimelable()
         setView()
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.descriptionTV.setContentOffset(CGPoint.zero, animated: false)
+    }
+    
     func setView()
     {
-        self.websiteLable.text = store?.website
+        let attribute = [NSUnderlineStyleAttributeName:1,
+                         NSForegroundColorAttributeName:UIColor.black] as [String : Any]
+        let buttonText = NSMutableAttributedString(string: (store?.website)!, attributes: attribute)
+        self.websiteLinkBtn.setAttributedTitle(buttonText, for: UIControlState.normal)
+        self.websiteLinkBtn.titleLabel?.text = store?.website
         self.address2Lable.text = store?.address_2
-        self.descriptionLable.text = store?.descriptions
+        let htmlText = store?.descriptions
+        if let htmlData = htmlText?.data(using: String.Encoding.unicode) {
+            do {
+                let attributedText = try NSAttributedString(data: htmlData, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
+                self.descriptionTV.attributedText = attributedText
+            } catch let e as NSError {
+                print("Couldn't translate \(htmlText): \(e.localizedDescription) ")
+            }
+        }
+        favorateBtn.isSelected = (store?.isFavorate)!
     }
     func configurePageControl() {
         // The total number of pages that are available is based on how many available colors we have.
@@ -127,14 +148,20 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         {
             favorateBtn.isSelected = false
             store?.isFavorate = false
+            CoreDataManager.sharedInstance().deleteStore(storeID: (self.store?.id)!)
         }
         else{
             favorateBtn.isSelected = true
             store?.isFavorate = true
+            CoreDataManager.sharedInstance().saveStores(self.store!)
         }
 
     }
     
+    @IBAction func websiteLinkBtnAction(_ sender: Any) {
+        let url = URL(string: (store?.website)!)
+        UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+    }
     /*
      // MARK: - Navigation
      
@@ -230,4 +257,5 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
             }
         return fromhr+":"+frommin+" - "+tohr+":"+tomin
     }
+    
 }
