@@ -135,7 +135,7 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         
         if userLocation.coordinate.latitude != 0.0 && userLocation.coordinate.longitude != 0.0 {
             
-            if (self.navigationController?.viewControllers.count)! == 1 && currentLocation == nil {
+            if (self.navigationController?.viewControllers.count) == 1 && currentLocation == nil {
                 currentLocation = userLocation
                 self.mapView.setCenter(userLocation.coordinate, animated: true)
                 let region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate,2000, 2000)
@@ -208,24 +208,25 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
                 let rightButton = UIButton(type: .detailDisclosure)
                 rightButton.addTarget(self, action: #selector(MyMapVC.buttonAction(_:)), for: .touchUpInside)
                 returnedAnnotationView!.rightCalloutAccessoryView = rightButton
-            } else if annotation is WharfAnnotation { // for Fisherman's Wharf
-                returnedAnnotationView = WharfAnnotation.createViewAnnotationForMapView(self.mapView,  annotation: annotation)
-                
-                // provide an image view to use as the accessory view's detail view.
-                let imageView = UIImageView(image: UIImage(named: "logo"))
-                returnedAnnotationView!.detailCalloutAccessoryView = imageView;
-            } else if annotation is SFAnnotation {   // for City of San Francisco
-                returnedAnnotationView = SFAnnotation.createViewAnnotationForMapView(self.mapView, annotation: annotation)
-                
-                // provide the annotation view's image
-                returnedAnnotationView!.image = UIImage(named: "info")
-                
-                // provide the left image icon for the annotation
-                let sfIconView = UIImageView(image: UIImage(named: "logo"))
-                returnedAnnotationView!.leftCalloutAccessoryView = sfIconView
-            } else if annotation is CustomAnnotation {  // for Japanese Tea Garden
-                returnedAnnotationView = CustomAnnotation.createViewAnnotationForMapView(self.mapView, annotation: annotation)
-            }
+            } 
+//                else if annotation is WharfAnnotation { // for Fisherman's Wharf
+//                returnedAnnotationView = WharfAnnotation.createViewAnnotationForMapView(self.mapView,  annotation: annotation)
+//                
+//                // provide an image view to use as the accessory view's detail view.
+//                let imageView = UIImageView(image: UIImage(named: "logo"))
+//                returnedAnnotationView!.detailCalloutAccessoryView = imageView;
+//            } else if annotation is SFAnnotation {   // for City of San Francisco
+//                returnedAnnotationView = SFAnnotation.createViewAnnotationForMapView(self.mapView, annotation: annotation)
+//                
+//                // provide the annotation view's image
+//                returnedAnnotationView!.image = UIImage(named: "info")
+//                
+//                // provide the left image icon for the annotation
+//                let sfIconView = UIImageView(image: UIImage(named: "logo"))
+//                returnedAnnotationView!.leftCalloutAccessoryView = sfIconView
+//            } else if annotation is CustomAnnotation {  // for Japanese Tea Garden
+//                returnedAnnotationView = CustomAnnotation.createViewAnnotationForMapView(self.mapView, annotation: annotation)
+//            }
             else if annotation is BookStoreAnnotation {  // for Japanese Tea Garden
                 returnedAnnotationView = BookStoreAnnotation.createViewAnnotationForMapView(self.mapView, annotation: annotation)
                 // provide the annotation view's image

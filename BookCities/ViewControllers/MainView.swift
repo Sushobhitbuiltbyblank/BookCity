@@ -71,7 +71,16 @@ class MainView: UIViewController {
         let next = self.storyboard?.instantiateViewController(withIdentifier:"MyListVC") as! MyListVC
         next.tit = "My Place"
         if CoreDataManager.sharedInstance().haveStore(){
-            next.stores = JSONStore.storeFromCoreData(CoreDataManager.sharedInstance().getStores() as! [Store])
+            let citiWiseStore = JSONStore.storeFromCoreData(CoreDataManager.sharedInstance().getStores() as! [Store])
+            var citiArray = Array<String>()
+            for store in citiWiseStore {
+                let city = store.city
+                if !citiArray.contains(city!){
+                    citiArray.append(city!)
+                }
+            }
+            next.cities = citiArray
+            next.stores = citiWiseStore
             let nv:UINavigationController = UINavigationController(rootViewController: next)
             self.present(nv, animated: true, completion: nil)
         }
@@ -142,7 +151,7 @@ class MainView: UIViewController {
                             for data in response!{
                                 if !CoreDataManager.sharedInstance().haveStore(data.id!)
                                 {
-                                    CoreDataManager.sharedInstance().saveStores(data)
+//                                    CoreDataManager.sharedInstance().saveStores(data)
                                 }
                             }
                             storeCount += 1

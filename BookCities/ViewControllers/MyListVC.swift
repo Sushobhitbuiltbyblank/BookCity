@@ -32,11 +32,14 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
     
     // MARK: - Other variables
     var cellIdentifier:String!
+    var headerCellIdentifier:String!
     var stores:Array<JSONStore>?
     var tit: String?
     var categories:Array<Any>?
     var city:JSONCity?
     var totalStores:Array<JSONStore>?
+    var cities: Array<String>?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         defaultViewSetting()
@@ -44,7 +47,9 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
         categories = CoreDataManager.sharedInstance().getCategories()
         //registercellfor Table view
         cellIdentifier = "bookStoreCell"
+        headerCellIdentifier = "headerViewCell"
         tableView.register(UINib(nibName: "BookStoreTVCell", bundle: nil), forCellReuseIdentifier:cellIdentifier)
+        tableView.register(UINib(nibName: "headerViewCell", bundle: nil), forCellReuseIdentifier: headerCellIdentifier)
     }
     
     override func didReceiveMemoryWarning() {
@@ -54,28 +59,92 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
     
     //MARK: - TableView Data Source function
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return stores!.count
+        if cities != nil {
+            let twoDArray = getTwoDArray(cities: self.cities!, stores: stores!)
+            return twoDArray[section].count
+        }
+        else{
+            return stores!.count
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        if let cityArray = cities{
+            return cityArray.count
+        }
+        else{
+            return 1
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! BookStoreTVCell
-        cell.titleLable?.text = stores?[indexPath.row].name
-        if (stores?[indexPath.row].isFavorate)!{
-          cell.favBookStoreImageV.image = UIImage.init(named: Constants.image.SelectedTriagle)
+        if cities != nil {
+            let twoDArray = getTwoDArray(cities: self.cities!, stores: stores!)
+            cell.titleLable?.text = twoDArray[indexPath.section][indexPath.row].name
+            if (stores?[indexPath.row].isFavorate)!{
+                cell.favBookStoreImageV.image = UIImage.init(named: Constants.image.SelectedTriagle)
+            }
+            cell.bookstoreTypeImageV?.image = UIImage.init(named: getStoreTypeImage(indexPath.row))
+            return cell
+
         }
-        cell.bookstoreTypeImageV?.image = UIImage.init(named: getStoreTypeImage(indexPath.row))
-        return cell
+        else{
+            cell.titleLable?.text = stores?[indexPath.row].name
+            if (stores?[indexPath.row].isFavorate)!{
+                cell.favBookStoreImageV.image = UIImage.init(named: Constants.image.SelectedTriagle)
+            }
+            cell.bookstoreTypeImageV?.image = UIImage.init(named: getStoreTypeImage(indexPath.row))
+            return cell
+        }
     }
-    
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        if cities != nil {
+            let twoDArray = getTwoDArray(cities: self.cities!, stores: stores!)
+            if twoDArray[section].count == 0 {
+                return nil
+            }
+            else{
+                let cell = tableView.dequeueReusableCell(withIdentifier: headerCellIdentifier) as! headerViewCell
+                cell.mainLable.text = twoDArray[section][0].cityName
+                cell.shareBtn.tag = section
+                cell.shareBtn.addTarget(self, action: #selector(self.shareBtnAction(_:)), for: .touchUpInside)
+                return cell
+            }
+        }
+        else{
+            return nil
+        }
+    }
+ 
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if cities != nil {
+            let twoDArray = getTwoDArray(cities: self.cities!, stores: stores!)
+            if twoDArray[section].count == 0 {
+                return 0
+            }
+            else{
+                return 50
+            }
+        }
+        else{
+            return 0
+        }
+    }
     // MARK: - Table View Delegate Function
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let next = self.storyboard?.instantiateViewController(withIdentifier:"ShopDetailVC") as! ShopDetailVC
-        next.tit = stores?[indexPath.row].name
-        next.store = stores?[indexPath.row]
+        if cities != nil {
+            let twoDArray = getTwoDArray(cities: self.cities!, stores: stores!)
+            next.tit = twoDArray[indexPath.section][indexPath.row].name
+            next.store = twoDArray[indexPath.section][indexPath.row]
+        }
+        else{
+            next.tit = stores?[indexPath.row].name
+            next.store = stores?[indexPath.row]
+        }
         self.navigationController?.pushViewController(next, animated: true)
     }
     
@@ -95,6 +164,12 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
     }
+    
+//    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+//        
+//        let string = (categories?[row] as AnyObject).value(forKeyPath: "name") as? String
+//        return NSAttributedString(string: string!, attributes: [NSForegroundColorAttributeName:UIColor.white])
+//    }
     //MARK: - Change View setting
     func defaultViewSetting() {
         // NavigationBar Update
@@ -222,7 +297,29 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
         showCategoryPicker(true)
     }
     
-    
+     @objc func shareBtnAction(_ button: UIButton) {
+        let twoDArray =  getTwoDArray(cities: self.cities!, stores: stores!)
+        let storeList = twoDArray[button.tag]
+        var data = [String]()
+        for store in storeList {
+            let header = store.name
+            let gap = "\n"
+            let link = "Link - "+(store.website)!
+            let address = "Address - "+(store.address)!
+            let phone = "Contact - "+(store.phone)! 
+            data.append(header!+gap+link+gap+address+gap+phone+gap)
+        }
+        let textToShare = data
+        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+        
+        // exclude some activity types from the list (optional)
+        activityViewController.excludedActivityTypes = [ UIActivityType.airDrop]
+        
+        // present the view controller
+        self.present(activityViewController, animated: true, completion: nil)
+
+    }
     // MARK: - CATEGORY CONTAINER BUTTONS ACTION
     @IBAction func doneBtnAction(_ sender: Any) {
         let row = categoryPicker.selectedRow(inComponent: 0)
@@ -235,7 +332,6 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
         }
         stores = storesData
         tableView.reloadData()
-        print(value ?? "no category from core data")
         showCategoryPicker(false)
     }
     
@@ -306,6 +402,44 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
         }
     }
     
+    func getStoreTypeImage(_ section:Int, row:Int)->String{
+        
+        if cities != nil {
+            let twoDArray = getTwoDArray(cities: self.cities!, stores: stores!)
+            if twoDArray[section][row].is_new_books == "1" && (twoDArray[section][row].is_used_books == "1") && (twoDArray[section][row].is_museumshops == "1")
+            {
+                return ""
+            }
+            else if twoDArray[section][row].is_new_books == "0" && (twoDArray[section][row].is_used_books == "1") && (twoDArray[section][row].is_museumshops == "1")
+            {
+                return Constants.image.GreenBlueCircle
+            }
+            else if twoDArray[section][row].is_new_books == "1" && (twoDArray[section][row].is_used_books == "0") && (twoDArray[section][row].is_museumshops == "1")
+            {
+                return Constants.image.RedGreenCircle
+            }
+            else if twoDArray[section][row].is_new_books == "1" && (twoDArray[section][row].is_used_books == "1") && (twoDArray[section][row].is_museumshops == "0")
+            {
+                return Constants.image.BlueRedCircle
+            }
+            else if twoDArray[section][row].is_new_books == "0" && (twoDArray[section][row].is_used_books == "0") && (twoDArray[section][row].is_museumshops == "1"){
+                return Constants.image.GreenCircle
+            }
+            else if twoDArray[section][row].is_new_books == "1" && (twoDArray[section][row].is_used_books == "0") && (twoDArray[section][row].is_museumshops == "0"){
+                return Constants.image.RedCircle
+            }
+            else if twoDArray[section][row].is_new_books == "0" && (twoDArray[section][row].is_used_books == "1") && (twoDArray[section][row].is_museumshops == "0"){
+                return Constants.image.BlueCircle
+            }
+            else {
+                return ""
+            }
+        }
+        else{
+           return ""
+        }
+    }
+        
     func containCategory(store:JSONStore,category:Any)-> Bool {
         let categoryString = store.books_category_ids
         let value:Categories = category as! Categories
@@ -318,4 +452,20 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
         }
         return false
     }
+    
+    func getTwoDArray(cities:Array<String>,stores:Array<JSONStore>) -> [[JSONStore]] {
+        var twoDArray = [[JSONStore]]()
+        for city in cities {
+            var storeInCity = Array<JSONStore>()
+            for store in stores {
+                if store.city == city{
+                    storeInCity.append(store)
+                }
+            }
+            twoDArray.append(storeInCity)
+        }
+        return twoDArray
+    }
+    
+    
 }

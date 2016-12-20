@@ -26,6 +26,7 @@
         <attribute name="address_2" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="books_category_ids" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cityName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="descriptions" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fri_from_hr" optional="YES" attributeType="String" syncable="YES"/>
@@ -80,6 +81,6 @@
         <element name="City" positionX="-6806" positionY="-748" width="128" height="118"/>
         <element name="Country" positionX="-6824" positionY="-576" width="128" height="90"/>
         <element name="State" positionX="-7011" positionY="-549" width="128" height="90"/>
-        <element name="Store" positionX="-6626" positionY="-828" width="128" height="823"/>
+        <element name="Store" positionX="-6626" positionY="-828" width="128" height="840"/>
     </elements>
 </model>

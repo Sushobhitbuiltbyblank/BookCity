@@ -12,6 +12,8 @@
 		2B0C39841DFE7BA600108B1A /* JSONState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0C39831DFE7BA600108B1A /* JSONState.swift */; };
 		2B0C39861DFEB58E00108B1A /* ViewControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0C39851DFEB58E00108B1A /* ViewControllerHelper.swift */; };
 		2B0C398A1DFEC96B00108B1A /* PKHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B0C39891DFEC96B00108B1A /* PKHUD.framework */; };
+		2B2009E61E0922BC00D42672 /* headerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2009E41E0922BC00D42672 /* headerViewCell.swift */; };
+		2B2009E71E0922BC00D42672 /* headerViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B2009E51E0922BC00D42672 /* headerViewCell.xib */; };
 		2B4B90F51DF19802008FE99B /* Reachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4B90F41DF19802008FE99B /* Reachable.swift */; };
 		2B7662E41DEC526300987F40 /* JSONCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7662E31DEC526300987F40 /* JSONCity.swift */; };
 		2B81934F1DE6FD69008879B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81934E1DE6FD69008879B2 /* AppDelegate.swift */; };
@@ -58,6 +60,8 @@
 		2B0C39831DFE7BA600108B1A /* JSONState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONState.swift; sourceTree = "<group>"; };
 		2B0C39851DFEB58E00108B1A /* ViewControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerHelper.swift; sourceTree = "<group>"; };
 		2B0C39891DFEC96B00108B1A /* PKHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PKHUD.framework; path = "../../../../Library/Developer/Xcode/DerivedData/BookCities-fdagecfuoyvlxsaabdajemrbsgur/Build/Products/Debug-iphoneos/PKHUD/PKHUD.framework"; sourceTree = "<group>"; };
+		2B2009E41E0922BC00D42672 /* headerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = headerViewCell.swift; sourceTree = "<group>"; };
+		2B2009E51E0922BC00D42672 /* headerViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = headerViewCell.xib; sourceTree = "<group>"; };
 		2B4B90F21DF161E7008FE99B /* ReachabilitySwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReachabilitySwift.framework; path = "../../../../Library/Developer/Xcode/DerivedData/BookCities-fdagecfuoyvlxsaabdajemrbsgur/Build/Products/Debug-iphoneos/ReachabilitySwift/ReachabilitySwift.framework"; sourceTree = "<group>"; };
 		2B4B90F41DF19802008FE99B /* Reachable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachable.swift; sourceTree = "<group>"; };
 		2B7662E31DEC526300987F40 /* JSONCity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONCity.swift; sourceTree = "<group>"; };
@@ -244,6 +248,8 @@
 				2B81937D1DE6FE34008879B2 /* BookStoreTVCell.xib */,
 				2B81937E1DE6FE34008879B2 /* CitiesTVCell.swift */,
 				2B81937F1DE6FE34008879B2 /* CitiesTVCell.xib */,
+				2B2009E41E0922BC00D42672 /* headerViewCell.swift */,
+				2B2009E51E0922BC00D42672 /* headerViewCell.xib */,
 			);
 			path = CustomTableViewCells;
 			sourceTree = "<group>";
@@ -369,6 +375,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B81935C1DE6FD69008879B2 /* LaunchScreen.storyboard in Resources */,
+				2B2009E71E0922BC00D42672 /* headerViewCell.xib in Resources */,
 				2B8193591DE6FD69008879B2 /* Assets.xcassets in Resources */,
 				2B8193981DE6FE34008879B2 /* CitiesTVCell.xib in Resources */,
 				2B8193541DE6FD69008879B2 /* Main.storyboard in Resources */,
@@ -451,6 +458,7 @@
 				2B0C39821DFE784A00108B1A /* JSONCountry.swift in Sources */,
 				2B8193901DE6FE34008879B2 /* SFAnnotation.swift in Sources */,
 				2B7662E41DEC526300987F40 /* JSONCity.swift in Sources */,
+				2B2009E61E0922BC00D42672 /* headerViewCell.swift in Sources */,
 				2B8AA7D21DEDAFEC0024F011 /* JSONStore.swift in Sources */,
 				2B8193831DE6FE34008879B2 /* CitiesVC.swift in Sources */,
 				2B8193941DE6FE34008879B2 /* BorderButton.swift in Sources */,

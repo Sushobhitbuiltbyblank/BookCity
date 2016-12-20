@@ -143,4 +143,7 @@ class Constants: NSObject {
         static let Share = "share"
         static let Triangle = "triangle"
     }
+    struct CDStoreKey {
+        static let CityName = "cityName"
+    }
 }

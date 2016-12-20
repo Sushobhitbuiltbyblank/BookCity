@@ -34,8 +34,6 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     @IBOutlet weak var friTimeL: UILabel!
     @IBOutlet weak var satTimeL: UILabel!
     @IBOutlet weak var sunTimeL: UILabel!
-    
-    var colors:[UIColor] = [UIColor.red, UIColor.blue, UIColor.green, UIColor.yellow]
     var frame: CGRect = CGRect(x: 0, y: 0, width: 0, height: 0)
     var tit:String?
     var store:JSONStore?
@@ -51,7 +49,6 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage(named: self.getStoreTypeImage())?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: .plain, target: nil, action: nil)
         self.addressLable.text = store?.address
-        getcatergories()
         configurePageControl()
         configureImageScroller()
         setTimelable()
@@ -81,10 +78,11 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
             }
         }
         favorateBtn.isSelected = (store?.isFavorate)!
+        self.categoryLable.text = getcatergories()
     }
     func configurePageControl() {
         // The total number of pages that are available is based on how many available colors we have.
-        self.pageControl.numberOfPages = colors.count
+        self.pageControl.numberOfPages = 4
         self.pageControl.currentPage = 0
         self.pageControl.tintColor = UIColor.red
         self.pageControl.pageIndicatorTintColor = UIColor.white
@@ -105,7 +103,6 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
             let imageV = UIImageView(frame: frame)
             let url = URL(string:imageUrls[index])!
             imageV.af_setImage(withURL: url, placeholderImage: UIImage(named: "placeholder"), filter: nil, imageTransition: .crossDissolve(0.2), runImageTransitionIfCached: true, completion: nil)
-            imageV.backgroundColor = colors[index]
             self.scrollView.addSubview(imageV)
         }
         
@@ -141,6 +138,23 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     }
     
     @IBAction func shareBtnAction(_ sender: Any) {
+        
+        let header = store?.name
+        let gap = "\n"
+        let link = "Link - "+(store?.website)!
+        let address = "Address - "+(store?.address)!
+        let phone = "Contact - "+(store?.phone)!
+        let categories = "Catergory - "+getcatergories()
+        // set up activity view controller
+        let textToShare = [header!,link,gap,phone,gap,address,gap,categories] as [Any]
+        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+        
+        // exclude some activity types from the list (optional)
+        activityViewController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook ]
+        
+        // present the view controller
+        self.present(activityViewController, animated: true, completion: nil)
     }
 
     @IBAction func favorateAction(_ sender: Any) {
@@ -153,7 +167,12 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         else{
             favorateBtn.isSelected = true
             store?.isFavorate = true
-            CoreDataManager.sharedInstance().saveStores(self.store!)
+            BookCitiesClient.sharedInstance().getCityOrigin([String : AnyObject](),id:(store?.city)!,completionHandlerForCityOrigin:{
+                (response,error)in
+                    let city = JSONState.stateFromResults(response?["cities"] as! [[String : AnyObject]])
+                    print(city[0].name)
+                    CoreDataManager.sharedInstance().saveStores(self.store!,cityName: city[0].name)
+            })
         }
 
     }
@@ -216,10 +235,23 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         return array 
     }
     
-    func getcatergories()
+    func getcatergories() ->String
     {
-            
+        let categoryIds = store?.books_category_ids
+        var categoryString = ""
+        let catergoryArray = categoryIds?.characters.split{$0 == ":"}.map(String.init)
+        for value in catergoryArray!{
+            categoryString.append(CoreDataManager.sharedInstance().getCategoryName(id: value)+",")
+        }
+        if categoryString != "" {
+            categoryString = categoryString.substring(to: categoryString.index(before: categoryString.endIndex))
+            return categoryString
+        }
+        else{
+            return ""
+        }
     }
+    
     func setTimelable()
     {
         monTimeL.text = getString(fromHr: (store?.mon_from_hr)!, fromMin: (store?.mon_from_mins)!, toHr: (store?.mon_to_hr)!, toMin: (store?.mon_to_mins)!)

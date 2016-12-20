@@ -563,7 +563,7 @@ Walter Haas</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GfJ-MX-hst" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1278" y="789"/>
+            <point key="canvasLocation" x="1650" y="789"/>
         </scene>
         <!--CitiesVC-->
         <scene sceneID="oSS-aJ-3Et">
@@ -709,7 +709,7 @@ Walter Haas</string>
                                     <action selector="resetFiltersBtnAction:" destination="j4u-7Z-pXv" eventType="touchUpInside" id="JKP-kR-d4F"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="50" sectionHeaderHeight="60" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Y3Q-1q-DfG">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="50" sectionHeaderHeight="50" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Y3Q-1q-DfG">
                                 <rect key="frame" x="0.0" y="100" width="320" height="468"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -718,17 +718,17 @@ Walter Haas</string>
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CrD-9g-r9t">
-                                <rect key="frame" x="0.0" y="800" width="320" height="189.5"/>
+                                <rect key="frame" x="0.0" y="900" width="320" height="568"/>
                                 <subviews>
                                     <pickerView contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="0Gl-fl-HFf">
-                                        <rect key="frame" x="0.0" y="30" width="320" height="160"/>
+                                        <rect key="frame" x="0.0" y="176" width="320" height="216"/>
                                         <connections>
                                             <outlet property="dataSource" destination="j4u-7Z-pXv" id="wnZ-fp-2Lv"/>
                                             <outlet property="delegate" destination="j4u-7Z-pXv" id="Hu2-on-nRA"/>
                                         </connections>
                                     </pickerView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qbz-ab-rGk">
-                                        <rect key="frame" x="160" y="0.0" width="160" height="30"/>
+                                        <rect key="frame" x="80" y="138" width="160" height="30"/>
                                         <state key="normal" title="Done">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -736,9 +736,13 @@ Walter Haas</string>
                                             <action selector="doneBtnAction:" destination="j4u-7Z-pXv" eventType="touchUpInside" id="eZf-FC-d2f"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eA1-ts-m5G">
-                                        <rect key="frame" x="0.0" y="0.0" width="160" height="30"/>
-                                        <state key="normal" title="Cancle">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eA1-ts-m5G">
+                                        <rect key="frame" x="272" y="68" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="TYx-DN-jih"/>
+                                            <constraint firstAttribute="height" constant="40" id="ozo-py-WZL"/>
+                                        </constraints>
+                                        <state key="normal" image="cross">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -748,18 +752,13 @@ Walter Haas</string>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="eA1-ts-m5G" firstAttribute="width" secondItem="qbz-ab-rGk" secondAttribute="width" id="0MD-mR-keP"/>
-                                    <constraint firstItem="qbz-ab-rGk" firstAttribute="leading" secondItem="eA1-ts-m5G" secondAttribute="trailing" id="3Bh-2L-Tb6"/>
-                                    <constraint firstAttribute="bottom" secondItem="0Gl-fl-HFf" secondAttribute="bottom" id="94K-cC-22a"/>
-                                    <constraint firstItem="qbz-ab-rGk" firstAttribute="top" secondItem="CrD-9g-r9t" secondAttribute="top" id="CJi-PH-ZqL"/>
-                                    <constraint firstItem="0Gl-fl-HFf" firstAttribute="top" secondItem="eA1-ts-m5G" secondAttribute="bottom" id="Ch7-V3-Nwo"/>
-                                    <constraint firstItem="eA1-ts-m5G" firstAttribute="top" secondItem="CrD-9g-r9t" secondAttribute="top" id="Fng-Do-rr5"/>
-                                    <constraint firstAttribute="trailing" secondItem="0Gl-fl-HFf" secondAttribute="trailing" id="NWP-Pi-qtS"/>
-                                    <constraint firstItem="qbz-ab-rGk" firstAttribute="leading" secondItem="eA1-ts-m5G" secondAttribute="trailing" id="g5q-Hs-Xi8"/>
-                                    <constraint firstAttribute="trailing" secondItem="qbz-ab-rGk" secondAttribute="trailing" id="g8O-Bw-5Jn"/>
-                                    <constraint firstItem="eA1-ts-m5G" firstAttribute="leading" secondItem="CrD-9g-r9t" secondAttribute="leading" id="iSx-On-n7r"/>
-                                    <constraint firstItem="eA1-ts-m5G" firstAttribute="width" secondItem="CrD-9g-r9t" secondAttribute="width" multiplier="1/2" id="jcW-Ng-xgF"/>
-                                    <constraint firstItem="0Gl-fl-HFf" firstAttribute="leading" secondItem="CrD-9g-r9t" secondAttribute="leading" id="z6q-H4-YcS"/>
+                                    <constraint firstItem="0Gl-fl-HFf" firstAttribute="centerY" secondItem="CrD-9g-r9t" secondAttribute="centerY" id="6oo-4Z-jRZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="eA1-ts-m5G" secondAttribute="trailing" constant="8" id="GJv-Ge-bcA"/>
+                                    <constraint firstItem="qbz-ab-rGk" firstAttribute="leading" secondItem="CrD-9g-r9t" secondAttribute="leading" constant="80" id="RiD-KH-p3m"/>
+                                    <constraint firstAttribute="trailing" secondItem="qbz-ab-rGk" secondAttribute="trailing" constant="80" id="Rp8-FQ-hvd"/>
+                                    <constraint firstItem="0Gl-fl-HFf" firstAttribute="top" secondItem="qbz-ab-rGk" secondAttribute="bottom" constant="8" id="Vyc-Lt-Rxd"/>
+                                    <constraint firstItem="eA1-ts-m5G" firstAttribute="top" secondItem="CrD-9g-r9t" secondAttribute="top" constant="68" id="sJz-17-09o"/>
+                                    <constraint firstItem="0Gl-fl-HFf" firstAttribute="centerX" secondItem="CrD-9g-r9t" secondAttribute="centerX" id="xSQ-r5-fUt"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -778,29 +777,31 @@ Walter Haas</string>
                             <constraint firstItem="7Qk-YO-k1d" firstAttribute="top" secondItem="Y3Q-1q-DfG" secondAttribute="bottom" id="Lvt-53-ahp"/>
                             <constraint firstItem="lyA-gX-IWa" firstAttribute="leading" secondItem="jXo-IH-aon" secondAttribute="leading" id="N1P-qR-DJr"/>
                             <constraint firstItem="eCD-PV-6xK" firstAttribute="top" secondItem="3pA-J5-VeV" secondAttribute="bottom" id="QAL-fd-Vo5"/>
+                            <constraint firstAttribute="trailing" secondItem="CrD-9g-r9t" secondAttribute="trailing" id="S97-Ug-lhU"/>
                             <constraint firstItem="3pA-J5-VeV" firstAttribute="height" secondItem="mQb-ET-Kts" secondAttribute="height" id="SVo-wP-IFB"/>
+                            <constraint firstItem="CrD-9g-r9t" firstAttribute="height" secondItem="jXo-IH-aon" secondAttribute="height" id="WjA-MY-8ZT"/>
                             <constraint firstItem="h8J-ym-vJY" firstAttribute="top" secondItem="mQb-ET-Kts" secondAttribute="bottom" id="Y9x-lE-wzd"/>
-                            <constraint firstItem="CrD-9g-r9t" firstAttribute="leading" secondItem="jXo-IH-aon" secondAttribute="leading" id="bEu-tF-ZWX"/>
                             <constraint firstItem="3pA-J5-VeV" firstAttribute="leading" secondItem="X1w-HZ-duV" secondAttribute="trailing" id="bGT-oJ-k5I"/>
                             <constraint firstItem="X1w-HZ-duV" firstAttribute="baseline" secondItem="mQb-ET-Kts" secondAttribute="baseline" id="brO-uo-6ML"/>
                             <constraint firstItem="eCD-PV-6xK" firstAttribute="height" secondItem="h8J-ym-vJY" secondAttribute="height" id="cEE-z8-pTo"/>
                             <constraint firstItem="lyA-gX-IWa" firstAttribute="top" secondItem="h8J-ym-vJY" secondAttribute="bottom" id="dw0-gG-mph"/>
+                            <constraint firstItem="CrD-9g-r9t" firstAttribute="leading" secondItem="jXo-IH-aon" secondAttribute="leading" id="eOE-xw-8Nv"/>
                             <constraint firstItem="3pA-J5-VeV" firstAttribute="width" secondItem="mQb-ET-Kts" secondAttribute="width" constant="-1" id="f5T-lT-L2F"/>
                             <constraint firstItem="eCD-PV-6xK" firstAttribute="leading" secondItem="h8J-ym-vJY" secondAttribute="trailing" id="g66-vb-voI"/>
-                            <constraint firstAttribute="trailing" secondItem="CrD-9g-r9t" secondAttribute="trailing" id="gE5-QQ-0RG"/>
                             <constraint firstAttribute="trailing" secondItem="3pA-J5-VeV" secondAttribute="trailing" id="kGd-ub-xM8"/>
-                            <constraint firstItem="CrD-9g-r9t" firstAttribute="height" secondItem="jXo-IH-aon" secondAttribute="height" multiplier="1/3" id="km5-FL-CJZ"/>
                             <constraint firstItem="Y3Q-1q-DfG" firstAttribute="top" secondItem="lyA-gX-IWa" secondAttribute="bottom" id="kwg-Fz-plB"/>
                             <constraint firstAttribute="trailing" secondItem="eCD-PV-6xK" secondAttribute="trailing" id="rH4-cL-miM"/>
+                            <constraint firstAttribute="bottom" secondItem="CrD-9g-r9t" secondAttribute="bottom" constant="-900" id="t6R-cI-EpR"/>
                             <constraint firstItem="X1w-HZ-duV" firstAttribute="width" secondItem="mQb-ET-Kts" secondAttribute="width" id="uA0-87-lDX"/>
                             <constraint firstItem="eCD-PV-6xK" firstAttribute="baseline" secondItem="h8J-ym-vJY" secondAttribute="baseline" id="uXB-Kc-5c1"/>
-                            <constraint firstItem="7Qk-YO-k1d" firstAttribute="top" secondItem="CrD-9g-r9t" secondAttribute="bottom" constant="-421.5" id="wyD-pi-MJe"/>
                             <constraint firstItem="X1w-HZ-duV" firstAttribute="height" secondItem="mQb-ET-Kts" secondAttribute="height" id="yI3-ap-RUm"/>
                         </constraints>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="568"/>
                     <connections>
                         <outlet property="cancleBtn" destination="eA1-ts-m5G" id="w5g-ai-mLT"/>
-                        <outlet property="categoryContainerBottomC" destination="wyD-pi-MJe" id="kF2-RW-fZ0"/>
+                        <outlet property="categoryContainerBottomC" destination="t6R-cI-EpR" id="vPR-el-6qk"/>
                         <outlet property="categoryPicker" destination="0Gl-fl-HFf" id="tvp-4r-XAi"/>
                         <outlet property="doneBtn" destination="qbz-ab-rGk" id="kEU-v6-NsG"/>
                         <outlet property="filterByCategory" destination="h8J-ym-vJY" id="ja1-Xq-mS7"/>
@@ -817,13 +818,14 @@ Walter Haas</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iLO-U5-PCD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="875.625" y="789.08450704225356"/>
+            <point key="canvasLocation" x="876" y="874"/>
         </scene>
     </scenes>
     <resources>
         <image name="backBtnBlue" width="33" height="33"/>
         <image name="backBtnGreen" width="33" height="33"/>
         <image name="backBtnRed" width="33" height="33"/>
+        <image name="cross" width="19" height="19"/>
         <image name="info" width="39" height="39"/>
         <image name="logo" width="375" height="359"/>
         <image name="selectedTriagle" width="19" height="18"/>

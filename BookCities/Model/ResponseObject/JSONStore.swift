@@ -65,6 +65,7 @@ class JSONStore: NSObject {
     let sat_to_mins:String?
     let sun_to_mins:String?
     let descriptions:String?
+    let cityName:String?
     
     init(dictionary: [String:AnyObject]) {
         self.address = dictionary[Constants.JSONStoreResponseKey.Address] as? String
@@ -89,6 +90,12 @@ class JSONStore: NSObject {
         }
         else{
             self.isFavorate = false
+        }
+        if let cityNm = dictionary[Constants.CDStoreKey.CityName]  as? String{
+            self.cityName = cityNm
+        }
+        else{
+            self.cityName = ""
         }
         self.image1 = dictionary[Constants.JSONStoreResponseKey.Image1] as? String
         self.image2 = dictionary[Constants.JSONStoreResponseKey.Image2] as? String
@@ -150,6 +157,12 @@ class JSONStore: NSObject {
         }
         else{
             self.isFavorate = false
+        }
+        if let cityNm = dictionary[Constants.CDStoreKey.CityName]  as? String{
+            self.cityName = cityNm
+        }
+        else{
+            self.cityName = ""
         }
         self.store_image_dir = storeImageDir
         self.image1 = storeImageDir+(dictionary[Constants.JSONStoreResponseKey.Image1] as? String)!
@@ -255,6 +268,7 @@ class JSONStore: NSObject {
             dictionary[Constants.JSONStoreResponseKey.sun_to_hr] = result.value(forKeyPath: Constants.JSONStoreResponseKey.sun_to_hr)as AnyObject?
             dictionary[Constants.JSONStoreResponseKey.sun_to_mins] = result.value(forKeyPath: Constants.JSONStoreResponseKey.sun_to_mins)as AnyObject?
             dictionary[Constants.JSONStoreResponseKey.IsFavorate] = result.value(forKeyPath: Constants.JSONStoreResponseKey.IsFavorate)as AnyObject?
+            dictionary[Constants.CDStoreKey.CityName] = result.value(forKeyPath: Constants.CDStoreKey.CityName) as AnyObject?
             stores.append(JSONStore(dictionary: dictionary))
         }
         return stores
@@ -314,6 +328,7 @@ class JSONStore: NSObject {
         dictionary[Constants.JSONStoreResponseKey.sun_to_hr] = store.value(forKeyPath: Constants.JSONStoreResponseKey.sun_to_hr)as AnyObject?
         dictionary[Constants.JSONStoreResponseKey.sun_to_mins] = store.value(forKeyPath: Constants.JSONStoreResponseKey.sun_to_mins)as AnyObject?
         dictionary[Constants.JSONStoreResponseKey.IsFavorate] = store.value(forKeyPath: Constants.JSONStoreResponseKey.IsFavorate)as AnyObject?
+        dictionary[Constants.CDStoreKey.CityName] = store.value(forKeyPath: Constants.CDStoreKey.CityName) as AnyObject?
         return JSONStore(dictionary:dictionary)
 
     }

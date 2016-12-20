@@ -231,7 +231,7 @@ class CoreDataManager: NSObject {
     }
     
     // SAVE a Stores ON CORE DATA
-    func saveStores(_ store: JSONStore) {
+    func saveStores(_ store: JSONStore,cityName:String) {
         //        guard let appDelegate =
         //            UIApplication.shared.delegate as? AppDelegate else {
         //                return
@@ -319,6 +319,7 @@ class CoreDataManager: NSObject {
             storeEntity.setValue(store.image3, forKey: Constants.JSONStoreResponseKey.Image3)
             storeEntity.setValue(store.image4, forKey: Constants.JSONStoreResponseKey.Image4)
             storeEntity.setValue(store.isFavorate, forKey: Constants.JSONStoreResponseKey.IsFavorate)
+            storeEntity.setValue(cityName, forKey: Constants.CDStoreKey.CityName)
             // 4
             do {
                 try privateMOC.save()
@@ -357,6 +358,28 @@ class CoreDataManager: NSObject {
         do {
             data = try managedContext.fetch(fetchRequest)
         } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        return data
+    }
+    
+    //Fatch Category by Id
+    func getCategoryName(id:String) -> String {
+        var data = String()
+        
+        let managedContext =
+            self.persistentContainer.viewContext
+        
+        //2
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: Constants.Entity.Category)
+        let predicate = NSPredicate(format: "id == %@", id)
+        fetchRequest.predicate = predicate
+        //3
+        do {
+            let result = try managedContext.fetch(fetchRequest)
+            data = result[0].value(forKey: "name") as! String
+            } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
         return data
