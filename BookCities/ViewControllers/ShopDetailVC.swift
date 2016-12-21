@@ -24,6 +24,7 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     @IBOutlet weak var categoryLable: UILabel!
     @IBOutlet weak var contentOfScrollView: UIView!
     @IBOutlet weak var websiteLinkBtn: UIButton!
+    @IBOutlet weak var phonNumberBtn: UIButton!
     
    
     // add lable for daywise time.
@@ -48,7 +49,8 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(goBack))
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage(named: self.getStoreTypeImage())?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: .plain, target: nil, action: nil)
-        self.addressLable.text = store?.address
+        self.addressLable.text = (store?.address)!
+        self.phonNumberBtn.setTitle(store?.phone, for: UIControlState.normal)
         configurePageControl()
         configureImageScroller()
         setTimelable()
@@ -140,14 +142,11 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     @IBAction func shareBtnAction(_ sender: Any) {
         
         let header = store?.name
-        let gap = "\n"
-        let link = "Link - "+(store?.website)!
-        let address = "Address - "+(store?.address)!
-        let phone = "Contact - "+(store?.phone)!
-        let categories = "Catergory - "+getcatergories()
+        let link = "Website - "+(store?.website)!
         // set up activity view controller
-        let textToShare = [header!,link,gap,phone,gap,address,gap,categories] as [Any]
+        let textToShare = [link] as [Any]
         let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+        activityViewController.setValue(header, forKey: "subject")
         activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
         
         // exclude some activity types from the list (optional)
@@ -180,6 +179,16 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     @IBAction func websiteLinkBtnAction(_ sender: Any) {
         let url = URL(string: (store?.website)!)
         UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+    }
+    
+    @IBAction func phonNumberBtnAction(_ sender: Any) {
+        if let number = store?.phone {
+                let num = getcorrectPhoneNumber(number: number)
+                if UIApplication.shared.canOpenURL(URL(string: "telprompt://"+num)!){
+                    UIApplication.shared.open(URL(string: "telprompt://"+num)!, options: [:], completionHandler: nil)
+                }
+            
+        }
     }
     /*
      // MARK: - Navigation
@@ -241,10 +250,10 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         var categoryString = ""
         let catergoryArray = categoryIds?.characters.split{$0 == ":"}.map(String.init)
         for value in catergoryArray!{
-            categoryString.append(CoreDataManager.sharedInstance().getCategoryName(id: value)+",")
+            categoryString.append(CoreDataManager.sharedInstance().getCategoryName(id: value)+", ")
         }
         if categoryString != "" {
-            categoryString = categoryString.substring(to: categoryString.index(before: categoryString.endIndex))
+            categoryString = categoryString.substring(to: categoryString.index(before: categoryString.index(before: categoryString.endIndex)))
             return categoryString
         }
         else{
@@ -290,4 +299,36 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         return fromhr+":"+frommin+" - "+tohr+":"+tomin
     }
     
+    func getcorrectPhoneNumber(number:String) ->String
+    {
+        var no = number.trimmingCharacters(in: .whitespaces)
+        
+        if no.contains("(")
+        {
+            no = no.replacingOccurrences(of: "(", with: "")
+            
+        }
+        
+        if no.contains(" ")
+        {
+            no = no.replacingOccurrences(of: " ", with: "")
+            
+        }
+        
+        if no.contains(")")
+        {
+            no = no.replacingOccurrences(of: ")", with: "")
+        }
+        
+        if no.contains("+") {
+            no = no.replacingOccurrences(of: "+", with: "")
+        }
+        
+        if no.contains("-")
+        {
+            no = no.replacingOccurrences(of: "-", with: "")
+        }
+        
+        return no
+    }
 }

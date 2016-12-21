@@ -19,6 +19,12 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     var currentLocation:MKUserLocation?
     var city:JSONCity?
     var stores:[JSONStore]?
+    var totalStores:[JSONStore]?
+    @IBOutlet weak var newBookBtn: BorderButton!
+    @IBOutlet weak var usedBookBtn: BorderButton!
+    @IBOutlet weak var museumShopsBtn: BorderButton!
+    @IBOutlet weak var resetFilterBtn: UIButton!
+    @IBOutlet weak var heightOfResetC: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +35,7 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
             NSFontAttributeName: UIFont(name: Constants.Font.TypeHelvetica, size: CGFloat(Constants.Font.Size))!
         ]
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "cross")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: .plain, target: self, action: #selector(closeBtnAction))
-        
+        totalStores = stores
         self.mapView.delegate = self
         locationManager = CLLocationManager()
         
@@ -46,21 +52,7 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         
         self.geocoder = CLGeocoder()
         // create out annotations array (in this example only 3)
-        self.mapAnnotations = []
-        if let storesList = stores{
-             var i=0;
-        for store in storesList{
-            let storeAnnotation = BookStoreAnnotation()
-            storeAnnotation.title = store.name
-            storeAnnotation.subtitle = store.address
-            storeAnnotation.tag = Int(store.id!)
-            storeAnnotation.imageName = getStoreTypeImage(i)
-            storeAnnotation.coordinate = CLLocationCoordinate2DMake(Double(store.latitude!)!, Double(store.longitude!)!)
-            self.mapAnnotations.append(storeAnnotation)
-            i += 1
-        }
-        }
-
+        self.addAnnotationToMap()
 //        // annotation for the City of San Francisco
 //        let sfAnnotation = SFAnnotation()
 //        self.mapAnnotations.append(sfAnnotation)
@@ -81,10 +73,6 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 //        item.coordinate = CLLocationCoordinate2DMake(37.770, -122.4709)
         
 //        self.mapAnnotations.append(item)
-        self.mapView.removeAnnotations(self.mapView.annotations)
-        
-        // add all the custom annotations
-        self.mapView.addAnnotations(self.mapAnnotations)
         self.mapView.showsUserLocation = true
         if let currentCity = city {
              self.gotoDefaultLocation(currentCity)
@@ -98,10 +86,26 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         }
         //        let region = MKCoordinateRegionMakeWithDistance((currentLocation!.coordinate),2000, 2000)
         //        self.gotoDefaultLocation(newRegion:mapView.regionThatFits(region))
-        
-        
+        setView()
+        if (self.navigationController?.viewControllers.count) == 1{
+            newBookBtn.isHidden = true
+            usedBookBtn.isHidden = true
+            museumShopsBtn.isHidden = true
+        }
+        if (self.navigationController?.viewControllers.count)! > 1 && (self.navigationController?.viewControllers[(self.navigationController?.viewControllers.endIndex)!-2] is ShopDetailVC)
+        {
+            newBookBtn.isHidden = true
+            usedBookBtn.isHidden = true
+            museumShopsBtn.isHidden = true
+
+        }
     }
     
+    func setView(){
+        newBookBtn.isSelected = true
+        usedBookBtn.isSelected = true
+        museumShopsBtn.isSelected = true
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -112,7 +116,89 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     {
         self.dismiss(animated: true, completion: nil)
     }
+   
+    @IBAction func newBookBtnAction(_ sender: Any) {
+        self.usedBookBtn.isSelected = false
+        self.museumShopsBtn.isSelected = false
+        self.newBookBtn.isSelected = true
+        if self.heightOfResetC.constant == 0 {
+            showFilterView(true)
+        }
+        var storesData:Array<JSONStore> = Array()
+        for store in totalStores!{
+            if store.is_new_books == "1"{
+                storesData.append(store)
+            }
+        }
+        stores = storesData
+        self.addAnnotationToMap()
+    }
     
+    @IBAction func usedBookBtnAction(_ sender: Any) {
+        self.museumShopsBtn.isSelected = false
+        self.newBookBtn.isSelected = false
+        self.usedBookBtn.isSelected = true
+        if self.heightOfResetC.constant == 0 {
+            showFilterView(true)
+        }
+        var storesData:Array<JSONStore> = Array()
+        for store in totalStores!{
+            if store.is_used_books == "1"{
+                storesData.append(store)
+            }
+        }
+        stores = storesData
+        self.addAnnotationToMap()
+    }
+    
+    @IBAction func museumShopsBtnAction(_ sender: Any) {
+        self.newBookBtn.isSelected = false
+        self.usedBookBtn.isSelected = false
+        self.museumShopsBtn.isSelected = true
+        if self.heightOfResetC.constant == 0 {
+            showFilterView(true)
+        }
+        var storesData:Array<JSONStore> = Array()
+        for store in totalStores!{
+            if store.is_museumshops == "1"{
+                storesData.append(store)
+            }
+        }
+        stores = storesData
+        self.addAnnotationToMap()
+    }
+    
+    @IBAction func resetFilterBtnAction(_ sender: Any) {
+        defaultViewSetting()
+        showFilterView(false)
+        stores = totalStores
+        self.addAnnotationToMap()
+    }
+    func showFilterView(_ show:Bool) {
+        if !show
+        {
+            view.layoutIfNeeded()
+            self.heightOfResetC.constant = 0
+            self.resetFilterBtn.setTitle( "", for: .normal)
+            UIView.animate(withDuration: 0.3, animations: {
+                self.view.layoutIfNeeded()
+            })
+        }
+        else{
+            view.layoutIfNeeded()
+            self.heightOfResetC.constant = 30
+            self.resetFilterBtn.setTitle( "Reset Filters", for: .normal)
+            UIView.animate(withDuration: 0.3, animations: {
+                self.view.layoutIfNeeded()
+            })
+        }
+    }
+
+     func defaultViewSetting() {
+        self.newBookBtn.isSelected = true
+        self.usedBookBtn.isSelected = true
+        self.museumShopsBtn.isSelected = true
+    }
     // MARK: - MKMapView Delegate method
     
     // user tapped the disclosure button in the bridge callout
@@ -151,9 +237,11 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
                         print(self.placemark.country ?? "country")
                         if let cityName = self.placemark.locality
                         {
-                        BookCitiesClient.sharedInstance().getStores(["city":cityName as AnyObject], { (response, error) in
-                            self.stores = response
-                        })
+                            BookCitiesClient.sharedInstance().getStores(["city":cityName as AnyObject], { (response, error) in
+                                self.stores = response
+                                self.totalStores = self.stores
+                                self.addAnnotationToMap()
+                            })
                         }
                     }
                     else
@@ -161,8 +249,7 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
                         // Handle the nil case if necessary.
                     }
                     
-                } )
-                
+                })
             }
             if (self.navigationController?.viewControllers.count)! > 1 {
                 if currentLocation == nil && city == nil && !(self.navigationController?.viewControllers[(self.navigationController?.viewControllers.endIndex)!-2] is ShopDetailVC)
@@ -233,6 +320,7 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
                 returnedAnnotationView!.image = UIImage(named:(annotation as! BookStoreAnnotation).imageName!)
                  if !(self.navigationController?.viewControllers[(self.navigationController?.viewControllers.endIndex)!-2] is ShopDetailVC) {
                         let rightButton = UIButton(type: .detailDisclosure)
+                        rightButton.tintColor = UIColor.black
                         rightButton.tag = (annotation as! BookStoreAnnotation).tag!
                         rightButton.addTarget(self, action: #selector(MyMapVC.buttonAction(_:)), for: .touchUpInside)
                         returnedAnnotationView!.rightCalloutAccessoryView = rightButton
@@ -308,6 +396,7 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         region.span = MKCoordinateSpanMake(0.09, 0.09)
         self.mapView.setRegion(region, animated: true)
     }
+    
     // get PinImage
     func getStoreTypeImage(_ index:Int)->String{
         
@@ -341,6 +430,26 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         }
     }
 
+    func addAnnotationToMap() {
+            self.mapAnnotations = []
+            if let storesList = stores{
+                var i=0;
+                for store in storesList{
+                    let storeAnnotation = BookStoreAnnotation()
+                    storeAnnotation.title = store.name
+                    storeAnnotation.subtitle = store.address
+                    storeAnnotation.store = store
+                    storeAnnotation.tag = Int(store.id!)
+                    storeAnnotation.imageName = getStoreTypeImage(i)
+                    storeAnnotation.coordinate = CLLocationCoordinate2DMake(Double(store.latitude!)!, Double(store.longitude!)!)
+                    self.mapAnnotations.append(storeAnnotation)
+                    i += 1
+                }
+            }
+        self.mapView.removeAnnotations(self.mapView.annotations)
+        // add all the custom annotations
+        self.mapView.addAnnotations(self.mapAnnotations)
+    }
     /*
      // MARK: - Navigation
      

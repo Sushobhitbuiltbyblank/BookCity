@@ -82,18 +82,18 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
         if cities != nil {
             let twoDArray = getTwoDArray(cities: self.cities!, stores: stores!)
             cell.titleLable?.text = twoDArray[indexPath.section][indexPath.row].name
-            if (stores?[indexPath.row].isFavorate)!{
-                cell.favBookStoreImageV.image = UIImage.init(named: Constants.image.SelectedTriagle)
-            }
+//            if (stores?[indexPath.row].isFavorate)!{
+//                cell.favBookStoreImageV.image = UIImage.init(named: Constants.image.SelectedTriagle)
+//            }
             cell.bookstoreTypeImageV?.image = UIImage.init(named: getStoreTypeImage(indexPath.row))
             return cell
 
         }
         else{
             cell.titleLable?.text = stores?[indexPath.row].name
-            if (stores?[indexPath.row].isFavorate)!{
-                cell.favBookStoreImageV.image = UIImage.init(named: Constants.image.SelectedTriagle)
-            }
+//            if (stores?[indexPath.row].isFavorate)!{
+//                cell.favBookStoreImageV.image = UIImage.init(named: Constants.image.SelectedTriagle)
+//            }
             cell.bookstoreTypeImageV?.image = UIImage.init(named: getStoreTypeImage(indexPath.row))
             return cell
         }
@@ -301,18 +301,16 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
         let twoDArray =  getTwoDArray(cities: self.cities!, stores: stores!)
         let storeList = twoDArray[button.tag]
         var data = [String]()
+        data.append(storeList[0].cityName!)
         for store in storeList {
-            let header = store.name
+            let link = "Website - "+(store.website)!
             let gap = "\n"
-            let link = "Link - "+(store.website)!
-            let address = "Address - "+(store.address)!
-            let phone = "Contact - "+(store.phone)! 
-            data.append(header!+gap+link+gap+address+gap+phone+gap)
+            data.append(link+gap)
         }
         let textToShare = data
         let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-        
+        activityViewController.setValue("Book Shop List"+": "+storeList[0].cityName!, forKey: "subject")
         // exclude some activity types from the list (optional)
         activityViewController.excludedActivityTypes = [ UIActivityType.airDrop]
         

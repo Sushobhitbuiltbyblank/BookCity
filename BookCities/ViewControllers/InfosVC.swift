@@ -13,7 +13,7 @@ class InfosVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // NavigationBar Update
-        self.navigationItem.title = "Info"
+        self.navigationItem.title = "Infos"
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName: UIColor.black,
             NSFontAttributeName: UIFont(name: Constants.Font.TypeHelvetica, size: CGFloat(Constants.Font.Size))!

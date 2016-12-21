@@ -69,7 +69,7 @@ class MainView: UIViewController {
     
     @IBAction func myListBtnAction(_ sender: Any) {
         let next = self.storyboard?.instantiateViewController(withIdentifier:"MyListVC") as! MyListVC
-        next.tit = "My Place"
+        next.tit = "My List"
         if CoreDataManager.sharedInstance().haveStore(){
             let citiWiseStore = JSONStore.storeFromCoreData(CoreDataManager.sharedInstance().getStores() as! [Store])
             var citiArray = Array<String>()

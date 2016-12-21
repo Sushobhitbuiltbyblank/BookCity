@@ -17,6 +17,38 @@
             endingLineNumber = "119"
             landmarkName = "saveOfflineDataBtnAction(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BookCities.MainView.(saveOfflineDataBtnAction (Any) -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "BookCities"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Sushobhit/Desktop/BookMaps/Development/BookCities/BookCities/ViewControllers/MainView.swift"
+                  timestampString = "504023690.795872"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "119"
+                  endingLineNumber = "119"
+                  offsetFromSymbolStart = "284">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "BookCities.MainView.(saveOfflineDataBtnAction (Any) -&gt; ()).(closure #1).(closure #1).(closure #2)"
+                  moduleName = "BookCities"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Sushobhit/Desktop/BookMaps/Development/BookCities/BookCities/ViewControllers/MainView.swift"
+                  timestampString = "504023690.797126"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "110"
+                  endingLineNumber = "110"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
