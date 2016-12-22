@@ -80,7 +80,7 @@ extension BookCitiesClient
     }
     func getStores(_ parameteres:[String:AnyObject], _ completionHandlerForStores: @escaping (_ response : Array<JSONStore>? ,_ error : Error?) -> Void) -> Void {
         let mutableMethod: String = Constants.Methods.Stores
-        getMethodCall(mutableMethod, parameters: [String:AnyObject](), completionHandlerForGET: {
+        getMethodCall(mutableMethod, parameters: parameteres, completionHandlerForGET: {
             (response,error) in
             let res = response as! NSDictionary
             let array = res.object(forKey:"stores")! as! NSArray

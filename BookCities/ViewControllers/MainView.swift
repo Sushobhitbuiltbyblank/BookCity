@@ -17,29 +17,29 @@ class MainView: UIViewController {
     
     @IBOutlet weak var infoBtn: UIButton!
     let appdelegate = UIApplication.shared.delegate as! AppDelegate
-    override func viewDidLoad() {
+        override func viewDidLoad() {
         super.viewDidLoad()
         setViews()
         if(!CoreDataManager.sharedInstance().haveCategories()){
-        if Reachable.isConnectedToNetwork() == true
-        {
-            
-            BookCitiesClient.sharedInstance().getCategories({
-                (response, error) in
-                for catergory in response!
-                {
-                    CoreDataManager.sharedInstance().saveCategory(catergory.name!, id: catergory.id!)
-                }
-            })
-
+            if Reachable.isConnectedToNetwork() == true
+            {
+                
+                BookCitiesClient.sharedInstance().getCategories({
+                    (response, error) in
+                    for catergory in response!
+                    {
+                        CoreDataManager.sharedInstance().saveCategory(catergory.name!, id: catergory.id!)
+                    }
+                })
+                
+            }
+            else
+            {
+                let alert = UIAlertController(title: Constants.Alert.Title, message: Constants.Alert.Message, preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
         }
-        else
-        {
-            let alert = UIAlertController(title: Constants.Alert.Title, message: Constants.Alert.Message, preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
     }
 
     override func didReceiveMemoryWarning() {

@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import PKHUD
 class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
@@ -37,6 +38,8 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "cross")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: .plain, target: self, action: #selector(closeBtnAction))
         totalStores = stores
         self.mapView.delegate = self
+        
+        // Intialize the LocationManager
         locationManager = CLLocationManager()
         
         // Gets user permission use location while the app is in the foreground.
@@ -47,32 +50,10 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
         }
-//        let buttonItem = MKUserTrackingBarButtonItem(mapView: self.mapView)
-//        self.navigationItem.leftBarButtonItem = buttonItem
-        
+        // intialize GeoCoder object
         self.geocoder = CLGeocoder()
         // create out annotations array (in this example only 3)
         self.addAnnotationToMap()
-//        // annotation for the City of San Francisco
-//        let sfAnnotation = SFAnnotation()
-//        self.mapAnnotations.append(sfAnnotation)
-//        
-//        // annotation for Golden Gate Bridge
-//        let bridgeAnnotation = BridgeAnnotation()
-//        self.mapAnnotations.append(bridgeAnnotation)
-//        
-//        // annotation for Fisherman's Wharf
-//        let wharfAnnotation = WharfAnnotation()
-//        self.mapAnnotations.append(wharfAnnotation)
-        
-        // annotation for Japanese Tea Garden
-        
-//        let item = CustomAnnotation()
-//        item.place = "Tea Garden"
-//        item.imageName = "logo"
-//        item.coordinate = CLLocationCoordinate2DMake(37.770, -122.4709)
-        
-//        self.mapAnnotations.append(item)
         self.mapView.showsUserLocation = true
         if let currentCity = city {
              self.gotoDefaultLocation(currentCity)
@@ -84,14 +65,8 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
             }
             }
         }
-        //        let region = MKCoordinateRegionMakeWithDistance((currentLocation!.coordinate),2000, 2000)
-        //        self.gotoDefaultLocation(newRegion:mapView.regionThatFits(region))
+        
         setView()
-        if (self.navigationController?.viewControllers.count) == 1{
-            newBookBtn.isHidden = true
-            usedBookBtn.isHidden = true
-            museumShopsBtn.isHidden = true
-        }
         if (self.navigationController?.viewControllers.count)! > 1 && (self.navigationController?.viewControllers[(self.navigationController?.viewControllers.endIndex)!-2] is ShopDetailVC)
         {
             newBookBtn.isHidden = true
@@ -174,6 +149,19 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         stores = totalStores
         self.addAnnotationToMap()
     }
+    
+    @objc func buttonAction(_ button: UIButton) {
+        print(button.tag)
+        for store in stores! {
+            if Int(store.id!)! == button.tag
+            {
+                let next = self.storyboard?.instantiateViewController(withIdentifier:"ShopDetailVC") as! ShopDetailVC
+                next.store = store
+                self.navigationController?.pushViewController(next, animated: true)
+            }
+        }
+    }
+    
     func showFilterView(_ show:Bool) {
         if !show
         {
@@ -199,6 +187,7 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         self.usedBookBtn.isSelected = true
         self.museumShopsBtn.isSelected = true
     }
+    
     // MARK: - MKMapView Delegate method
     
     // user tapped the disclosure button in the bridge callout
@@ -218,38 +207,46 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         //         Center the map the first time we get a real location change.
-        
         if userLocation.coordinate.latitude != 0.0 && userLocation.coordinate.longitude != 0.0 {
             
             if (self.navigationController?.viewControllers.count) == 1 && currentLocation == nil {
+                HUD.show(.progress)
                 currentLocation = userLocation
                 self.mapView.setCenter(userLocation.coordinate, animated: true)
                 let region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate,2000, 2000)
                 mapView.setRegion(mapView.regionThatFits(region), animated: true)
-                
-                // Lookup the information for the current location of the user.
-                geocoder.reverseGeocodeLocation(mapView.userLocation.location!, completionHandler:{(placemarks, error) in
+                geocoder.reverseGeocodeLocation(userLocation.location!, completionHandler:{(placemarks, error) in
                     if placemarks != nil && (placemarks?.count)! > 0
                     {
                         self.placemark = (placemarks?[0])!
                         print(self.placemark.locality ?? "locality")
                         print(self.placemark.administrativeArea ?? "administrativeArea")
                         print(self.placemark.country ?? "country")
-                        if let cityName = self.placemark.locality
+                        let address = ["country_name":self.placemark.country,
+                                       "state_name":self.placemark.administrativeArea,
+                                       "city_name":self.placemark.locality]
+                        
+                        if self.placemark.locality != nil
                         {
-                            BookCitiesClient.sharedInstance().getStores(["city":cityName as AnyObject], { (response, error) in
-                                self.stores = response
-                                self.totalStores = self.stores
-                                self.addAnnotationToMap()
+                            BookCitiesClient.sharedInstance().getStores(address as [String : AnyObject], { (response, error) in
+                                if error == nil{
+                                    self.stores = response
+                                    self.totalStores = self.stores
+                                    self.addAnnotationToMap()
+                                    HUD.hide()
+                                }
+                                
                             })
                         }
                     }
                     else
                     {
+                        HUD.hide()
                         // Handle the nil case if necessary.
                     }
                     
                 })
+
             }
             if (self.navigationController?.viewControllers.count)! > 1 {
                 if currentLocation == nil && city == nil && !(self.navigationController?.viewControllers[(self.navigationController?.viewControllers.endIndex)!-2] is ShopDetailVC)
@@ -280,50 +277,25 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         
         // in case it's the user location, we already have an annotation, so just return nil
         if !(annotation is MKUserLocation) {
-            // handle our custom annotations
-            //
-            if annotation is BridgeAnnotation { // for Golden Gate Bridge
-                returnedAnnotationView = BridgeAnnotation.createViewAnnotationForMapView(self.mapView, annotation: annotation)
-                
-                // add a detail disclosure button to the callout which will open a new view controller page or a popover
-                //
-                // note: when the detail disclosure button is tapped, we respond to it via:
-                //       calloutAccessoryControlTapped delegate method
-                //
-                // by using "calloutAccessoryControlTapped", it's a convenient way to find out which annotation was tapped
-                //
-                let rightButton = UIButton(type: .detailDisclosure)
-                rightButton.addTarget(self, action: #selector(MyMapVC.buttonAction(_:)), for: .touchUpInside)
-                returnedAnnotationView!.rightCalloutAccessoryView = rightButton
-            } 
-//                else if annotation is WharfAnnotation { // for Fisherman's Wharf
-//                returnedAnnotationView = WharfAnnotation.createViewAnnotationForMapView(self.mapView,  annotation: annotation)
-//                
-//                // provide an image view to use as the accessory view's detail view.
-//                let imageView = UIImageView(image: UIImage(named: "logo"))
-//                returnedAnnotationView!.detailCalloutAccessoryView = imageView;
-//            } else if annotation is SFAnnotation {   // for City of San Francisco
-//                returnedAnnotationView = SFAnnotation.createViewAnnotationForMapView(self.mapView, annotation: annotation)
-//                
-//                // provide the annotation view's image
-//                returnedAnnotationView!.image = UIImage(named: "info")
-//                
-//                // provide the left image icon for the annotation
-//                let sfIconView = UIImageView(image: UIImage(named: "logo"))
-//                returnedAnnotationView!.leftCalloutAccessoryView = sfIconView
-//            } else if annotation is CustomAnnotation {  // for Japanese Tea Garden
-//                returnedAnnotationView = CustomAnnotation.createViewAnnotationForMapView(self.mapView, annotation: annotation)
-//            }
-            else if annotation is BookStoreAnnotation {  // for Japanese Tea Garden
+                if annotation is BookStoreAnnotation {  // BookStore
                 returnedAnnotationView = BookStoreAnnotation.createViewAnnotationForMapView(self.mapView, annotation: annotation)
                 // provide the annotation view's image
                 returnedAnnotationView!.image = UIImage(named:(annotation as! BookStoreAnnotation).imageName!)
-                 if !(self.navigationController?.viewControllers[(self.navigationController?.viewControllers.endIndex)!-2] is ShopDetailVC) {
-                        let rightButton = UIButton(type: .detailDisclosure)
-                        rightButton.tintColor = UIColor.black
-                        rightButton.tag = (annotation as! BookStoreAnnotation).tag!
-                        rightButton.addTarget(self, action: #selector(MyMapVC.buttonAction(_:)), for: .touchUpInside)
-                        returnedAnnotationView!.rightCalloutAccessoryView = rightButton
+                
+                 if (self.navigationController?.viewControllers.count)! > 1 && !(self.navigationController?.viewControllers[(self.navigationController?.viewControllers.endIndex)!-2] is ShopDetailVC) {
+                    let rightButton = UIButton(type: .detailDisclosure)
+                    rightButton.tintColor = UIColor.black
+                    rightButton.tag = (annotation as! BookStoreAnnotation).tag!
+                    rightButton.addTarget(self, action: #selector(MyMapVC.buttonAction(_:)), for: .touchUpInside)
+                    returnedAnnotationView!.rightCalloutAccessoryView = rightButton
+                }
+                if (self.navigationController?.viewControllers.count) == 1
+                {
+                    let rightButton = UIButton(type: .detailDisclosure)
+                    rightButton.tintColor = UIColor.black
+                    rightButton.tag = (annotation as! BookStoreAnnotation).tag!
+                    rightButton.addTarget(self, action: #selector(MyMapVC.buttonAction(_:)), for: .touchUpInside)
+                    returnedAnnotationView!.rightCalloutAccessoryView = rightButton
                 }
             }
         }
@@ -332,6 +304,7 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     // MARK: - use to show the annotation  view
     fileprivate func gotoByAnnotationClass(_ annotationClass: AnyClass) {
+        
         // user tapped "City" button in the bottom toolbar
         for annotation in self.mapAnnotations {
             if annotation.isKind(of: annotationClass) {
@@ -341,18 +314,6 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
                 self.mapView.addAnnotation(annotation)
                 
                 //                self.gotoDefaultLocation()
-            }
-        }
-    }
-    
-    @objc func buttonAction(_ button: UIButton) {
-        print(button.tag)
-        for store in stores! {
-            if Int(store.id!)! == button.tag
-            {
-                let next = self.storyboard?.instantiateViewController(withIdentifier:"ShopDetailVC") as! ShopDetailVC
-                next.store = store
-                self.navigationController?.pushViewController(next, animated: true)
             }
         }
     }
