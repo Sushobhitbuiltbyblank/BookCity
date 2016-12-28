@@ -84,18 +84,9 @@ class MainView: UIViewController {
             let nv:UINavigationController = UINavigationController(rootViewController: next)
             self.present(nv, animated: true, completion: nil)
         }
-        else if Reachable.isConnectedToNetwork() == true
-        {
-            BookCitiesClient.sharedInstance().getStores({
-                (response,error) in
-                next.stores = response
-                let nv:UINavigationController = UINavigationController(rootViewController: next)
-                self.present(nv, animated: true, completion: nil)
-            })
-        }
         else
         {
-            let alert = UIAlertController(title: Constants.Alert.Title, message: Constants.Alert.Message, preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: Constants.Alert.TitleNofavStore, message: Constants.Alert.MessageNoFavStore, preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }

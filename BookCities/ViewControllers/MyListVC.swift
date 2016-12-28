@@ -82,7 +82,7 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
         if cities != nil {
             let twoDArray = getTwoDArray(cities: self.cities!, stores: stores!)
             cell.titleLable?.text = twoDArray[indexPath.section][indexPath.row].name
-//            if (stores?[indexPath.row].isFavorate)!{
+//            if CoreDataManager.sharedInstance().haveStore((stores?[indexPath.row].id)!){
 //                cell.favBookStoreImageV.image = UIImage.init(named: Constants.image.SelectedTriagle)
 //            }
             cell.bookstoreTypeImageV?.image = UIImage.init(named: getStoreTypeImage(indexPath.row))
@@ -91,9 +91,9 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
         }
         else{
             cell.titleLable?.text = stores?[indexPath.row].name
-//            if (stores?[indexPath.row].isFavorate)!{
-//                cell.favBookStoreImageV.image = UIImage.init(named: Constants.image.SelectedTriagle)
-//            }
+            if CoreDataManager.sharedInstance().haveStore((stores?[indexPath.row].id)!){
+                cell.favBookStoreImageV.image = UIImage.init(named: Constants.image.SelectedTriagle)
+            }
             cell.bookstoreTypeImageV?.image = UIImage.init(named: getStoreTypeImage(indexPath.row))
             return cell
         }
@@ -289,6 +289,7 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
         }
         else{
             next.stores = stores
+            next.tit = self.tit
         }
         self.navigationController?.pushViewController(next, animated: true)
     }
@@ -299,12 +300,15 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
     
      @objc func shareBtnAction(_ button: UIButton) {
         let twoDArray =  getTwoDArray(cities: self.cities!, stores: stores!)
+//        let comma = ","
         let storeList = twoDArray[button.tag]
         var data = [String]()
-        data.append(storeList[0].cityName!)
+        let gap = "\n"
+        data.append(storeList[0].cityName!+gap)
         for store in storeList {
-            let link = "Website - "+(store.website)!
-            let gap = "\n"
+            let storeName = store.name!
+            let link = (store.website)!
+            data.append(storeName)
             data.append(link+gap)
         }
         let textToShare = data

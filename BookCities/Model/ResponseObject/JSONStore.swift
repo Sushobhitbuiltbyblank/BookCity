@@ -65,7 +65,7 @@ class JSONStore: NSObject {
     let sat_to_mins:String?
     let sun_to_mins:String?
     let descriptions:String?
-    let cityName:String?
+    var cityName:String?
     
     init(dictionary: [String:AnyObject]) {
         self.address = dictionary[Constants.JSONStoreResponseKey.Address] as? String

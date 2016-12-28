@@ -24,6 +24,7 @@ class Constants: NSObject {
         static let Cities = "/cities"
         static let Stores = "/stores"
         static let Bookscategories = "/bookscategories"
+        static let Appsettings = "/appsettings"
     }
     
     struct JSONCityResponseKey {
@@ -105,7 +106,9 @@ class Constants: NSObject {
     }
     struct Alert {
         static let Title = "No internet connection"
+        static let TitleNofavStore = "No favourite Stores yet"
         static let Message = "Please check your internet connectivity. "
+        static let MessageNoFavStore = "Please first set favourite store."
     }
     
     struct Entity {
@@ -142,6 +145,7 @@ class Constants: NSObject {
         static let SelectedTriagle = "selectedTriagle"
         static let Share = "share"
         static let Triangle = "triangle"
+        static let ImagePath = "http://54.191.201.248/bookmap/uploads/store_images/"
     }
     struct CDStoreKey {
         static let CityName = "cityName"

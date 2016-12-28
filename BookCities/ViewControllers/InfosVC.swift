@@ -7,9 +7,10 @@
 //
 
 import UIKit
-
+import PKHUD
 class InfosVC: UIViewController {
 
+    @IBOutlet weak var textView: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // NavigationBar Update
@@ -20,7 +21,20 @@ class InfosVC: UIViewController {
         ]
         self.navigationController?.navigationBar.barTintColor = UIColor(colorLiteralRed: 248/255, green: 8/255, blue: 8/255, alpha: 0.5)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "cross")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: .plain, target: self, action: #selector(closeBtnAction))
-
+        HUD.show(.progress)
+        BookCitiesClient.sharedInstance().getInfoData([:], {
+            (response,error) in
+            let htmlText = response
+            if let htmlData = htmlText?.data(using: String.Encoding.unicode) {
+                do {
+                    let attributedText = try NSAttributedString(data: htmlData, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
+                    HUD.hide()
+                    self.textView.attributedText = attributedText
+                } catch let e as NSError {
+                    print("Couldn't translate \(htmlText): \(e.localizedDescription) ")
+                }
+            }
+        })
         // Do any additional setup after loading the view.
     }
 

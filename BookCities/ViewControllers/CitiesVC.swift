@@ -130,7 +130,7 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let next = self.storyboard?.instantiateViewController(withIdentifier:"MyListVC") as! MyListVC
         if Reachable.isConnectedToNetwork() == true {
             tableView.isUserInteractionEnabled = false
-            BookCitiesClient.sharedInstance().getStores({
+            BookCitiesClient.sharedInstance().getStores(["city":currentCity.id as AnyObject],{
                 (response,error) in
                 next.stores = response
                 next.tit = currentCity.name

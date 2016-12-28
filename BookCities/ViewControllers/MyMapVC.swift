@@ -35,6 +35,10 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
             NSForegroundColorAttributeName: UIColor.black,
             NSFontAttributeName: UIFont(name: Constants.Font.TypeHelvetica, size: CGFloat(Constants.Font.Size))!
         ]
+        if (self.navigationController?.viewControllers.count) != 1 {
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(goBack))
+        }
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "cross")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: .plain, target: self, action: #selector(closeBtnAction))
         totalStores = stores
         self.mapView.delegate = self
@@ -55,6 +59,7 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         // create out annotations array (in this example only 3)
         self.addAnnotationToMap()
         self.mapView.showsUserLocation = true
+        self.mapView.showsPointsOfInterest = false
         if let currentCity = city {
              self.gotoDefaultLocation(currentCity)
         }
@@ -87,6 +92,11 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     }
     
     // MARK: - Button Actions
+    
+    func goBack(_ sender:AnyObject) -> ()
+    {
+        self.navigationController!.popViewController(animated: true)
+    }
     func closeBtnAction(_ sender:AnyObject)
     {
         self.dismiss(animated: true, completion: nil)
@@ -157,6 +167,7 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
             {
                 let next = self.storyboard?.instantiateViewController(withIdentifier:"ShopDetailVC") as! ShopDetailVC
                 next.store = store
+                next.tit = store.name
                 self.navigationController?.pushViewController(next, animated: true)
             }
         }
@@ -194,11 +205,6 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         // here we illustrate how to detect which annotation type was clicked on for its callout
         let annotation = view.annotation!
-//        if annotation is BridgeAnnotation {
-//            // user tapped the Golden Gate Bridge annotation
-//            //
-//            // note, we handle the accessory button press in "buttonAction"
-//        }
         if annotation is BookStoreAnnotation
         {
 
@@ -233,6 +239,10 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
                                     self.stores = response
                                     self.totalStores = self.stores
                                     self.addAnnotationToMap()
+                                    self.storesWithDistance()
+                                    if(self.mapAnnotations.count>1){
+                                        mapView.showAnnotations(self.mapAnnotations, animated: true)
+                                    }
                                     HUD.hide()
                                 }
                                 
@@ -248,13 +258,16 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
                 })
 
             }
-            if (self.navigationController?.viewControllers.count)! > 1 {
+            if (self.navigationController?.viewControllers.count)! > 2 {
                 if currentLocation == nil && city == nil && !(self.navigationController?.viewControllers[(self.navigationController?.viewControllers.endIndex)!-2] is ShopDetailVC)
                 {
                     currentLocation = userLocation
                     self.mapView.setCenter(userLocation.coordinate, animated: true)
-                    let region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate,2000, 2000)
-                    mapView.setRegion(mapView.regionThatFits(region), animated: true)
+                    if(self.mapAnnotations.count>1){
+                        mapView.showAnnotations(self.mapAnnotations, animated: true)
+                    }
+//                    let region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate,2000, 2000)
+//                    mapView.setRegion(mapView.regionThatFits(region), animated: true)
                 }
             }
         }
@@ -282,7 +295,7 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
                 // provide the annotation view's image
                 returnedAnnotationView!.image = UIImage(named:(annotation as! BookStoreAnnotation).imageName!)
                 
-                 if (self.navigationController?.viewControllers.count)! > 1 && !(self.navigationController?.viewControllers[(self.navigationController?.viewControllers.endIndex)!-2] is ShopDetailVC) {
+                 if (self.navigationController?.viewControllers.count)! > 2 && !(self.navigationController?.viewControllers[(self.navigationController?.viewControllers.endIndex)!-2] is ShopDetailVC) {
                     let rightButton = UIButton(type: .detailDisclosure)
                     rightButton.tintColor = UIColor.black
                     rightButton.tag = (annotation as! BookStoreAnnotation).tag!
@@ -302,6 +315,9 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         return returnedAnnotationView
     }
     
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+    }
     // MARK: - use to show the annotation  view
     fileprivate func gotoByAnnotationClass(_ annotationClass: AnyClass) {
         
@@ -320,32 +336,33 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     //MARK: -  Set Map to default Location
     fileprivate func gotoDefaultLocation(_ city:JSONCity) {
-        var address = [String:String]()
-        BookCitiesClient.sharedInstance().getCityOrigin([String : AnyObject](),id: city.id,completionHandlerForCityOrigin:{
-        (response,error)in
-            let state = JSONState.stateFromResults(response?["state"] as! [[String : AnyObject]])
-            print(state[0].name)
-            let country = JSONCountry.countryFromResults(response?["country"] as! [[String : AnyObject]])
-            print(country[0].name)
-            address = ["city":city.name ?? "",
-                                       "state":state[0].name,
-                                    "country": country[0].name];
-            self.geocoder.geocodeAddressDictionary(address, completionHandler: { (placemark,error) in
-                if(error == nil){
-                    let placemarkss:CLPlacemark = (placemark?.last)!
-                    var region:MKCoordinateRegion = MKCoordinateRegion()
-                    region.center.latitude = (placemarkss.location?.coordinate.latitude)!
-                    region.center.longitude = (placemarkss.location?.coordinate.longitude)!
-                    region.span = MKCoordinateSpanMake(0.09, 0.09)
-                    self.mapView.setRegion(region, animated: true)
-                }
-                else{
-                    print(error ?? "No city Location there and no error also")
-                }
-            })
-
-        })
-        
+        mapView.showAnnotations(mapAnnotations, animated: true)
+//        var address = [String:String]()
+//        BookCitiesClient.sharedInstance().getCityOrigin([String : AnyObject](),id: city.id,completionHandlerForCityOrigin:{
+//        (response,error)in
+//            let state = JSONState.stateFromResults(response?["state"] as! [[String : AnyObject]])
+//            print(state[0].name)
+//            let country = JSONCountry.countryFromResults(response?["country"] as! [[String : AnyObject]])
+//            print(country[0].name)
+//            address = ["city":city.name ?? "",
+//                                       "state":state[0].name,
+//                                    "country": country[0].name];
+//            self.geocoder.geocodeAddressDictionary(address, completionHandler: { (placemark,error) in
+//                if(error == nil){
+//                    let placemarkss:CLPlacemark = (placemark?.last)!
+//                    var region:MKCoordinateRegion = MKCoordinateRegion()
+//                    region.center.latitude = (placemarkss.location?.coordinate.latitude)!
+//                    region.center.longitude = (placemarkss.location?.coordinate.longitude)!
+//                    region.span = MKCoordinateSpanMake(0.009, 0.009)
+//                    self.mapView.setRegion(region, animated: true)
+//                }
+//                else{
+//                    print(error ?? "No city Location there and no error also")
+//                }
+//            })
+//
+//        })
+//        
         
     }
 
@@ -354,7 +371,7 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         var region:MKCoordinateRegion = MKCoordinateRegion()
         region.center.latitude = Double(store.latitude!)!
         region.center.longitude =  Double(store.longitude!)!
-        region.span = MKCoordinateSpanMake(0.09, 0.09)
+        region.span = MKCoordinateSpanMake(0.009, 0.009)
         self.mapView.setRegion(region, animated: true)
     }
     
@@ -410,6 +427,19 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         self.mapView.removeAnnotations(self.mapView.annotations)
         // add all the custom annotations
         self.mapView.addAnnotations(self.mapAnnotations)
+    }
+    
+    func storesWithDistance(){
+//        var distanceArray = Array<Any>()
+//        for store in self.stores! {
+//            let storeLocation = CLLocation(latitude: Double(store.latitude!)!, longitude: Double(store.longitude!)!)
+//            let distance = currentLocation?.location?.distance(from: storeLocation)
+//            let miles = distance!/0.000621371
+//            distanceArray.append(miles)
+//        }
+        
+//        let tableView = UITableView(CGRect(x: self.view.bounds.height, y: 0, width: self.view.bounds.height, height: self.view.bounds.width))
+        
     }
     /*
      // MARK: - Navigation

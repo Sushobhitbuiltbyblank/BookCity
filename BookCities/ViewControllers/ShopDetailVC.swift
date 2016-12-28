@@ -25,6 +25,9 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     @IBOutlet weak var contentOfScrollView: UIView!
     @IBOutlet weak var websiteLinkBtn: UIButton!
     @IBOutlet weak var phonNumberBtn: UIButton!
+    @IBOutlet weak var hoursStackView: UIStackView!
+    @IBOutlet weak var leftStackView: UIStackView!
+    @IBOutlet weak var rightStackView: UIStackView!
     
    
     // add lable for daywise time.
@@ -38,6 +41,10 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     var frame: CGRect = CGRect(x: 0, y: 0, width: 0, height: 0)
     var tit:String?
     var store:JSONStore?
+    var cityName:String?
+    var isFull = false
+    var days = [String]()
+    var dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
     override func viewDidLoad() {
         super.viewDidLoad()
         // update navigation bar
@@ -49,6 +56,10 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(goBack))
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage(named: self.getStoreTypeImage())?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: .plain, target: nil, action: nil)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openCloseTime))
+        self.hoursStackView.addGestureRecognizer(tapGesture)
+        
         self.addressLable.text = (store?.address)!
         self.phonNumberBtn.setTitle(store?.phone, for: UIControlState.normal)
         configurePageControl()
@@ -60,6 +71,9 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.descriptionTV.setContentOffset(CGPoint.zero, animated: false)
+        if getImageUrlArray().count == 0{
+            
+        }
     }
     
     func setView()
@@ -79,12 +93,38 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
                 print("Couldn't translate \(htmlText): \(e.localizedDescription) ")
             }
         }
-        favorateBtn.isSelected = (store?.isFavorate)!
+        if CoreDataManager.sharedInstance().haveStore((store?.id)!){
+            favorateBtn.isSelected = CoreDataManager.sharedInstance().getStore((store?.id)!).isFavorate
+        }
         self.categoryLable.text = getcatergories()
+        if store?.cityName == "" {
+        BookCitiesClient.sharedInstance().getCityOrigin([String : AnyObject](),id:(store?.city)!,completionHandlerForCityOrigin:{
+            (response,error)in
+            let city = JSONState.stateFromResults(response?["cities"] as! [[String : AnyObject]])
+            self.store?.cityName = city[0].name
+        })
+        }
+        
+        UIView.animate(withDuration: 0.01, animations: { () -> Void in
+            self.leftStackView.isHidden = true
+            self.rightStackView.isHidden = true
+        }, completion: { (success) -> Void in
+            self.leftStackView.removeFromSuperview()
+            self.rightStackView.removeFromSuperview()
+            self.isFull = false
+        })
+
+        addBtnOnStackV()
     }
     func configurePageControl() {
         // The total number of pages that are available is based on how many available colors we have.
-        self.pageControl.numberOfPages = 4
+        if getImageUrlArray().count == 1
+        {
+            self.pageControl.numberOfPages = 0
+        }
+        else{
+            self.pageControl.numberOfPages = getImageUrlArray().count
+        }
         self.pageControl.currentPage = 0
         self.pageControl.tintColor = UIColor.red
         self.pageControl.pageIndicatorTintColor = UIColor.white
@@ -96,19 +136,20 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         scrollView.delegate = self
         self.scrollView.isPagingEnabled = true
         let imageUrls = getImageUrlArray()
-        for index in 0..<4 {
+        for index in 0..<imageUrls.count{
             
             frame.origin.x = self.view.frame.size.width * CGFloat(index)
             frame.size.height = self.view.frame.size.height*10/25
             frame.size.width = self.view.frame.size.width
             self.scrollView.isPagingEnabled = true
             let imageV = UIImageView(frame: frame)
+            imageV.contentMode = .scaleAspectFill
             let url = URL(string:imageUrls[index])!
             imageV.af_setImage(withURL: url, placeholderImage: UIImage(named: "placeholder"), filter: nil, imageTransition: .crossDissolve(0.2), runImageTransitionIfCached: true, completion: nil)
             self.scrollView.addSubview(imageV)
         }
         
-        self.scrollView.contentSize = CGSize(width: self.view.frame.size.width * 4, height: self.scrollView.frame.size.height)
+        self.scrollView.contentSize = CGSize(width: self.view.frame.size.width * CGFloat(imageUrls.count), height: self.scrollView.frame.size.height)
         pageControl.addTarget(self, action: #selector(changePage), for: UIControlEvents.valueChanged)
     }
     
@@ -140,11 +181,12 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     }
     
     @IBAction func shareBtnAction(_ sender: Any) {
-        
-        let header = store?.name
-        let link = "Website - "+(store?.website)!
+//        let comma = ","         
+        let header = (store?.name)!
+        let cityName = (store?.cityName)!
+        let link = (store?.website)!
         // set up activity view controller
-        let textToShare = [link] as [Any]
+        let textToShare = [header ,cityName ,link] as [Any]
         let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
         activityViewController.setValue(header, forKey: "subject")
         activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
@@ -169,7 +211,6 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
             BookCitiesClient.sharedInstance().getCityOrigin([String : AnyObject](),id:(store?.city)!,completionHandlerForCityOrigin:{
                 (response,error)in
                     let city = JSONState.stateFromResults(response?["cities"] as! [[String : AnyObject]])
-                    print(city[0].name)
                     CoreDataManager.sharedInstance().saveStores(self.store!,cityName: city[0].name)
             })
         }
@@ -235,12 +276,20 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     
     func getImageUrlArray () -> Array<String>
     {
-        let image1:String = store?.image1 ?? ""
-        let image2:String = store?.image2 ?? ""
-        let image3:String = store?.image3 ?? ""
-        let image4:String = store?.image4 ?? ""
-        
-        let array = [image1,image2,image3,image4]
+        let path  = Constants.image.ImagePath
+        var array = [String]()
+        if store?.image1 != path{
+            array.append((store?.image1)!)
+        }
+        if store?.image2 != path{
+            array.append((store?.image2)!)
+        }
+        if store?.image3 != path{
+            array.append((store?.image3)!)
+        }
+        if store?.image4 != path{
+            array.append((store?.image4)!)
+        }
         return array 
     }
     
@@ -263,14 +312,21 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     
     func setTimelable()
     {
-        monTimeL.text = getString(fromHr: (store?.mon_from_hr)!, fromMin: (store?.mon_from_mins)!, toHr: (store?.mon_to_hr)!, toMin: (store?.mon_to_mins)!)
-        tueTimeL.text = getString(fromHr: (store?.tue_from_hr)!, fromMin: (store?.tue_from_mins)!, toHr: (store?.tue_to_hr)!, toMin: (store?.tue_to_mins)!)
-        tueTimeL.text = getString(fromHr: (store?.tue_from_hr)!, fromMin: (store?.tue_from_mins)!, toHr: (store?.tue_to_hr)!, toMin: (store?.tue_to_mins)!)
-        wedTimeL.text = getString(fromHr: (store?.wed_from_hr)!, fromMin: (store?.wed_from_mins)!, toHr: (store?.wed_to_hr)!, toMin: (store?.wed_to_mins)!)
-        thuTimeL.text = getString(fromHr: (store?.thurs_from_hr)!, fromMin: (store?.thurs_from_mins)!, toHr: (store?.thurs_to_hr)!, toMin: (store?.thurs_to_mins)!)
-        friTimeL.text = getString(fromHr: (store?.fri_from_hr)!, fromMin: (store?.fri_from_mins)!, toHr: (store?.fri_to_hr)!, toMin: (store?.fri_to_mins)!)
-        satTimeL.text = getString(fromHr: (store?.sat_from_hr)!, fromMin: (store?.sat_from_mins)!, toHr: (store?.sat_to_hr)!, toMin: (store?.sat_to_mins)!)
         sunTimeL.text = getString(fromHr: (store?.sun_from_hr)!, fromMin: (store?.sun_from_mins)!, toHr: (store?.sun_to_hr)!, toMin: (store?.sun_to_mins)!)
+        days.append(sunTimeL.text!)
+        monTimeL.text = getString(fromHr: (store?.mon_from_hr)!, fromMin: (store?.mon_from_mins)!, toHr: (store?.mon_to_hr)!, toMin: (store?.mon_to_mins)!)
+        days.append(monTimeL.text!)
+        tueTimeL.text = getString(fromHr: (store?.tue_from_hr)!, fromMin: (store?.tue_from_mins)!, toHr: (store?.tue_to_hr)!, toMin: (store?.tue_to_mins)!)
+        days.append(tueTimeL.text!)
+        wedTimeL.text = getString(fromHr: (store?.wed_from_hr)!, fromMin: (store?.wed_from_mins)!, toHr: (store?.wed_to_hr)!, toMin: (store?.wed_to_mins)!)
+        days.append(wedTimeL.text!)
+        thuTimeL.text = getString(fromHr: (store?.thurs_from_hr)!, fromMin: (store?.thurs_from_mins)!, toHr: (store?.thurs_to_hr)!, toMin: (store?.thurs_to_mins)!)
+        days.append(thuTimeL.text!)
+        friTimeL.text = getString(fromHr: (store?.fri_from_hr)!, fromMin: (store?.fri_from_mins)!, toHr: (store?.fri_to_hr)!, toMin: (store?.fri_to_mins)!)
+        days.append(friTimeL.text!)
+        satTimeL.text = getString(fromHr: (store?.sat_from_hr)!, fromMin: (store?.sat_from_mins)!, toHr: (store?.sat_to_hr)!, toMin: (store?.sat_to_mins)!)
+        days.append(satTimeL.text!)
+       
     }
     
     func getString(fromHr:String,fromMin:String,toHr:String,toMin:String) ->String
@@ -330,5 +386,171 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         }
         
         return no
+    }
+    // add Open Button On StackView
+    func addBtnOnStackV(){
+        deleteStackView()
+        let stack = self.hoursStackView
+        let index = (stack?.arrangedSubviews.count)! - 1
+        let newView = createEntry()
+        newView.isHidden = true
+        stack?.insertArrangedSubview(newView, at: index)
+        
+        UIView.animate(withDuration: 0.01) { () -> Void in
+            newView.isHidden = false
+        }
+    }
+    func createEntry() ->UIView{
+        
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.alignment = .firstBaseline
+        stack.distribution = .fill
+        stack.spacing = 8
+        var textforTime = ""
+        let timeInNumber = UILabel()
+        if isOpen() {
+            textforTime = "Open today"
+            let date = Date()
+            let calendar = NSCalendar.current
+            let components = calendar.component(.weekday, from: date)
+            let day = components.description
+            
+            timeInNumber.text = days[Int(day)!]
+        }
+        else{
+            textforTime = "closed"
+        }
+        let timeInWordlable = UILabel()
+        timeInWordlable.text = textforTime
+        timeInWordlable.font = UIFont.boldSystemFont(ofSize: 17)
+        timeInWordlable.textColor = UIColor.darkGray
+        timeInNumber.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+        
+        let arrowButton = UIButton(type: .roundedRect)
+        arrowButton.setImage(UIImage(named: "downArrow")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal),for: .normal)
+        arrowButton.addTarget(self, action:#selector(showFullTime(sender:)), for: .touchUpInside)
+        stack.addArrangedSubview(timeInWordlable)
+        stack.addArrangedSubview(timeInNumber)
+        stack.addArrangedSubview(arrowButton)
+
+        return stack
+    }
+    
+    func showFullTime(sender:UIButton){
+       self.openCloseTime()
+    }
+    
+    func deleteStackView()
+    {
+        let stack = self.hoursStackView
+        let index = (stack?.arrangedSubviews.count)! - 1
+        if let view = stack?.arrangedSubviews[index] {
+            UIView.animate(withDuration: 0.01, animations: { () -> Void in
+                view.isHidden = true
+            }, completion: { (success) -> Void in
+                view.removeFromSuperview()
+            })
+        }
+    }
+    
+    func openCloseTime()
+    {
+        if isFull {
+            addBtnOnStackV()
+            isFull = false
+        }
+        else{
+            isFull = true
+            let stack = self.hoursStackView
+            let index = (stack?.arrangedSubviews.count)! - 1
+            let addView = stack?.arrangedSubviews[index]
+            addView?.removeFromSuperview()
+            
+            UIView.animate(withDuration: 0.01, animations: { () -> Void in
+                addView?.isHidden = true
+            }, completion: { (success) -> Void in
+                addView?.removeFromSuperview()
+                self.addStacks()
+            })
+        }
+    }
+    
+    func addStacks()
+    {
+        let stack = self.hoursStackView
+        let newView = createFullStack()
+        
+        newView.isHidden = true
+        stack?.addArrangedSubview(newView)
+        UIView.animate(withDuration: 0.01) { () -> Void in
+            newView.isHidden = false
+        }
+
+    }
+    
+    func createFullStack() -> UIView{
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.alignment = .leading
+        stack.distribution = .fill
+        stack.spacing = 5
+        let date = Date()
+        let calendar = NSCalendar.current
+        let components = calendar.component(.weekday, from: date)
+        let d = Int(components.description)! - 1
+        
+        for day in d ..< 7 {
+            stack.addArrangedSubview(createStack(day: dayNames[day], time: days[day]))
+        }
+        for day in 0 ..< d {
+            stack.addArrangedSubview(createStack(day: dayNames[day], time: days[day]))
+        }
+        for i in 0 ..< 6 {
+            let view0:UIStackView = stack.arrangedSubviews[i] as! UIStackView
+            let view00 = view0.arrangedSubviews[0]
+            let view4:UIStackView = stack.arrangedSubviews[i+1] as! UIStackView
+            let view40 = view4.arrangedSubviews[0]
+            let width = NSLayoutConstraint(item: view00, attribute: .width, relatedBy: .equal, toItem: view40, attribute: .width, multiplier: 1.0, constant: 0)
+            stack.addConstraint(width)
+        }
+        return stack
+    }
+    
+    func createStack(day:String,time:String) ->UIStackView
+    {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.alignment = .firstBaseline
+        stack.distribution = .equalSpacing
+        stack.spacing = 8
+        
+        let timeInWordlable = UILabel()
+        timeInWordlable.text = day
+        timeInWordlable.textAlignment = .left
+        timeInWordlable.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+        
+        let timeInNumber = UILabel()
+        timeInNumber.text = time
+        timeInNumber.textAlignment = .left
+        timeInNumber.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+        
+        stack.addArrangedSubview(timeInWordlable)
+        stack.addArrangedSubview(timeInNumber)
+        
+        return stack
+    }
+    
+    func isOpen() -> Bool
+    {
+        let date = Date()
+        let calendar = NSCalendar.current
+        let components = calendar.component(.weekday, from: date)
+        let day = components.description
+        if days[Int(day)!] == "closed"
+        {
+            return false
+        }
+        return true
     }
 }
