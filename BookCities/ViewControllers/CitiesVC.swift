@@ -20,6 +20,8 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var page = 1
     var arary:Array<Any>!
     let appdelegate = UIApplication.shared.delegate as! AppDelegate
+    let searchController = UISearchController(searchResultsController: nil)
+    var filteredCities = [JSONCity]()
     override func viewWillAppear(_ animated: Bool) {
     }
     
@@ -72,6 +74,13 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         cellIdentifier = "citiCells"
         tableView.register(UINib(nibName: "CitiesTVCell", bundle: nil), forCellReuseIdentifier:cellIdentifier)
         
+        // Searching Controller
+        
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -81,6 +90,9 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //MARK: - TableView Data Source function
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchController.isActive && searchController.searchBar.text != "" {
+            return filteredCities.count
+        }
         return cities.count
     }
     
@@ -90,7 +102,13 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! CitiesTVCell
-        cell.titleLable?.text = cities[indexPath.row].name
+        
+        if searchController.isActive && searchController.searchBar.text != "" {
+            cell.titleLable?.text = filteredCities[indexPath.row].name
+        } else {
+            cell.titleLable?.text = cities[indexPath.row].name
+        }
+        
         return cell;
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -126,7 +144,12 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - Table View Delegate Function
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let currentCity:JSONCity = cities[indexPath.row]
+        var currentCity:JSONCity!
+        if searchController.isActive && searchController.searchBar.text != "" {
+            currentCity = filteredCities[indexPath.row]
+        } else {
+            currentCity = cities[indexPath.row]
+        }
         let next = self.storyboard?.instantiateViewController(withIdentifier:"MyListVC") as! MyListVC
         if Reachable.isConnectedToNetwork() == true {
             tableView.isUserInteractionEnabled = false
@@ -156,7 +179,17 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     {
         self.dismiss(animated: true, completion: nil)
     }
-    /*
+    
+    // MARK: - SearchController Delegate method
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        filteredCities = cities.filter { city in
+            return (city.name?.lowercased().contains(searchText.lowercased()))!
+        }
+        
+        tableView.reloadData()
+    }
+    
+       /*
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -167,3 +200,12 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
      */
     
 }
+extension CitiesVC: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController){
+         filterContentForSearchText(searchText: searchController.searchBar.text!)
+    }
+    
+}
+
+ 

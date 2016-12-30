@@ -185,7 +185,7 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         }
         else{
             view.layoutIfNeeded()
-            self.heightOfResetC.constant = 30
+            self.heightOfResetC.constant = 40
             self.resetFilterBtn.setTitle( "Reset Filters", for: .normal)
             UIView.animate(withDuration: 0.3, animations: {
                 self.view.layoutIfNeeded()

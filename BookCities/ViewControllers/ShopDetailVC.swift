@@ -8,6 +8,11 @@
 
 import UIKit
 import AlamofireImage
+
+protocol UpdateFavorate {
+    func updateTableView(indexpath:IndexPath)
+}
+
 class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -29,7 +34,7 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     @IBOutlet weak var leftStackView: UIStackView!
     @IBOutlet weak var rightStackView: UIStackView!
     
-   
+    
     // add lable for daywise time.
     @IBOutlet weak var monTimeL: UILabel!
     @IBOutlet weak var tueTimeL: UILabel!
@@ -45,6 +50,8 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     var isFull = false
     var days = [String]()
     var dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
+    var delegate:UpdateFavorate?
+    var indexPath:IndexPath?
     override func viewDidLoad() {
         super.viewDidLoad()
         // update navigation bar
@@ -97,13 +104,6 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
             favorateBtn.isSelected = CoreDataManager.sharedInstance().getStore((store?.id)!).isFavorate
         }
         self.categoryLable.text = getcatergories()
-        if store?.cityName == "" {
-        BookCitiesClient.sharedInstance().getCityOrigin([String : AnyObject](),id:(store?.city)!,completionHandlerForCityOrigin:{
-            (response,error)in
-            let city = JSONState.stateFromResults(response?["cities"] as! [[String : AnyObject]])
-            self.store?.cityName = city[0].name
-        })
-        }
         
         UIView.animate(withDuration: 0.01, animations: { () -> Void in
             self.leftStackView.isHidden = true
@@ -113,7 +113,7 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
             self.rightStackView.removeFromSuperview()
             self.isFull = false
         })
-
+        
         addBtnOnStackV()
     }
     func configurePageControl() {
@@ -158,7 +158,7 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         let x = CGFloat(pageControl.currentPage) * view.frame.size.width
         scrollView.setContentOffset(CGPoint(x: x,y :0), animated: true)
     }
-   
+    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         
         let pageNumber = round(scrollView.contentOffset.x / scrollView.frame.size.width)
@@ -181,40 +181,65 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     }
     
     @IBAction func shareBtnAction(_ sender: Any) {
-//        let comma = ","         
-        let header = (store?.name)!
-        let cityName = (store?.cityName)!
-        let link = (store?.website)!
-        // set up activity view controller
-        let textToShare = [header ,cityName ,link] as [Any]
-        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
-        activityViewController.setValue(header, forKey: "subject")
-        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-        
-        // exclude some activity types from the list (optional)
-        activityViewController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook ]
-        
-        // present the view controller
-        self.present(activityViewController, animated: true, completion: nil)
+        let comma = ","
+        if store?.cityName == "" {
+            BookCitiesClient.sharedInstance().getCityOrigin([String : AnyObject](),id:(store?.city)!,completionHandlerForCityOrigin:{
+                (response,error)in
+                let city = JSONState.stateFromResults(response?["cities"] as! [[String : AnyObject]])
+                self.store?.cityName = city[0].name
+                let header = (self.store?.name)!
+                let cityName = (self.store?.cityName)!
+                let link = (self.store?.website)!
+                // set up activity view controller
+                let textToShare = [header+comma+" "+cityName ,link] as [Any]
+                let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+                activityViewController.setValue(header, forKey: "subject")
+                activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+                
+                // exclude some activity types from the list (optional)
+                activityViewController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook ]
+                
+                // present the view controller
+                self.present(activityViewController, animated: true, completion: nil)
+            })
+        }
+        else{
+            let header = (self.store?.name)!
+            let cityName = (self.store?.cityName)!
+            let link = (self.store?.website)!
+            // set up activity view controller
+            let textToShare = [header+comma+" "+cityName ,link] as [Any]
+            let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+            activityViewController.setValue(header, forKey: "subject")
+            activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+            
+            // exclude some activity types from the list (optional)
+            activityViewController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook ]
+            
+            // present the view controller
+            self.present(activityViewController, animated: true, completion: nil)
+        }
     }
-
+    
     @IBAction func favorateAction(_ sender: Any) {
         if favorateBtn.isSelected
         {
             favorateBtn.isSelected = false
             store?.isFavorate = false
             CoreDataManager.sharedInstance().deleteStore(storeID: (self.store?.id)!)
+            self.delegate?.updateTableView(indexpath: indexPath!)
         }
         else{
             favorateBtn.isSelected = true
             store?.isFavorate = true
             BookCitiesClient.sharedInstance().getCityOrigin([String : AnyObject](),id:(store?.city)!,completionHandlerForCityOrigin:{
                 (response,error)in
-                    let city = JSONState.stateFromResults(response?["cities"] as! [[String : AnyObject]])
-                    CoreDataManager.sharedInstance().saveStores(self.store!,cityName: city[0].name)
+                let city = JSONState.stateFromResults(response?["cities"] as! [[String : AnyObject]])
+                CoreDataManager.sharedInstance().saveStores(self.store!,cityName: city[0].name)
+                 self.delegate?.updateTableView(indexpath: self.indexPath!)
             })
         }
-
+        
     }
     
     @IBAction func websiteLinkBtnAction(_ sender: Any) {
@@ -224,10 +249,10 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     
     @IBAction func phonNumberBtnAction(_ sender: Any) {
         if let number = store?.phone {
-                let num = getcorrectPhoneNumber(number: number)
-                if UIApplication.shared.canOpenURL(URL(string: "telprompt://"+num)!){
-                    UIApplication.shared.open(URL(string: "telprompt://"+num)!, options: [:], completionHandler: nil)
-                }
+            let num = getcorrectPhoneNumber(number: number)
+            if UIApplication.shared.canOpenURL(URL(string: "telprompt://"+num)!){
+                UIApplication.shared.open(URL(string: "telprompt://"+num)!, options: [:], completionHandler: nil)
+            }
             
         }
     }
@@ -272,7 +297,7 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
             return ""
         }
     }
-
+    
     
     func getImageUrlArray () -> Array<String>
     {
@@ -290,7 +315,7 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         if store?.image4 != path{
             array.append((store?.image4)!)
         }
-        return array 
+        return array
     }
     
     func getcatergories() ->String
@@ -326,7 +351,7 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         days.append(friTimeL.text!)
         satTimeL.text = getString(fromHr: (store?.sat_from_hr)!, fromMin: (store?.sat_from_mins)!, toHr: (store?.sat_to_hr)!, toMin: (store?.sat_to_mins)!)
         days.append(satTimeL.text!)
-       
+        
     }
     
     func getString(fromHr:String,fromMin:String,toHr:String,toMin:String) ->String
@@ -341,17 +366,17 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
             return "closed"
         }
         if fromMin == "0"{
-                frommin = "00"
-            }
-            if fromHr == "0"{
-                fromhr = "00"
-            }
-            if toMin == "0"{
-                tomin = "00"
-            }
-            if toHr == "00"{
-                tohr = "0"
-            }
+            frommin = "00"
+        }
+        if fromHr == "0"{
+            fromhr = "00"
+        }
+        if toMin == "0"{
+            tomin = "00"
+        }
+        if toHr == "00"{
+            tohr = "0"
+        }
         return fromhr+":"+frommin+" - "+tohr+":"+tomin
     }
     
@@ -405,8 +430,8 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.alignment = .firstBaseline
-        stack.distribution = .fill
-        stack.spacing = 8
+        stack.distribution = .fillProportionally
+        stack.spacing = 0
         var textforTime = ""
         let timeInNumber = UILabel()
         if isOpen() {
@@ -416,7 +441,7 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
             let components = calendar.component(.weekday, from: date)
             let day = components.description
             
-            timeInNumber.text = days[Int(day)!]
+            timeInNumber.text = " "+days[Int(day)!]
         }
         else{
             textforTime = "closed"
@@ -429,16 +454,17 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         
         let arrowButton = UIButton(type: .roundedRect)
         arrowButton.setImage(UIImage(named: "downArrow")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal),for: .normal)
+        arrowButton.setTitle("", for: .normal)
         arrowButton.addTarget(self, action:#selector(showFullTime(sender:)), for: .touchUpInside)
         stack.addArrangedSubview(timeInWordlable)
         stack.addArrangedSubview(timeInNumber)
         stack.addArrangedSubview(arrowButton)
-
+        
         return stack
     }
     
     func showFullTime(sender:UIButton){
-       self.openCloseTime()
+        self.openCloseTime()
     }
     
     func deleteStackView()
@@ -486,7 +512,7 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         UIView.animate(withDuration: 0.01) { () -> Void in
             newView.isHidden = false
         }
-
+        
     }
     
     func createFullStack() -> UIView{

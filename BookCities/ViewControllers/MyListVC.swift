@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UpdateFavorate {
     
     @IBOutlet weak var closeBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
@@ -140,10 +140,14 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
             let twoDArray = getTwoDArray(cities: self.cities!, stores: stores!)
             next.tit = twoDArray[indexPath.section][indexPath.row].name
             next.store = twoDArray[indexPath.section][indexPath.row]
+            next.delegate = self
+            next.indexPath = indexPath
         }
         else{
             next.tit = stores?[indexPath.row].name
             next.store = stores?[indexPath.row]
+            next.delegate = self
+            next.indexPath = indexPath
         }
         self.navigationController?.pushViewController(next, animated: true)
     }
@@ -189,7 +193,7 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
         self.newBooksBtn.isSelected = true
         self.usedBooksBtn.isSelected = true
         self.museumshopsBtn.isSelected = true
-//        self.resetFiltersBtn.setTitle( "Reset Filters", for: .normal)
+        self.filterByCategory.setTitle("Filter by category", for: .normal)
     }
     
     func showFilterView(_ show:Bool) {
@@ -204,7 +208,7 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
             }
             else{
                 view.layoutIfNeeded()
-                self.heightOfResetC.constant = 30
+                self.heightOfResetC.constant = 40
                 self.resetFiltersBtn.setTitle( "Reset Filters", for: .normal)
                 UIView.animate(withDuration: 0.3, animations: {
                     self.view.layoutIfNeeded()
@@ -333,8 +337,14 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
             }
         }
         stores = storesData
+        let categorySelected = (categories?[row] as AnyObject).value(forKeyPath: "name") as? String
+        if self.heightOfResetC.constant == 0 {
+            showFilterView(true)
+        }
+        filterByCategory.setTitle(categorySelected, for: .normal)
         tableView.reloadData()
         showCategoryPicker(false)
+        
     }
     
     @IBAction func cancleBtnAction(_ sender: Any) {
@@ -467,6 +477,15 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
             twoDArray.append(storeInCity)
         }
         return twoDArray
+    }
+    
+    // MARK: -  Updatefavorate Protocol method
+    
+    func updateTableView(indexpath:IndexPath) {
+//        self.tableView.beginUpdates()
+//        self.tableView.reloadRows(at: [indexpath], with: .none)
+//        self.tableView.endUpdates()
+//        self.tableView.reloadData()
     }
     
     
