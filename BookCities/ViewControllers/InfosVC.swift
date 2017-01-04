@@ -27,7 +27,8 @@ class InfosVC: UIViewController {
             let htmlText = response
             if let htmlData = htmlText?.data(using: String.Encoding.unicode) {
                 do {
-                    let attributedText = try NSAttributedString(data: htmlData, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
+                    let attributedText = try NSMutableAttributedString(data: htmlData, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
+                    attributedText.addAttribute(NSFontAttributeName, value: UIFont(name: "Helvetica Neue", size: 17)!, range: NSMakeRange(0,attributedText.length))
                     HUD.hide()
                     self.textView.attributedText = attributedText
                 } catch let e as NSError {

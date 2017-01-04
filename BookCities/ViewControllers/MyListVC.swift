@@ -237,6 +237,7 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
         self.usedBooksBtn.isSelected = false
         self.museumshopsBtn.isSelected = false
         self.newBooksBtn.isSelected = true
+        self.filterByCategory.setTitle("Filter by category", for: .normal)
         if self.heightOfResetC.constant == 0 {
             showFilterView(true)
         }
@@ -254,6 +255,7 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
         self.museumshopsBtn.isSelected = false
         self.newBooksBtn.isSelected = false
         self.usedBooksBtn.isSelected = true
+        self.filterByCategory.setTitle("Filter by category", for: .normal)
         if self.heightOfResetC.constant == 0 {
             showFilterView(true)
         }
@@ -271,6 +273,7 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
         self.newBooksBtn.isSelected = false
         self.usedBooksBtn.isSelected = false
         self.museumshopsBtn.isSelected = true
+        self.filterByCategory.setTitle("Filter by category", for: .normal)
         if self.heightOfResetC.constant == 0 {
             showFilterView(true)
         }
