@@ -48,7 +48,9 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         else{
             if !CoreDataManager.sharedInstance().haveCity(){
                 let alert = UIAlertController(title: Constants.Alert.Title, message: Constants.Alert.Message, preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction) in
+                    self.dismiss(animated:true, completion: nil)
+                }))
                 self.present(alert, animated: true, completion: nil)
 
             }
@@ -80,7 +82,14 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
-        
+        let upperBoarder = CALayer()
+        upperBoarder.backgroundColor = UIColor.black.cgColor
+        upperBoarder.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 2.0)
+        self.tableView.layer.addSublayer(upperBoarder)
+        let lowerBoader = CALayer()
+        lowerBoader.backgroundColor = UIColor.black.cgColor
+        lowerBoader.frame = CGRect(x: 0, y: searchController.searchBar.bounds.height-1, width: self.view.frame.width, height: 2.0)
+        self.searchController.searchBar.layer.addSublayer(lowerBoader)
     }
     
     override func didReceiveMemoryWarning() {
@@ -108,10 +117,15 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         } else {
             cell.titleLable?.text = cities[indexPath.row].name
         }
-        
+        let totalRow = tableView.numberOfRows(inSection: indexPath.section) //first get total rows in that section by current indexPath.
+        if(indexPath.row == totalRow-1){
+            cell.addLowerBorder()
+        }
         return cell;
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+       
+
         if indexPath.row >= (cities.count)-1
         {
             let parameter = ["per_page":tableIndex,"page":page];
@@ -159,7 +173,15 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 next.tit = currentCity.name
                 next.city = currentCity
                 tableView.isUserInteractionEnabled = true
-                self.navigationController?.pushViewController(next, animated: true)
+                BookCitiesClient.sharedInstance().getCountry("/"+currentCity.country_id, { (response, error) in
+                    var storelist = Array<JSONStore>()
+                    for store in next.stores! {
+                        store.phone = response![0].country_code+store.phone!
+                        storelist.append(store)
+                    }
+                    next.stores = storelist
+                    self.navigationController?.pushViewController(next, animated: true)
+                })
             })
         }
         else if CoreDataManager.sharedInstance().haveStore(){

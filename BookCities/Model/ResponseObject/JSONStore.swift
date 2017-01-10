@@ -31,7 +31,7 @@ class JSONStore: NSObject {
     let image2:String?
     let image3:String?
     let image4:String?
-    let phone:String?
+    var phone:String?
     
     let mon_from_hr:String?
     let tue_from_hr:String?

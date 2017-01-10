@@ -22,13 +22,14 @@ class InfosVC: UIViewController {
         self.navigationController?.navigationBar.barTintColor = UIColor(colorLiteralRed: 248/255, green: 8/255, blue: 8/255, alpha: 0.5)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "cross")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: .plain, target: self, action: #selector(closeBtnAction))
         HUD.show(.progress)
+        if Reachable.isConnectedToNetwork(){
         BookCitiesClient.sharedInstance().getInfoData([:], {
             (response,error) in
             let htmlText = response
             if let htmlData = htmlText?.data(using: String.Encoding.unicode) {
                 do {
                     let attributedText = try NSMutableAttributedString(data: htmlData, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
-                    attributedText.addAttribute(NSFontAttributeName, value: UIFont(name: "Helvetica Neue", size: 17)!, range: NSMakeRange(0,attributedText.length))
+                    attributedText.addAttribute(NSFontAttributeName, value: UIFont(name: "Helvetica Neue", size: 20)!, range: NSMakeRange(0,attributedText.length))
                     HUD.hide()
                     self.textView.attributedText = attributedText
                 } catch let e as NSError {
@@ -36,6 +37,19 @@ class InfosVC: UIViewController {
                 }
             }
         })
+        }
+        else{
+           HUD.hide()
+            let alert = UIAlertController.init(title: Constants.Alert.Title, message: Constants.Alert.Message, preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction.init(title: "OK", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction) in
+                self.dismiss(animated:true, completion: nil)
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+        let upperBoarder = CALayer()
+        upperBoarder.backgroundColor = UIColor.black.cgColor
+        upperBoarder.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 2.0)
+        self.textView.layer.addSublayer(upperBoarder)
         // Do any additional setup after loading the view.
     }
 

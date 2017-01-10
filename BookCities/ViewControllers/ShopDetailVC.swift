@@ -25,7 +25,7 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     @IBOutlet weak var categoriesLabel: UILabel!
     @IBOutlet weak var addressLable: UILabel!
     @IBOutlet weak var address2Lable: UILabel!
-    @IBOutlet weak var descriptionTV: UITextView!
+//    @IBOutlet weak var descriptionTV: UITextView!
     @IBOutlet weak var categoryLable: UILabel!
     @IBOutlet weak var contentOfScrollView: UIView!
     @IBOutlet weak var websiteLinkBtn: UIButton!
@@ -33,6 +33,9 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     @IBOutlet weak var hoursStackView: UIStackView!
     @IBOutlet weak var leftStackView: UIStackView!
     @IBOutlet weak var rightStackView: UIStackView!
+    @IBOutlet weak var descriptionLable: UILabel!
+    @IBOutlet weak var heightOfContent: NSLayoutConstraint!
+    
     
     
     // add lable for daywise time.
@@ -77,7 +80,7 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.descriptionTV.setContentOffset(CGPoint.zero, animated: false)
+//        self.descriptionLable.setContentOffset(CGPoint.zero, animated: false)
         if getImageUrlArray().count == 0{
             
         }
@@ -95,8 +98,9 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         if let htmlData = htmlText?.data(using: String.Encoding.unicode) {
             do {
                 let attributedText = try NSMutableAttributedString(data: htmlData, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
-                attributedText.addAttribute(NSFontAttributeName, value: UIFont(name: "Helvetica Neue", size: 17)!, range: NSMakeRange(0,attributedText.length))
-                self.descriptionTV.attributedText = attributedText
+                attributedText.addAttribute(NSFontAttributeName, value: UIFont(name: "Helvetica Neue", size: 19)!, range: NSMakeRange(0,attributedText.length))
+                self.descriptionLable.attributedText = attributedText
+                
             } catch let e as NSError {
                 print("Couldn't translate \(htmlText): \(e.localizedDescription) ")
             }
@@ -114,7 +118,25 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
             self.rightStackView.removeFromSuperview()
             self.isFull = false
         })
+       
+        self.shareBtn.addLeftBorder(width: 1.0)
+        self.shareBtn.addRightBorder(width: 1.0)
+        self.shareBtn.addUpperBorder(width: 2.0)
+        self.shareBtn.addLowerBorder(width: 2.0)
+        self.showOnMapBtn.addLeftBorder(width: 2.0)
+        self.showOnMapBtn.addRightBorder(width: 2.0)
+        self.showOnMapBtn.addUpperBorder(width: 2.0)
+        self.showOnMapBtn.addLowerBorder(width: 2.0)
+        self.favorateBtn.addLeftBorder(width: 2.0)
+        self.favorateBtn.addRightBorder(width: 2.0)
+        self.favorateBtn.addUpperBorder(width: 2.0)
+        self.favorateBtn.addLowerBorder(width: 2.0)
         
+        let upperBoarder = CALayer()
+        upperBoarder.backgroundColor = UIColor.black.cgColor
+        upperBoarder.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 1.0)
+        self.scrollView.layer.addSublayer(upperBoarder)
+
         addBtnOnStackV()
     }
     func configurePageControl() {
@@ -144,7 +166,7 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
             frame.size.width = self.view.frame.size.width
             self.scrollView.isPagingEnabled = true
             let imageV = UIImageView(frame: frame)
-            imageV.contentMode = .scaleAspectFill
+            imageV.contentMode = .redraw
             let url = URL(string:imageUrls[index])!
             imageV.af_setImage(withURL: url, placeholderImage: UIImage(named: "placeholder"), filter: nil, imageTransition: .crossDissolve(0.2), runImageTransitionIfCached: true, completion: nil)
             self.scrollView.addSubview(imageV)
@@ -188,13 +210,13 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
                 (response,error)in
                 let city = JSONState.stateFromResults(response?["cities"] as! [[String : AnyObject]])
                 self.store?.cityName = city[0].name
-                let header = (self.store?.name)!
+                let storeName = (self.store?.name)!
                 let cityName = (self.store?.cityName)!
                 let link = (self.store?.website)!
                 // set up activity view controller
-                let textToShare = [header+comma+" "+cityName ,link] as [Any]
+                let textToShare = [storeName+": "+link] as [Any]
                 let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
-                activityViewController.setValue(header, forKey: "subject")
+                activityViewController.setValue(storeName+comma+" "+cityName, forKey: "subject")
                 activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
                 
                 // exclude some activity types from the list (optional)
@@ -205,13 +227,13 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
             })
         }
         else{
-            let header = (self.store?.name)!
+            let storeName = (self.store?.name)!
             let cityName = (self.store?.cityName)!
             let link = (self.store?.website)!
             // set up activity view controller
-            let textToShare = [header+comma+" "+cityName ,link] as [Any]
+            let textToShare = [storeName+": "+link] as [Any]
             let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
-            activityViewController.setValue(header, forKey: "subject")
+            activityViewController.setValue(storeName+comma+" "+cityName, forKey: "subject")
             activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
             
             // exclude some activity types from the list (optional)
@@ -385,11 +407,11 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     {
         var no = number.trimmingCharacters(in: .whitespaces)
         
-        if no.contains("(")
-        {
-            no = no.replacingOccurrences(of: "(", with: "")
-            
-        }
+//        if no.contains("(")
+//        {
+//            no = no.replacingOccurrences(of: "(", with: "")
+//            
+//        }
         
         if no.contains(" ")
         {
@@ -397,19 +419,19 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
             
         }
         
-        if no.contains(")")
-        {
-            no = no.replacingOccurrences(of: ")", with: "")
-        }
+//        if no.contains(")")
+//        {
+//            no = no.replacingOccurrences(of: ")", with: "")
+//        }
         
-        if no.contains("+") {
-            no = no.replacingOccurrences(of: "+", with: "")
-        }
+//        if no.contains("+") {
+//            no = no.replacingOccurrences(of: "+", with: "")
+//        }
         
-        if no.contains("-")
-        {
-            no = no.replacingOccurrences(of: "-", with: "")
-        }
+//        if no.contains("-")
+//        {
+//            no = no.replacingOccurrences(of: "-", with: "")
+//        }
         
         return no
     }
@@ -449,9 +471,9 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         }
         let timeInWordlable = UILabel()
         timeInWordlable.text = textforTime
-        timeInWordlable.font = UIFont.boldSystemFont(ofSize: 17)
+        timeInWordlable.font = UIFont.boldSystemFont(ofSize: 19)
         timeInWordlable.textColor = UIColor.darkGray
-        timeInNumber.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+        timeInNumber.font = UIFont.systemFont(ofSize: 19)
         
         let arrowButton = UIButton(type: .roundedRect)
         arrowButton.setImage(UIImage(named: "downArrow")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal),for: .normal)
@@ -555,12 +577,12 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         let timeInWordlable = UILabel()
         timeInWordlable.text = day
         timeInWordlable.textAlignment = .left
-        timeInWordlable.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+        timeInWordlable.font = UIFont.systemFont(ofSize: 19)
         
         let timeInNumber = UILabel()
         timeInNumber.text = time
         timeInNumber.textAlignment = .left
-        timeInNumber.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+        timeInNumber.font = UIFont.systemFont(ofSize: 19)
         
         stack.addArrangedSubview(timeInWordlable)
         stack.addArrangedSubview(timeInNumber)

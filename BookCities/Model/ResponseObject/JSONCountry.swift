@@ -12,12 +12,14 @@ class JSONCountry: NSObject {
     var id:String!
     var name:String!
     var sortname:String!
+    var country_code:String!
     
     // construct a JSONCountry from a dictionary
     init(dictionary: [String:AnyObject]) {
         id = dictionary[Constants.JSONCountryResponseKey.Id] as! String
         name = dictionary[Constants.JSONCountryResponseKey.Name] as? String
         sortname = dictionary[Constants.JSONCountryResponseKey.SortName] as! String
+        country_code = dictionary[Constants.JSONCountryResponseKey.Country_code] as! String
     }
     
     static func countryFromResults(_ results: [[String:AnyObject]]) -> [JSONCountry] {
@@ -29,7 +31,9 @@ class JSONCountry: NSObject {
         }
         return countries
     }
-    
+    static func countryFromResult(_ result:[String:AnyObject]) -> JSONCountry{
+        return JSONCountry(dictionary: result)
+    }
     static func countryFromCoreData(_ results: [Country])->[JSONCountry] {
         var countries = [JSONCountry]()
         // iterate through array of dictionaries, each Movie is a dictionary

@@ -4,7 +4,7 @@
 //
 //  Created by Sushobhit_BuiltByBlank on 11/8/16.
 //  Copyright © 2016 Built by Blank India Pvt. Ltd. All rights reserved.
-//
+// http://54.191.201.248/bookmap/app/api/countries/<country-id>
 
 import UIKit
 
@@ -82,11 +82,14 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
         if cities != nil {
             let twoDArray = getTwoDArray(cities: self.cities!, stores: stores!)
             cell.titleLable?.text = twoDArray[indexPath.section][indexPath.row].name
+            if twoDArray.last?.last == twoDArray[indexPath.section][indexPath.row]{
+                cell.addLowerBorder(width:2.0)
+            }
 //            if CoreDataManager.sharedInstance().haveStore((stores?[indexPath.row].id)!){
 //                cell.favBookStoreImageV.image = UIImage.init(named: Constants.image.SelectedTriagle)
 //            }
-            cell.bookstoreTypeImageV?.image = UIImage.init(named: getStoreTypeImage(indexPath.row))
-            return cell
+            cell.bookstoreTypeImageV?.image = UIImage.init(named: getStoreTypeImage(indexPath.section,row: indexPath.row))
+           
 
         }
         else{
@@ -94,9 +97,15 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
             if CoreDataManager.sharedInstance().haveStore((stores?[indexPath.row].id)!){
                 cell.favBookStoreImageV.image = UIImage.init(named: Constants.image.SelectedTriagle)
             }
+            else{
+                cell.favBookStoreImageV.image = UIImage()
+            }
+            if stores?.last == stores?[indexPath.row]{
+                cell.addLowerBorder(width:2.0)
+            }
             cell.bookstoreTypeImageV?.image = UIImage.init(named: getStoreTypeImage(indexPath.row))
-            return cell
         }
+         return cell
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -140,15 +149,13 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
             let twoDArray = getTwoDArray(cities: self.cities!, stores: stores!)
             next.tit = twoDArray[indexPath.section][indexPath.row].name
             next.store = twoDArray[indexPath.section][indexPath.row]
-            next.delegate = self
-            next.indexPath = indexPath
         }
         else{
             next.tit = stores?[indexPath.row].name
             next.store = stores?[indexPath.row]
-            next.delegate = self
-            next.indexPath = indexPath
         }
+        next.delegate = self
+        next.indexPath = indexPath
         self.navigationController?.pushViewController(next, animated: true)
     }
     
@@ -194,6 +201,23 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
         self.usedBooksBtn.isSelected = true
         self.museumshopsBtn.isSelected = true
         self.filterByCategory.setTitle("Filter by category", for: .normal)
+        self.newBooksBtn.addLeftBorder(width: 2.0)
+        self.newBooksBtn.addUpperBorder(width: 2.0)
+        self.newBooksBtn.addLowerBorder(width: 1.0)
+        self.newBooksBtn.addRightBorder(width: 1.0)
+        self.usedBooksBtn.addUpperBorder(width: 2.0)
+        self.usedBooksBtn.addLowerBorder(width: 1.0)
+        self.usedBooksBtn.addRightBorder(width: 1.0)
+        self.usedBooksBtn.addLeftBorder(width: 1.0)
+        self.museumshopsBtn.addLeftBorder(width: 1.0)
+        self.museumshopsBtn.addRightBorder(width: 2.0)
+        self.museumshopsBtn.addUpperBorder(width: 2.0)
+        self.museumshopsBtn.addLowerBorder(width: 1.0)
+        self.filterByCategory.addBorder(width: 1.0)
+        self.showOnMapBtn.addRightBorder(width: 2.0)
+        self.showOnMapBtn.addLeftBorder(width: 1.0)
+        self.showOnMapBtn.addUpperBorder(width: 1.0)
+        self.showOnMapBtn.addLowerBorder(width: 1.0)
     }
     
     func showFilterView(_ show:Bool) {
@@ -485,10 +509,17 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
     // MARK: -  Updatefavorate Protocol method
     
     func updateTableView(indexpath:IndexPath) {
-//        self.tableView.beginUpdates()
-//        self.tableView.reloadRows(at: [indexpath], with: .none)
-//        self.tableView.endUpdates()
-//        self.tableView.reloadData()
+        if cities != nil {
+            var twoDArray = getTwoDArray(cities: cities!, stores: stores!)
+             let store = twoDArray[indexpath.section][indexpath.row]
+            for (index,value) in stores!.enumerated(){
+                if store.id == value.id
+                {
+                    stores?.remove(at: index)
+                }
+            }
+        }
+        self.tableView.reloadData()
     }
     
     

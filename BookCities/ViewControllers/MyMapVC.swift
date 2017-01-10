@@ -85,6 +85,21 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         newBookBtn.isSelected = true
         usedBookBtn.isSelected = true
         museumShopsBtn.isSelected = true
+        self.newBookBtn.isSelected = true
+        self.usedBookBtn.isSelected = true
+        self.museumShopsBtn.isSelected = true
+        self.newBookBtn.addLeftBorder(width: 2.0)
+        self.newBookBtn.addUpperBorder(width: 2.0)
+        self.newBookBtn.addLowerBorder(width: 2.0)
+        self.newBookBtn.addRightBorder(width: 2.0)
+        self.usedBookBtn.addUpperBorder(width: 2.0)
+        self.usedBookBtn.addLowerBorder(width: 2.0)
+        self.usedBookBtn.addRightBorder(width: 1.0)
+        self.usedBookBtn.addLeftBorder(width: 1.0)
+        self.museumShopsBtn.addLeftBorder(width: 2.0)
+        self.museumShopsBtn.addRightBorder(width: 2.0)
+        self.museumShopsBtn.addUpperBorder(width: 2.0)
+        self.museumShopsBtn.addLowerBorder(width: 2.0)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -218,44 +233,89 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
             if (self.navigationController?.viewControllers.count) == 1 && currentLocation == nil {
                 HUD.show(.progress)
                 currentLocation = userLocation
-                self.mapView.setCenter(userLocation.coordinate, animated: true)
-                let region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate,2000, 2000)
-                mapView.setRegion(mapView.regionThatFits(region), animated: true)
-                geocoder.reverseGeocodeLocation(userLocation.location!, completionHandler:{(placemarks, error) in
-                    if placemarks != nil && (placemarks?.count)! > 0
-                    {
-                        self.placemark = (placemarks?[0])!
-                        print(self.placemark.locality ?? "locality")
-                        print(self.placemark.administrativeArea ?? "administrativeArea")
-                        print(self.placemark.country ?? "country")
-                        let address = ["country_name":self.placemark.country,
-                                       "state_name":self.placemark.administrativeArea,
-                                       "city_name":self.placemark.locality]
-                        
-                        if self.placemark.locality != nil
-                        {
-                            BookCitiesClient.sharedInstance().getStores(address as [String : AnyObject], { (response, error) in
-                                if error == nil{
-                                    self.stores = response
-                                    self.totalStores = self.stores
-                                    self.addAnnotationToMap()
-                                    self.storesWithDistance()
-                                    if(self.mapAnnotations.count>1){
-                                        mapView.showAnnotations(self.mapAnnotations, animated: true)
-                                    }
-                                    HUD.hide()
+                
+//                let region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate,160934, 160934)
+//                mapView.setRegion(mapView.regionThatFits(region), animated: true)
+                if Reachable.isConnectedToNetwork(){
+                    BookCitiesClient.sharedInstance().getStores({ (response, error) in
+                        if error == nil{
+                            self.stores = response
+                            self.totalStores = self.stores
+                            self.addAnnotationToMap()
+                            var distanceArray = self.storesWithDistance()
+                            var smallest = distanceArray[0]
+                            var indx = 0;
+                            for (index,distance) in distanceArray.enumerated() {
+                                if smallest > distance
+                                {
+                                    smallest = distance
+                                    indx = index
                                 }
-                                
-                            })
+                            }
+                            var region = MKCoordinateRegion()
+                            if smallest < 80467.0{
+                                self.mapView.setCenter(userLocation.coordinate, animated: true)
+                                region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate,80467.0, 80467.0)
+                                mapView.setRegion(mapView.regionThatFits(region), animated: true)
+                            }
+                            else{
+                                let annotation = self.mapAnnotations[indx]
+                                let array = [annotation,mapView.userLocation]
+                                mapView.showAnnotations(array, animated: true)
+                            }
+                            
+                            //                        if(self.mapAnnotations.count>1){
+                            //                            //                                        mapView.showAnnotations(self.mapAnnotations, animated: true)
+                            //                        }
+                            HUD.hide()
                         }
-                    }
-                    else
-                    {
-                        HUD.hide()
-                        // Handle the nil case if necessary.
-                    }
+                        
+                    })
+                }
+                else{
+                    HUD.hide()
+                    let alert = UIAlertController.init(title: Constants.Alert.Title, message: Constants.Alert.Message, preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction.init(title: "OK", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction) in
+                        self.dismiss(animated:true, completion: nil)
+                    }))
+                    self.present(alert, animated: true, completion: nil)
                     
-                })
+                }
+//                geocoder.reverseGeocodeLocation(userLocation.location!, completionHandler:{(placemarks, error) in
+//                    if placemarks != nil && (placemarks?.count)! > 0
+//                    {
+//                        self.placemark = (placemarks?[0])!
+//                        print(self.placemark.locality ?? "locality")
+//                        print(self.placemark.administrativeArea ?? "administrativeArea")
+//                        print(self.placemark.country ?? "country")
+////                        let address = ["country_name":self.placemark.country,
+////                                       "state_name":self.placemark.administrativeArea,
+////                                       "city_name":self.placemark.locality]
+//                        
+//                        if self.placemark.locality != nil
+//                        {
+////                            BookCitiesClient.sharedInstance().getStores(address as [String : AnyObject], { (response, error) in
+////                                if error == nil{
+////                                    self.stores = response
+////                                    self.totalStores = self.stores
+////                                    self.addAnnotationToMap()
+////                                    self.storesWithDistance()
+////                                    if(self.mapAnnotations.count>1){
+////                                        mapView.showAnnotations(self.mapAnnotations, animated: true)
+////                                    }
+////                                    HUD.hide()
+////                                }
+////                                
+////                            })
+//                        }
+//                    }
+//                    else
+//                    {
+//                        HUD.hide()
+//                        // Handle the nil case if necessary.
+//                    }
+//                    
+//                })
 
             }
             if (self.navigationController?.viewControllers.count)! > 2 {
@@ -419,6 +479,7 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
                     storeAnnotation.store = store
                     storeAnnotation.tag = Int(store.id!)
                     storeAnnotation.imageName = getStoreTypeImage(i)
+//                    if(store.longitude == )
                     storeAnnotation.coordinate = CLLocationCoordinate2DMake(Double(store.latitude!)!, Double(store.longitude!)!)
                     self.mapAnnotations.append(storeAnnotation)
                     i += 1
@@ -429,19 +490,21 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         self.mapView.addAnnotations(self.mapAnnotations)
     }
     
-    func storesWithDistance(){
-//        var distanceArray = Array<Any>()
-//        for store in self.stores! {
-//            let storeLocation = CLLocation(latitude: Double(store.latitude!)!, longitude: Double(store.longitude!)!)
-//            let distance = currentLocation?.location?.distance(from: storeLocation)
-//            let miles = distance!/0.000621371
-//            distanceArray.append(miles)
-//        }
-        
-//        let tableView = UITableView(CGRect(x: self.view.bounds.height, y: 0, width: self.view.bounds.height, height: self.view.bounds.width))
-        
+    func storesWithDistance() -> Array<Double>{
+        var distanceArray = Array<Double>()
+        for store in self.stores! {
+            let storeLocation = CLLocation(latitude: Double(store.latitude!)!, longitude: Double(store.longitude!)!)
+            let distance = currentLocation?.location?.distance(from: storeLocation)
+            let miles = distance!
+            distanceArray.append(miles)
+        }
+        print(distanceArray)
+        return distanceArray
     }
-    /*
+    
+    
+    
+        /*
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation

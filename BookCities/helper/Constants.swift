@@ -97,6 +97,7 @@ class Constants: NSObject {
         static let Id = "id"
         static let Name = "name"
         static let SortName = "sortname"
+        static let Country_code = "country_code"
     }
     
     struct JSONStateResponseKey {
@@ -119,7 +120,7 @@ class Constants: NSObject {
         static let State = "State"
     }
     struct Font {
-        static let Size = 18
+        static let Size = 22
         static let TypeHelvetica = "Helvetica"
     }
     struct image {
@@ -149,5 +150,9 @@ class Constants: NSObject {
     }
     struct CDStoreKey {
         static let CityName = "cityName"
+    }
+    struct BlackLines {
+        static let height = 1.0
+        static let width = 1.0
     }
 }

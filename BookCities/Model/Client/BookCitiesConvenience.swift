@@ -51,6 +51,17 @@ extension BookCitiesClient
         })
     }
     
+    func getCountry(_ countryId:String,_ completionHandlerForCountry: @escaping (_ response : Array<JSONCountry>? ,_ error : Error?) -> Void) -> Void {
+        let mutableMethod: String = Constants.Methods.Countries+countryId
+        getMethodCall(mutableMethod, parameters: [String:AnyObject](), completionHandlerForGET: {
+            (response,error) in
+            let res = response as! NSDictionary
+            let array = res.object(forKey:"countries")! as! NSArray
+            let response = JSONCountry.countryFromResults(array as! [[String : AnyObject]])
+            completionHandlerForCountry(response as Array<JSONCountry>?,error)
+        })
+    }
+    
     func getState(_ completionHandlerForState: @escaping (_ response : Array<JSONState>? ,_ error : Error?) -> Void) -> Void {
         let mutableMethod: String = Constants.Methods.States
         getMethod(mutableMethod, parameters: [String:AnyObject](), completionHandlerForGET: {

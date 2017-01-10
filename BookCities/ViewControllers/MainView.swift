@@ -51,6 +51,9 @@ class MainView: UIViewController {
     func setViews()
     {
         self.saveOfflineDataBtn.isHidden = true
+        self.chooseACityBtn.addBorder(width: 1.0)
+        self.nearMeBtn.addBorder(width: 1.0)
+        self.myListBtn.addBorder(width: 1.0)
     }
     
     // MARK: - Button Actions
@@ -71,18 +74,50 @@ class MainView: UIViewController {
         let next = self.storyboard?.instantiateViewController(withIdentifier:"MyListVC") as! MyListVC
         next.tit = "My List"
         if CoreDataManager.sharedInstance().haveStore(){
-            let citiWiseStore = JSONStore.storeFromCoreData(CoreDataManager.sharedInstance().getStores() as! [Store])
-            var citiArray = Array<String>()
-            for store in citiWiseStore {
-                let city = store.city
-                if !citiArray.contains(city!){
-                    citiArray.append(city!)
-                }
+            var citiWiseStore = JSONStore.storeFromCoreData(CoreDataManager.sharedInstance().getStores() as! [Store])
+            if Reachable.isConnectedToNetwork(){
+                HUD.show(.progress)
+                BookCitiesClient.sharedInstance().getStores({ (response, error) in
+                    if error == nil{
+                        for (index,value) in citiWiseStore.enumerated(){
+                            if !self.containStore(value, StortList: response!){
+                                citiWiseStore.remove(at: index)
+                                CoreDataManager.sharedInstance().deleteStore(storeID: value.id!)
+                            }
+                        }
+                        var citiArray = Array<String>()
+                        for store in citiWiseStore {
+                            let city = store.city
+                            if !citiArray.contains(city!){
+                                citiArray.append(city!)
+                            }
+                        }
+                        next.cities = citiArray
+                        next.stores = citiWiseStore
+                        HUD.hide()
+                        let nv:UINavigationController = UINavigationController(rootViewController: next)
+                        self.present(nv, animated: true, completion: nil)
+
+                    }
+                    else{
+                        HUD.hide()
+                    }
+                })
             }
-            next.cities = citiArray
-            next.stores = citiWiseStore
-            let nv:UINavigationController = UINavigationController(rootViewController: next)
-            self.present(nv, animated: true, completion: nil)
+            else{
+                var citiArray = Array<String>()
+                for store in citiWiseStore {
+                    let city = store.city
+                    if !citiArray.contains(city!){
+                        citiArray.append(city!)
+                    }
+                }
+                next.cities = citiArray
+                next.stores = citiWiseStore
+                let nv:UINavigationController = UINavigationController(rootViewController: next)
+                self.present(nv, animated: true, completion: nil)
+            }
+
         }
         else
         {
@@ -237,5 +272,14 @@ class MainView: UIViewController {
         // Pass the selected object to the new view controller.
     }
     
+    // Check store contain in list
+    func containStore(_ store:JSONStore, StortList:[JSONStore]) -> Bool{
+        for stor in StortList{
+            if store.id == stor.id{
+                return true
+            }
+        }
+        return false
+    }
 
 }
