@@ -143,7 +143,7 @@ class Constants: NSObject {
         static let RedGreenCircle = "redGreenCircle"
         static let RedGreenPin = "redGreenPin"
         static let RedPin = "redPin"
-        static let SelectedTriagle = "selectedTriagle"
+        static let SelectedTriagle = "selectedTriangle"
         static let Share = "share"
         static let Triangle = "triangle"
         static let ImagePath = "http://54.191.201.248/bookmap/uploads/store_images/"

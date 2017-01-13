@@ -26,6 +26,7 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     @IBOutlet weak var museumShopsBtn: BorderButton!
     @IBOutlet weak var resetFilterBtn: UIButton!
     @IBOutlet weak var heightOfResetC: NSLayoutConstraint!
+    @IBOutlet weak var blackBoarderV: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,7 +78,7 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
             newBookBtn.isHidden = true
             usedBookBtn.isHidden = true
             museumShopsBtn.isHidden = true
-
+            blackBoarderV.isHidden = true
         }
     }
     
@@ -88,18 +89,36 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         self.newBookBtn.isSelected = true
         self.usedBookBtn.isSelected = true
         self.museumShopsBtn.isSelected = true
-        self.newBookBtn.addLeftBorder(width: 2.0)
-        self.newBookBtn.addUpperBorder(width: 2.0)
-        self.newBookBtn.addLowerBorder(width: 2.0)
-        self.newBookBtn.addRightBorder(width: 2.0)
-        self.usedBookBtn.addUpperBorder(width: 2.0)
-        self.usedBookBtn.addLowerBorder(width: 2.0)
-        self.usedBookBtn.addRightBorder(width: 1.0)
-        self.usedBookBtn.addLeftBorder(width: 1.0)
-        self.museumShopsBtn.addLeftBorder(width: 2.0)
-        self.museumShopsBtn.addRightBorder(width: 2.0)
-        self.museumShopsBtn.addUpperBorder(width: 2.0)
-        self.museumShopsBtn.addLowerBorder(width: 2.0)
+//        self.newBookBtn.addLeftBorder(width: 2.0)
+//        self.newBookBtn.addUpperBorder(width: 2.0)
+//        self.newBookBtn.addLowerBorder(width: 2.0)
+//        self.newBookBtn.addRightBorder(width: 2.0)
+//        self.usedBookBtn.addUpperBorder(width: 2.0)
+//        self.usedBookBtn.addLowerBorder(width: 2.0)
+//        self.usedBookBtn.addRightBorder(width: 1.0)
+//        self.usedBookBtn.addLeftBorder(width: 1.0)
+//        self.museumShopsBtn.addLeftBorder(width: 2.0)
+//        self.museumShopsBtn.addRightBorder(width: 2.0)
+//        self.museumShopsBtn.addUpperBorder(width: 2.0)
+//        self.museumShopsBtn.addLowerBorder(width: 2.0)
+        self.newBookBtn.addBorder(width: 1)
+        self.usedBookBtn.addBorder(width: 1)
+        self.museumShopsBtn.addBorder(width: 1)
+        
+//        let upperBoarder = CALayer()
+//        upperBoarder.backgroundColor = UIColor.black.cgColor
+//        upperBoarder.frame = CGRect(x: 0, y: (self.navigationController?.navigationBar.bounds.height)!, width: self.view.frame.width, height: 2.0)
+//        self.navigationController?.navigationBar.layer.addSublayer(upperBoarder)
+        navigationController!.navigationBar.isTranslucent = false
+        
+        // The navigation bar's shadowImage is set to a transparent image.  In
+        // addition to providing a custom background image, this removes
+        // the grey hairline at the bottom of the navigation bar.  The
+        // ExtendedNavBarView will draw its own hairline.
+        navigationController!.navigationBar.shadowImage = #imageLiteral(resourceName: "TransparentPixel")
+        // "Pixel" is a solid white 1x1 image.
+        navigationController!.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "Pixel"), for: .default)
+        navigationItem.prompt = ""
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -253,9 +272,9 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
                                 }
                             }
                             var region = MKCoordinateRegion()
-                            if smallest < 80467.0{
+                            if smallest < 3218.688{
                                 self.mapView.setCenter(userLocation.coordinate, animated: true)
-                                region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate,80467.0, 80467.0)
+                                region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate,3218.688, 3218.688)
                                 mapView.setRegion(mapView.regionThatFits(region), animated: true)
                             }
                             else{
@@ -318,18 +337,23 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 //                })
 
             }
-            if (self.navigationController?.viewControllers.count)! > 2 {
-                if currentLocation == nil && city == nil && !(self.navigationController?.viewControllers[(self.navigationController?.viewControllers.endIndex)!-2] is ShopDetailVC)
-                {
-                    currentLocation = userLocation
-                    self.mapView.setCenter(userLocation.coordinate, animated: true)
-                    if(self.mapAnnotations.count>1){
-                        mapView.showAnnotations(self.mapAnnotations, animated: true)
+            if let nv = (self.navigationController?.viewControllers.count) {
+                if nv > 2 {
+                    if currentLocation == nil && city == nil && !(self.navigationController?.viewControllers[(self.navigationController?.viewControllers.endIndex)!-2] is ShopDetailVC)
+                    {
+                        currentLocation = userLocation
+                        self.mapView.setCenter(userLocation.coordinate, animated: true)
+                        print("----------run--------")
+                        if(self.mapAnnotations.count>1){
+                            mapView.showAnnotations(self.mapAnnotations, animated: true)
+                        }
+                        
+                        //                    let region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate,2000, 2000)
+                        //                    mapView.setRegion(mapView.regionThatFits(region), animated: true)
                     }
-//                    let region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate,2000, 2000)
-//                    mapView.setRegion(mapView.regionThatFits(region), animated: true)
                 }
             }
+
         }
         
     }
@@ -355,7 +379,7 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
                 // provide the annotation view's image
                 returnedAnnotationView!.image = UIImage(named:(annotation as! BookStoreAnnotation).imageName!)
                 
-                 if (self.navigationController?.viewControllers.count)! > 2 && !(self.navigationController?.viewControllers[(self.navigationController?.viewControllers.endIndex)!-2] is ShopDetailVC) {
+                 if (self.navigationController?.viewControllers.count)! > 1 && !(self.navigationController?.viewControllers[(self.navigationController?.viewControllers.endIndex)!-2] is ShopDetailVC) {
                     let rightButton = UIButton(type: .detailDisclosure)
                     rightButton.tintColor = UIColor.black
                     rightButton.tag = (annotation as! BookStoreAnnotation).tag!
@@ -363,6 +387,14 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
                     returnedAnnotationView!.rightCalloutAccessoryView = rightButton
                 }
                 if (self.navigationController?.viewControllers.count) == 1
+                {
+                    let rightButton = UIButton(type: .detailDisclosure)
+                    rightButton.tintColor = UIColor.black
+                    rightButton.tag = (annotation as! BookStoreAnnotation).tag!
+                    rightButton.addTarget(self, action: #selector(MyMapVC.buttonAction(_:)), for: .touchUpInside)
+                    returnedAnnotationView!.rightCalloutAccessoryView = rightButton
+                }
+                if (self.navigationController?.viewControllers.first is MyListVC)
                 {
                     let rightButton = UIButton(type: .detailDisclosure)
                     rightButton.tintColor = UIColor.black

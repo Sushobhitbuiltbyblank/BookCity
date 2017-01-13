@@ -97,7 +97,6 @@ class MainView: UIViewController {
                         HUD.hide()
                         let nv:UINavigationController = UINavigationController(rootViewController: next)
                         self.present(nv, animated: true, completion: nil)
-
                     }
                     else{
                         HUD.hide()

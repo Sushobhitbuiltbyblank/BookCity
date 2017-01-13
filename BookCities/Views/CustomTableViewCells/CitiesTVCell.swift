@@ -14,15 +14,22 @@ class CitiesTVCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.addBorder()
         // Initialization code
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
         // Configure the view for the selected state
     }
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        if highlighted {
+            self.backgroundColor = UIColor.init(colorLiteralRed: 217/255, green: 217/255, blue: 217/255, alpha: 1)
+        }
+        else{
+            self.backgroundColor = UIColor.white
+        }
+    }
+    
     func addBorder()
     {
         self.layer.borderColor = UIColor.black.cgColor

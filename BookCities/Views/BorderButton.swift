@@ -32,7 +32,7 @@ class BorderButton: UIButton {
     {
         let upperBoarder = CALayer()
         upperBoarder.backgroundColor = UIColor.black.cgColor
-        upperBoarder.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: width)
+        upperBoarder.frame = CGRect(x: 0, y: 0, width: self.layer.preferredFrameSize().width, height: width)
         self.layer.addSublayer(upperBoarder)
     }
     
@@ -40,7 +40,7 @@ class BorderButton: UIButton {
     {
         let upperBoarder = CALayer()
         upperBoarder.backgroundColor = UIColor.black.cgColor
-        upperBoarder.frame = CGRect(x: 0, y: self.frame.height-1, width: self.frame.width, height: width)
+        upperBoarder.frame = CGRect(x: 0, y: self.bounds.height-1, width: self.layer.preferredFrameSize().width, height: width)
         self.layer.addSublayer(upperBoarder)
     }
     
@@ -48,7 +48,7 @@ class BorderButton: UIButton {
     {
         let upperBoarder = CALayer()
         upperBoarder.backgroundColor = UIColor.black.cgColor
-        upperBoarder.frame = CGRect(x: 0, y: 0, width: width, height: self.frame.height)
+        upperBoarder.frame = CGRect(x: 0, y: 0, width: width, height: self.bounds.height)
         self.layer.addSublayer(upperBoarder)
     }
     
@@ -56,7 +56,7 @@ class BorderButton: UIButton {
     {
         let upperBoarder = CALayer()
         upperBoarder.backgroundColor = UIColor.black.cgColor
-        upperBoarder.frame = CGRect(x: self.frame.width-1, y: 0, width: width, height: self.frame.height)
+        upperBoarder.frame = CGRect(x: self.bounds.width-1, y: 0, width: width, height: self.bounds.height)
         self.layer.addSublayer(upperBoarder)
     }
     

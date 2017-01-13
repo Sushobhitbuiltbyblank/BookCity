@@ -22,7 +22,9 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let appdelegate = UIApplication.shared.delegate as! AppDelegate
     let searchController = UISearchController(searchResultsController: nil)
     var filteredCities = [JSONCity]()
+    
     override func viewWillAppear(_ animated: Bool) {
+       
     }
     
     override func viewDidLoad() {
@@ -81,21 +83,33 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
-        tableView.tableHeaderView = searchController.searchBar
-        let upperBoarder = CALayer()
-        upperBoarder.backgroundColor = UIColor.black.cgColor
-        upperBoarder.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 2.0)
-        self.tableView.layer.addSublayer(upperBoarder)
+        
+//        let upperBoarder = CALayer()
+//        upperBoarder.backgroundColor = UIColor.black.cgColor
+//        upperBoarder.frame = CGRect(x: 0, y: (self.navigationController?.navigationBar.bounds.height)!, width: self.view.frame.width, height: 2.0)
+//        self.navigationController?.navigationBar.layer.addSublayer(upperBoarder)
         let lowerBoader = CALayer()
         lowerBoader.backgroundColor = UIColor.black.cgColor
         lowerBoader.frame = CGRect(x: 0, y: searchController.searchBar.bounds.height-1, width: self.view.frame.width, height: 2.0)
         self.searchController.searchBar.layer.addSublayer(lowerBoader)
+        self.searchController.searchBar.backgroundImage = UIImage()
+        navigationController!.navigationBar.isTranslucent = false
+        
+        // The navigation bar's shadowImage is set to a transparent image.  In
+        // addition to providing a custom background image, this removes
+        // the grey hairline at the bottom of the navigation bar.  The
+        // ExtendedNavBarView will draw its own hairline.
+        navigationController!.navigationBar.shadowImage = #imageLiteral(resourceName: "TransparentPixel")
+        // "Pixel" is a solid white 1x1 image.
+        navigationController!.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "Pixel"), for: .default)
+        navigationItem.prompt = ""
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
     //MARK: - TableView Data Source function
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -117,10 +131,11 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         } else {
             cell.titleLable?.text = cities[indexPath.row].name
         }
-        let totalRow = tableView.numberOfRows(inSection: indexPath.section) //first get total rows in that section by current indexPath.
-        if(indexPath.row == totalRow-1){
-            cell.addLowerBorder()
-        }
+//        let totalRow = tableView.numberOfRows(inSection: indexPath.section) //first get total rows in that section by current indexPath.
+//        if(indexPath.row == totalRow-1){
+//            cell.addLowerBorder()
+//        }
+        cell.selectionStyle = .none
         return cell;
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -158,6 +173,7 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - Table View Delegate Function
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         var currentCity:JSONCity!
         if searchController.isActive && searchController.searchBar.text != "" {
             currentCity = filteredCities[indexPath.row]
@@ -210,6 +226,15 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         tableView.reloadData()
     }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if tableView.contentOffset.y < -100{
+            self.tableView.tableHeaderView = searchController.searchBar
+        }
+
+    }
+    
+    
     
        /*
      // MARK: - Navigation

@@ -19,25 +19,36 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jGk-HA-0OP">
-                        <rect key="frame" x="277" y="0.0" width="43" height="59.5"/>
+                        <rect key="frame" x="279" y="18" width="24" height="24"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="43" id="wJs-Dn-Gfe"/>
+                            <constraint firstAttribute="height" constant="24" id="8AZ-Ak-TLd"/>
+                            <constraint firstAttribute="width" constant="24" id="q39-pm-YM2"/>
                         </constraints>
                         <state key="normal" image="share"/>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xeq-dc-hRK">
-                        <rect key="frame" x="134" y="17" width="54" height="26.5"/>
+                        <rect key="frame" x="133" y="17" width="54" height="26.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RbV-e8-aAN">
+                        <rect key="frame" x="0.0" y="57.5" width="320" height="2"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="2" id="95n-En-liS"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="jGk-HA-0OP" secondAttribute="trailing" id="Jde-cd-e41"/>
-                    <constraint firstItem="jGk-HA-0OP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="JiJ-Ot-4RD"/>
+                    <constraint firstItem="jGk-HA-0OP" firstAttribute="leading" secondItem="xeq-dc-hRK" secondAttribute="trailing" priority="250" id="2Vd-P4-caN"/>
+                    <constraint firstAttribute="bottom" secondItem="RbV-e8-aAN" secondAttribute="bottom" id="3ID-Nh-7JA"/>
+                    <constraint firstAttribute="trailing" secondItem="jGk-HA-0OP" secondAttribute="trailing" constant="17" id="Jde-cd-e41"/>
                     <constraint firstItem="xeq-dc-hRK" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ORg-p9-PUM"/>
-                    <constraint firstAttribute="bottom" secondItem="jGk-HA-0OP" secondAttribute="bottom" id="VLB-Kn-2lt"/>
+                    <constraint firstAttribute="trailing" secondItem="RbV-e8-aAN" secondAttribute="trailing" id="OZK-I1-rpI"/>
+                    <constraint firstItem="jGk-HA-0OP" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Sbs-Bv-oLR"/>
+                    <constraint firstItem="RbV-e8-aAN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ZcU-Wc-bsT"/>
                     <constraint firstItem="xeq-dc-hRK" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="jhZ-ZA-Hur"/>
                 </constraints>
             </tableViewCellContentView>
@@ -49,6 +60,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="share" width="25" height="25"/>
+        <image name="share" width="37" height="39"/>
     </resources>
 </document>

@@ -14,7 +14,6 @@ class headerViewCell: UITableViewCell {
     @IBOutlet weak var mainLable: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.addBorder()
         // Initialization code
     }
     

@@ -65,7 +65,12 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         ]
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(goBack))
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage(named: self.getStoreTypeImage())?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: .plain, target: nil, action: nil)
+        let imageView = UIImageView(image: UIImage(named: self.getStoreTypeImage()))
+        imageView.frame = CGRect.init(x: 0, y: 0, width: 24, height: 24) //CGRectMake(0, 0, 24, 24)
+        let barButton = UIBarButtonItem.init(customView: imageView)
+        self.navigationItem.rightBarButtonItem = barButton
+        
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage(named: self.getStoreTypeImage())?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: .plain, target: nil, action: nil)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openCloseTime))
         self.hoursStackView.addGestureRecognizer(tapGesture)
@@ -88,11 +93,10 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     
     func setView()
     {
-        let attribute = [NSUnderlineStyleAttributeName:1,
+        let attribute = [NSUnderlineStyleAttributeName:2,
                          NSForegroundColorAttributeName:UIColor.black] as [String : Any]
-        let buttonText = NSMutableAttributedString(string: (store?.website)!, attributes: attribute)
+        let buttonText = NSMutableAttributedString(string: self.removeHttp((store?.website)!), attributes: attribute)
         self.websiteLinkBtn.setAttributedTitle(buttonText, for: UIControlState.normal)
-        self.websiteLinkBtn.titleLabel?.text = store?.website
         self.address2Lable.text = store?.address_2
         let htmlText = store?.descriptions
         if let htmlData = htmlText?.data(using: String.Encoding.unicode) {
@@ -119,24 +123,32 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
             self.isFull = false
         })
        
-        self.shareBtn.addLeftBorder(width: 1.0)
-        self.shareBtn.addRightBorder(width: 1.0)
-        self.shareBtn.addUpperBorder(width: 2.0)
-        self.shareBtn.addLowerBorder(width: 2.0)
-        self.showOnMapBtn.addLeftBorder(width: 2.0)
-        self.showOnMapBtn.addRightBorder(width: 2.0)
-        self.showOnMapBtn.addUpperBorder(width: 2.0)
-        self.showOnMapBtn.addLowerBorder(width: 2.0)
-        self.favorateBtn.addLeftBorder(width: 2.0)
-        self.favorateBtn.addRightBorder(width: 2.0)
-        self.favorateBtn.addUpperBorder(width: 2.0)
-        self.favorateBtn.addLowerBorder(width: 2.0)
+//        self.shareBtn.addLeftBorder(width: 1.0)
+//        self.shareBtn.addRightBorder(width: 1.0)
+//        self.shareBtn.addUpperBorder(width: 2.0)
+//        self.shareBtn.addLowerBorder(width: 2.0)
+//        self.showOnMapBtn.addLeftBorder(width: 2.0)
+//        self.showOnMapBtn.addRightBorder(width: 2.0)
+//        self.showOnMapBtn.addUpperBorder(width: 2.0)
+//        self.showOnMapBtn.addLowerBorder(width: 2.0)
+//        self.favorateBtn.addLeftBorder(width: 2.0)
+//        self.favorateBtn.addRightBorder(width: 2.0)
+//        self.favorateBtn.addUpperBorder(width: 2.0)
+//        self.favorateBtn.addLowerBorder(width: 2.0)
+        self.shareBtn.addBorder(width: 2)
+        self.showOnMapBtn.addBorder(width: 2)
+        self.favorateBtn.addBorder(width: 2)
+        navigationController!.navigationBar.isTranslucent = false
         
-        let upperBoarder = CALayer()
-        upperBoarder.backgroundColor = UIColor.black.cgColor
-        upperBoarder.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 1.0)
-        self.scrollView.layer.addSublayer(upperBoarder)
+        // The navigation bar's shadowImage is set to a transparent image.  In
+        // addition to providing a custom background image, this removes
+        // the grey hairline at the bottom of the navigation bar.  The
+        // ExtendedNavBarView will draw its own hairline.
+        navigationController!.navigationBar.shadowImage = #imageLiteral(resourceName: "TransparentPixel")
+        // "Pixel" is a solid white 1x1 image.
+        navigationController!.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "Pixel"), for: .default)
 
+        navigationItem.prompt = ""
         addBtnOnStackV()
     }
     func configurePageControl() {
@@ -166,7 +178,7 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
             frame.size.width = self.view.frame.size.width
             self.scrollView.isPagingEnabled = true
             let imageV = UIImageView(frame: frame)
-            imageV.contentMode = .redraw
+            imageV.contentMode = .scaleAspectFill
             let url = URL(string:imageUrls[index])!
             imageV.af_setImage(withURL: url, placeholderImage: UIImage(named: "placeholder"), filter: nil, imageTransition: .crossDissolve(0.2), runImageTransitionIfCached: true, completion: nil)
             self.scrollView.addSubview(imageV)
@@ -454,7 +466,7 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         stack.axis = .horizontal
         stack.alignment = .firstBaseline
         stack.distribution = .fillProportionally
-        stack.spacing = 0
+        stack.spacing = 2.0
         var textforTime = ""
         let timeInNumber = UILabel()
         if isOpen() {
@@ -471,8 +483,7 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         }
         let timeInWordlable = UILabel()
         timeInWordlable.text = textforTime
-        timeInWordlable.font = UIFont.boldSystemFont(ofSize: 19)
-        timeInWordlable.textColor = UIColor.darkGray
+        timeInWordlable.font = UIFont.systemFont(ofSize: 19)
         timeInNumber.font = UIFont.systemFont(ofSize: 19)
         
         let arrowButton = UIButton(type: .roundedRect)
@@ -601,5 +612,17 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
             return false
         }
         return true
+    }
+    func removeHttp(_ webLink:String) ->String{
+        var weblink = webLink
+        if webLink.contains("https://")
+        {
+           weblink = webLink.replacingOccurrences(of: "https://", with: "")
+        }
+        if webLink.contains("http://")
+        {
+            weblink = webLink.replacingOccurrences(of: "http://", with: "")
+        }
+        return weblink
     }
 }

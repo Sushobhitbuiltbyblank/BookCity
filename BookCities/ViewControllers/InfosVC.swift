@@ -19,7 +19,7 @@ class InfosVC: UIViewController {
             NSForegroundColorAttributeName: UIColor.black,
             NSFontAttributeName: UIFont(name: Constants.Font.TypeHelvetica, size: CGFloat(Constants.Font.Size))!
         ]
-        self.navigationController?.navigationBar.barTintColor = UIColor(colorLiteralRed: 248/255, green: 8/255, blue: 8/255, alpha: 0.5)
+        self.navigationController?.navigationBar.barTintColor = UIColor(colorLiteralRed: 255/255, green: 0/255, blue: 0/255, alpha: 0.5)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "cross")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: .plain, target: self, action: #selector(closeBtnAction))
         HUD.show(.progress)
         if Reachable.isConnectedToNetwork(){
@@ -46,10 +46,20 @@ class InfosVC: UIViewController {
             }))
             self.present(alert, animated: true, completion: nil)
         }
-        let upperBoarder = CALayer()
-        upperBoarder.backgroundColor = UIColor.black.cgColor
-        upperBoarder.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 2.0)
-        self.textView.layer.addSublayer(upperBoarder)
+//        let upperBoarder = CALayer()
+//        upperBoarder.backgroundColor = UIColor.black.cgColor
+//        upperBoarder.frame = CGRect(x: 0, y: (self.navigationController?.navigationBar.bounds.height)!, width: self.view.frame.width, height: 2.0)
+//        self.navigationController?.navigationBar.layer.addSublayer(upperBoarder)
+        navigationController!.navigationBar.isTranslucent = false
+        
+        // The navigation bar's shadowImage is set to a transparent image.  In
+        // addition to providing a custom background image, this removes
+        // the grey hairline at the bottom of the navigation bar.  The
+        // ExtendedNavBarView will draw its own hairline.
+        navigationController!.navigationBar.shadowImage = #imageLiteral(resourceName: "TransparentPixel")
+        // "Pixel" is a solid white 1x1 image.
+        navigationController!.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "backBtnRed"), for: .default)
+        navigationItem.prompt = ""
         // Do any additional setup after loading the view.
     }
 

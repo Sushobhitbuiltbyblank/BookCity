@@ -24,15 +24,26 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zep-OB-6uV">
+                        <rect key="frame" x="0.0" y="57.5" width="320" height="2"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="2" id="QbM-5i-vQE"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="Zep-OB-6uV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="55c-sJ-8Vx"/>
                     <constraint firstItem="BAX-fx-XIW" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="eya-BW-2te"/>
+                    <constraint firstAttribute="bottom" secondItem="Zep-OB-6uV" secondAttribute="bottom" id="jsU-TB-Lxz"/>
+                    <constraint firstAttribute="trailing" secondItem="Zep-OB-6uV" secondAttribute="trailing" id="y0L-6d-G3Y"/>
                     <constraint firstItem="BAX-fx-XIW" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="zqa-C8-cE0"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="titleLable" destination="BAX-fx-XIW" id="yDT-4X-5Xi"/>
             </connections>
+            <point key="canvasLocation" x="53" y="-40"/>
         </tableViewCell>
     </objects>
 </document>

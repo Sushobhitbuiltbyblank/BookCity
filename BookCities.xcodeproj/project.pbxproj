@@ -14,12 +14,25 @@
 		2B0C398A1DFEC96B00108B1A /* PKHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B0C39891DFEC96B00108B1A /* PKHUD.framework */; };
 		2B2009E61E0922BC00D42672 /* headerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2009E41E0922BC00D42672 /* headerViewCell.swift */; };
 		2B2009E71E0922BC00D42672 /* headerViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B2009E51E0922BC00D42672 /* headerViewCell.xib */; };
+		2B2BBF1E1E261E760098AFF5 /* CustomeNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2BBF1D1E261E760098AFF5 /* CustomeNavBar.swift */; };
+		2B2BBF241E2621D30098AFF5 /* NVViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2BBF231E2621D30098AFF5 /* NVViewController.swift */; };
+		2B2BBF261E2665FF0098AFF5 /* Element 28.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B2BBF251E2665FF0098AFF5 /* Element 28.png */; };
+		2B2BBF281E2666120098AFF5 /* Element 29.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B2BBF271E2666120098AFF5 /* Element 29.png */; };
+		2B2BBF2C1E2666650098AFF5 /* Element 25.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B2BBF2B1E2666650098AFF5 /* Element 25.png */; };
+		2B2BBF2F1E2667010098AFF5 /* Element 28@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B2BBF2D1E2667010098AFF5 /* Element 28@2x.png */; };
+		2B2BBF301E2667010098AFF5 /* Element 28@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B2BBF2E1E2667010098AFF5 /* Element 28@3x.png */; };
+		2B2BBF331E26670E0098AFF5 /* Element 29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B2BBF311E26670E0098AFF5 /* Element 29@2x.png */; };
+		2B2BBF341E26670E0098AFF5 /* Element 29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B2BBF321E26670E0098AFF5 /* Element 29@3x.png */; };
+		2B2BBF371E26671C0098AFF5 /* Element 25@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B2BBF351E26671C0098AFF5 /* Element 25@3x.png */; };
+		2B2BBF381E26671C0098AFF5 /* Element 25@4x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B2BBF361E26671C0098AFF5 /* Element 25@4x.png */; };
+		2B2BBF3A1E2667680098AFF5 /* Element 25@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B2BBF391E2667680098AFF5 /* Element 25@2x.png */; };
+		2B3A69861E2774E000B8EC6E /* ExtendedNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3A69851E2774E000B8EC6E /* ExtendedNavBarView.swift */; };
+		2B418F931E2748B000DE15B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B418F921E2748B000DE15B1 /* Assets.xcassets */; };
 		2B4B90F51DF19802008FE99B /* Reachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4B90F41DF19802008FE99B /* Reachable.swift */; };
 		2B7662E41DEC526300987F40 /* JSONCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7662E31DEC526300987F40 /* JSONCity.swift */; };
 		2B81934F1DE6FD69008879B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81934E1DE6FD69008879B2 /* AppDelegate.swift */; };
 		2B8193541DE6FD69008879B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B8193521DE6FD69008879B2 /* Main.storyboard */; };
 		2B8193571DE6FD69008879B2 /* BookCities.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2B8193551DE6FD69008879B2 /* BookCities.xcdatamodeld */; };
-		2B8193591DE6FD69008879B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B8193581DE6FD69008879B2 /* Assets.xcassets */; };
 		2B81935C1DE6FD69008879B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B81935A1DE6FD69008879B2 /* LaunchScreen.storyboard */; };
 		2B8193831DE6FE34008879B2 /* CitiesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8193641DE6FE34008879B2 /* CitiesVC.swift */; };
 		2B8193841DE6FE34008879B2 /* InfosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8193651DE6FE34008879B2 /* InfosVC.swift */; };
@@ -62,6 +75,20 @@
 		2B0C39891DFEC96B00108B1A /* PKHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PKHUD.framework; path = "../../../../Library/Developer/Xcode/DerivedData/BookCities-fdagecfuoyvlxsaabdajemrbsgur/Build/Products/Debug-iphoneos/PKHUD/PKHUD.framework"; sourceTree = "<group>"; };
 		2B2009E41E0922BC00D42672 /* headerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = headerViewCell.swift; sourceTree = "<group>"; };
 		2B2009E51E0922BC00D42672 /* headerViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = headerViewCell.xib; sourceTree = "<group>"; };
+		2B2BBF1D1E261E760098AFF5 /* CustomeNavBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomeNavBar.swift; path = BookCities/Views/CustomeNavBar.swift; sourceTree = SOURCE_ROOT; };
+		2B2BBF231E2621D30098AFF5 /* NVViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVViewController.swift; sourceTree = "<group>"; };
+		2B2BBF251E2665FF0098AFF5 /* Element 28.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Element 28.png"; sourceTree = "<group>"; };
+		2B2BBF271E2666120098AFF5 /* Element 29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Element 29.png"; sourceTree = "<group>"; };
+		2B2BBF2B1E2666650098AFF5 /* Element 25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Element 25.png"; sourceTree = "<group>"; };
+		2B2BBF2D1E2667010098AFF5 /* Element 28@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Element 28@2x.png"; sourceTree = "<group>"; };
+		2B2BBF2E1E2667010098AFF5 /* Element 28@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Element 28@3x.png"; sourceTree = "<group>"; };
+		2B2BBF311E26670E0098AFF5 /* Element 29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Element 29@2x.png"; sourceTree = "<group>"; };
+		2B2BBF321E26670E0098AFF5 /* Element 29@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Element 29@3x.png"; sourceTree = "<group>"; };
+		2B2BBF351E26671C0098AFF5 /* Element 25@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Element 25@3x.png"; sourceTree = "<group>"; };
+		2B2BBF361E26671C0098AFF5 /* Element 25@4x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Element 25@4x.png"; sourceTree = "<group>"; };
+		2B2BBF391E2667680098AFF5 /* Element 25@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Element 25@2x.png"; sourceTree = "<group>"; };
+		2B3A69851E2774E000B8EC6E /* ExtendedNavBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtendedNavBarView.swift; sourceTree = "<group>"; };
+		2B418F921E2748B000DE15B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2B4B90F21DF161E7008FE99B /* ReachabilitySwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReachabilitySwift.framework; path = "../../../../Library/Developer/Xcode/DerivedData/BookCities-fdagecfuoyvlxsaabdajemrbsgur/Build/Products/Debug-iphoneos/ReachabilitySwift/ReachabilitySwift.framework"; sourceTree = "<group>"; };
 		2B4B90F41DF19802008FE99B /* Reachable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachable.swift; sourceTree = "<group>"; };
 		2B7662E31DEC526300987F40 /* JSONCity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONCity.swift; sourceTree = "<group>"; };
@@ -69,7 +96,6 @@
 		2B81934E1DE6FD69008879B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2B8193531DE6FD69008879B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2B8193561DE6FD69008879B2 /* BookCities.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BookCities.xcdatamodel; sourceTree = "<group>"; };
-		2B8193581DE6FD69008879B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2B81935B1DE6FD69008879B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2B81935D1DE6FD69008879B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B8193641DE6FE34008879B2 /* CitiesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CitiesVC.swift; sourceTree = "<group>"; };
@@ -166,7 +192,7 @@
 				2B8193811DE6FE34008879B2 /* assets */,
 				2B81934E1DE6FD69008879B2 /* AppDelegate.swift */,
 				2B8193521DE6FD69008879B2 /* Main.storyboard */,
-				2B8193581DE6FD69008879B2 /* Assets.xcassets */,
+				2B418F921E2748B000DE15B1 /* Assets.xcassets */,
 				2B81935A1DE6FD69008879B2 /* LaunchScreen.storyboard */,
 				2B81935D1DE6FD69008879B2 /* Info.plist */,
 				2B8193551DE6FD69008879B2 /* BookCities.xcdatamodeld */,
@@ -183,6 +209,7 @@
 				2B8193671DE6FE34008879B2 /* MyListVC.swift */,
 				2B8193681DE6FE34008879B2 /* MyMapVC.swift */,
 				2B8193691DE6FE34008879B2 /* ShopDetailVC.swift */,
+				2B2BBF1D1E261E760098AFF5 /* CustomeNavBar.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -235,6 +262,7 @@
 		2B8193791DE6FE34008879B2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2B3A69851E2774E000B8EC6E /* ExtendedNavBarView.swift */,
 				2B81937A1DE6FE34008879B2 /* BorderButton.swift */,
 				2B81937B1DE6FE34008879B2 /* CustomTableViewCells */,
 			);
@@ -250,6 +278,7 @@
 				2B81937F1DE6FE34008879B2 /* CitiesTVCell.xib */,
 				2B2009E41E0922BC00D42672 /* headerViewCell.swift */,
 				2B2009E51E0922BC00D42672 /* headerViewCell.xib */,
+				2B2BBF231E2621D30098AFF5 /* NVViewController.swift */,
 			);
 			path = CustomTableViewCells;
 			sourceTree = "<group>";
@@ -266,7 +295,17 @@
 		2B8193811DE6FE34008879B2 /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				2B2BBF251E2665FF0098AFF5 /* Element 28.png */,
+				2B2BBF2D1E2667010098AFF5 /* Element 28@2x.png */,
+				2B2BBF2E1E2667010098AFF5 /* Element 28@3x.png */,
+				2B2BBF271E2666120098AFF5 /* Element 29.png */,
+				2B2BBF311E26670E0098AFF5 /* Element 29@2x.png */,
+				2B2BBF321E26670E0098AFF5 /* Element 29@3x.png */,
 				2B8193821DE6FE34008879B2 /* splash_screen.png */,
+				2B2BBF2B1E2666650098AFF5 /* Element 25.png */,
+				2B2BBF391E2667680098AFF5 /* Element 25@2x.png */,
+				2B2BBF351E26671C0098AFF5 /* Element 25@3x.png */,
+				2B2BBF361E26671C0098AFF5 /* Element 25@4x.png */,
 			);
 			path = assets;
 			sourceTree = "<group>";
@@ -375,12 +414,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B81935C1DE6FD69008879B2 /* LaunchScreen.storyboard in Resources */,
+				2B2BBF381E26671C0098AFF5 /* Element 25@4x.png in Resources */,
 				2B2009E71E0922BC00D42672 /* headerViewCell.xib in Resources */,
-				2B8193591DE6FD69008879B2 /* Assets.xcassets in Resources */,
+				2B2BBF2F1E2667010098AFF5 /* Element 28@2x.png in Resources */,
 				2B8193981DE6FE34008879B2 /* CitiesTVCell.xib in Resources */,
+				2B2BBF3A1E2667680098AFF5 /* Element 25@2x.png in Resources */,
+				2B418F931E2748B000DE15B1 /* Assets.xcassets in Resources */,
+				2B2BBF2C1E2666650098AFF5 /* Element 25.png in Resources */,
 				2B8193541DE6FD69008879B2 /* Main.storyboard in Resources */,
+				2B2BBF261E2665FF0098AFF5 /* Element 28.png in Resources */,
+				2B2BBF331E26670E0098AFF5 /* Element 29@2x.png in Resources */,
+				2B2BBF371E26671C0098AFF5 /* Element 25@3x.png in Resources */,
 				2B8193961DE6FE34008879B2 /* BookStoreTVCell.xib in Resources */,
+				2B2BBF341E26670E0098AFF5 /* Element 29@3x.png in Resources */,
 				2B8193991DE6FE34008879B2 /* splash_screen.png in Resources */,
+				2B2BBF281E2666120098AFF5 /* Element 29.png in Resources */,
+				2B2BBF301E2667010098AFF5 /* Element 28@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +494,7 @@
 				2B81938D1DE6FE34008879B2 /* BridgeAnnotation.swift in Sources */,
 				2B8193571DE6FD69008879B2 /* BookCities.xcdatamodeld in Sources */,
 				2B8193931DE6FE34008879B2 /* BookCitiesConvenience.swift in Sources */,
+				2B2BBF241E2621D30098AFF5 /* NVViewController.swift in Sources */,
 				2B8193911DE6FE34008879B2 /* WharfAnnotation.swift in Sources */,
 				2B81BB161DEEF18800318859 /* CoreDataManager.swift in Sources */,
 				2B81BB181DEEFFF400318859 /* JSONCategory.swift in Sources */,
@@ -463,6 +513,7 @@
 				2B8193831DE6FE34008879B2 /* CitiesVC.swift in Sources */,
 				2B8193941DE6FE34008879B2 /* BorderButton.swift in Sources */,
 				2B8193871DE6FE34008879B2 /* MyMapVC.swift in Sources */,
+				2B2BBF1E1E261E760098AFF5 /* CustomeNavBar.swift in Sources */,
 				2B81938C1DE6FE34008879B2 /* BookStoreAnnotation.swift in Sources */,
 				2B8193851DE6FE34008879B2 /* MainView.swift in Sources */,
 				2B9ADB571DFACDD800DD96EA /* MapDataController.swift in Sources */,
@@ -471,6 +522,7 @@
 				2B4B90F51DF19802008FE99B /* Reachable.swift in Sources */,
 				2B8193951DE6FE34008879B2 /* BookStoreTVCell.swift in Sources */,
 				2B81938A1DE6FE34008879B2 /* Constants.swift in Sources */,
+				2B3A69861E2774E000B8EC6E /* ExtendedNavBarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

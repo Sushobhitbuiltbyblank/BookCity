@@ -50,6 +50,7 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
         headerCellIdentifier = "headerViewCell"
         tableView.register(UINib(nibName: "BookStoreTVCell", bundle: nil), forCellReuseIdentifier:cellIdentifier)
         tableView.register(UINib(nibName: "headerViewCell", bundle: nil), forCellReuseIdentifier: headerCellIdentifier)
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -82,9 +83,9 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
         if cities != nil {
             let twoDArray = getTwoDArray(cities: self.cities!, stores: stores!)
             cell.titleLable?.text = twoDArray[indexPath.section][indexPath.row].name
-            if twoDArray.last?.last == twoDArray[indexPath.section][indexPath.row]{
-                cell.addLowerBorder(width:2.0)
-            }
+//            if twoDArray.last?.last == twoDArray[indexPath.section][indexPath.row]{
+//                cell.addLowerBorder(width:2.0)
+//            }
 //            if CoreDataManager.sharedInstance().haveStore((stores?[indexPath.row].id)!){
 //                cell.favBookStoreImageV.image = UIImage.init(named: Constants.image.SelectedTriagle)
 //            }
@@ -100,12 +101,13 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
             else{
                 cell.favBookStoreImageV.image = UIImage()
             }
-            if stores?.last == stores?[indexPath.row]{
-                cell.addLowerBorder(width:2.0)
-            }
+//            if stores?.last == stores?[indexPath.row]{
+//                cell.addLowerBorder(width:2.0)
+//            }
             cell.bookstoreTypeImageV?.image = UIImage.init(named: getStoreTypeImage(indexPath.row))
         }
-         return cell
+        cell.selectionStyle = .none
+        return cell
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -144,6 +146,7 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
     }
     // MARK: - Table View Delegate Function
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let next = self.storyboard?.instantiateViewController(withIdentifier:"ShopDetailVC") as! ShopDetailVC
         if cities != nil {
             let twoDArray = getTwoDArray(cities: self.cities!, stores: stores!)
@@ -184,7 +187,7 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
     //MARK: - Change View setting
     func defaultViewSetting() {
         // NavigationBar Update
-        self.navigationItem.title = tit
+        self.navigationItem.title = "\n"+tit!+"\n"
         // Add left button arrow image for pushed views
         let n: Int! = self.navigationController?.viewControllers.count
         if (n>1){
@@ -201,23 +204,41 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
         self.usedBooksBtn.isSelected = true
         self.museumshopsBtn.isSelected = true
         self.filterByCategory.setTitle("Filter by category", for: .normal)
-        self.newBooksBtn.addLeftBorder(width: 2.0)
-        self.newBooksBtn.addUpperBorder(width: 2.0)
-        self.newBooksBtn.addLowerBorder(width: 1.0)
-        self.newBooksBtn.addRightBorder(width: 1.0)
-        self.usedBooksBtn.addUpperBorder(width: 2.0)
-        self.usedBooksBtn.addLowerBorder(width: 1.0)
-        self.usedBooksBtn.addRightBorder(width: 1.0)
-        self.usedBooksBtn.addLeftBorder(width: 1.0)
-        self.museumshopsBtn.addLeftBorder(width: 1.0)
-        self.museumshopsBtn.addRightBorder(width: 2.0)
-        self.museumshopsBtn.addUpperBorder(width: 2.0)
-        self.museumshopsBtn.addLowerBorder(width: 1.0)
+//        self.newBooksBtn.addLeftBorder(width: 2.0)
+//        self.newBooksBtn.addUpperBorder(width: 2.0)
+//        self.newBooksBtn.addLowerBorder(width: 1.0)
+//        self.newBooksBtn.addRightBorder(width: 1.0)
+//        self.usedBooksBtn.addUpperBorder(width: 2.0)
+//        self.usedBooksBtn.addLowerBorder(width: 1.0)
+//        self.usedBooksBtn.addRightBorder(width: 1.0)
+//        self.usedBooksBtn.addLeftBorder(width: 1.0)
+//        self.museumshopsBtn.addLeftBorder(width: 1.0)
+//        self.museumshopsBtn.addRightBorder(width: 2.0)
+//        self.museumshopsBtn.addUpperBorder(width: 2.0)
+//        self.museumshopsBtn.addLowerBorder(width: 1.0)
+//        self.showOnMapBtn.addRightBorder(width: 2.0)
+//        self.showOnMapBtn.addLeftBorder(width: 1.0)
+//        self.showOnMapBtn.addUpperBorder(width: 1.0)
+//        self.showOnMapBtn.addLowerBorder(width: 1.0)
         self.filterByCategory.addBorder(width: 1.0)
-        self.showOnMapBtn.addRightBorder(width: 2.0)
-        self.showOnMapBtn.addLeftBorder(width: 1.0)
-        self.showOnMapBtn.addUpperBorder(width: 1.0)
-        self.showOnMapBtn.addLowerBorder(width: 1.0)
+        self.showOnMapBtn.addBorder(width: 1.0)
+        self.newBooksBtn.addBorder(width: 1)
+        self.usedBooksBtn.addBorder(width: 1)
+        self.museumshopsBtn.addBorder(width: 1)
+//        let upperBoarder = CALayer()
+//        upperBoarder.backgroundColor = UIColor.black.cgColor
+//        upperBoarder.frame = CGRect(x: 0, y: (self.navigationController?.navigationBar.bounds.height)!, width: self.view.frame.width, height: 2.0)
+//        self.navigationController?.navigationBar.layer.addSublayer(upperBoarder)
+        navigationController!.navigationBar.isTranslucent = false
+        
+        // The navigation bar's shadowImage is set to a transparent image.  In
+        // addition to providing a custom background image, this removes
+        // the grey hairline at the bottom of the navigation bar.  The
+        // ExtendedNavBarView will draw its own hairline.
+        navigationController!.navigationBar.shadowImage = #imageLiteral(resourceName: "TransparentPixel")
+        // "Pixel" is a solid white 1x1 image.
+        navigationController!.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "Pixel"), for: .default)
+        navigationItem.prompt = ""
     }
     
     func showFilterView(_ show:Bool) {
