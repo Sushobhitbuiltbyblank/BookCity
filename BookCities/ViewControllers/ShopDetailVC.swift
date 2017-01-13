@@ -171,10 +171,11 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         scrollView.delegate = self
         self.scrollView.isPagingEnabled = true
         let imageUrls = getImageUrlArray()
+        
         for index in 0..<imageUrls.count{
             
             frame.origin.x = self.view.frame.size.width * CGFloat(index)
-            frame.size.height = self.view.frame.size.height*10/25
+            frame.size.height = self.view.bounds.size.height*10/25
             frame.size.width = self.view.frame.size.width
             self.scrollView.isPagingEnabled = true
             let imageV = UIImageView(frame: frame)
@@ -422,7 +423,7 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
 //        if no.contains("(")
 //        {
 //            no = no.replacingOccurrences(of: "(", with: "")
-//            
+//
 //        }
         
         if no.contains(" ")

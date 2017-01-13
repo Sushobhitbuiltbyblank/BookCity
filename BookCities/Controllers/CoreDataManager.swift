@@ -779,7 +779,6 @@ class CoreDataManager: NSObject {
         {
             let fetchResults = try managedContext.fetch(fetchRequest)
             if fetchResults.count > 0 {
-                print(fetchResults)
                 return true
             }
             else{

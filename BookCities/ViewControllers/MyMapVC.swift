@@ -195,7 +195,6 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     }
     
     @objc func buttonAction(_ button: UIButton) {
-        print(button.tag)
         for store in stores! {
             if Int(store.id!)! == button.tag
             {
@@ -343,7 +342,6 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
                     {
                         currentLocation = userLocation
                         self.mapView.setCenter(userLocation.coordinate, animated: true)
-                        print("----------run--------")
                         if(self.mapAnnotations.count>1){
                             mapView.showAnnotations(self.mapAnnotations, animated: true)
                         }
@@ -530,7 +528,6 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
             let miles = distance!
             distanceArray.append(miles)
         }
-        print(distanceArray)
         return distanceArray
     }
     

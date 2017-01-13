@@ -459,7 +459,7 @@
                                                         <inset key="imageEdgeInsets" minX="26" minY="12" maxX="26" maxY="12"/>
                                                         <state key="normal" image="triangle"/>
                                                         <state key="selected" image="selectedTriangle"/>
-                                                        <state key="highlighted" image="selectedTriagle"/>
+                                                        <state key="highlighted" image="selectedTriangle"/>
                                                         <connections>
                                                             <action selector="favorateAction:" destination="7Mf-3R-1Ca" eventType="touchUpInside" id="HzM-fO-FPh"/>
                                                         </connections>
