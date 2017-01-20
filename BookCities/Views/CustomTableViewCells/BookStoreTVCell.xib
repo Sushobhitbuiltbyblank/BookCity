@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="249" verticalCompressionResistancePriority="749" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IJw-dd-5xE">
-                        <rect key="frame" x="18" y="18" width="208" height="23"/>
+                        <rect key="frame" x="18" y="18.5" width="208" height="23"/>
                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -29,7 +29,7 @@
                         <rect key="frame" x="241" y="17" width="24" height="24"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="24" id="Sfe-b6-S69"/>
-                            <constraint firstAttribute="width" constant="24" id="ahA-JA-F4k"/>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="24" id="ahA-JA-F4k"/>
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Re-T4-soq">
@@ -63,11 +63,13 @@
             <connections>
                 <outlet property="bookstoreTypeImageV" destination="DVX-kL-6el" id="jkO-Hj-IxU"/>
                 <outlet property="favBookStoreImageV" destination="6KW-Je-VOG" id="MP3-w0-OXU"/>
+                <outlet property="marginC" destination="5Po-VK-Rum" id="Brw-ky-Eh1"/>
                 <outlet property="titleLable" destination="IJw-dd-5xE" id="YUE-qq-lIP"/>
             </connections>
+            <point key="canvasLocation" x="94" y="58"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="redCircle" width="17" height="17"/>
+        <image name="redCircle" width="34" height="34"/>
     </resources>
 </document>

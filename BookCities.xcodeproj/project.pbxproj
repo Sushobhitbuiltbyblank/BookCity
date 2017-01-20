@@ -217,8 +217,8 @@
 		2B81936B1DE6FE34008879B2 /* helper */ = {
 			isa = PBXGroup;
 			children = (
-				2B81936C1DE6FE34008879B2 /* Constants.swift */,
 				2B81936D1DE6FE34008879B2 /* GCDBlackBox.swift */,
+				2B81936C1DE6FE34008879B2 /* Constants.swift */,
 				2B4B90F41DF19802008FE99B /* Reachable.swift */,
 				2B0C39851DFEB58E00108B1A /* ViewControllerHelper.swift */,
 			);

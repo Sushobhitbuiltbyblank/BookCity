@@ -13,6 +13,7 @@ class BookStoreTVCell: UITableViewCell {
     @IBOutlet weak var titleLable: UILabel!
     @IBOutlet weak var favBookStoreImageV: UIImageView!
     @IBOutlet weak var bookstoreTypeImageV: UIImageView!
+    @IBOutlet weak var marginC: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()

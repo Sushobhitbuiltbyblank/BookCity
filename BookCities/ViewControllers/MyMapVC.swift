@@ -66,9 +66,9 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         }
         else{
             if (self.navigationController?.viewControllers.count)! > 1 {
-            if self.navigationController?.viewControllers[(self.navigationController?.viewControllers.endIndex)!-2] is ShopDetailVC {
-                goToStoreLocation(store: (self.stores?[0])!)
-            }
+                if self.navigationController?.viewControllers[(self.navigationController?.viewControllers.endIndex)!-2] is ShopDetailVC {
+                    goToStoreLocation(store: (self.stores?[0])!,span: 0.009)
+                }
             }
         }
         
@@ -89,26 +89,10 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         self.newBookBtn.isSelected = true
         self.usedBookBtn.isSelected = true
         self.museumShopsBtn.isSelected = true
-//        self.newBookBtn.addLeftBorder(width: 2.0)
-//        self.newBookBtn.addUpperBorder(width: 2.0)
-//        self.newBookBtn.addLowerBorder(width: 2.0)
-//        self.newBookBtn.addRightBorder(width: 2.0)
-//        self.usedBookBtn.addUpperBorder(width: 2.0)
-//        self.usedBookBtn.addLowerBorder(width: 2.0)
-//        self.usedBookBtn.addRightBorder(width: 1.0)
-//        self.usedBookBtn.addLeftBorder(width: 1.0)
-//        self.museumShopsBtn.addLeftBorder(width: 2.0)
-//        self.museumShopsBtn.addRightBorder(width: 2.0)
-//        self.museumShopsBtn.addUpperBorder(width: 2.0)
-//        self.museumShopsBtn.addLowerBorder(width: 2.0)
         self.newBookBtn.addBorder(width: 1)
         self.usedBookBtn.addBorder(width: 1)
         self.museumShopsBtn.addBorder(width: 1)
-        
-//        let upperBoarder = CALayer()
-//        upperBoarder.backgroundColor = UIColor.black.cgColor
-//        upperBoarder.frame = CGRect(x: 0, y: (self.navigationController?.navigationBar.bounds.height)!, width: self.view.frame.width, height: 2.0)
-//        self.navigationController?.navigationBar.layer.addSublayer(upperBoarder)
+    
         navigationController!.navigationBar.isTranslucent = false
         
         // The navigation bar's shadowImage is set to a transparent image.  In
@@ -247,7 +231,12 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         //         Center the map the first time we get a real location change.
         if userLocation.coordinate.latitude != 0.0 && userLocation.coordinate.longitude != 0.0 {
-            
+            if(self.tit == "My List") && currentLocation == nil {
+                currentLocation = userLocation
+                var region = MKCoordinateRegion()
+                region = MKCoordinateRegionMake(userLocation.coordinate, MKCoordinateSpanMake(180, 180))
+                mapView.setRegion(region, animated: true)
+            }
             if (self.navigationController?.viewControllers.count) == 1 && currentLocation == nil {
                 HUD.show(.progress)
                 currentLocation = userLocation
@@ -282,9 +271,6 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
                                 mapView.showAnnotations(array, animated: true)
                             }
                             
-                            //                        if(self.mapAnnotations.count>1){
-                            //                            //                                        mapView.showAnnotations(self.mapAnnotations, animated: true)
-                            //                        }
                             HUD.hide()
                         }
                         
@@ -456,12 +442,12 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         
     }
 
-    func goToStoreLocation(store:JSONStore)
+    func goToStoreLocation(store:JSONStore,span : Double)
     {
         var region:MKCoordinateRegion = MKCoordinateRegion()
         region.center.latitude = Double(store.latitude!)!
         region.center.longitude =  Double(store.longitude!)!
-        region.span = MKCoordinateSpanMake(0.009, 0.009)
+        region.span = MKCoordinateSpanMake(span, span)
         self.mapView.setRegion(region, animated: true)
     }
     
@@ -509,9 +495,11 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
                     storeAnnotation.store = store
                     storeAnnotation.tag = Int(store.id!)
                     storeAnnotation.imageName = getStoreTypeImage(i)
-//                    if(store.longitude == )
-                    storeAnnotation.coordinate = CLLocationCoordinate2DMake(Double(store.latitude!)!, Double(store.longitude!)!)
-                    self.mapAnnotations.append(storeAnnotation)
+                    if(store.longitude != "" || store.latitude != "") {
+                        storeAnnotation.coordinate = CLLocationCoordinate2DMake(Double(store.latitude!)!, Double(store.longitude!)!)
+                        self.mapAnnotations.append(storeAnnotation)
+                    }
+                    
                     i += 1
                 }
             }
@@ -523,10 +511,12 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     func storesWithDistance() -> Array<Double>{
         var distanceArray = Array<Double>()
         for store in self.stores! {
-            let storeLocation = CLLocation(latitude: Double(store.latitude!)!, longitude: Double(store.longitude!)!)
-            let distance = currentLocation?.location?.distance(from: storeLocation)
-            let miles = distance!
-            distanceArray.append(miles)
+            if(store.longitude != "" || store.latitude != "") {
+                let storeLocation = CLLocation(latitude: Double(store.latitude!)!, longitude: Double(store.longitude!)!)
+                let distance = currentLocation?.location?.distance(from: storeLocation)
+                let miles = distance!
+                distanceArray.append(miles)
+            }
         }
         return distanceArray
     }

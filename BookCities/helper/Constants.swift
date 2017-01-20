@@ -110,6 +110,7 @@ class Constants: NSObject {
         static let TitleNofavStore = "No favourite Stores yet"
         static let Message = "Please check your internet connectivity. "
         static let MessageNoFavStore = "Please first set favourite store."
+        static let TitleNotAWebLink = "Invalide url"
     }
     
     struct Entity {
@@ -120,7 +121,7 @@ class Constants: NSObject {
         static let State = "State"
     }
     struct Font {
-        static let Size = 22
+        static let Size = 27
         static let TypeHelvetica = "Helvetica"
     }
     struct image {

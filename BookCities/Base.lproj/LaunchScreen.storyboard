@@ -22,23 +22,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="a9b-M1-pdw">
-                                <rect key="frame" x="0.0" y="43" width="320" height="274"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="a9b-M1-pdw">
+                                <rect key="frame" x="0.0" y="43" width="320" height="254"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pYQ-Xd-ZUr">
-                                <rect key="frame" x="107" y="354" width="106.5" height="24"/>
+                                <rect key="frame" x="107" y="334" width="106.5" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Books Cities," textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qir-at-CdO">
-                                <rect key="frame" x="101.5" y="378" width="117" height="24"/>
+                                <rect key="frame" x="101.5" y="358" width="117" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="your bookshop-finder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vXy-01-9oe">
-                                <rect key="frame" x="63" y="402" width="194.5" height="24"/>
+                                <rect key="frame" x="63" y="382" width="194.5" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -49,7 +49,7 @@
                             <constraint firstItem="a9b-M1-pdw" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="-16" id="Aat-jO-Ddc"/>
                             <constraint firstItem="pYQ-Xd-ZUr" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Cxe-TA-anO"/>
                             <constraint firstItem="pYQ-Xd-ZUr" firstAttribute="top" secondItem="a9b-M1-pdw" secondAttribute="bottom" constant="37" id="LQt-Zg-MW5"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="vXy-01-9oe" secondAttribute="bottom" constant="142" id="Q5x-v7-NGK"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="vXy-01-9oe" secondAttribute="bottom" constant="162" id="Q5x-v7-NGK"/>
                             <constraint firstItem="vXy-01-9oe" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="QJd-FN-vDy"/>
                             <constraint firstItem="vXy-01-9oe" firstAttribute="top" secondItem="qir-at-CdO" secondAttribute="bottom" id="Rk3-EC-CiR"/>
                             <constraint firstItem="qir-at-CdO" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="T4r-1Z-LKP"/>

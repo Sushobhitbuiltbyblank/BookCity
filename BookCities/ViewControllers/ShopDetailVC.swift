@@ -86,15 +86,15 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 //        self.descriptionLable.setContentOffset(CGPoint.zero, animated: false)
-        if getImageUrlArray().count == 0{
-            
+        for view in self.scrollView.subviews {
+            view.frame.size.height = scrollView.frame.size.height
         }
+        self.scrollView.contentSize.height = scrollView.frame.size.height
     }
     
     func setView()
     {
-        let attribute = [NSUnderlineStyleAttributeName:2,
-                         NSForegroundColorAttributeName:UIColor.black] as [String : Any]
+        let attribute = [NSForegroundColorAttributeName:UIColor.black] as [String : Any]
         let buttonText = NSMutableAttributedString(string: self.removeHttp((store?.website)!), attributes: attribute)
         self.websiteLinkBtn.setAttributedTitle(buttonText, for: UIControlState.normal)
         self.address2Lable.text = store?.address_2
@@ -103,6 +103,9 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
             do {
                 let attributedText = try NSMutableAttributedString(data: htmlData, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
                 attributedText.addAttribute(NSFontAttributeName, value: UIFont(name: "Helvetica Neue", size: 19)!, range: NSMakeRange(0,attributedText.length))
+                let style = NSMutableParagraphStyle()
+                style.lineSpacing = CGFloat(3.0)
+                attributedText.addAttributes([NSParagraphStyleAttributeName : style], range: NSMakeRange(0,attributedText.length))
                 self.descriptionLable.attributedText = attributedText
                 
             } catch let e as NSError {
@@ -122,22 +125,14 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
             self.rightStackView.removeFromSuperview()
             self.isFull = false
         })
-       
-//        self.shareBtn.addLeftBorder(width: 1.0)
-//        self.shareBtn.addRightBorder(width: 1.0)
-//        self.shareBtn.addUpperBorder(width: 2.0)
-//        self.shareBtn.addLowerBorder(width: 2.0)
-//        self.showOnMapBtn.addLeftBorder(width: 2.0)
-//        self.showOnMapBtn.addRightBorder(width: 2.0)
-//        self.showOnMapBtn.addUpperBorder(width: 2.0)
-//        self.showOnMapBtn.addLowerBorder(width: 2.0)
-//        self.favorateBtn.addLeftBorder(width: 2.0)
-//        self.favorateBtn.addRightBorder(width: 2.0)
-//        self.favorateBtn.addUpperBorder(width: 2.0)
-//        self.favorateBtn.addLowerBorder(width: 2.0)
+
         self.shareBtn.addBorder(width: 2)
         self.showOnMapBtn.addBorder(width: 2)
         self.favorateBtn.addBorder(width: 2)
+//        self.shareBtn.imageEdgeInsets = UIEdgeInsetsMake(12, 26, 12, 26)
+//        self.shareBtn.imageView?.contentMode = .scaleAspectFit
+//        self.favorateBtn.imageEdgeInsets = UIEdgeInsetsMake(12, 26, 12, 26)
+//        self.favorateBtn.imageView?.contentMode = .scaleAspectFit
         navigationController!.navigationBar.isTranslucent = false
         
         // The navigation bar's shadowImage is set to a transparent image.  In
@@ -175,11 +170,12 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         for index in 0..<imageUrls.count{
             
             frame.origin.x = self.view.frame.size.width * CGFloat(index)
-            frame.size.height = self.view.bounds.size.height*10/25
+            frame.size.height = self.view.frame.size.height*10/25
             frame.size.width = self.view.frame.size.width
             self.scrollView.isPagingEnabled = true
             let imageV = UIImageView(frame: frame)
             imageV.contentMode = .scaleAspectFill
+            imageV.clipsToBounds = true
             let url = URL(string:imageUrls[index])!
             imageV.af_setImage(withURL: url, placeholderImage: UIImage(named: "placeholder"), filter: nil, imageTransition: .crossDissolve(0.2), runImageTransitionIfCached: true, completion: nil)
             self.scrollView.addSubview(imageV)
@@ -280,7 +276,14 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     
     @IBAction func websiteLinkBtnAction(_ sender: Any) {
         let url = URL(string: (store?.website)!)
-        UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+        if UIApplication.shared.canOpenURL(url!){
+            UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+        }
+        else {
+            let alert = UIAlertController(title: Constants.Alert.TitleNotAWebLink, message: (store?.website)! + "  is not the valid url", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     @IBAction func phonNumberBtnAction(_ sender: Any) {
@@ -401,17 +404,17 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         {
             return "closed"
         }
-        if fromMin == "0"{
-            frommin = "00"
+        if Int(frommin)! < 10 {
+            frommin = "0"+frommin
         }
-        if fromHr == "0"{
-            fromhr = "00"
+        if Int(fromhr)! < 10 {
+            fromhr = "0"+fromhr
         }
-        if toMin == "0"{
-            tomin = "00"
+        if Int(tomin)! < 10 {
+            tomin = "0"+tomin
         }
-        if toHr == "00"{
-            tohr = "0"
+        if Int(tohr)! < 10 {
+            tohr = "0"+tohr
         }
         return fromhr+":"+frommin+" - "+tohr+":"+tomin
     }
@@ -467,17 +470,17 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         stack.axis = .horizontal
         stack.alignment = .firstBaseline
         stack.distribution = .fillProportionally
-        stack.spacing = 2.0
+        stack.spacing = 8.0
         var textforTime = ""
         let timeInNumber = UILabel()
         if isOpen() {
-            textforTime = "Open today"
+            textforTime = "Open now"
             let date = Date()
             let calendar = NSCalendar.current
             let components = calendar.component(.weekday, from: date)
-            let day = components.description
+            let day = Int(components.description)! - 1
             
-            timeInNumber.text = " "+days[Int(day)!]
+            timeInNumber.text = days[Int(day)]
         }
         else{
             textforTime = "closed"
@@ -555,7 +558,7 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         stack.axis = .vertical
         stack.alignment = .leading
         stack.distribution = .fill
-        stack.spacing = 5
+        stack.spacing = 2
         let date = Date()
         let calendar = NSCalendar.current
         let components = calendar.component(.weekday, from: date)
@@ -607,12 +610,56 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         let date = Date()
         let calendar = NSCalendar.current
         let components = calendar.component(.weekday, from: date)
-        let day = components.description
-        if days[Int(day)!] == "closed"
+        let day = Int(components.description)! - 1
+        if days[Int(day)] == "closed"
         {
             return false
         }
-        return true
+        else{
+            let hour = calendar.component(.hour, from: date as Date)
+            let minutes = calendar.component(.minute, from: date as Date)
+            let currentTime = hour * 60 + minutes
+//            print("current - > \(currentTime)")
+            var time = days[Int(day)] as String
+            time = time.trimmingCharacters(in: .whitespaces)
+            let times = time.characters.split{$0 == "-"}.map(String.init)
+            
+            var uppertime = times[0].characters.split(separator: ":").map(String.init)
+            var lowertime = times[1].characters.split(separator: ":").map(String.init)
+            uppertime[0] = uppertime[0].trimmingCharacters(in: .whitespaces)
+            uppertime[1] = uppertime[1].trimmingCharacters(in: .whitespaces)
+            lowertime[0] = lowertime[0].trimmingCharacters(in: .whitespaces)
+            lowertime[1] = lowertime[1].trimmingCharacters(in: .whitespaces)
+            
+            var upper = 0
+            var lower = 23
+            
+            if let upperLimit = Int(uppertime[0]){
+                upper = upperLimit * 60 + Int(uppertime[1])!
+//                print("upper -> \(upper)")
+            }
+            if let lowerLimit = Int(lowertime[0]) {
+                if Int(uppertime[0])! > lowerLimit {
+                    lower = lowerLimit * 60 + Int(lowertime[1])!
+//                    print("lower -> \(lower)")
+                    if currentTime < lower || currentTime > upper {
+                        return true
+                    }
+                    lower = (lowerLimit + 24) * 60 + Int(lowertime[1])!
+                }
+                else{
+                    lower = lowerLimit * 60 + Int(lowertime[1])!
+                }
+//                print("lower -> \(lower)")
+            }
+
+            if upper < currentTime && lower > currentTime {
+                return true
+            }
+            else{
+                return false
+            }
+        }
     }
     func removeHttp(_ webLink:String) ->String{
         var weblink = webLink

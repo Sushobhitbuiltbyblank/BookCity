@@ -26,7 +26,7 @@ class InfosVC: UIViewController {
         BookCitiesClient.sharedInstance().getInfoData([:], {
             (response,error) in
             let htmlText = response
-            if let htmlData = htmlText?.data(using: String.Encoding.unicode) {
+            if let htmlData = htmlText?.data(using: String.Encoding.utf8, allowLossyConversion: true) {
                 do {
                     let attributedText = try NSMutableAttributedString(data: htmlData, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
                     attributedText.addAttribute(NSFontAttributeName, value: UIFont(name: "Helvetica Neue", size: 20)!, range: NSMakeRange(0,attributedText.length))

@@ -83,6 +83,7 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
         if cities != nil {
             let twoDArray = getTwoDArray(cities: self.cities!, stores: stores!)
             cell.titleLable?.text = twoDArray[indexPath.section][indexPath.row].name
+            cell.removeConstraint(cell.marginC)
 //            if twoDArray.last?.last == twoDArray[indexPath.section][indexPath.row]{
 //                cell.addLowerBorder(width:2.0)
 //            }
@@ -119,6 +120,7 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
             }
             else{
                 let cell = tableView.dequeueReusableCell(withIdentifier: headerCellIdentifier) as! headerViewCell
+                cell.mainLable.font = UIFont(name: Constants.Font.TypeHelvetica, size: CGFloat(Constants.Font.Size))!
                 cell.mainLable.text = twoDArray[section][0].cityName
                 cell.shareBtn.tag = section
                 cell.shareBtn.addTarget(self, action: #selector(self.shareBtnAction(_:)), for: .touchUpInside)
@@ -137,7 +139,7 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
                 return 0
             }
             else{
-                return 50
+                return 60
             }
         }
         else{
@@ -204,31 +206,11 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
         self.usedBooksBtn.isSelected = true
         self.museumshopsBtn.isSelected = true
         self.filterByCategory.setTitle("Filter by category", for: .normal)
-//        self.newBooksBtn.addLeftBorder(width: 2.0)
-//        self.newBooksBtn.addUpperBorder(width: 2.0)
-//        self.newBooksBtn.addLowerBorder(width: 1.0)
-//        self.newBooksBtn.addRightBorder(width: 1.0)
-//        self.usedBooksBtn.addUpperBorder(width: 2.0)
-//        self.usedBooksBtn.addLowerBorder(width: 1.0)
-//        self.usedBooksBtn.addRightBorder(width: 1.0)
-//        self.usedBooksBtn.addLeftBorder(width: 1.0)
-//        self.museumshopsBtn.addLeftBorder(width: 1.0)
-//        self.museumshopsBtn.addRightBorder(width: 2.0)
-//        self.museumshopsBtn.addUpperBorder(width: 2.0)
-//        self.museumshopsBtn.addLowerBorder(width: 1.0)
-//        self.showOnMapBtn.addRightBorder(width: 2.0)
-//        self.showOnMapBtn.addLeftBorder(width: 1.0)
-//        self.showOnMapBtn.addUpperBorder(width: 1.0)
-//        self.showOnMapBtn.addLowerBorder(width: 1.0)
         self.filterByCategory.addBorder(width: 1.0)
         self.showOnMapBtn.addBorder(width: 1.0)
         self.newBooksBtn.addBorder(width: 1)
         self.usedBooksBtn.addBorder(width: 1)
         self.museumshopsBtn.addBorder(width: 1)
-//        let upperBoarder = CALayer()
-//        upperBoarder.backgroundColor = UIColor.black.cgColor
-//        upperBoarder.frame = CGRect(x: 0, y: (self.navigationController?.navigationBar.bounds.height)!, width: self.view.frame.width, height: 2.0)
-//        self.navigationController?.navigationBar.layer.addSublayer(upperBoarder)
         navigationController!.navigationBar.isTranslucent = false
         
         // The navigation bar's shadowImage is set to a transparent image.  In
@@ -342,6 +324,7 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
         else{
             next.stores = stores
             next.tit = self.tit
+            
         }
         self.navigationController?.pushViewController(next, animated: true)
     }
