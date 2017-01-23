@@ -148,7 +148,7 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
     }
     // MARK: - Table View Delegate Function
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+//        tableView.deselectRow(at: indexPath, animated: true)
         let next = self.storyboard?.instantiateViewController(withIdentifier:"ShopDetailVC") as! ShopDetailVC
         if cities != nil {
             let twoDArray = getTwoDArray(cities: self.cities!, stores: stores!)

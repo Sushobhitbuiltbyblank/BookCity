@@ -22,40 +22,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="a9b-M1-pdw">
-                                <rect key="frame" x="0.0" y="43" width="320" height="254"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Book Cities" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="unK-pU-1SZ">
+                                <rect key="frame" x="92" y="54" width="136" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="h3Q-yI-nRm">
+                                <rect key="frame" x="18" y="112" width="284" height="396"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pYQ-Xd-ZUr">
-                                <rect key="frame" x="107" y="334" width="106.5" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Books Cities," textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qir-at-CdO">
-                                <rect key="frame" x="101.5" y="358" width="117" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="your bookshop-finder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vXy-01-9oe">
-                                <rect key="frame" x="63" y="382" width="194.5" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.98039215690000003" blue="0.63921568630000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.0" green="0.60784313729999995" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="a9b-M1-pdw" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="-16" id="Aat-jO-Ddc"/>
-                            <constraint firstItem="pYQ-Xd-ZUr" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Cxe-TA-anO"/>
-                            <constraint firstItem="pYQ-Xd-ZUr" firstAttribute="top" secondItem="a9b-M1-pdw" secondAttribute="bottom" constant="37" id="LQt-Zg-MW5"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="vXy-01-9oe" secondAttribute="bottom" constant="162" id="Q5x-v7-NGK"/>
-                            <constraint firstItem="vXy-01-9oe" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="QJd-FN-vDy"/>
-                            <constraint firstItem="vXy-01-9oe" firstAttribute="top" secondItem="qir-at-CdO" secondAttribute="bottom" id="Rk3-EC-CiR"/>
-                            <constraint firstItem="qir-at-CdO" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="T4r-1Z-LKP"/>
-                            <constraint firstItem="a9b-M1-pdw" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="23" id="XL7-fe-VAf"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="a9b-M1-pdw" secondAttribute="trailing" constant="-16" id="eGM-NU-TcV"/>
-                            <constraint firstItem="qir-at-CdO" firstAttribute="top" secondItem="pYQ-Xd-ZUr" secondAttribute="bottom" id="vcI-qA-Jbu"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="h3Q-yI-nRm" secondAttribute="bottom" constant="60" id="7sq-us-fHp"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="h3Q-yI-nRm" secondAttribute="trailing" constant="2" id="S6Y-T5-NpM"/>
+                            <constraint firstItem="unK-pU-1SZ" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Sp1-Mr-lAF"/>
+                            <constraint firstItem="h3Q-yI-nRm" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="2" id="dm3-8T-JZ2"/>
+                            <constraint firstItem="unK-pU-1SZ" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="33.5" id="pRl-mX-nrl"/>
+                            <constraint firstItem="h3Q-yI-nRm" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="92" id="vRX-R2-ZoZ"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -65,6 +49,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="logo" width="375" height="359"/>
+        <image name="logo" width="585" height="808"/>
     </resources>
 </document>

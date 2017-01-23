@@ -35,7 +35,8 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     @IBOutlet weak var rightStackView: UIStackView!
     @IBOutlet weak var descriptionLable: UILabel!
     @IBOutlet weak var heightOfContent: NSLayoutConstraint!
-    
+    @IBOutlet weak var phoneNumberBtnHeight: NSLayoutConstraint!
+    @IBOutlet weak var upperofAddress2: NSLayoutConstraint!
     
     
     // add lable for daywise time.
@@ -76,7 +77,20 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         self.hoursStackView.addGestureRecognizer(tapGesture)
         
         self.addressLable.text = (store?.address)!
-        self.phonNumberBtn.setTitle(store?.phone, for: UIControlState.normal)
+        if store?.phone != "" {
+            self.phonNumberBtn.setTitle(store?.phone, for: UIControlState.normal)
+        }
+        else{
+            self.view.layoutIfNeeded()
+            self.phoneNumberBtnHeight.constant = 0
+            self.view.layoutIfNeeded()
+        }
+        
+        if store?.address_2 != "" {
+            self.view.layoutIfNeeded()
+            upperofAddress2.constant = 2
+            self.view.layoutIfNeeded()
+        }
         configurePageControl()
         configureImageScroller()
         setTimelable()

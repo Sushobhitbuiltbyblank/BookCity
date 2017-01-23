@@ -13,7 +13,7 @@ class MainView: UIViewController {
     @IBOutlet weak var chooseACityBtn: BorderButton!
     @IBOutlet weak var nearMeBtn: BorderButton!
     @IBOutlet weak var myListBtn: BorderButton!
-    @IBOutlet weak var saveOfflineDataBtn: BorderButton!
+//    @IBOutlet weak var saveOfflineDataBtn: BorderButton!
     
     @IBOutlet weak var infoBtn: UIButton!
     let appdelegate = UIApplication.shared.delegate as! AppDelegate
@@ -50,7 +50,7 @@ class MainView: UIViewController {
 // MARK: - Function to deal with view editing
     func setViews()
     {
-        self.saveOfflineDataBtn.isHidden = true
+//        self.saveOfflineDataBtn.isHidden = true
         self.chooseACityBtn.addBorder(width: 1.0)
         self.nearMeBtn.addBorder(width: 1.0)
         self.myListBtn.addBorder(width: 1.0)

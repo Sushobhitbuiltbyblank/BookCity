@@ -24,7 +24,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="Uvm-NZ-xhb">
-                                <rect key="frame" x="16" y="60" width="288" height="508"/>
+                                <rect key="frame" x="16" y="20" width="288" height="548"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -56,7 +56,7 @@
                             <constraint firstItem="Uvm-NZ-xhb" firstAttribute="leading" secondItem="nis-iE-V63" secondAttribute="leading" constant="16" id="FFi-9s-d1L"/>
                             <constraint firstAttribute="trailing" secondItem="cNM-Ro-Wi7" secondAttribute="trailing" id="VL1-6i-iNN"/>
                             <constraint firstAttribute="trailing" secondItem="Uvm-NZ-xhb" secondAttribute="trailing" constant="16" id="mQP-TB-R8n"/>
-                            <constraint firstItem="Uvm-NZ-xhb" firstAttribute="top" secondItem="cNM-Ro-Wi7" secondAttribute="bottom" constant="40" id="mWy-Gy-d3R"/>
+                            <constraint firstItem="Uvm-NZ-xhb" firstAttribute="top" secondItem="cNM-Ro-Wi7" secondAttribute="bottom" id="mWy-Gy-d3R"/>
                             <constraint firstItem="AAK-S3-bKS" firstAttribute="top" secondItem="Uvm-NZ-xhb" secondAttribute="bottom" id="ooG-ym-hBw"/>
                         </constraints>
                     </view>
@@ -80,42 +80,50 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yMJ-DA-T0H" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="U97-tF-LEU">
+                                <rect key="frame" x="18" y="112" width="284" height="396"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yMJ-DA-T0H" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="448" width="320" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="Choose a city">
+                                <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Choose a City" backgroundImage="backBtnWhite">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="highlighted" backgroundImage="selectedButton"/>
+                                <state key="focused" backgroundImage="selectedButton"/>
                                 <connections>
                                     <action selector="chooseACityBtnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tkE-dt-PYt"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cig-Th-TVp" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="508" width="148.5" height="60"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cig-Th-TVp" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="508" width="128" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="V8E-wg-ZJ8"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="Near me">
+                                <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Near Me" backgroundImage="backBtnWhite">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="highlighted" backgroundImage="selectedButton"/>
                                 <connections>
                                     <action selector="nearMeBtnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="q2x-bN-9Yf"/>
                                     <segue destination="V3A-i7-RUi" kind="show" id="Xj1-QK-pdi"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q4h-yf-jI9" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
-                                <rect key="frame" x="144.5" y="508" width="111.5" height="60"/>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q4h-yf-jI9" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
+                                <rect key="frame" x="128" y="508" width="128" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="My list">
+                                <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="My List" backgroundImage="backBtnWhite">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="highlighted" backgroundImage="selectedButton"/>
+                                <state key="focused" backgroundImage="selectedButton"/>
                                 <connections>
                                     <action selector="myListBtnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JsC-JT-CBw"/>
                                 </connections>
@@ -127,47 +135,11 @@
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                 <state key="normal" image="info"/>
+                                <state key="highlighted" image="infoSelected"/>
                                 <connections>
                                     <action selector="infoBtnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ll9-lZ-tz0"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="U97-tF-LEU">
-                                <rect key="frame" x="0.0" y="43" width="320" height="254"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Waj-a9-Cbh">
-                                <rect key="frame" x="107" y="334" width="107" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Books Cities," textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xlo-Lm-z1p">
-                                <rect key="frame" x="102" y="358" width="117" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="your bookshop-finder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dnl-Yk-bcW">
-                                <rect key="frame" x="63" y="382" width="195" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3A2-GC-pma" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
-                                <rect key="frame" x="77" y="414" width="166" height="30"/>
-                                <state key="normal" title="Save Offline Data">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="saveOfflineDataBtnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XNF-JV-qIh"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nAq-Jm-lN9">
-                                <rect key="frame" x="143.5" y="508" width="1" height="60"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="1" id="jsy-0R-OBt"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T7L-Ys-OT7">
                                 <rect key="frame" x="256" y="508" width="1" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -186,53 +158,47 @@
                                     <constraint firstAttribute="height" constant="1" id="ku6-cb-GPY"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Book Cities" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G1W-5q-VAv">
+                                <rect key="frame" x="92.5" y="54" width="136" height="32.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.98039215686274506" blue="0.63921568627450975" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.0" green="0.60784313725490191" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="U97-tF-LEU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="1KP-ZX-ocE"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="cig-Th-TVp" secondAttribute="bottom" id="1cz-GI-cKW"/>
-                            <constraint firstItem="Waj-a9-Cbh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="1nu-9g-uDu"/>
                             <constraint firstItem="yiq-ay-8hS" firstAttribute="leading" secondItem="Q4h-yf-jI9" secondAttribute="trailing" constant="1" id="25Y-7d-U2N"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="3A2-GC-pma" secondAttribute="trailing" constant="61" id="2me-T7-krP"/>
-                            <constraint firstItem="yMJ-DA-T0H" firstAttribute="top" secondItem="3A2-GC-pma" secondAttribute="bottom" constant="4" id="3lB-87-92T"/>
+                            <constraint firstItem="G1W-5q-VAv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3a0-JK-PHj"/>
                             <constraint firstItem="cig-Th-TVp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="5HS-py-DqB"/>
                             <constraint firstAttribute="trailingMargin" secondItem="T7L-Ys-OT7" secondAttribute="trailing" constant="47" id="6Yj-rx-mgK"/>
                             <constraint firstAttribute="trailing" secondItem="yiq-ay-8hS" secondAttribute="trailing" constant="3" id="8iw-XW-L41"/>
-                            <constraint firstAttribute="trailing" secondItem="U97-tF-LEU" secondAttribute="trailing" id="9Hd-zg-eSu"/>
                             <constraint firstItem="IEZ-NG-wFk" firstAttribute="leading" secondItem="yiq-ay-8hS" secondAttribute="leading" id="9b9-w0-ag2"/>
-                            <constraint firstItem="nAq-Jm-lN9" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottomMargin" id="CfZ-3G-jhN"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="yiq-ay-8hS" secondAttribute="bottom" id="DXj-QB-sAP"/>
+                            <constraint firstAttribute="bottom" secondItem="U97-tF-LEU" secondAttribute="bottom" constant="60" id="Etl-3C-n6n"/>
                             <constraint firstItem="T7L-Ys-OT7" firstAttribute="leading" secondItem="Q4h-yf-jI9" secondAttribute="trailing" id="Fd1-6N-gmV"/>
-                            <constraint firstItem="Q4h-yf-jI9" firstAttribute="leading" secondItem="cig-Th-TVp" secondAttribute="trailing" constant="-4" id="Hq6-O0-6uO"/>
+                            <constraint firstItem="U97-tF-LEU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="18" id="HOs-kn-BMI"/>
                             <constraint firstAttribute="trailing" secondItem="yMJ-DA-T0H" secondAttribute="trailing" id="J5v-do-ZDd"/>
                             <constraint firstItem="IEZ-NG-wFk" firstAttribute="top" secondItem="yiq-ay-8hS" secondAttribute="top" id="LH3-lv-oty"/>
                             <constraint firstItem="yiq-ay-8hS" firstAttribute="height" secondItem="yMJ-DA-T0H" secondAttribute="height" id="Nv6-Px-WhA"/>
                             <constraint firstItem="yMJ-DA-T0H" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Nxp-B7-3cA"/>
                             <constraint firstItem="cig-Th-TVp" firstAttribute="height" secondItem="yMJ-DA-T0H" secondAttribute="height" id="Pv2-RI-457"/>
-                            <constraint firstItem="3A2-GC-pma" firstAttribute="top" secondItem="Dnl-Yk-bcW" secondAttribute="bottom" constant="8" id="UoK-G5-sFl"/>
-                            <constraint firstItem="Xlo-Lm-z1p" firstAttribute="top" secondItem="Waj-a9-Cbh" secondAttribute="bottom" id="Yuu-qf-as9"/>
-                            <constraint firstItem="Waj-a9-Cbh" firstAttribute="top" secondItem="U97-tF-LEU" secondAttribute="bottom" constant="37" id="ZHL-bO-vpm"/>
+                            <constraint firstItem="U97-tF-LEU" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="92" id="Ve8-yU-bsb"/>
+                            <constraint firstAttribute="trailing" secondItem="U97-tF-LEU" secondAttribute="trailing" constant="18" id="YrO-BI-bGA"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Q4h-yf-jI9" secondAttribute="bottom" id="ZnV-YH-5UQ"/>
                             <constraint firstItem="yiq-ay-8hS" firstAttribute="leading" secondItem="Q4h-yf-jI9" secondAttribute="trailing" constant="1" id="aSj-cT-UMN"/>
                             <constraint firstItem="cig-Th-TVp" firstAttribute="top" secondItem="yMJ-DA-T0H" secondAttribute="bottom" id="ayZ-LD-vwD"/>
                             <constraint firstItem="T7L-Ys-OT7" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottomMargin" id="c3r-Iz-Flh"/>
                             <constraint firstItem="Q4h-yf-jI9" firstAttribute="top" secondItem="yMJ-DA-T0H" secondAttribute="bottom" id="dkz-dh-haA"/>
-                            <constraint firstItem="yMJ-DA-T0H" firstAttribute="top" secondItem="Dnl-Yk-bcW" secondAttribute="bottom" constant="42" id="eLd-3T-6IO"/>
-                            <constraint firstItem="Xlo-Lm-z1p" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="h0M-p5-h1d"/>
                             <constraint firstItem="aFV-q0-Ite" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="hoV-mw-xgV"/>
                             <constraint firstItem="yMJ-DA-T0H" firstAttribute="top" secondItem="aFV-q0-Ite" secondAttribute="bottom" id="kgu-d9-q0j"/>
-                            <constraint firstItem="U97-tF-LEU" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="23" id="naC-T4-Vdd"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="IEZ-NG-wFk" secondAttribute="bottom" constant="59" id="neE-TD-8bh"/>
                             <constraint firstItem="Q4h-yf-jI9" firstAttribute="height" secondItem="yMJ-DA-T0H" secondAttribute="height" id="o5U-zH-aHy"/>
                             <constraint firstItem="T7L-Ys-OT7" firstAttribute="height" secondItem="Q4h-yf-jI9" secondAttribute="height" id="qqF-HK-gZn"/>
                             <constraint firstAttribute="trailing" secondItem="aFV-q0-Ite" secondAttribute="trailing" id="rl7-FY-UQq"/>
-                            <constraint firstItem="Dnl-Yk-bcW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sBE-cD-Mmq"/>
-                            <constraint firstItem="3A2-GC-pma" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="61" id="tms-4c-njq"/>
-                            <constraint firstItem="Q4h-yf-jI9" firstAttribute="width" secondItem="cig-Th-TVp" secondAttribute="width" multiplier="5:3" constant="-136" id="usi-T9-lhV"/>
-                            <constraint firstItem="Q4h-yf-jI9" firstAttribute="leading" secondItem="cig-Th-TVp" secondAttribute="trailing" constant="-4" id="vEU-uz-S2S"/>
-                            <constraint firstItem="Q4h-yf-jI9" firstAttribute="leading" secondItem="nAq-Jm-lN9" secondAttribute="trailing" id="x7c-7J-BiP"/>
-                            <constraint firstItem="Dnl-Yk-bcW" firstAttribute="top" secondItem="Xlo-Lm-z1p" secondAttribute="bottom" id="xRG-e4-tlM"/>
-                            <constraint firstItem="nAq-Jm-lN9" firstAttribute="height" secondItem="Q4h-yf-jI9" secondAttribute="height" id="zjM-0c-2v7"/>
+                            <constraint firstItem="G1W-5q-VAv" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="33.5" id="tFU-ot-2Kh"/>
+                            <constraint firstItem="Q4h-yf-jI9" firstAttribute="width" secondItem="cig-Th-TVp" secondAttribute="width" multiplier="1:1" id="usi-T9-lhV"/>
+                            <constraint firstItem="Q4h-yf-jI9" firstAttribute="leading" secondItem="cig-Th-TVp" secondAttribute="trailing" id="vEU-uz-S2S"/>
                         </constraints>
                     </view>
                     <connections>
@@ -240,7 +206,6 @@
                         <outlet property="infoBtn" destination="yiq-ay-8hS" id="E7v-8o-BpJ"/>
                         <outlet property="myListBtn" destination="Q4h-yf-jI9" id="IxD-5y-154"/>
                         <outlet property="nearMeBtn" destination="cig-Th-TVp" id="spM-hW-6fq"/>
-                        <outlet property="saveOfflineDataBtn" destination="3A2-GC-pma" id="Bxk-HI-gzv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -400,7 +365,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vrW-Yg-Inv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="875.625" y="132.04225352112675"/>
+            <point key="canvasLocation" x="968" y="133"/>
         </scene>
         <!--Shop DetailVC-->
         <scene sceneID="Zqe-Mr-aan">
@@ -418,7 +383,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" horizontalHuggingPriority="247" verticalHuggingPriority="247" translatesAutoresizingMaskIntoConstraints="NO" id="72u-DP-nhM">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="830"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="834"/>
                                         <subviews>
                                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ErN-Mk-vmh">
                                                 <rect key="frame" x="0.0" y="20" width="320" height="252.5"/>
@@ -429,13 +394,14 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="-2" translatesAutoresizingMaskIntoConstraints="NO" id="Vdk-at-IUS">
                                                 <rect key="frame" x="0.0" y="272.5" width="320" height="60"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aCn-iN-cBA" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aCn-iN-cBA" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="162" height="60"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         <state key="normal" title="Show on Map">
                                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
+                                                        <state key="highlighted" backgroundImage="selectedButton"/>
                                                         <connections>
                                                             <action selector="showOnMapAction:" destination="7Mf-3R-1Ca" eventType="touchUpInside" id="X3Z-MX-hR1"/>
                                                         </connections>
@@ -443,6 +409,7 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Yv-cT-Pdq" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
                                                         <rect key="frame" x="160" y="0.0" width="81" height="60"/>
                                                         <state key="normal" image="share"/>
+                                                        <state key="highlighted" backgroundImage="selectedButton"/>
                                                         <connections>
                                                             <action selector="shareBtnAction:" destination="7Mf-3R-1Ca" eventType="touchUpInside" id="GJ3-R3-r68"/>
                                                         </connections>
@@ -451,7 +418,7 @@
                                                         <rect key="frame" x="239" y="0.0" width="81" height="60"/>
                                                         <state key="normal" image="triangle"/>
                                                         <state key="selected" image="selectedTriangle"/>
-                                                        <state key="highlighted" image="selectedTriangle"/>
+                                                        <state key="highlighted" image="selectedTriangle" backgroundImage="selectedButton"/>
                                                         <connections>
                                                             <action selector="favorateAction:" destination="7Mf-3R-1Ca" eventType="touchUpInside" id="HzM-fO-FPh"/>
                                                         </connections>
@@ -582,12 +549,15 @@
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="address2" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U5p-8q-MhJ">
                                                 <rect key="frame" x="18" y="631" width="294" height="23"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="23" id="Wyp-5u-jLq"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sFB-8h-kcb">
-                                                <rect key="frame" x="17" y="677" width="294" height="23"/>
+                                                <rect key="frame" x="17" y="681" width="294" height="23"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="23" id="1wM-0P-62L"/>
                                                 </constraints>
@@ -600,18 +570,18 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fae-mQ-0KU">
-                                                <rect key="frame" x="18" y="725" width="302" height="18"/>
+                                                <rect key="frame" x="18" y="729" width="302" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DF4-t2-aEv">
-                                                <rect key="frame" x="18" y="654" width="294" height="23"/>
+                                                <rect key="frame" x="18" y="656" width="294" height="23"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="23" id="DLb-i5-64M"/>
+                                                    <constraint firstAttribute="height" constant="23" id="DLb-i5-64M"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                                <state key="normal" title="Phone">
+                                                <state key="normal">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
@@ -619,7 +589,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="48" text="" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qXg-Es-dZZ">
-                                                <rect key="frame" x="18" y="751" width="284" height="20"/>
+                                                <rect key="frame" x="18" y="755" width="284" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="WQK-vK-O6x"/>
                                                 </constraints>
@@ -628,13 +598,13 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Categories" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1Q-6R-lHa">
-                                                <rect key="frame" x="18" y="771" width="302" height="18"/>
+                                                <rect key="frame" x="18" y="775" width="302" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Art, Design, Photography" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FO3-pb-zCU">
-                                                <rect key="frame" x="18" y="797" width="295" height="23"/>
+                                                <rect key="frame" x="18" y="801" width="295" height="23"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -650,7 +620,7 @@
                                             <constraint firstAttribute="trailing" secondItem="IYC-rB-fbj" secondAttribute="trailing" constant="8" id="7rj-FX-NTG"/>
                                             <constraint firstItem="FO3-pb-zCU" firstAttribute="leading" secondItem="72u-DP-nhM" secondAttribute="leading" constant="18" id="80t-uJ-1DT"/>
                                             <constraint firstItem="FO3-pb-zCU" firstAttribute="top" secondItem="f1Q-6R-lHa" secondAttribute="bottom" constant="8" id="AXs-6O-viI"/>
-                                            <constraint firstItem="DF4-t2-aEv" firstAttribute="top" secondItem="U5p-8q-MhJ" secondAttribute="bottom" id="BLM-iu-Xh2"/>
+                                            <constraint firstItem="DF4-t2-aEv" firstAttribute="top" secondItem="U5p-8q-MhJ" secondAttribute="bottom" constant="2" id="BLM-iu-Xh2"/>
                                             <constraint firstAttribute="trailing" secondItem="qXg-Es-dZZ" secondAttribute="trailing" constant="18" id="BxV-ZJ-zMU"/>
                                             <constraint firstAttribute="trailing" secondItem="f1Q-6R-lHa" secondAttribute="trailing" id="H6t-Ez-JLg"/>
                                             <constraint firstItem="ErN-Mk-vmh" firstAttribute="leading" secondItem="72u-DP-nhM" secondAttribute="leading" id="LSZ-qz-ARr"/>
@@ -670,7 +640,7 @@
                                             <constraint firstItem="DF4-t2-aEv" firstAttribute="leading" secondItem="72u-DP-nhM" secondAttribute="leading" constant="18" id="jDP-uZ-Ctq"/>
                                             <constraint firstItem="uyN-rB-IAj" firstAttribute="centerX" secondItem="ErN-Mk-vmh" secondAttribute="centerX" id="jGJ-i9-uaY"/>
                                             <constraint firstItem="hGf-ei-rOM" firstAttribute="top" secondItem="3uX-IB-RbC" secondAttribute="bottom" constant="30" id="kWw-Sb-adY"/>
-                                            <constraint firstItem="sFB-8h-kcb" firstAttribute="top" secondItem="DF4-t2-aEv" secondAttribute="bottom" id="kyA-di-2E8"/>
+                                            <constraint firstItem="sFB-8h-kcb" firstAttribute="top" secondItem="DF4-t2-aEv" secondAttribute="bottom" constant="2" id="kyA-di-2E8"/>
                                             <constraint firstAttribute="bottom" secondItem="FO3-pb-zCU" secondAttribute="bottom" constant="10" id="mYk-Al-S7u"/>
                                             <constraint firstItem="qXg-Es-dZZ" firstAttribute="top" secondItem="Fae-mQ-0KU" secondAttribute="bottom" constant="8" id="nPl-YD-Yl8"/>
                                             <constraint firstItem="sFB-8h-kcb" firstAttribute="leading" secondItem="72u-DP-nhM" secondAttribute="leading" constant="17" id="oX3-DA-Y7D"/>
@@ -745,6 +715,7 @@
                         <outlet property="monTimeL" destination="77s-B1-mAq" id="8NK-8t-NxV"/>
                         <outlet property="pageControl" destination="uyN-rB-IAj" id="B3J-m7-U7d"/>
                         <outlet property="phonNumberBtn" destination="DF4-t2-aEv" id="QLd-pn-gkf"/>
+                        <outlet property="phoneNumberBtnHeight" destination="DLb-i5-64M" id="tpV-dN-XlP"/>
                         <outlet property="rightStackView" destination="Akn-9v-1ov" id="aqX-gW-gTA"/>
                         <outlet property="satTimeL" destination="3aR-TG-AoJ" id="Zr7-fi-kHb"/>
                         <outlet property="scrollView" destination="ErN-Mk-vmh" id="ktY-a7-24E"/>
@@ -753,13 +724,14 @@
                         <outlet property="sunTimeL" destination="axn-pw-akT" id="YUr-S8-kyI"/>
                         <outlet property="thuTimeL" destination="vn9-aC-zpQ" id="54M-yh-Zkl"/>
                         <outlet property="tueTimeL" destination="lgO-th-Ihq" id="tCZ-6q-u1d"/>
+                        <outlet property="upperofAddress2" destination="wzU-Kr-Yq1" id="bQo-hM-LEg"/>
                         <outlet property="websiteLinkBtn" destination="sFB-8h-kcb" id="fJ7-bV-j0s"/>
                         <outlet property="wedTimeL" destination="Nry-hy-Mai" id="YGp-83-dLK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GfJ-MX-hst" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1886.25" y="873.59154929577471"/>
+            <point key="canvasLocation" x="1862" y="884"/>
         </scene>
         <!--CitiesVC-->
         <scene sceneID="oSS-aJ-3Et">
@@ -890,7 +862,7 @@
                                     <action selector="museumshopsBtnAction:" destination="j4u-7Z-pXv" eventType="touchUpInside" id="T5w-P9-yRb"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eCD-PV-6xK" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eCD-PV-6xK" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
                                 <rect key="frame" x="160" y="79" width="160" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="lLv-Zn-cx0"/>
@@ -900,11 +872,12 @@
                                 <state key="normal" title="Show on Map">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="highlighted" backgroundImage="selectedButton"/>
                                 <connections>
                                     <action selector="showOnMapBtnAction:" destination="j4u-7Z-pXv" eventType="touchUpInside" id="rRW-h4-2hg"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h8J-ym-vJY" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h8J-ym-vJY" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="79" width="160" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="yXx-EM-TZa"/>
@@ -914,6 +887,7 @@
                                 <state key="normal" title="Filter by category">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="highlighted" backgroundImage="selectedButton"/>
                                 <connections>
                                     <action selector="filterByCategoryBtnAction:" destination="j4u-7Z-pXv" eventType="touchUpInside" id="qUT-Rj-bV7"/>
                                 </connections>
@@ -1082,7 +1056,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iLO-U5-PCD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="875.625" y="873.59154929577471"/>
+            <point key="canvasLocation" x="969" y="885"/>
         </scene>
     </scenes>
     <resources>
@@ -1092,7 +1066,9 @@
         <image name="backBtnWhite" width="33" height="33"/>
         <image name="cross" width="28" height="28"/>
         <image name="info" width="39" height="39"/>
-        <image name="logo" width="375" height="359"/>
+        <image name="infoSelected" width="39" height="39"/>
+        <image name="logo" width="585" height="808"/>
+        <image name="selectedButton" width="33" height="33"/>
         <image name="selectedTriangle" width="24" height="22"/>
         <image name="share" width="24" height="25"/>
         <image name="triangle" width="24" height="22"/>

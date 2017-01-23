@@ -131,10 +131,6 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         } else {
             cell.titleLable?.text = cities[indexPath.row].name
         }
-//        let totalRow = tableView.numberOfRows(inSection: indexPath.section) //first get total rows in that section by current indexPath.
-//        if(indexPath.row == totalRow-1){
-//            cell.addLowerBorder()
-//        }
         cell.selectionStyle = .none
         return cell;
     }
@@ -173,7 +169,8 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - Table View Delegate Function
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        tableView.isUserInteractionEnabled = false
+//        tableView.deselectRow(at: indexPath, animated: true)
         var currentCity:JSONCity!
         if searchController.isActive && searchController.searchBar.text != "" {
             currentCity = filteredCities[indexPath.row]
@@ -182,29 +179,30 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
         let next = self.storyboard?.instantiateViewController(withIdentifier:"MyListVC") as! MyListVC
         if Reachable.isConnectedToNetwork() == true {
-            tableView.isUserInteractionEnabled = false
             BookCitiesClient.sharedInstance().getStores(["city":currentCity.id as AnyObject],{
                 (response,error) in
                 next.stores = response
                 next.tit = currentCity.name
                 next.city = currentCity
-                tableView.isUserInteractionEnabled = true
                 BookCitiesClient.sharedInstance().getCountry("/"+currentCity.country_id, { (response, error) in
                     var storelist = Array<JSONStore>()
                     for store in next.stores! {
-                        store.phone = response![0].country_code+store.phone!
+                        if store.phone != ""{
+                            store.phone = response![0].country_code+store.phone!
+                        }
                         storelist.append(store)
                     }
                     next.stores = storelist
+                    tableView.isUserInteractionEnabled = true
                     self.navigationController?.pushViewController(next, animated: true)
                 })
             })
         }
-        else if CoreDataManager.sharedInstance().haveStore(){
-            next.stores = JSONStore.storeFromCoreData(CoreDataManager.sharedInstance().getStores() as! [Store])
-            next.tit = self.cities[indexPath.row].name
-            self.navigationController?.pushViewController(next, animated: true)
-        }
+//        else if CoreDataManager.sharedInstance().haveStore(){
+//            next.stores = JSONStore.storeFromCoreData(CoreDataManager.sharedInstance().getStores() as! [Store])
+//            next.tit = self.cities[indexPath.row].name
+//            self.navigationController?.pushViewController(next, animated: true)
+//        }
         else {
             let alert = UIAlertController(title: Constants.Alert.Title, message: Constants.Alert.Message, preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
