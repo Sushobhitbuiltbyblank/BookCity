@@ -31,7 +31,7 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         super.viewDidLoad()
         // NavigationBar Update
         cities = Array<JSONCity>()
-        let parameter = ["per_page":tableIndex,"page":page];
+        let parameter = ["per_page":tableIndex,"page":page,"hide_empty":1];
         page = page+1
         if Reachable.isConnectedToNetwork() == true {
             BookCitiesClient.sharedInstance().getCities(parameter as [String : AnyObject], completionHandlerForCities: {
@@ -83,11 +83,7 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
-        
-//        let upperBoarder = CALayer()
-//        upperBoarder.backgroundColor = UIColor.black.cgColor
-//        upperBoarder.frame = CGRect(x: 0, y: (self.navigationController?.navigationBar.bounds.height)!, width: self.view.frame.width, height: 2.0)
-//        self.navigationController?.navigationBar.layer.addSublayer(upperBoarder)
+    
         let lowerBoader = CALayer()
         lowerBoader.backgroundColor = UIColor.black.cgColor
         lowerBoader.frame = CGRect(x: 0, y: searchController.searchBar.bounds.height-1, width: self.view.frame.width, height: 2.0)
@@ -139,7 +135,7 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
         if indexPath.row >= (cities.count)-1
         {
-            let parameter = ["per_page":tableIndex,"page":page];
+            let parameter = ["per_page":tableIndex,"page":page,"hide_empty":1];
             page = page+1
             if Reachable.isConnectedToNetwork() == true {
                 BookCitiesClient.sharedInstance().getCities(parameter as [String : AnyObject], completionHandlerForCities: {
@@ -170,6 +166,8 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // MARK: - Table View Delegate Function
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.isUserInteractionEnabled = false
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.contentView.backgroundColor = UIColor(colorLiteralRed: 217/255, green: 217/255, blue: 217/255, alpha: 1)
 //        tableView.deselectRow(at: indexPath, animated: true)
         var currentCity:JSONCity!
         if searchController.isActive && searchController.searchBar.text != "" {
@@ -194,6 +192,7 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     }
                     next.stores = storelist
                     tableView.isUserInteractionEnabled = true
+                    cell?.contentView.backgroundColor = UIColor.white
                     self.navigationController?.pushViewController(next, animated: true)
                 })
             })

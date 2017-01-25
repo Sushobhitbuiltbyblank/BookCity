@@ -71,6 +71,7 @@ class MainView: UIViewController {
     }
     
     @IBAction func myListBtnAction(_ sender: Any) {
+        myListBtn.setBackgroundImage( UIImage(named:"selectedButton"), for: .normal)
         let next = self.storyboard?.instantiateViewController(withIdentifier:"MyListVC") as! MyListVC
         next.tit = "My List"
         if CoreDataManager.sharedInstance().haveStore(){
@@ -94,6 +95,7 @@ class MainView: UIViewController {
                         }
                         next.cities = citiArray
                         next.stores = citiWiseStore
+                        self.myListBtn.setBackgroundImage( UIImage(named:"backBtnWhite"), for: .normal)
                         HUD.hide()
                         let nv:UINavigationController = UINavigationController(rootViewController: next)
                         self.present(nv, animated: true, completion: nil)
@@ -115,6 +117,7 @@ class MainView: UIViewController {
                 next.stores = citiWiseStore
                 let nv:UINavigationController = UINavigationController(rootViewController: next)
                 self.present(nv, animated: true, completion: nil)
+                self.myListBtn.setBackgroundImage( UIImage(named:"backBtnWhite"), for: .normal)
             }
 
         }
@@ -123,6 +126,7 @@ class MainView: UIViewController {
             let alert = UIAlertController(title: Constants.Alert.TitleNofavStore, message: Constants.Alert.MessageNoFavStore, preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
+            self.myListBtn.setBackgroundImage( UIImage(named:"backBtnWhite"), for: .normal)
         }
     }
     

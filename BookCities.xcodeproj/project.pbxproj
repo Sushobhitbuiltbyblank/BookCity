@@ -92,7 +92,7 @@
 		2B4B90F21DF161E7008FE99B /* ReachabilitySwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReachabilitySwift.framework; path = "../../../../Library/Developer/Xcode/DerivedData/BookCities-fdagecfuoyvlxsaabdajemrbsgur/Build/Products/Debug-iphoneos/ReachabilitySwift/ReachabilitySwift.framework"; sourceTree = "<group>"; };
 		2B4B90F41DF19802008FE99B /* Reachable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachable.swift; sourceTree = "<group>"; };
 		2B7662E31DEC526300987F40 /* JSONCity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONCity.swift; sourceTree = "<group>"; };
-		2B81934B1DE6FD69008879B2 /* BookCities.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookCities.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B81934B1DE6FD69008879B2 /* Book Cities.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Book Cities.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B81934E1DE6FD69008879B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2B8193531DE6FD69008879B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2B8193561DE6FD69008879B2 /* BookCities.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BookCities.xcdatamodel; sourceTree = "<group>"; };
@@ -175,7 +175,7 @@
 		2B81934C1DE6FD69008879B2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2B81934B1DE6FD69008879B2 /* BookCities.app */,
+				2B81934B1DE6FD69008879B2 /* Book Cities.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -369,7 +369,7 @@
 			);
 			name = BookCities;
 			productName = BookCities;
-			productReference = 2B81934B1DE6FD69008879B2 /* BookCities.app */;
+			productReference = 2B81934B1DE6FD69008879B2 /* Book Cities.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -660,7 +660,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.builtbyblank.bookcities;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Book Cities";
 				PROVISIONING_PROFILE = "c6220058-eb65-480b-b786-dcd3d13de502";
 				PROVISIONING_PROFILE_SPECIFIER = BookCitiesDevPP;
 				SDKROOT = iphoneos;
@@ -682,7 +682,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.builtbyblank.bookcities;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Book Cities";
 				PROVISIONING_PROFILE = "c6220058-eb65-480b-b786-dcd3d13de502";
 				PROVISIONING_PROFILE_SPECIFIER = BookCitiesDevPP;
 				SDKROOT = iphoneos;

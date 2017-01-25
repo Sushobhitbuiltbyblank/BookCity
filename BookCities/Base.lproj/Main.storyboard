@@ -14,7 +14,7 @@
         <!--InfosVC-->
         <scene sceneID="xCm-Be-DZq">
             <objects>
-                <viewController storyboardIdentifier="InfosVC" id="Rav-fg-r6h" customClass="InfosVC" customModule="BookCities" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InfosVC" id="Rav-fg-r6h" customClass="InfosVC" customModule="Book_Cities" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zmf-Te-uPS"/>
                         <viewControllerLayoutGuide type="bottom" id="AAK-S3-bKS"/>
@@ -28,8 +28,9 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
                             </textView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cNM-Ro-Wi7" customClass="ExtendedNavBarView" customModule="BookCities" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cNM-Ro-Wi7" customClass="ExtendedNavBarView" customModule="Book_Cities" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="20"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="swR-Ym-9af">
@@ -71,7 +72,7 @@
         <!--Main View-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MainView" customModule="BookCities" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MainView" customModule="Book_Cities" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -81,9 +82,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="U97-tF-LEU">
-                                <rect key="frame" x="18" y="112" width="284" height="396"/>
+                                <rect key="frame" x="18" y="112" width="284" height="369"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yMJ-DA-T0H" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yMJ-DA-T0H" customClass="BorderButton" customModule="Book_Cities" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="448" width="320" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -97,7 +98,7 @@
                                     <action selector="chooseACityBtnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tkE-dt-PYt"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cig-Th-TVp" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cig-Th-TVp" customClass="BorderButton" customModule="Book_Cities" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="508" width="128" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -114,7 +115,7 @@
                                     <segue destination="V3A-i7-RUi" kind="show" id="Xj1-QK-pdi"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q4h-yf-jI9" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q4h-yf-jI9" customClass="BorderButton" customModule="Book_Cities" customModuleProvider="target">
                                 <rect key="frame" x="128" y="508" width="128" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -143,6 +144,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T7L-Ys-OT7">
                                 <rect key="frame" x="256" y="508" width="1" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="1" id="SO0-qf-Duk"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IEZ-NG-wFk">
                                 <rect key="frame" x="257" y="508" width="63" height="1"/>
@@ -159,7 +163,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Book Cities" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G1W-5q-VAv">
-                                <rect key="frame" x="92.5" y="54" width="136" height="32.5"/>
+                                <rect key="frame" x="92" y="54" width="136" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -171,11 +175,10 @@
                             <constraint firstItem="yiq-ay-8hS" firstAttribute="leading" secondItem="Q4h-yf-jI9" secondAttribute="trailing" constant="1" id="25Y-7d-U2N"/>
                             <constraint firstItem="G1W-5q-VAv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3a0-JK-PHj"/>
                             <constraint firstItem="cig-Th-TVp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="5HS-py-DqB"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="T7L-Ys-OT7" secondAttribute="trailing" constant="47" id="6Yj-rx-mgK"/>
                             <constraint firstAttribute="trailing" secondItem="yiq-ay-8hS" secondAttribute="trailing" constant="3" id="8iw-XW-L41"/>
                             <constraint firstItem="IEZ-NG-wFk" firstAttribute="leading" secondItem="yiq-ay-8hS" secondAttribute="leading" id="9b9-w0-ag2"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="yiq-ay-8hS" secondAttribute="bottom" id="DXj-QB-sAP"/>
-                            <constraint firstAttribute="bottom" secondItem="U97-tF-LEU" secondAttribute="bottom" constant="60" id="Etl-3C-n6n"/>
+                            <constraint firstAttribute="bottom" secondItem="U97-tF-LEU" secondAttribute="bottom" constant="87" id="Etl-3C-n6n"/>
                             <constraint firstItem="T7L-Ys-OT7" firstAttribute="leading" secondItem="Q4h-yf-jI9" secondAttribute="trailing" id="Fd1-6N-gmV"/>
                             <constraint firstItem="U97-tF-LEU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="18" id="HOs-kn-BMI"/>
                             <constraint firstAttribute="trailing" secondItem="yMJ-DA-T0H" secondAttribute="trailing" id="J5v-do-ZDd"/>
@@ -215,7 +218,7 @@
         <!--My MapVC-->
         <scene sceneID="0G5-zk-G1n">
             <objects>
-                <viewController storyboardIdentifier="MyMapVC" id="V3A-i7-RUi" customClass="MyMapVC" customModule="BookCities" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyMapVC" id="V3A-i7-RUi" customClass="MyMapVC" customModule="Book_Cities" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="EPP-nB-UYC"/>
                         <viewControllerLayoutGuide type="bottom" id="EQG-WS-13e"/>
@@ -230,7 +233,7 @@
                                     <outlet property="delegate" destination="V3A-i7-RUi" id="2ob-Hr-TF9"/>
                                 </connections>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g43-p3-rDT" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g43-p3-rDT" customClass="BorderButton" customModule="Book_Cities" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="19" width="107.5" height="40"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -246,7 +249,7 @@
                                     <action selector="newBookBtnAction:" destination="V3A-i7-RUi" eventType="touchUpInside" id="808-AZ-hT1"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OOv-NQ-FYQ" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OOv-NQ-FYQ" customClass="BorderButton" customModule="Book_Cities" customModuleProvider="target">
                                 <rect key="frame" x="107.5" y="19" width="107" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="EVM-Kh-Umx"/>
@@ -265,7 +268,7 @@
                                     <action selector="usedBookBtnAction:" destination="V3A-i7-RUi" eventType="touchUpInside" id="B0X-l3-FRg"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zCm-0Z-GMc" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zCm-0Z-GMc" customClass="BorderButton" customModule="Book_Cities" customModuleProvider="target">
                                 <rect key="frame" x="214" y="19" width="106" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="HDV-5N-Ocx"/>
@@ -305,7 +308,7 @@
                                     <constraint firstAttribute="height" constant="1" id="4gF-3i-8xP"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="61E-cj-8EB" customClass="ExtendedNavBarView" customModule="BookCities" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="61E-cj-8EB" customClass="ExtendedNavBarView" customModule="Book_Cities" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="20"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oTe-yy-OwS">
@@ -370,7 +373,7 @@
         <!--Shop DetailVC-->
         <scene sceneID="Zqe-Mr-aan">
             <objects>
-                <viewController storyboardIdentifier="ShopDetailVC" id="7Mf-3R-1Ca" customClass="ShopDetailVC" customModule="BookCities" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ShopDetailVC" id="7Mf-3R-1Ca" customClass="ShopDetailVC" customModule="Book_Cities" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SYI-Eh-xod"/>
                         <viewControllerLayoutGuide type="bottom" id="oSf-2T-Xi4"/>
@@ -383,7 +386,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" horizontalHuggingPriority="247" verticalHuggingPriority="247" translatesAutoresizingMaskIntoConstraints="NO" id="72u-DP-nhM">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="834"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="835.5"/>
                                         <subviews>
                                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ErN-Mk-vmh">
                                                 <rect key="frame" x="0.0" y="20" width="320" height="252.5"/>
@@ -392,10 +395,10 @@
                                                 <rect key="frame" x="140" y="227.5" width="39" height="37"/>
                                             </pageControl>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="-2" translatesAutoresizingMaskIntoConstraints="NO" id="Vdk-at-IUS">
-                                                <rect key="frame" x="0.0" y="272.5" width="320" height="60"/>
+                                                <rect key="frame" x="0.0" y="272.5" width="320" height="61.5"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aCn-iN-cBA" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="162" height="60"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aCn-iN-cBA" customClass="BorderButton" customModule="Book_Cities" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="162" height="61.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <inset key="titleEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         <state key="normal" title="Show on Map">
@@ -406,16 +409,16 @@
                                                             <action selector="showOnMapAction:" destination="7Mf-3R-1Ca" eventType="touchUpInside" id="X3Z-MX-hR1"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Yv-cT-Pdq" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
-                                                        <rect key="frame" x="160" y="0.0" width="81" height="60"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Yv-cT-Pdq" customClass="BorderButton" customModule="Book_Cities" customModuleProvider="target">
+                                                        <rect key="frame" x="160" y="0.0" width="81" height="61.5"/>
                                                         <state key="normal" image="share"/>
                                                         <state key="highlighted" backgroundImage="selectedButton"/>
                                                         <connections>
                                                             <action selector="shareBtnAction:" destination="7Mf-3R-1Ca" eventType="touchUpInside" id="GJ3-R3-r68"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hGc-Ef-DDW" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
-                                                        <rect key="frame" x="239" y="0.0" width="81" height="60"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hGc-Ef-DDW" customClass="BorderButton" customModule="Book_Cities" customModuleProvider="target">
+                                                        <rect key="frame" x="239" y="0.0" width="81" height="61.5"/>
                                                         <state key="normal" image="triangle"/>
                                                         <state key="selected" image="selectedTriangle"/>
                                                         <state key="highlighted" image="selectedTriangle" backgroundImage="selectedButton"/>
@@ -426,18 +429,18 @@
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="hGc-Ef-DDW" firstAttribute="width" secondItem="3Yv-cT-Pdq" secondAttribute="width" id="7Yd-3M-Hnh"/>
-                                                    <constraint firstAttribute="height" constant="60" id="bJ4-dT-xVL"/>
+                                                    <constraint firstAttribute="height" constant="61.5" id="bJ4-dT-xVL"/>
                                                     <constraint firstItem="3Yv-cT-Pdq" firstAttribute="width" secondItem="aCn-iN-cBA" secondAttribute="width" multiplier="1/2" id="dpY-1w-d6j"/>
                                                 </constraints>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Opening hours" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d1y-h8-3Ta">
-                                                <rect key="frame" x="18" y="352.5" width="302" height="18"/>
+                                                <rect key="frame" x="18" y="354" width="302" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3uX-IB-RbC">
-                                                <rect key="frame" x="18" y="378.5" width="87" height="173.5"/>
+                                                <rect key="frame" x="18" y="380" width="87" height="173.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Bcf-kx-dfC">
                                                         <rect key="frame" x="0.0" y="0.0" width="35" height="173.5"/>
@@ -536,19 +539,19 @@
                                                 </subviews>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Contact" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hGf-ei-rOM">
-                                                <rect key="frame" x="18" y="582" width="302" height="18"/>
+                                                <rect key="frame" x="18" y="583.5" width="302" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IYC-rB-fbj">
-                                                <rect key="frame" x="18" y="608" width="294" height="23"/>
+                                                <rect key="frame" x="18" y="609.5" width="294" height="23"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="address2" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U5p-8q-MhJ">
-                                                <rect key="frame" x="18" y="631" width="294" height="23"/>
+                                                <rect key="frame" x="18" y="632.5" width="294" height="23"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="23" id="Wyp-5u-jLq"/>
                                                 </constraints>
@@ -557,7 +560,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sFB-8h-kcb">
-                                                <rect key="frame" x="17" y="681" width="294" height="23"/>
+                                                <rect key="frame" x="17" y="682.5" width="294" height="23"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="23" id="1wM-0P-62L"/>
                                                 </constraints>
@@ -570,13 +573,13 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fae-mQ-0KU">
-                                                <rect key="frame" x="18" y="729" width="302" height="18"/>
+                                                <rect key="frame" x="18" y="730.5" width="302" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DF4-t2-aEv">
-                                                <rect key="frame" x="18" y="656" width="294" height="23"/>
+                                                <rect key="frame" x="18" y="657.5" width="294" height="23"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="23" id="DLb-i5-64M"/>
                                                 </constraints>
@@ -589,7 +592,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="48" text="" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qXg-Es-dZZ">
-                                                <rect key="frame" x="18" y="755" width="284" height="20"/>
+                                                <rect key="frame" x="18" y="756.5" width="284" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="WQK-vK-O6x"/>
                                                 </constraints>
@@ -598,13 +601,13 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Categories" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1Q-6R-lHa">
-                                                <rect key="frame" x="18" y="775" width="302" height="18"/>
+                                                <rect key="frame" x="18" y="776.5" width="302" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Art, Design, Photography" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FO3-pb-zCU">
-                                                <rect key="frame" x="18" y="801" width="295" height="23"/>
+                                                <rect key="frame" x="18" y="802.5" width="295" height="23"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -655,7 +658,7 @@
                                             <constraint firstItem="Vdk-at-IUS" firstAttribute="top" secondItem="ErN-Mk-vmh" secondAttribute="bottom" id="zex-AQ-Y4V"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FaD-5w-qi7" customClass="ExtendedNavBarView" customModule="BookCities" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FaD-5w-qi7" customClass="ExtendedNavBarView" customModule="Book_Cities" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="20"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z44-bu-9NA">
@@ -731,12 +734,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GfJ-MX-hst" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1862" y="884"/>
+            <point key="canvasLocation" x="1725" y="884"/>
         </scene>
         <!--CitiesVC-->
         <scene sceneID="oSS-aJ-3Et">
             <objects>
-                <viewController storyboardIdentifier="CitiesVC" id="Un9-qO-Jli" customClass="CitiesVC" customModule="BookCities" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CitiesVC" id="Un9-qO-Jli" customClass="CitiesVC" customModule="Book_Cities" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="sGk-eb-yeR"/>
                         <viewControllerLayoutGuide type="bottom" id="nh7-oT-UU2"/>
@@ -754,7 +757,7 @@
                                     <outlet property="delegate" destination="Un9-qO-Jli" id="HxF-ld-d5L"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qAf-jG-8Lr" customClass="ExtendedNavBarView" customModule="BookCities" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qAf-jG-8Lr" customClass="ExtendedNavBarView" customModule="Book_Cities" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="20"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hcM-2v-G0i">
@@ -796,7 +799,7 @@
         <!--My ListVC-->
         <scene sceneID="HGW-kL-yNM">
             <objects>
-                <viewController storyboardIdentifier="MyListVC" id="j4u-7Z-pXv" customClass="MyListVC" customModule="BookCities" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyListVC" id="j4u-7Z-pXv" customClass="MyListVC" customModule="Book_Cities" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="sno-Q0-Yiw"/>
                         <viewControllerLayoutGuide type="bottom" id="7Qk-YO-k1d"/>
@@ -805,7 +808,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mQb-ET-Kts" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mQb-ET-Kts" customClass="BorderButton" customModule="Book_Cities" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="39" width="106.5" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="vGa-of-wvb"/>
@@ -824,7 +827,7 @@
                                     <action selector="newBooksBtnAction:" destination="j4u-7Z-pXv" eventType="touchUpInside" id="ShB-Qh-ZWM"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X1w-HZ-duV" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X1w-HZ-duV" customClass="BorderButton" customModule="Book_Cities" customModuleProvider="target">
                                 <rect key="frame" x="106.5" y="39" width="107" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="ONh-kv-6fb"/>
@@ -843,7 +846,7 @@
                                     <action selector="usedBooksBtnAction:" destination="j4u-7Z-pXv" eventType="touchUpInside" id="KL3-pH-LzT"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3pA-J5-VeV" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3pA-J5-VeV" customClass="BorderButton" customModule="Book_Cities" customModuleProvider="target">
                                 <rect key="frame" x="213.5" y="39" width="106.5" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="elA-wc-TzM"/>
@@ -862,7 +865,7 @@
                                     <action selector="museumshopsBtnAction:" destination="j4u-7Z-pXv" eventType="touchUpInside" id="T5w-P9-yRb"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eCD-PV-6xK" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eCD-PV-6xK" customClass="BorderButton" customModule="Book_Cities" customModuleProvider="target">
                                 <rect key="frame" x="160" y="79" width="160" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="lLv-Zn-cx0"/>
@@ -877,7 +880,7 @@
                                     <action selector="showOnMapBtnAction:" destination="j4u-7Z-pXv" eventType="touchUpInside" id="rRW-h4-2hg"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h8J-ym-vJY" customClass="BorderButton" customModule="BookCities" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h8J-ym-vJY" customClass="BorderButton" customModule="Book_Cities" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="79" width="160" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="yXx-EM-TZa"/>
@@ -912,9 +915,10 @@
                                     <constraint firstAttribute="height" constant="1" id="cKD-1v-eiL"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="60" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Y3Q-1q-DfG">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="61" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Y3Q-1q-DfG">
                                 <rect key="frame" x="0.0" y="139" width="320" height="430"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="separatorColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="j4u-7Z-pXv" id="yX4-ce-EQg"/>
                                     <outlet property="delegate" destination="j4u-7Z-pXv" id="ub8-Fz-36r"/>
@@ -971,7 +975,7 @@
                                     <constraint firstItem="0Gl-fl-HFf" firstAttribute="centerX" secondItem="CrD-9g-r9t" secondAttribute="centerX" id="xSQ-r5-fUt"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mFR-Ti-mEe" customClass="ExtendedNavBarView" customModule="BookCities" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mFR-Ti-mEe" customClass="ExtendedNavBarView" customModule="Book_Cities" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="20"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H2u-Rq-sIW">
@@ -1067,7 +1071,7 @@
         <image name="cross" width="28" height="28"/>
         <image name="info" width="39" height="39"/>
         <image name="infoSelected" width="39" height="39"/>
-        <image name="logo" width="585" height="808"/>
+        <image name="logo" width="638" height="880"/>
         <image name="selectedButton" width="33" height="33"/>
         <image name="selectedTriangle" width="24" height="22"/>
         <image name="share" width="24" height="25"/>
