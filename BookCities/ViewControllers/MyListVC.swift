@@ -501,10 +501,11 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
         for city in cities {
             var storeInCity = Array<JSONStore>()
             for store in stores {
-                if store.city == city{
+                if store.cityName == city{
                     storeInCity.append(store)
                 }
             }
+            storeInCity = storeInCity.sorted(by: { $0.name! < $1.name! })
             twoDArray.append(storeInCity)
         }
         return twoDArray

@@ -81,19 +81,19 @@ class MainView: UIViewController {
                 BookCitiesClient.sharedInstance().getStores({ (response, error) in
                     if error == nil{
                         for (index,value) in citiWiseStore.enumerated(){
-                            if !self.containStore(value, StortList: response!){
+                            if !self.containStore(value, StoreList: response!){
                                 citiWiseStore.remove(at: index)
                                 CoreDataManager.sharedInstance().deleteStore(storeID: value.id!)
                             }
                         }
                         var citiArray = Array<String>()
                         for store in citiWiseStore {
-                            let city = store.city
+                            let city = store.cityName
                             if !citiArray.contains(city!){
                                 citiArray.append(city!)
                             }
                         }
-                        next.cities = citiArray
+                        next.cities = citiArray.sorted(by: {$0 < $1})
                         next.stores = citiWiseStore
                         self.myListBtn.setBackgroundImage( UIImage(named:"backBtnWhite"), for: .normal)
                         HUD.hide()
@@ -276,8 +276,8 @@ class MainView: UIViewController {
     }
     
     // Check store contain in list
-    func containStore(_ store:JSONStore, StortList:[JSONStore]) -> Bool{
-        for stor in StortList{
+    func containStore(_ store:JSONStore, StoreList:[JSONStore]) -> Bool{
+        for stor in StoreList{
             if store.id == stor.id{
                 return true
             }

@@ -186,7 +186,9 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     var storelist = Array<JSONStore>()
                     for store in next.stores! {
                         if store.phone != ""{
-                            store.phone = response![0].country_code+store.phone!
+                            if !(store.phone?.hasPrefix("+"))!{
+                                store.phone = response![0].country_code+" "+store.phone!
+                            }
                         }
                         storelist.append(store)
                     }
