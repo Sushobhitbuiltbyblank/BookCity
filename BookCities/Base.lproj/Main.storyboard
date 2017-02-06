@@ -565,7 +565,7 @@
                                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="23" id="1wM-0P-62L"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                                <state key="normal" title="www.google.com">
+                                                <state key="normal">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
@@ -728,6 +728,7 @@
                         <outlet property="thuTimeL" destination="vn9-aC-zpQ" id="54M-yh-Zkl"/>
                         <outlet property="tueTimeL" destination="lgO-th-Ihq" id="tCZ-6q-u1d"/>
                         <outlet property="upperofAddress2" destination="wzU-Kr-Yq1" id="bQo-hM-LEg"/>
+                        <outlet property="websiteBtnHeight" destination="1wM-0P-62L" id="mdC-rM-bDc"/>
                         <outlet property="websiteLinkBtn" destination="sFB-8h-kcb" id="fJ7-bV-j0s"/>
                         <outlet property="wedTimeL" destination="Nry-hy-Mai" id="YGp-83-dLK"/>
                     </connections>

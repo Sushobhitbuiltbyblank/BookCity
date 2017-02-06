@@ -111,6 +111,8 @@ class Constants: NSObject {
         static let Message = "Please check your internet connectivity. "
         static let MessageNoFavStore = "Please first set favourite store."
         static let TitleNotAWebLink = "Invalide url"
+        static let MessageLocationNotFound = "Store not found on Google Maps"
+        static let TitleLocationNotFound = "Location not found"
     }
     
     struct Entity {

@@ -182,10 +182,18 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
         for store in stores! {
             if Int(store.id!)! == button.tag
             {
-                let next = self.storyboard?.instantiateViewController(withIdentifier:"ShopDetailVC") as! ShopDetailVC
-                next.store = store
-                next.tit = store.name
-                self.navigationController?.pushViewController(next, animated: true)
+                BookCitiesClient.sharedInstance().getCountry("/"+store.country!, { (response, error) in
+                    if store.phone != ""{
+                        if !(store.phone?.hasPrefix("+"))!{
+                            store.phone = response![0].country_code+" "+store.phone!
+                        }
+                    }
+                    let next = self.storyboard?.instantiateViewController(withIdentifier:"ShopDetailVC") as! ShopDetailVC
+                    next.store = store
+                    next.tit = store.name
+                    self.navigationController?.pushViewController(next, animated: true)
+                })
+                
             }
         }
     }
@@ -444,11 +452,18 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
     func goToStoreLocation(store:JSONStore,span : Double)
     {
-        var region:MKCoordinateRegion = MKCoordinateRegion()
-        region.center.latitude = Double(store.latitude!)!
-        region.center.longitude =  Double(store.longitude!)!
-        region.span = MKCoordinateSpanMake(span, span)
-        self.mapView.setRegion(region, animated: true)
+        if(store.longitude == "" || store.latitude == "") {
+            let alert = UIAlertController(title: Constants.Alert.TitleLocationNotFound, message: Constants.Alert.MessageLocationNotFound, preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+        else{
+            var region:MKCoordinateRegion = MKCoordinateRegion()
+            region.center.latitude = Double(store.latitude!)!
+            region.center.longitude =  Double(store.longitude!)!
+            region.span = MKCoordinateSpanMake(span, span)
+            self.mapView.setRegion(region, animated: true)
+        }
     }
     
     // get PinImage

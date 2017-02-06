@@ -36,6 +36,7 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     @IBOutlet weak var descriptionLable: UILabel!
     @IBOutlet weak var heightOfContent: NSLayoutConstraint!
     @IBOutlet weak var phoneNumberBtnHeight: NSLayoutConstraint!
+     @IBOutlet weak var websiteBtnHeight: NSLayoutConstraint!
     @IBOutlet weak var upperofAddress2: NSLayoutConstraint!
     
     
@@ -111,6 +112,11 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         let attribute = [NSForegroundColorAttributeName:UIColor.black] as [String : Any]
         let buttonText = NSMutableAttributedString(string: self.removeHttp((store?.website)!), attributes: attribute)
         self.websiteLinkBtn.setAttributedTitle(buttonText, for: UIControlState.normal)
+        if store?.website == "" {
+            self.view.layoutIfNeeded()
+            websiteBtnHeight.constant = 0
+            self.view.layoutIfNeeded()
+        }
         self.address2Lable.text = store?.address_2
         let htmlText = store?.descriptions
         if let htmlData = htmlText?.data(using: String.Encoding.unicode) {
