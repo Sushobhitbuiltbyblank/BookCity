@@ -97,7 +97,7 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
         else{
             cell.titleLable?.text = stores?[indexPath.row].name
             if CoreDataManager.sharedInstance().haveStore((stores?[indexPath.row].id)!){
-                cell.favBookStoreImageV.image = UIImage.init(named: Constants.image.SelectedTriagle)
+                cell.favBookStoreImageV.image = UIImage.init(named: Constants.image.SelectedSmily)
             }
             else{
                 cell.favBookStoreImageV.image = UIImage()
