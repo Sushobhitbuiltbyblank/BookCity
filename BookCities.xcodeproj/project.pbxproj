@@ -340,7 +340,7 @@
 				TargetAttributes = {
 					2B81934A1DE6FD69008879B2 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = GXTXWHR532;
+						DevelopmentTeam = 2W7KN85DB5;
 						LastSwiftMigration = 0810;
 						ProvisioningStyle = Manual;
 					};
@@ -601,17 +601,17 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Anna Haas (2W7KN85DB5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = GXTXWHR532;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 2W7KN85DB5;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = BookCities/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.builtbyblank.bookcities;
+				PRODUCT_BUNDLE_IDENTIFIER = ch.annahaas.bookcities1;
 				PRODUCT_NAME = "Book Cities";
-				PROVISIONING_PROFILE = "f3bce8a6-04d7-47c1-8875-33c8951b1b7e";
-				PROVISIONING_PROFILE_SPECIFIER = BookCitiesDevPP;
+				PROVISIONING_PROFILE = "d3631c17-2c86-4df0-9959-38d22a15f295";
+				PROVISIONING_PROFILE_SPECIFIER = BookCitiesDistributionPP;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 3.0;
 			};
@@ -624,17 +624,17 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Anna Haas (2W7KN85DB5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = GXTXWHR532;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 2W7KN85DB5;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = BookCities/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.builtbyblank.bookcities;
+				PRODUCT_BUNDLE_IDENTIFIER = ch.annahaas.bookcities1;
 				PRODUCT_NAME = "Book Cities";
-				PROVISIONING_PROFILE = "f3bce8a6-04d7-47c1-8875-33c8951b1b7e";
-				PROVISIONING_PROFILE_SPECIFIER = BookCitiesDevPP;
+				PROVISIONING_PROFILE = "d3631c17-2c86-4df0-9959-38d22a15f295";
+				PROVISIONING_PROFILE_SPECIFIER = BookCitiesDistributionPP;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 3.0;
 			};
