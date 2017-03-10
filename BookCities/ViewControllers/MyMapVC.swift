@@ -248,9 +248,6 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
             if (self.navigationController?.viewControllers.count) == 1 && currentLocation == nil {
                 HUD.show(.progress)
                 currentLocation = userLocation
-                
-//                let region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate,160934, 160934)
-//                mapView.setRegion(mapView.regionThatFits(region), animated: true)
                 if Reachable.isConnectedToNetwork(){
                     BookCitiesClient.sharedInstance().getStores({ (response, error) in
                         if error == nil{
@@ -293,41 +290,6 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
                     self.present(alert, animated: true, completion: nil)
                     
                 }
-//                geocoder.reverseGeocodeLocation(userLocation.location!, completionHandler:{(placemarks, error) in
-//                    if placemarks != nil && (placemarks?.count)! > 0
-//                    {
-//                        self.placemark = (placemarks?[0])!
-//                        print(self.placemark.locality ?? "locality")
-//                        print(self.placemark.administrativeArea ?? "administrativeArea")
-//                        print(self.placemark.country ?? "country")
-////                        let address = ["country_name":self.placemark.country,
-////                                       "state_name":self.placemark.administrativeArea,
-////                                       "city_name":self.placemark.locality]
-//                        
-//                        if self.placemark.locality != nil
-//                        {
-////                            BookCitiesClient.sharedInstance().getStores(address as [String : AnyObject], { (response, error) in
-////                                if error == nil{
-////                                    self.stores = response
-////                                    self.totalStores = self.stores
-////                                    self.addAnnotationToMap()
-////                                    self.storesWithDistance()
-////                                    if(self.mapAnnotations.count>1){
-////                                        mapView.showAnnotations(self.mapAnnotations, animated: true)
-////                                    }
-////                                    HUD.hide()
-////                                }
-////                                
-////                            })
-//                        }
-//                    }
-//                    else
-//                    {
-//                        HUD.hide()
-//                        // Handle the nil case if necessary.
-//                    }
-//                    
-//                })
 
             }
             if let nv = (self.navigationController?.viewControllers.count) {
@@ -339,9 +301,6 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
                         if(self.mapAnnotations.count>1){
                             mapView.showAnnotations(self.mapAnnotations, animated: true)
                         }
-                        
-                        //                    let region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate,2000, 2000)
-                        //                    mapView.setRegion(mapView.regionThatFits(region), animated: true)
                     }
                 }
             }
@@ -421,33 +380,6 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     //MARK: -  Set Map to default Location
     fileprivate func gotoDefaultLocation(_ city:JSONCity) {
         mapView.showAnnotations(mapAnnotations, animated: true)
-//        var address = [String:String]()
-//        BookCitiesClient.sharedInstance().getCityOrigin([String : AnyObject](),id: city.id,completionHandlerForCityOrigin:{
-//        (response,error)in
-//            let state = JSONState.stateFromResults(response?["state"] as! [[String : AnyObject]])
-//            print(state[0].name)
-//            let country = JSONCountry.countryFromResults(response?["country"] as! [[String : AnyObject]])
-//            print(country[0].name)
-//            address = ["city":city.name ?? "",
-//                                       "state":state[0].name,
-//                                    "country": country[0].name];
-//            self.geocoder.geocodeAddressDictionary(address, completionHandler: { (placemark,error) in
-//                if(error == nil){
-//                    let placemarkss:CLPlacemark = (placemark?.last)!
-//                    var region:MKCoordinateRegion = MKCoordinateRegion()
-//                    region.center.latitude = (placemarkss.location?.coordinate.latitude)!
-//                    region.center.longitude = (placemarkss.location?.coordinate.longitude)!
-//                    region.span = MKCoordinateSpanMake(0.009, 0.009)
-//                    self.mapView.setRegion(region, animated: true)
-//                }
-//                else{
-//                    print(error ?? "No city Location there and no error also")
-//                }
-//            })
-//
-//        })
-//        
-        
     }
 
     func goToStoreLocation(store:JSONStore,span : Double)

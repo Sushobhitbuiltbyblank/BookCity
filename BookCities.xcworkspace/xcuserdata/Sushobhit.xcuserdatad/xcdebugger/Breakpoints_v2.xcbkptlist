@@ -17,6 +17,38 @@
             endingLineNumber = "153"
             landmarkName = "saveOfflineDataBtnAction(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Book_Cities.MainView.(saveOfflineDataBtnAction (Any) -&gt; ()).(closure #1).(closure #1).(closure #2)"
+                  moduleName = "Book Cities"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Sushobhit/Desktop/BookMaps/Development/BookCities/BookCities/ViewControllers/MainView.swift"
+                  timestampString = "510843513.45422"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "153"
+                  endingLineNumber = "153"
+                  offsetFromSymbolStart = "312">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Book_Cities.MainView.(saveOfflineDataBtnAction (Any) -&gt; ()).(closure #1).(closure #1).(closure #2).(closure #1)"
+                  moduleName = "Book Cities"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Sushobhit/Desktop/BookMaps/Development/BookCities/BookCities/ViewControllers/MainView.swift"
+                  timestampString = "510843513.45547"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "139"
+                  endingLineNumber = "139"
+                  offsetFromSymbolStart = "20">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -33,6 +65,38 @@
             endingLineNumber = "204"
             landmarkName = "saveOfflineDataBtnAction(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Book_Cities.MainView.(saveOfflineDataBtnAction (Any) -&gt; ()).(closure #1).(closure #3)"
+                  moduleName = "Book Cities"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Sushobhit/Desktop/BookMaps/Development/BookCities/BookCities/ViewControllers/MainView.swift"
+                  timestampString = "510843513.458089"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "204"
+                  endingLineNumber = "204"
+                  offsetFromSymbolStart = "212">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Book_Cities.MainView.(saveOfflineDataBtnAction (Any) -&gt; ()).(closure #1).(closure #3).(closure #2)"
+                  moduleName = "Book Cities"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Sushobhit/Desktop/BookMaps/Development/BookCities/BookCities/ViewControllers/MainView.swift"
+                  timestampString = "510843513.459292"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "139"
+                  endingLineNumber = "139"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -49,6 +113,38 @@
             endingLineNumber = "233"
             landmarkName = "saveOfflineDataBtnAction(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Book_Cities.MainView.(saveOfflineDataBtnAction (Any) -&gt; ()).(closure #1).(closure #4)"
+                  moduleName = "Book Cities"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Sushobhit/Desktop/BookMaps/Development/BookCities/BookCities/ViewControllers/MainView.swift"
+                  timestampString = "510843513.461822"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "233"
+                  endingLineNumber = "233"
+                  offsetFromSymbolStart = "212">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Book_Cities.MainView.(saveOfflineDataBtnAction (Any) -&gt; ()).(closure #1).(closure #4).(closure #2)"
+                  moduleName = "Book Cities"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Sushobhit/Desktop/BookMaps/Development/BookCities/BookCities/ViewControllers/MainView.swift"
+                  timestampString = "510843513.463028"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "139"
+                  endingLineNumber = "139"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -65,6 +161,48 @@
             endingLineNumber = "174"
             landmarkName = "saveOfflineDataBtnAction(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Book_Cities.MainView.(saveOfflineDataBtnAction (Any) -&gt; ()).(closure #1).(closure #2)"
+                  moduleName = "Book Cities"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Sushobhit/Desktop/BookMaps/Development/BookCities/BookCities/ViewControllers/MainView.swift"
+                  timestampString = "510843513.465609"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "174"
+                  endingLineNumber = "174"
+                  offsetFromSymbolStart = "212">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Book_Cities.MainView.(saveOfflineDataBtnAction (Any) -&gt; ()).(closure #1).(closure #2).(closure #2)"
+                  moduleName = "Book Cities"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Sushobhit/Desktop/BookMaps/Development/BookCities/BookCities/ViewControllers/MainView.swift"
+                  timestampString = "510843513.46682"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "139"
+                  endingLineNumber = "139"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            scope = "0"
+            stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

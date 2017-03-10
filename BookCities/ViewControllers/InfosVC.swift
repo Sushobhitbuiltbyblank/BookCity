@@ -27,11 +27,11 @@ class InfosVC: UIViewController {
         BookCitiesClient.sharedInstance().getInfoData([:], {
             (response,error) in
             let htmlText = response
+            HUD.hide()
             if let htmlData = htmlText?.data(using: String.Encoding.utf8, allowLossyConversion: true) {
                 do {
                     let attributedText = try NSMutableAttributedString(data: htmlData, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
                     attributedText.addAttribute(NSFontAttributeName, value: UIFont(name: "Helvetica Neue", size: 20)!, range: NSMakeRange(0,attributedText.length))
-                    HUD.hide()
                     self.textView.attributedText = attributedText
                 } catch let e as NSError {
                     print("Couldn't translate \(htmlText): \(e.localizedDescription) ")
@@ -47,10 +47,6 @@ class InfosVC: UIViewController {
             }))
             self.present(alert, animated: true, completion: nil)
         }
-//        let upperBoarder = CALayer()
-//        upperBoarder.backgroundColor = UIColor.black.cgColor
-//        upperBoarder.frame = CGRect(x: 0, y: (self.navigationController?.navigationBar.bounds.height)!, width: self.view.frame.width, height: 2.0)
-//        self.navigationController?.navigationBar.layer.addSublayer(upperBoarder)
         navigationController!.navigationBar.isTranslucent = false
         
         // The navigation bar's shadowImage is set to a transparent image.  In

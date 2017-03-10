@@ -11,6 +11,7 @@ import AlamofireImage
 
 protocol UpdateFavorate {
     func updateTableView(indexpath:IndexPath)
+    func updateTableViewOnly()
 }
 
 class ShopDetailVC: UIViewController , UIScrollViewDelegate {
@@ -25,7 +26,6 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     @IBOutlet weak var categoriesLabel: UILabel!
     @IBOutlet weak var addressLable: UILabel!
     @IBOutlet weak var address2Lable: UILabel!
-//    @IBOutlet weak var descriptionTV: UITextView!
     @IBOutlet weak var categoryLable: UILabel!
     @IBOutlet weak var contentOfScrollView: UIView!
     @IBOutlet weak var websiteLinkBtn: UIButton!
@@ -71,9 +71,7 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         imageView.frame = CGRect.init(x: 0, y: 0, width: 24, height: 24) //CGRectMake(0, 0, 24, 24)
         let barButton = UIBarButtonItem.init(customView: imageView)
         self.navigationItem.rightBarButtonItem = barButton
-        
-//        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage(named: self.getStoreTypeImage())?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: .plain, target: nil, action: nil)
-        
+    
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openCloseTime))
         self.hoursStackView.addGestureRecognizer(tapGesture)
         
@@ -149,10 +147,6 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         self.shareBtn.addBorder(width: 2)
         self.showOnMapBtn.addBorder(width: 2)
         self.favorateBtn.addBorder(width: 2)
-//        self.shareBtn.imageEdgeInsets = UIEdgeInsetsMake(12, 26, 12, 26)
-//        self.shareBtn.imageView?.contentMode = .scaleAspectFit
-//        self.favorateBtn.imageEdgeInsets = UIEdgeInsetsMake(12, 26, 12, 26)
-//        self.favorateBtn.imageView?.contentMode = .scaleAspectFit
         navigationController!.navigationBar.isTranslucent = false
         
         // The navigation bar's shadowImage is set to a transparent image.  In
@@ -288,7 +282,7 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
                 (response,error)in
                 let city = JSONState.stateFromResults(response?["cities"] as! [[String : AnyObject]])
                 CoreDataManager.sharedInstance().saveStores(self.store!,cityName: city[0].name)
-                 self.delegate?.updateTableView(indexpath: self.indexPath!)
+                 self.delegate?.updateTableViewOnly()
             })
         }
         
@@ -442,33 +436,11 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     func getcorrectPhoneNumber(number:String) ->String
     {
         var no = number.trimmingCharacters(in: .whitespaces)
-        
-//        if no.contains("(")
-//        {
-//            no = no.replacingOccurrences(of: "(", with: "")
-//
-//        }
-        
         if no.contains(" ")
         {
             no = no.replacingOccurrences(of: " ", with: "")
             
         }
-        
-//        if no.contains(")")
-//        {
-//            no = no.replacingOccurrences(of: ")", with: "")
-//        }
-        
-//        if no.contains("+") {
-//            no = no.replacingOccurrences(of: "+", with: "")
-//        }
-        
-//        if no.contains("-")
-//        {
-//            no = no.replacingOccurrences(of: "-", with: "")
-//        }
-        
         return no
     }
     // add Open Button On StackView
@@ -656,12 +628,10 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
             
             if let upperLimit = Int(uppertime[0]){
                 upper = upperLimit * 60 + Int(uppertime[1])!
-//                print("upper -> \(upper)")
             }
             if let lowerLimit = Int(lowertime[0]) {
                 if Int(uppertime[0])! > lowerLimit {
                     lower = lowerLimit * 60 + Int(lowertime[1])!
-//                    print("lower -> \(lower)")
                     if currentTime < lower || currentTime > upper {
                         return true
                     }
@@ -670,7 +640,6 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
                 else{
                     lower = lowerLimit * 60 + Int(lowertime[1])!
                 }
-//                print("lower -> \(lower)")
             }
 
             if upper < currentTime && lower > currentTime {

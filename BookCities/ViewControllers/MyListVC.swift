@@ -516,15 +516,34 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
     func updateTableView(indexpath:IndexPath) {
         if cities != nil {
             var twoDArray = getTwoDArray(cities: cities!, stores: stores!)
-             let store = twoDArray[indexpath.section][indexpath.row]
-            for (index,value) in stores!.enumerated(){
-                if store.id == value.id
-                {
-                    stores?.remove(at: index)
+            if twoDArray.count > indexpath.section && twoDArray[indexpath.section].count > indexpath.row {
+                let store = twoDArray[indexpath.section][indexpath.row]
+                for (index,value) in stores!.enumerated(){
+                    if store.id == value.id
+                    {
+                        stores?.remove(at: index)
+                    }
                 }
             }
         }
         self.tableView.reloadData()
+    }
+    
+    func updateTableViewOnly(){
+        if CoreDataManager.sharedInstance().haveStore(){
+            let citiWiseStore = JSONStore.storeFromCoreData(CoreDataManager.sharedInstance().getStores() as! [Store])
+            var citiArray = Array<String>()
+            for store in citiWiseStore {
+                let city = store.cityName
+                if !citiArray.contains(city!){
+                    citiArray.append(city!)
+                }
+            }
+            self.cities = citiArray.sorted(by: {$0 < $1})
+            self.stores = citiWiseStore
+            self.totalStores = citiWiseStore
+            self.tableView.reloadData()
+        }
     }
     
     

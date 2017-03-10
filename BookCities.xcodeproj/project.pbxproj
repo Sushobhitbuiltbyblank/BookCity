@@ -16,16 +16,6 @@
 		2B2009E71E0922BC00D42672 /* headerViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B2009E51E0922BC00D42672 /* headerViewCell.xib */; };
 		2B2BBF1E1E261E760098AFF5 /* CustomeNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2BBF1D1E261E760098AFF5 /* CustomeNavBar.swift */; };
 		2B2BBF241E2621D30098AFF5 /* NVViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2BBF231E2621D30098AFF5 /* NVViewController.swift */; };
-		2B2BBF261E2665FF0098AFF5 /* Element 28.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B2BBF251E2665FF0098AFF5 /* Element 28.png */; };
-		2B2BBF281E2666120098AFF5 /* Element 29.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B2BBF271E2666120098AFF5 /* Element 29.png */; };
-		2B2BBF2C1E2666650098AFF5 /* Element 25.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B2BBF2B1E2666650098AFF5 /* Element 25.png */; };
-		2B2BBF2F1E2667010098AFF5 /* Element 28@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B2BBF2D1E2667010098AFF5 /* Element 28@2x.png */; };
-		2B2BBF301E2667010098AFF5 /* Element 28@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B2BBF2E1E2667010098AFF5 /* Element 28@3x.png */; };
-		2B2BBF331E26670E0098AFF5 /* Element 29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B2BBF311E26670E0098AFF5 /* Element 29@2x.png */; };
-		2B2BBF341E26670E0098AFF5 /* Element 29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B2BBF321E26670E0098AFF5 /* Element 29@3x.png */; };
-		2B2BBF371E26671C0098AFF5 /* Element 25@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B2BBF351E26671C0098AFF5 /* Element 25@3x.png */; };
-		2B2BBF381E26671C0098AFF5 /* Element 25@4x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B2BBF361E26671C0098AFF5 /* Element 25@4x.png */; };
-		2B2BBF3A1E2667680098AFF5 /* Element 25@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B2BBF391E2667680098AFF5 /* Element 25@2x.png */; };
 		2B3A69861E2774E000B8EC6E /* ExtendedNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3A69851E2774E000B8EC6E /* ExtendedNavBarView.swift */; };
 		2B418F931E2748B000DE15B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B418F921E2748B000DE15B1 /* Assets.xcassets */; };
 		2B4B90F51DF19802008FE99B /* Reachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4B90F41DF19802008FE99B /* Reachable.swift */; };
@@ -55,14 +45,12 @@
 		2B8193961DE6FE34008879B2 /* BookStoreTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B81937D1DE6FE34008879B2 /* BookStoreTVCell.xib */; };
 		2B8193971DE6FE34008879B2 /* CitiesTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81937E1DE6FE34008879B2 /* CitiesTVCell.swift */; };
 		2B8193981DE6FE34008879B2 /* CitiesTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B81937F1DE6FE34008879B2 /* CitiesTVCell.xib */; };
-		2B8193991DE6FE34008879B2 /* splash_screen.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B8193821DE6FE34008879B2 /* splash_screen.png */; };
 		2B81939D1DE709EE008879B2 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B81939C1DE709EE008879B2 /* Alamofire.framework */; };
 		2B81939F1DE709FA008879B2 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B81939E1DE709FA008879B2 /* MapKit.framework */; };
 		2B8193A11DE70A02008879B2 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8193A01DE70A02008879B2 /* CoreLocation.framework */; };
 		2B81BB161DEEF18800318859 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81BB151DEEF18800318859 /* CoreDataManager.swift */; };
 		2B81BB181DEEFFF400318859 /* JSONCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81BB171DEEFFF400318859 /* JSONCategory.swift */; };
 		2B8AA7D21DEDAFEC0024F011 /* JSONStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8AA7D11DEDAFEC0024F011 /* JSONStore.swift */; };
-		2B9ADB571DFACDD800DD96EA /* MapDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9ADB561DFACDD800DD96EA /* MapDataController.swift */; };
 		2BDB3DC61DF1B616004AC4FC /* categoriescdExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDB3DC51DF1B616004AC4FC /* categoriescdExtension.swift */; };
 		90A10771576CFEA06A1F17FA /* Pods_BookCities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4E7342CCD0E719848D26A94 /* Pods_BookCities.framework */; };
 /* End PBXBuildFile section */
@@ -77,16 +65,6 @@
 		2B2009E51E0922BC00D42672 /* headerViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = headerViewCell.xib; sourceTree = "<group>"; };
 		2B2BBF1D1E261E760098AFF5 /* CustomeNavBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomeNavBar.swift; path = BookCities/Views/CustomeNavBar.swift; sourceTree = SOURCE_ROOT; };
 		2B2BBF231E2621D30098AFF5 /* NVViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVViewController.swift; sourceTree = "<group>"; };
-		2B2BBF251E2665FF0098AFF5 /* Element 28.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Element 28.png"; sourceTree = "<group>"; };
-		2B2BBF271E2666120098AFF5 /* Element 29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Element 29.png"; sourceTree = "<group>"; };
-		2B2BBF2B1E2666650098AFF5 /* Element 25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Element 25.png"; sourceTree = "<group>"; };
-		2B2BBF2D1E2667010098AFF5 /* Element 28@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Element 28@2x.png"; sourceTree = "<group>"; };
-		2B2BBF2E1E2667010098AFF5 /* Element 28@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Element 28@3x.png"; sourceTree = "<group>"; };
-		2B2BBF311E26670E0098AFF5 /* Element 29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Element 29@2x.png"; sourceTree = "<group>"; };
-		2B2BBF321E26670E0098AFF5 /* Element 29@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Element 29@3x.png"; sourceTree = "<group>"; };
-		2B2BBF351E26671C0098AFF5 /* Element 25@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Element 25@3x.png"; sourceTree = "<group>"; };
-		2B2BBF361E26671C0098AFF5 /* Element 25@4x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Element 25@4x.png"; sourceTree = "<group>"; };
-		2B2BBF391E2667680098AFF5 /* Element 25@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Element 25@2x.png"; sourceTree = "<group>"; };
 		2B3A69851E2774E000B8EC6E /* ExtendedNavBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtendedNavBarView.swift; sourceTree = "<group>"; };
 		2B418F921E2748B000DE15B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2B4B90F21DF161E7008FE99B /* ReachabilitySwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReachabilitySwift.framework; path = "../../../../Library/Developer/Xcode/DerivedData/BookCities-fdagecfuoyvlxsaabdajemrbsgur/Build/Products/Debug-iphoneos/ReachabilitySwift/ReachabilitySwift.framework"; sourceTree = "<group>"; };
@@ -119,14 +97,12 @@
 		2B81937D1DE6FE34008879B2 /* BookStoreTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookStoreTVCell.xib; sourceTree = "<group>"; };
 		2B81937E1DE6FE34008879B2 /* CitiesTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CitiesTVCell.swift; sourceTree = "<group>"; };
 		2B81937F1DE6FE34008879B2 /* CitiesTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CitiesTVCell.xib; sourceTree = "<group>"; };
-		2B8193821DE6FE34008879B2 /* splash_screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash_screen.png; sourceTree = "<group>"; };
 		2B81939C1DE709EE008879B2 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "Pods/../build/Release-iphoneos/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
 		2B81939E1DE709FA008879B2 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		2B8193A01DE70A02008879B2 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2B81BB151DEEF18800318859 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		2B81BB171DEEFFF400318859 /* JSONCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONCategory.swift; sourceTree = "<group>"; };
 		2B8AA7D11DEDAFEC0024F011 /* JSONStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONStore.swift; sourceTree = "<group>"; };
-		2B9ADB561DFACDD800DD96EA /* MapDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDataController.swift; sourceTree = "<group>"; };
 		2BDB3DC51DF1B616004AC4FC /* categoriescdExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = categoriescdExtension.swift; sourceTree = "<group>"; };
 		A240B5DB20F3E8440EBDF64C /* Pods-BookCities.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookCities.release.xcconfig"; path = "Pods/Target Support Files/Pods-BookCities/Pods-BookCities.release.xcconfig"; sourceTree = "<group>"; };
 		AF25DD344DE010CE098E7B94 /* Pods-BookCities.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookCities.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BookCities/Pods-BookCities.debug.xcconfig"; sourceTree = "<group>"; };
@@ -189,7 +165,6 @@
 				2B8193761DE6FE34008879B2 /* Client */,
 				2B81936E1DE6FE34008879B2 /* Model */,
 				2B8193791DE6FE34008879B2 /* Views */,
-				2B8193811DE6FE34008879B2 /* assets */,
 				2B81934E1DE6FD69008879B2 /* AppDelegate.swift */,
 				2B8193521DE6FD69008879B2 /* Main.storyboard */,
 				2B418F921E2748B000DE15B1 /* Assets.xcassets */,
@@ -292,29 +267,10 @@
 			path = ../Views/Extension;
 			sourceTree = "<group>";
 		};
-		2B8193811DE6FE34008879B2 /* assets */ = {
-			isa = PBXGroup;
-			children = (
-				2B2BBF251E2665FF0098AFF5 /* Element 28.png */,
-				2B2BBF2D1E2667010098AFF5 /* Element 28@2x.png */,
-				2B2BBF2E1E2667010098AFF5 /* Element 28@3x.png */,
-				2B2BBF271E2666120098AFF5 /* Element 29.png */,
-				2B2BBF311E26670E0098AFF5 /* Element 29@2x.png */,
-				2B2BBF321E26670E0098AFF5 /* Element 29@3x.png */,
-				2B8193821DE6FE34008879B2 /* splash_screen.png */,
-				2B2BBF2B1E2666650098AFF5 /* Element 25.png */,
-				2B2BBF391E2667680098AFF5 /* Element 25@2x.png */,
-				2B2BBF351E26671C0098AFF5 /* Element 25@3x.png */,
-				2B2BBF361E26671C0098AFF5 /* Element 25@4x.png */,
-			);
-			path = assets;
-			sourceTree = "<group>";
-		};
 		2B81BB141DEEE58100318859 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				2B81BB151DEEF18800318859 /* CoreDataManager.swift */,
-				2B9ADB561DFACDD800DD96EA /* MapDataController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -379,7 +335,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Built by Blank India Pvt. Ltd.";
 				TargetAttributes = {
 					2B81934A1DE6FD69008879B2 = {
@@ -414,22 +370,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B81935C1DE6FD69008879B2 /* LaunchScreen.storyboard in Resources */,
-				2B2BBF381E26671C0098AFF5 /* Element 25@4x.png in Resources */,
 				2B2009E71E0922BC00D42672 /* headerViewCell.xib in Resources */,
-				2B2BBF2F1E2667010098AFF5 /* Element 28@2x.png in Resources */,
 				2B8193981DE6FE34008879B2 /* CitiesTVCell.xib in Resources */,
-				2B2BBF3A1E2667680098AFF5 /* Element 25@2x.png in Resources */,
 				2B418F931E2748B000DE15B1 /* Assets.xcassets in Resources */,
-				2B2BBF2C1E2666650098AFF5 /* Element 25.png in Resources */,
 				2B8193541DE6FD69008879B2 /* Main.storyboard in Resources */,
-				2B2BBF261E2665FF0098AFF5 /* Element 28.png in Resources */,
-				2B2BBF331E26670E0098AFF5 /* Element 29@2x.png in Resources */,
-				2B2BBF371E26671C0098AFF5 /* Element 25@3x.png in Resources */,
 				2B8193961DE6FE34008879B2 /* BookStoreTVCell.xib in Resources */,
-				2B2BBF341E26670E0098AFF5 /* Element 29@3x.png in Resources */,
-				2B8193991DE6FE34008879B2 /* splash_screen.png in Resources */,
-				2B2BBF281E2666120098AFF5 /* Element 29.png in Resources */,
-				2B2BBF301E2667010098AFF5 /* Element 28@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,7 +461,6 @@
 				2B2BBF1E1E261E760098AFF5 /* CustomeNavBar.swift in Sources */,
 				2B81938C1DE6FE34008879B2 /* BookStoreAnnotation.swift in Sources */,
 				2B8193851DE6FE34008879B2 /* MainView.swift in Sources */,
-				2B9ADB571DFACDD800DD96EA /* MapDataController.swift in Sources */,
 				2B81934F1DE6FD69008879B2 /* AppDelegate.swift in Sources */,
 				2B81938F1DE6FE34008879B2 /* CustomAnnotationView.swift in Sources */,
 				2B4B90F51DF19802008FE99B /* Reachable.swift in Sources */,
@@ -570,16 +514,17 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Shivam Goyal (QQBLUMH2RR)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Shivam Goyal (QQBLUMH2RR)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Anna Haas (2W7KN85DB5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Anna Haas (2W7KN85DB5)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 2W7KN85DB5;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = fast;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -593,9 +538,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "69564718-0673-4225-8a1b-a1478c31af74";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -622,15 +568,16 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Shivam Goyal (QQBLUMH2RR)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Shivam Goyal (QQBLUMH2RR)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Anna Haas (2W7KN85DB5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Anna Haas (2W7KN85DB5)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 2W7KN85DB5;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = fast;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -639,8 +586,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "69564718-0673-4225-8a1b-a1478c31af74";
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -652,7 +600,8 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Shivam Goyal (QQBLUMH2RR)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Anna Haas (2W7KN85DB5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = GXTXWHR532;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = BookCities/Info.plist;
@@ -661,7 +610,7 @@
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.builtbyblank.bookcities;
 				PRODUCT_NAME = "Book Cities";
-				PROVISIONING_PROFILE = "c6220058-eb65-480b-b786-dcd3d13de502";
+				PROVISIONING_PROFILE = "f3bce8a6-04d7-47c1-8875-33c8951b1b7e";
 				PROVISIONING_PROFILE_SPECIFIER = BookCitiesDevPP;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 3.0;
@@ -674,7 +623,8 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Shivam Goyal (QQBLUMH2RR)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Anna Haas (2W7KN85DB5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = GXTXWHR532;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = BookCities/Info.plist;
@@ -683,7 +633,7 @@
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.builtbyblank.bookcities;
 				PRODUCT_NAME = "Book Cities";
-				PROVISIONING_PROFILE = "c6220058-eb65-480b-b786-dcd3d13de502";
+				PROVISIONING_PROFILE = "f3bce8a6-04d7-47c1-8875-33c8951b1b7e";
 				PROVISIONING_PROFILE_SPECIFIER = BookCitiesDevPP;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 3.0;
