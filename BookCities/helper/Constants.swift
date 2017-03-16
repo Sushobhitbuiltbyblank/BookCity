@@ -13,8 +13,8 @@ class Constants: NSObject {
     // MARK: BookCity
     struct BookCity {
         static let ApiScheme = "http"
-        static let ApiHost = "54.191.201.248"
-        static let ApiPath = "/bookmap/app/api"
+        static let ApiHost = "bookcities.org"
+        static let ApiPath = "/app/app/api"
     }
 
     // MARK: Methods

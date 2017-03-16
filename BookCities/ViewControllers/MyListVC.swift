@@ -530,20 +530,22 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
     }
     
     func updateTableViewOnly(){
-        if CoreDataManager.sharedInstance().haveStore(){
-            let citiWiseStore = JSONStore.storeFromCoreData(CoreDataManager.sharedInstance().getStores() as! [Store])
-            var citiArray = Array<String>()
-            for store in citiWiseStore {
-                let city = store.cityName
-                if !citiArray.contains(city!){
-                    citiArray.append(city!)
+        if cities != nil {
+            if CoreDataManager.sharedInstance().haveStore(){
+                let citiWiseStore = JSONStore.storeFromCoreData(CoreDataManager.sharedInstance().getStores() as! [Store])
+                var citiArray = Array<String>()
+                for store in citiWiseStore {
+                    let city = store.cityName
+                    if !citiArray.contains(city!){
+                        citiArray.append(city!)
+                    }
                 }
+                self.cities = citiArray.sorted(by: {$0 < $1})
+                self.stores = citiWiseStore
+                self.totalStores = citiWiseStore
             }
-            self.cities = citiArray.sorted(by: {$0 < $1})
-            self.stores = citiWiseStore
-            self.totalStores = citiWiseStore
-            self.tableView.reloadData()
         }
+        self.tableView.reloadData()
     }
     
     
