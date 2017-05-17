@@ -686,6 +686,34 @@ class CoreDataManager: NSObject {
         
     }
     
+    func haveCategory(_ Id: String) -> Bool {
+        //        guard let appDelegate =
+        //            UIApplication.shared.delegate as? AppDelegate else {
+        //                return false
+        //        }
+        let managedContext =
+            self.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.Entity.Category)
+        let predicate = NSPredicate(format: "id == %@", Id)
+        fetchRequest.predicate = predicate
+        do
+        {
+            let fetchResults = try managedContext.fetch(fetchRequest)
+            if fetchResults.count > 0 {
+                return true
+            }
+            else{
+                return false
+            }
+        }
+        catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+            return false
+        }
+        
+    }
+
     // MARK: - Get the Record by ID
     
     func getStore(_ Id: String) -> Store {

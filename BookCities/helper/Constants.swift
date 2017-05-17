@@ -149,7 +149,7 @@ class Constants: NSObject {
         static let Share = "share"
         static let Smily = "smily"
         static let SelectedSmily = "selectedSmily"
-        static let ImagePath = "http://54.191.201.248/bookmap/uploads/store_images/"
+        static let ImagePath = "http://bookcities.org/app/uploads/store_images/"
     }
     struct CDStoreKey {
         static let CityName = "cityName"

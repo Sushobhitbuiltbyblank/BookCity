@@ -20,18 +20,17 @@ class MainView: UIViewController {
         override func viewDidLoad() {
         super.viewDidLoad()
         setViews()
-        if(!CoreDataManager.sharedInstance().haveCategories()){
             if Reachable.isConnectedToNetwork() == true
             {
-                
                 BookCitiesClient.sharedInstance().getCategories({
                     (response, error) in
                     for catergory in response!
                     {
-                        CoreDataManager.sharedInstance().saveCategory(catergory.name!, id: catergory.id!)
+                        if !CoreDataManager.sharedInstance().haveCategory(catergory.id!){
+                            CoreDataManager.sharedInstance().saveCategory(catergory.name!, id: catergory.id!)
+                        }
                     }
                 })
-                
             }
             else
             {
@@ -39,7 +38,6 @@ class MainView: UIViewController {
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }
-        }
     }
 
     override func didReceiveMemoryWarning() {
