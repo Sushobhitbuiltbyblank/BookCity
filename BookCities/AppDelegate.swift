@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import UserNotifications
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -16,6 +17,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //declare this property where it won't go out of scope relative to your listener
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        let skipAction = UNNotificationAction(identifier: "SKIP_ACTION",
+                                                title: "Skip",
+                                                options: UNNotificationActionOptions(rawValue: 0))
+        let addNewStoreCategory = UNNotificationCategory(identifier: "addNewStore",
+                                                    actions: [skipAction],
+                                                    intentIdentifiers: [],
+                                                    options: .customDismissAction)
+        
+        // Register the category.
+        let center = UNUserNotificationCenter.current()
+        center.delegate = self
+        center.setNotificationCategories([addNewStoreCategory])
+        center.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+            
+            // Enable or disable features based on authorization.
+            if granted == true
+            {
+                print("Allow")
+                application.registerForRemoteNotifications()
+            }
+            else
+            {
+                print("Don't Allow")
+            }
+        }
+        application.applicationIconBadgeNumber = 0
+        
+        if let notification = launchOptions?[.remoteNotification] as? [String: AnyObject] {
+            // 2
+            let aps = notification["aps"] as! [String: AnyObject]
+            let storeId = aps["store_id"] as? String
+            guard let alert = aps["alert"] as? [String: AnyObject] else { return false }
+            let storeName = alert["title"] as! String
+            let notificationObj = StorePushModel.init(storeId!, storeName)
+            CoreDataManager.sharedInstance().saveNotification(notificationObj.storeName!, id: notificationObj.storeId!)
+            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+            let notificationListV = storyboard.instantiateViewController(withIdentifier:"LatestShopListVC") as! LatestShopListVC
+            let nv = UINavigationController(rootViewController:notificationListV)
+            self.window?.rootViewController = nv
+        }
+        
         // Override point for customization after application launch.
         return true
     }
@@ -89,6 +131,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    // Called when APNs has assigned the device a unique token
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        // Convert token to string
+        let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
+        
+        // Print it to console
+        print("APNs device token: \(deviceTokenString)")
+        if UserDefaults.standard.value(forKey: Constants.UserDefaultKey.DeviceToken) == nil {
+            UserDefaults.standard.set(deviceTokenString, forKey: Constants.UserDefaultKey.DeviceToken)
+            BookCitiesClient.sharedInstance().sendToken([Constants.RegTokenRequestKey.current_token:deviceTokenString as AnyObject,Constants.RegTokenRequestKey.prevtoken:"" as AnyObject,Constants.RegTokenRequestKey.platform:"iOS" as AnyObject], completionHandlerForLogin: { (response, error) in
+             print(response ?? "no response")
+            })
+        }
+        else if UserDefaults.standard.string(forKey: Constants.UserDefaultKey.DeviceToken) != deviceTokenString {
+            BookCitiesClient.sharedInstance().sendToken([Constants.RegTokenRequestKey.current_token:deviceTokenString as AnyObject,Constants.RegTokenRequestKey.prevtoken:UserDefaults.standard.string(forKey: Constants.UserDefaultKey.DeviceToken) as AnyObject,Constants.RegTokenRequestKey.platform:"iOS" as AnyObject], completionHandlerForLogin: { (response, error) in
+                print(response ?? "no response")
+            })
+            UserDefaults.standard.set(deviceTokenString, forKey: Constants.UserDefaultKey.DeviceToken)
+        }
+        else{
+            
+        }
+        
+        // Persist it in your backend in case it's new
+    }
+    
+    // Called when APNs failed to register the device for push notifications
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        // Print the error to console (you should alert the user that registration failed)
+        print("APNs registration failed: \(error)")
+    }
+    
+    // Push notification received
+    func application(_ application: UIApplication, didReceiveRemoteNotification data: [AnyHashable : Any]) {
+        // Print notification payload data
+        let notification = data as! [String:AnyObject]
+        let aps = notification["aps"] as! [String: AnyObject]
+        let storeId = aps["store_id"] as? String
+        guard let alert = aps["alert"] as? [String: AnyObject] else { return  }
+        let storeName = alert["title"] as! String
+        let notificationObj = StorePushModel.init(storeId!, storeName)
+        CoreDataManager.sharedInstance().saveNotification(notificationObj.storeName!, id: notificationObj.storeId!)
+//               print("Push notification received: \(data)")
+        if application.applicationState != UIApplicationState.active
+        {
+            application.applicationIconBadgeNumber = 0
+            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+            let notificationListV = storyboard.instantiateViewController(withIdentifier:"LatestShopListVC") as! LatestShopListVC
+            let nv = UINavigationController(rootViewController:notificationListV)
+            self.window?.rootViewController = nv
+        }
+    }
+    
 //    func startReachableNotifier() {
 //        do {
 //            try reachability.startNotifier()
@@ -104,3 +199,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 }
 
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert])
+    }
+    
+//    public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+//        switch response.actionIdentifier {
+//        case Constants.NotificationName.Action.skip:
+//            print("Skip")
+//        default:
+//            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+//            let notificationListV = storyboard.instantiateViewController(withIdentifier:"LatestShopListVC") as! LatestShopListVC
+//            let nv = UINavigationController(rootViewController:notificationListV)
+//            self.window?.rootViewController = nv
+//        }
+//        completionHandler()
+//    }
+}

@@ -101,6 +101,17 @@ extension BookCitiesClient
         })
     }
     
+    func getStore(_ id:String, _ completionHandlerForStore: @escaping (_ response:Array<JSONStore>?, _ error:Error?)->Void)->Void {
+        let mutableMethod: String = Constants.Methods.Stores+"/\(id)"
+        getMethodCall(mutableMethod, parameters: [String:AnyObject](), completionHandlerForGET: {
+            (response,error) in
+            let res = response as! NSDictionary
+            let array = res.object(forKey:"stores")! as! NSArray
+            let response = JSONStore.storeFromResults(array as! [[String : AnyObject]],storeImageDir:res.object(forKey:"store_image_dir")! as! String)
+            completionHandlerForStore(response as Array<JSONStore>?,error)
+        })
+    }
+    
     func getInfoData(_ parameters:[String:AnyObject], _ completionHandlerForInfo: @escaping (_ response:String? ,_ error:Error?) -> Void) -> Void {
         let mutableMethod = Constants.Methods.Appsettings
         getMethodCall(mutableMethod, parameters: parameters, completionHandlerForGET: { (response,error) in
@@ -110,4 +121,20 @@ extension BookCitiesClient
             completionHandlerForInfo(response,error)
         })
     }
+    
+    func sendToken(_ parameter:[String:AnyObject], completionHandlerForLogin: @escaping (_ response:NSDictionary?,_ error:Error?) -> Void)
+    {
+        let mutableMethod:String = Constants.Methods.RegToken
+        postMethod(mutableMethod,parameters: parameter) {
+            (response, error) in
+            print(response ?? "no response")
+            if error == nil {
+                completionHandlerForLogin(response as NSDictionary?,error)
+            }
+            else{
+                completionHandlerForLogin(nil,error)
+            }
+        }
+    }
+
 }

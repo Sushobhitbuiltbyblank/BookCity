@@ -34,7 +34,7 @@ class InfosVC: UIViewController {
                     attributedText.addAttribute(NSFontAttributeName, value: UIFont(name: "Helvetica Neue", size: 20)!, range: NSMakeRange(0,attributedText.length))
                     self.textView.attributedText = attributedText
                 } catch let e as NSError {
-                    print("Couldn't translate \(htmlText): \(e.localizedDescription) ")
+                    print("Couldn't translate \(String(describing: htmlText)): \(e.localizedDescription) ")
                 }
             }
         })

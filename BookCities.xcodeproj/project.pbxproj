@@ -17,8 +17,11 @@
 		2B2BBF1E1E261E760098AFF5 /* CustomeNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2BBF1D1E261E760098AFF5 /* CustomeNavBar.swift */; };
 		2B2BBF241E2621D30098AFF5 /* NVViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2BBF231E2621D30098AFF5 /* NVViewController.swift */; };
 		2B3A69861E2774E000B8EC6E /* ExtendedNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3A69851E2774E000B8EC6E /* ExtendedNavBarView.swift */; };
+		2B40A4C11EFA48F500B7C6E3 /* StorePushModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B40A4C01EFA48F500B7C6E3 /* StorePushModel.swift */; };
 		2B418F931E2748B000DE15B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B418F921E2748B000DE15B1 /* Assets.xcassets */; };
 		2B4B90F51DF19802008FE99B /* Reachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4B90F41DF19802008FE99B /* Reachable.swift */; };
+		2B5B67D51EDED65C00F70766 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B5B67D41EDED65C00F70766 /* UserNotifications.framework */; };
+		2B5F5BF41EF94A3800BD5444 /* LatestShopListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5F5BF31EF94A3800BD5444 /* LatestShopListVC.swift */; };
 		2B7662E41DEC526300987F40 /* JSONCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7662E31DEC526300987F40 /* JSONCity.swift */; };
 		2B81934F1DE6FD69008879B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81934E1DE6FD69008879B2 /* AppDelegate.swift */; };
 		2B8193541DE6FD69008879B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B8193521DE6FD69008879B2 /* Main.storyboard */; };
@@ -46,6 +49,7 @@
 		2B81BB161DEEF18800318859 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81BB151DEEF18800318859 /* CoreDataManager.swift */; };
 		2B81BB181DEEFFF400318859 /* JSONCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81BB171DEEFFF400318859 /* JSONCategory.swift */; };
 		2B8AA7D21DEDAFEC0024F011 /* JSONStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8AA7D11DEDAFEC0024F011 /* JSONStore.swift */; };
+		2B919DEA1EFA43CC00048903 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B919DE91EFA43CC00048903 /* NotificationCell.swift */; };
 		2BDB3DC61DF1B616004AC4FC /* categoriescdExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDB3DC51DF1B616004AC4FC /* categoriescdExtension.swift */; };
 		90A10771576CFEA06A1F17FA /* Pods_BookCities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4E7342CCD0E719848D26A94 /* Pods_BookCities.framework */; };
 /* End PBXBuildFile section */
@@ -61,9 +65,13 @@
 		2B2BBF1D1E261E760098AFF5 /* CustomeNavBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomeNavBar.swift; path = BookCities/Views/CustomeNavBar.swift; sourceTree = SOURCE_ROOT; };
 		2B2BBF231E2621D30098AFF5 /* NVViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVViewController.swift; sourceTree = "<group>"; };
 		2B3A69851E2774E000B8EC6E /* ExtendedNavBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtendedNavBarView.swift; sourceTree = "<group>"; };
+		2B40A4C01EFA48F500B7C6E3 /* StorePushModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorePushModel.swift; sourceTree = "<group>"; };
 		2B418F921E2748B000DE15B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2B4B90F21DF161E7008FE99B /* ReachabilitySwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReachabilitySwift.framework; path = "../../../../Library/Developer/Xcode/DerivedData/BookCities-fdagecfuoyvlxsaabdajemrbsgur/Build/Products/Debug-iphoneos/ReachabilitySwift/ReachabilitySwift.framework"; sourceTree = "<group>"; };
 		2B4B90F41DF19802008FE99B /* Reachable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachable.swift; sourceTree = "<group>"; };
+		2B5B67D31EDECF7000F70766 /* Book Cities.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Book Cities.entitlements"; sourceTree = "<group>"; };
+		2B5B67D41EDED65C00F70766 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		2B5F5BF31EF94A3800BD5444 /* LatestShopListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LatestShopListVC.swift; sourceTree = "<group>"; };
 		2B7662E31DEC526300987F40 /* JSONCity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONCity.swift; sourceTree = "<group>"; };
 		2B81934B1DE6FD69008879B2 /* Book Cities.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Book Cities.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B81934E1DE6FD69008879B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +101,7 @@
 		2B81BB151DEEF18800318859 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		2B81BB171DEEFFF400318859 /* JSONCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONCategory.swift; sourceTree = "<group>"; };
 		2B8AA7D11DEDAFEC0024F011 /* JSONStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONStore.swift; sourceTree = "<group>"; };
+		2B919DE91EFA43CC00048903 /* NotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		2BDB3DC51DF1B616004AC4FC /* categoriescdExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = categoriescdExtension.swift; sourceTree = "<group>"; };
 		A240B5DB20F3E8440EBDF64C /* Pods-BookCities.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookCities.release.xcconfig"; path = "Pods/Target Support Files/Pods-BookCities/Pods-BookCities.release.xcconfig"; sourceTree = "<group>"; };
 		AF25DD344DE010CE098E7B94 /* Pods-BookCities.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookCities.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BookCities/Pods-BookCities.debug.xcconfig"; sourceTree = "<group>"; };
@@ -104,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B5B67D51EDED65C00F70766 /* UserNotifications.framework in Frameworks */,
 				2B05367C1E0158B900021FC7 /* AlamofireImage.framework in Frameworks */,
 				2B0C398A1DFEC96B00108B1A /* PKHUD.framework in Frameworks */,
 				2B8193A11DE70A02008879B2 /* CoreLocation.framework in Frameworks */,
@@ -116,6 +126,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B40A4BF1EFA488300B7C6E3 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				2B40A4C01EFA48F500B7C6E3 /* StorePushModel.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
 		2B7662E21DEC019600987F40 /* ResponseObject */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +167,7 @@
 		2B81934D1DE6FD69008879B2 /* BookCities */ = {
 			isa = PBXGroup;
 			children = (
+				2B5B67D31EDECF7000F70766 /* Book Cities.entitlements */,
 				2B81BB141DEEE58100318859 /* Controllers */,
 				2B8193631DE6FE34008879B2 /* ViewControllers */,
 				2B81936B1DE6FE34008879B2 /* helper */,
@@ -175,6 +194,7 @@
 				2B8193681DE6FE34008879B2 /* MyMapVC.swift */,
 				2B8193691DE6FE34008879B2 /* ShopDetailVC.swift */,
 				2B2BBF1D1E261E760098AFF5 /* CustomeNavBar.swift */,
+				2B5F5BF31EF94A3800BD5444 /* LatestShopListVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -193,6 +213,7 @@
 		2B81936E1DE6FE34008879B2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2B40A4BF1EFA488300B7C6E3 /* Notifications */,
 				2BDB3DB21DF1A835004AC4FC /* Managed Objects */,
 				2B8193801DE6FE34008879B2 /* Extension */,
 				2B7662E21DEC019600987F40 /* ResponseObject */,
@@ -239,6 +260,7 @@
 				2B2009E41E0922BC00D42672 /* headerViewCell.swift */,
 				2B2009E51E0922BC00D42672 /* headerViewCell.xib */,
 				2B2BBF231E2621D30098AFF5 /* NVViewController.swift */,
+				2B919DE91EFA43CC00048903 /* NotificationCell.swift */,
 			);
 			path = CustomTableViewCells;
 			sourceTree = "<group>";
@@ -279,6 +301,7 @@
 		EFBD2AB30B0D142B18346A67 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2B5B67D41EDED65C00F70766 /* UserNotifications.framework */,
 				2B05367B1E0158B900021FC7 /* AlamofireImage.framework */,
 				2B0C39891DFEC96B00108B1A /* PKHUD.framework */,
 				2B4B90F21DF161E7008FE99B /* ReachabilitySwift.framework */,
@@ -328,6 +351,11 @@
 						DevelopmentTeam = GXTXWHR532;
 						LastSwiftMigration = 0810;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -431,8 +459,11 @@
 				2B8193881DE6FE34008879B2 /* ShopDetailVC.swift in Sources */,
 				2B0C39861DFEB58E00108B1A /* ViewControllerHelper.swift in Sources */,
 				2B0C39841DFE7BA600108B1A /* JSONState.swift in Sources */,
+				2B40A4C11EFA48F500B7C6E3 /* StorePushModel.swift in Sources */,
+				2B5F5BF41EF94A3800BD5444 /* LatestShopListVC.swift in Sources */,
 				2B81938B1DE6FE34008879B2 /* GCDBlackBox.swift in Sources */,
 				2B0C39821DFE784A00108B1A /* JSONCountry.swift in Sources */,
+				2B919DEA1EFA43CC00048903 /* NotificationCell.swift in Sources */,
 				2B7662E41DEC526300987F40 /* JSONCity.swift in Sources */,
 				2B2009E61E0922BC00D42672 /* headerViewCell.swift in Sources */,
 				2B8AA7D21DEDAFEC0024F011 /* JSONStore.swift in Sources */,
@@ -582,6 +613,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "BookCities/Book Cities.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Shivam Goyal (QQBLUMH2RR)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Shivam Goyal (QQBLUMH2RR)";
 				DEVELOPMENT_TEAM = GXTXWHR532;
@@ -605,6 +637,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "BookCities/Book Cities.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Shivam Goyal (QQBLUMH2RR)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Shivam Goyal (QQBLUMH2RR)";
 				DEVELOPMENT_TEAM = GXTXWHR532;

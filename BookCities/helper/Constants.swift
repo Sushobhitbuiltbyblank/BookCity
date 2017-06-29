@@ -25,6 +25,7 @@ class Constants: NSObject {
         static let Stores = "/stores"
         static let Bookscategories = "/bookscategories"
         static let Appsettings = "/appsettings"
+        static let RegToken = "/reg_token"
     }
     
     struct JSONCityResponseKey {
@@ -91,6 +92,14 @@ class Constants: NSObject {
         static let sat_to_mins = "sat_to_mins"
         static let sun_to_mins = "sun_to_mins"
         static let descriptions = "descriptions"
+        static let by_appointment = "by_appointment"
+        static let mon_by_appointment = "mon_by_appointment"
+        static let tue_by_appointment = "tue_by_appointment"
+        static let wed_by_appointment = "wed_by_appointment"
+        static let thurs_by_appointment = "thurs_by_appointment"
+        static let fri_by_appointment = "fri_by_appointment"
+        static let sat_by_appointment = "sat_by_appointment"
+        static let sun_by_appointment = "sun_by_appointment"
     }
     
     struct JSONCountryResponseKey {
@@ -121,6 +130,7 @@ class Constants: NSObject {
         static let Category = "Categories"
         static let Country = "Country"
         static let State = "State"
+        static let Notification = "Notification"
     }
     struct Font {
         static let Size = 27
@@ -151,11 +161,31 @@ class Constants: NSObject {
         static let SelectedSmily = "selectedSmily"
         static let ImagePath = "http://bookcities.org/app/uploads/store_images/"
     }
+    struct RegTokenRequestKey {
+        static let prevtoken = "prev_token"
+        static let current_token = "current_token"
+        static let platform = "platform"
+    }
+    struct  UserDefaultKey {
+        static let DeviceToken = "deviceToken"
+    }
     struct CDStoreKey {
         static let CityName = "cityName"
     }
     struct BlackLines {
         static let height = 1.0
         static let width = 1.0
+    }
+    struct NotificationName {
+        
+        struct Category {
+            static let tutorial = "tutorial"
+        }
+        
+        struct Action {
+            static let skip = "SKIP_ACTION"
+            static let show = "SHOW_ACTION"
+        }
+        
     }
 }

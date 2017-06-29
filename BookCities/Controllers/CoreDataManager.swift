@@ -95,6 +95,36 @@ class CoreDataManager: NSObject {
         }
     }
     
+    // Save  a Notification ON CORE DATA
+    func saveNotification(_ name: String , id: String) {
+        //        guard let appDelegate =
+        //            UIApplication.shared.delegate as? AppDelegate else {
+        //                return
+        //        }
+        // 1
+        let managedContext =
+            self.persistentContainer.viewContext
+        
+        // 2
+        let entity =
+            NSEntityDescription.entity(forEntityName: Constants.Entity.Notification,
+                                       in: managedContext)!
+        
+        let notification = NSManagedObject(entity: entity,
+                                       insertInto: managedContext)
+        
+        // 3
+        notification.setValue(name, forKeyPath: "name")
+        notification.setValue(id, forKey: "id")
+        
+        // 4
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
+
     // Save  a City ON CORE DATA
     func saveCity(_ name: String , id: String, stateId:String, countryId:String) {
         //        guard let appDelegate =
@@ -313,6 +343,7 @@ class CoreDataManager: NSObject {
         storeEntity.setValue(store.image4, forKey: Constants.JSONStoreResponseKey.Image4)
         storeEntity.setValue(store.isFavorate, forKey: Constants.JSONStoreResponseKey.IsFavorate)
         storeEntity.setValue(cityName, forKey: Constants.CDStoreKey.CityName)
+        storeEntity.setValue(store.by_appointment, forKey: Constants.JSONStoreResponseKey.by_appointment)
         // 4
         do {
             try managedContext.save()
@@ -338,6 +369,31 @@ class CoreDataManager: NSObject {
         //2
         let fetchRequest =
             NSFetchRequest<NSManagedObject>(entityName: Constants.Entity.Category)
+        
+        //3
+        do {
+            data = try managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        return data
+    }
+    
+    //Fatch Notification
+    func getNotifications() -> Array<Any> {
+        var data = Array<Any>()
+        //1
+        //        guard let appDelegate =
+        //            UIApplication.shared.delegate as? AppDelegate else {
+        //                return Array()
+        //        }
+        
+        let managedContext =
+            self.persistentContainer.viewContext
+        
+        //2
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: Constants.Entity.Notification)
         
         //3
         do {
@@ -794,7 +850,7 @@ class CoreDataManager: NSObject {
         return data
     }
 
-    //Mark: Delete record from CoreData
+    //MARK:-  Delete record from CoreData
     
     func deleteStore(storeID:String)
     {
@@ -809,6 +865,34 @@ class CoreDataManager: NSObject {
             let fetchResults = try managedContext.fetch(fetchRequest)
             for result in fetchResults{
                 managedContext.delete(result as! Store)
+            }
+        }
+        catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        do
+        {
+            try managedContext.save()
+        }
+        catch let error as NSError {
+            fatalError("Failure to save context: \(error)")
+        }
+    }
+
+    //  delete Notification from coreData
+    func deleteNotification(_ notificationId:String)
+    {
+        let managedContext =
+            self.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.Entity.Notification)
+        let predicate = NSPredicate(format: "id == %@", notificationId)
+        fetchRequest.predicate = predicate
+        do
+        {
+            let fetchResults = try managedContext.fetch(fetchRequest)
+            for result in fetchResults{
+                managedContext.delete(result as! Notification)
             }
         }
         catch let error as NSError {

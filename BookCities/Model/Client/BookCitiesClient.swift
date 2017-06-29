@@ -50,9 +50,43 @@ class BookCitiesClient: NSObject {
             }
         }
     }
-    // MARK: Helpers
     
+    //MARK: - POST
+    func postMethod(_ method:String, parameters:[String:AnyObject], completionHandlerForPost: @escaping (_ respose: NSDictionary?, _ error : Error?) -> Void) {
+        let url = BookCitiesURLFromParameters([:], withPathExtension: method)
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("multipart/form-data", forHTTPHeaderField: "enctype")
+        Alamofire.upload(multipartFormData: { (formData) in
+            for (key, value) in parameters {
+                if value is String || value is Int {
+                    formData.append("\(value)".data(using: .utf8)!, withName: key)
+                }
+            }
+        }, with: request) { (result) in switch result {
+        case .success(let upload, _, _):
+            upload.responseJSON { response in
+                print(response)
+                
+                if let result = response.result.value as? NSDictionary
+                {
+//                    print(result.value(forKey: "status") as! Bool)
+                    completionHandlerForPost(result, nil)
+                }
+                else{
+                    completionHandlerForPost(nil, nil)
+                }
+            }
+        case .failure(let encodingError):
+            print(encodingError.localizedDescription)
+            completionHandlerForPost(nil,encodingError)
+            }
+        }
+        
+    }
 
+    
+    // MARK: Helpers
     // given raw JSON, return a usable Foundation object
     fileprivate func convertDataWithCompletionHandler(_ data: Data, completionHandlerForConvertData: (_ result: AnyObject?, _ error: NSError?) -> Void) {
         

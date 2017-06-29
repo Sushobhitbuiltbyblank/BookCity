@@ -57,6 +57,8 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     var dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
     var delegate:UpdateFavorate?
     var indexPath:IndexPath?
+    var tapGesture:UITapGestureRecognizer?
+    let byAppointment = "by appointment"
     override func viewDidLoad() {
         super.viewDidLoad()
         // update navigation bar
@@ -72,8 +74,8 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         let barButton = UIBarButtonItem.init(customView: imageView)
         self.navigationItem.rightBarButtonItem = barButton
     
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openCloseTime))
-        self.hoursStackView.addGestureRecognizer(tapGesture)
+        tapGesture = UITapGestureRecognizer(target: self, action: #selector(openCloseTime))
+        self.hoursStackView.addGestureRecognizer(tapGesture!)
         
         self.addressLable.text = (store?.address)!
         if store?.phone != "" {
@@ -127,7 +129,7 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
                 self.descriptionLable.attributedText = attributedText
                 
             } catch let e as NSError {
-                print("Couldn't translate \(htmlText): \(e.localizedDescription) ")
+                print("Couldn't translate \(String(describing: htmlText)): \(e.localizedDescription) ")
             }
         }
         if CoreDataManager.sharedInstance().haveStore((store?.id)!){
@@ -390,21 +392,62 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     
     func setTimelable()
     {
-        sunTimeL.text = getString(fromHr: (store?.sun_from_hr)!, fromMin: (store?.sun_from_mins)!, toHr: (store?.sun_to_hr)!, toMin: (store?.sun_to_mins)!)
-        days.append(sunTimeL.text!)
-        monTimeL.text = getString(fromHr: (store?.mon_from_hr)!, fromMin: (store?.mon_from_mins)!, toHr: (store?.mon_to_hr)!, toMin: (store?.mon_to_mins)!)
-        days.append(monTimeL.text!)
-        tueTimeL.text = getString(fromHr: (store?.tue_from_hr)!, fromMin: (store?.tue_from_mins)!, toHr: (store?.tue_to_hr)!, toMin: (store?.tue_to_mins)!)
-        days.append(tueTimeL.text!)
-        wedTimeL.text = getString(fromHr: (store?.wed_from_hr)!, fromMin: (store?.wed_from_mins)!, toHr: (store?.wed_to_hr)!, toMin: (store?.wed_to_mins)!)
-        days.append(wedTimeL.text!)
-        thuTimeL.text = getString(fromHr: (store?.thurs_from_hr)!, fromMin: (store?.thurs_from_mins)!, toHr: (store?.thurs_to_hr)!, toMin: (store?.thurs_to_mins)!)
-        days.append(thuTimeL.text!)
-        friTimeL.text = getString(fromHr: (store?.fri_from_hr)!, fromMin: (store?.fri_from_mins)!, toHr: (store?.fri_to_hr)!, toMin: (store?.fri_to_mins)!)
-        days.append(friTimeL.text!)
-        satTimeL.text = getString(fromHr: (store?.sat_from_hr)!, fromMin: (store?.sat_from_mins)!, toHr: (store?.sat_to_hr)!, toMin: (store?.sat_to_mins)!)
-        days.append(satTimeL.text!)
-        
+        if store!.sun_by_appointment != "1" {
+            sunTimeL.text = getString(fromHr: (store?.sun_from_hr)!, fromMin: (store?.sun_from_mins)!, toHr: (store?.sun_to_hr)!, toMin: (store?.sun_to_mins)!)
+            days.append(sunTimeL.text!)
+        }
+        else{
+            sunTimeL.text = byAppointment
+            days.append(sunTimeL.text!)
+        }
+        if store!.mon_by_appointment != "1" {
+            monTimeL.text = getString(fromHr: (store?.mon_from_hr)!, fromMin: (store?.mon_from_mins)!, toHr: (store?.mon_to_hr)!, toMin: (store?.mon_to_mins)!)
+            days.append(monTimeL.text!)
+
+        }
+        else{
+            monTimeL.text = byAppointment
+            days.append(monTimeL.text!)
+        }
+        if store!.tue_by_appointment != "1" {
+            tueTimeL.text = getString(fromHr: (store?.tue_from_hr)!, fromMin: (store?.tue_from_mins)!, toHr: (store?.tue_to_hr)!, toMin: (store?.tue_to_mins)!)
+            days.append(tueTimeL.text!)
+        }
+        else{
+            tueTimeL.text = byAppointment
+            days.append(tueTimeL.text!)
+        }
+        if store!.wed_by_appointment != "1" {
+            wedTimeL.text = getString(fromHr: (store?.wed_from_hr)!, fromMin: (store?.wed_from_mins)!, toHr: (store?.wed_to_hr)!, toMin: (store?.wed_to_mins)!)
+            days.append(wedTimeL.text!)
+        }
+        else{
+            wedTimeL.text = byAppointment
+            days.append(wedTimeL.text!)
+        }
+        if store!.thurs_by_appointment != "1" {
+            thuTimeL.text = getString(fromHr: (store?.thurs_from_hr)!, fromMin: (store?.thurs_from_mins)!, toHr: (store?.thurs_to_hr)!, toMin: (store?.thurs_to_mins)!)
+            days.append(thuTimeL.text!)
+        }
+        else{
+            thuTimeL.text = byAppointment
+            days.append(thuTimeL.text!)
+        }
+        if store!.fri_by_appointment != "1" {
+            friTimeL.text = getString(fromHr: (store?.fri_from_hr)!, fromMin: (store?.fri_from_mins)!, toHr: (store?.fri_to_hr)!, toMin: (store?.fri_to_mins)!)
+            days.append(friTimeL.text!)        }
+        else{
+            friTimeL.text = byAppointment
+            days.append(friTimeL.text!)
+        }
+        if store!.sat_by_appointment != "1" {
+            satTimeL.text = getString(fromHr: (store?.sat_from_hr)!, fromMin: (store?.sat_from_mins)!, toHr: (store?.sat_to_hr)!, toMin: (store?.sat_to_mins)!)
+            days.append(satTimeL.text!)
+        }
+        else{
+            satTimeL.text = byAppointment
+            days.append(satTimeL.text!)
+        }
     }
     
     func getString(fromHr:String,fromMin:String,toHr:String,toMin:String) ->String
@@ -456,8 +499,8 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
             newView.isHidden = false
         }
     }
+    
     func createEntry() ->UIView{
-        
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.alignment = .firstBaseline
@@ -465,23 +508,28 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         stack.spacing = 8.0
         var textforTime = ""
         let timeInNumber = UILabel()
-        if isOpen() {
-            textforTime = "Open now"
-            let date = Date()
-            let calendar = NSCalendar.current
-            let components = calendar.component(.weekday, from: date)
-            let day = Int(components.description)! - 1
-            
-            timeInNumber.text = days[Int(day)]
+        if isByAppoinment(){
+            textforTime = byAppointment
         }
         else{
-            textforTime = "closed"
+            if isOpen() {
+                textforTime = "Open now"
+                let date = Date()
+                let calendar = NSCalendar.current
+                let components = calendar.component(.weekday, from: date)
+                let day = Int(components.description)! - 1
+                
+                timeInNumber.text = days[Int(day)]
+            }
+            else{
+                textforTime = "closed"
+            }
         }
+        
         let timeInWordlable = UILabel()
         timeInWordlable.text = textforTime
         timeInWordlable.font = UIFont.systemFont(ofSize: 19)
         timeInNumber.font = UIFont.systemFont(ofSize: 19)
-        
         let arrowButton = UIButton(type: .roundedRect)
         arrowButton.setImage(UIImage(named: "downArrow")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal),for: .normal)
         arrowButton.setTitle("", for: .normal)
@@ -489,7 +537,6 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         stack.addArrangedSubview(timeInWordlable)
         stack.addArrangedSubview(timeInNumber)
         stack.addArrangedSubview(arrowButton)
-        
         return stack
     }
     
@@ -650,6 +697,22 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
             }
         }
     }
+    
+    func isByAppoinment() -> Bool
+    {
+        let date = Date()
+        let calendar = NSCalendar.current
+        let components = calendar.component(.weekday, from: date)
+        let day = Int(components.description)! - 1
+        if days[Int(day)] == byAppointment
+        {
+            return true
+        }
+        else{
+            return false
+        }
+    }
+    
     func removeHttp(_ webLink:String) ->String{
         var weblink = webLink
         if webLink.contains("https://")
