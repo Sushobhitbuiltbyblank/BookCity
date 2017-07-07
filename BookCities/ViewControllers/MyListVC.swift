@@ -157,7 +157,9 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
         }
         else{
             next.tit = stores?[indexPath.row].name
-            next.store = stores?[indexPath.row]
+            let store = stores?[indexPath.row]
+            store?.cityName = tit
+            next.store = store
         }
         next.delegate = self
         next.indexPath = indexPath

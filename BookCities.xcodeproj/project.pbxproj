@@ -189,8 +189,8 @@
 			children = (
 				2B8193641DE6FE34008879B2 /* CitiesVC.swift */,
 				2B8193651DE6FE34008879B2 /* InfosVC.swift */,
-				2B8193661DE6FE34008879B2 /* MainView.swift */,
 				2B8193671DE6FE34008879B2 /* MyListVC.swift */,
+				2B8193661DE6FE34008879B2 /* MainView.swift */,
 				2B8193681DE6FE34008879B2 /* MyMapVC.swift */,
 				2B8193691DE6FE34008879B2 /* ShopDetailVC.swift */,
 				2B2BBF1D1E261E760098AFF5 /* CustomeNavBar.swift */,
@@ -203,8 +203,8 @@
 			isa = PBXGroup;
 			children = (
 				2B81936D1DE6FE34008879B2 /* GCDBlackBox.swift */,
-				2B81936C1DE6FE34008879B2 /* Constants.swift */,
 				2B4B90F41DF19802008FE99B /* Reachable.swift */,
+				2B81936C1DE6FE34008879B2 /* Constants.swift */,
 				2B0C39851DFEB58E00108B1A /* ViewControllerHelper.swift */,
 			);
 			path = helper;
@@ -348,7 +348,7 @@
 				TargetAttributes = {
 					2B81934A1DE6FD69008879B2 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = GXTXWHR532;
+						DevelopmentTeam = 2W7KN85DB5;
 						LastSwiftMigration = 0810;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
@@ -525,11 +525,11 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Shivam Goyal (QQBLUMH2RR)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Shivam Goyal (QQBLUMH2RR)";
+				CODE_SIGN_IDENTITY = "Anna Haas (2W7KN85DB5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Anna Haas (2W7KN85DB5)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = GXTXWHR532;
+				DEVELOPMENT_TEAM = "Anna Haas (2W7KN85DB5)";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -549,8 +549,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "c6220058-eb65-480b-b786-dcd3d13de502";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "69564718-0673-4225-8a1b-a1478c31af74";
+				PROVISIONING_PROFILE_SPECIFIER = "Anna Haas (2W7KN85DB5)";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -580,11 +580,11 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Shivam Goyal (QQBLUMH2RR)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Shivam Goyal (QQBLUMH2RR)";
+				CODE_SIGN_IDENTITY = "Anna Haas (2W7KN85DB5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Anna Haas (2W7KN85DB5)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = GXTXWHR532;
+				DEVELOPMENT_TEAM = "Anna Haas (2W7KN85DB5)";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -598,8 +598,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "c6220058-eb65-480b-b786-dcd3d13de502";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "69564718-0673-4225-8a1b-a1478c31af74";
+				PROVISIONING_PROFILE_SPECIFIER = "Anna Haas (2W7KN85DB5)";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -614,18 +614,18 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "BookCities/Book Cities.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Shivam Goyal (QQBLUMH2RR)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Shivam Goyal (QQBLUMH2RR)";
-				DEVELOPMENT_TEAM = GXTXWHR532;
+				CODE_SIGN_IDENTITY = "Anna Haas (2W7KN85DB5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Anna Haas (2W7KN85DB5)";
+				DEVELOPMENT_TEAM = 2W7KN85DB5;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = BookCities/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.builtbyblank.bookcities;
+				PRODUCT_BUNDLE_IDENTIFIER = ch.annahaas.bookcities1;
 				PRODUCT_NAME = "Book Cities";
-				PROVISIONING_PROFILE = "c6220058-eb65-480b-b786-dcd3d13de502";
-				PROVISIONING_PROFILE_SPECIFIER = BookCitiesDevPP;
+				PROVISIONING_PROFILE = "69564718-0673-4225-8a1b-a1478c31af74";
+				PROVISIONING_PROFILE_SPECIFIER = BookCitiesDistributionPP;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 3.0;
 			};
@@ -638,18 +638,18 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "BookCities/Book Cities.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Shivam Goyal (QQBLUMH2RR)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Shivam Goyal (QQBLUMH2RR)";
-				DEVELOPMENT_TEAM = GXTXWHR532;
+				CODE_SIGN_IDENTITY = "Anna Haas (2W7KN85DB5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Anna Haas (2W7KN85DB5)";
+				DEVELOPMENT_TEAM = 2W7KN85DB5;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = BookCities/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.builtbyblank.bookcities;
+				PRODUCT_BUNDLE_IDENTIFIER = ch.annahaas.bookcities1;
 				PRODUCT_NAME = "Book Cities";
-				PROVISIONING_PROFILE = "c6220058-eb65-480b-b786-dcd3d13de502";
-				PROVISIONING_PROFILE_SPECIFIER = BookCitiesDevPP;
+				PROVISIONING_PROFILE = "69564718-0673-4225-8a1b-a1478c31af74";
+				PROVISIONING_PROFILE_SPECIFIER = BookCitiesDistributionPP;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 3.0;
 			};

@@ -48,12 +48,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // 2
             let aps = notification["aps"] as! [String: AnyObject]
             let storeId = aps["store_id"] as? String
-            guard let alert = aps["alert"] as? [String: AnyObject] else { return false }
-            let storeName = alert["title"] as! String
-            let notificationObj = StorePushModel.init(storeId!, storeName)
-            CoreDataManager.sharedInstance().saveNotification(notificationObj.storeName!, id: notificationObj.storeId!)
+            let cityName = aps["city_name"] as? String
+//            let storeName = aps["store_name"] as? String
+            guard (aps["alert"] as? [String: AnyObject]) != nil else { return true }
+//            let notificationObj = StorePushModel.init(storeId!, storeName!)
+//            CoreDataManager.sharedInstance().saveNotification(notificationObj.storeName!, id: notificationObj.storeId!)
             let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
             let notificationListV = storyboard.instantiateViewController(withIdentifier:"LatestShopListVC") as! LatestShopListVC
+            notificationListV.storeID = storeId
+            notificationListV.cityName = cityName
             let nv = UINavigationController(rootViewController:notificationListV)
             self.window?.rootViewController = nv
         }
@@ -169,19 +172,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let notification = data as! [String:AnyObject]
         let aps = notification["aps"] as! [String: AnyObject]
         let storeId = aps["store_id"] as? String
-        guard let alert = aps["alert"] as? [String: AnyObject] else { return  }
-        let storeName = alert["title"] as! String
-        let notificationObj = StorePushModel.init(storeId!, storeName)
-        CoreDataManager.sharedInstance().saveNotification(notificationObj.storeName!, id: notificationObj.storeId!)
+        let cityName = aps["city_name"] as? String
+//        let storeName = aps["store_name"] as? String
+        guard (aps["alert"] as? [String: AnyObject]) != nil else { return  }
+//        let notificationObj = StorePushModel.init(storeId!, storeName!)
 //               print("Push notification received: \(data)")
-        if application.applicationState != UIApplicationState.active
-        {
+//        CoreDataManager.sharedInstance().saveNotification(notificationObj.storeName!, id: notificationObj.storeId!)
+//        if application.applicationState != UIApplicationState.active
+//        {
             application.applicationIconBadgeNumber = 0
             let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
             let notificationListV = storyboard.instantiateViewController(withIdentifier:"LatestShopListVC") as! LatestShopListVC
+            notificationListV.storeID = storeId
+            notificationListV.cityName = cityName
             let nv = UINavigationController(rootViewController:notificationListV)
             self.window?.rootViewController = nv
-        }
+//        }
+//        else{
+//            print(application.applicationState)
+//            application.applicationIconBadgeNumber = 0
+//            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+//            let notificationListV = storyboard.instantiateViewController(withIdentifier:"LatestShopListVC") as! LatestShopListVC
+//            notificationListV.storeID = storeId
+//            let nv = UINavigationController(rootViewController:notificationListV)
+//            self.window?.rootViewController = nv
+
+//        }
     }
     
 //    func startReachableNotifier() {
@@ -202,7 +218,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate: UNUserNotificationCenterDelegate {
     
     public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.alert])
+        completionHandler([.alert,.sound])
     }
     
 //    public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {

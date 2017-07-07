@@ -63,11 +63,28 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         super.viewDidLoad()
         // update navigation bar
         self.navigationItem.title = tit
+        navigationController!.navigationBar.isTranslucent = false
+        
+        // The navigation bar's shadowImage is set to a transparent image.  In
+        // addition to providing a custom background image, this removes
+        // the grey hairline at the bottom of the navigation bar.  The
+        // ExtendedNavBarView will draw its own hairline.
+        navigationController!.navigationBar.shadowImage = #imageLiteral(resourceName: "TransparentPixel")
+        // "Pixel" is a solid white 1x1 image.
+        navigationController!.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "Pixel"), for: .default)
+        
+        navigationItem.prompt = ""
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName: UIColor.black,
             NSFontAttributeName: UIFont(name: Constants.Font.TypeHelvetica, size: CGFloat(Constants.Font.Size))!
         ]
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(goBack))
+        if self.navigationController!.viewControllers[0] === self
+        {
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "cross"), style: .plain, target: self, action: #selector(goBack))
+        }
+        else{
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(goBack))
+        }
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
         let imageView = UIImageView(image: UIImage(named: self.getStoreTypeImage()))
         imageView.frame = CGRect.init(x: 0, y: 0, width: 24, height: 24) //CGRectMake(0, 0, 24, 24)
@@ -76,8 +93,26 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     
         tapGesture = UITapGestureRecognizer(target: self, action: #selector(openCloseTime))
         self.hoursStackView.addGestureRecognizer(tapGesture!)
-        
+        var city = ""
+        if let cityNam = self.cityName{
+           city = cityNam
+        }
+        else{
+            print("no Cityname in cityname var")
+        }
+        if let cityNam = store?.cityName{
+            if cityNam != ""{
+                city = cityNam
+            }
+        }
+        else {
+            print("no Cityname in Store")
+        }
+       
         self.addressLable.text = (store?.address)!
+        if city != ""{
+            self.addressLable.text = self.addressLable.text! + "\n\(city)"
+        }
         if store?.phone != "" {
             self.phonNumberBtn.setTitle(store?.phone, for: UIControlState.normal)
         }
@@ -149,17 +184,6 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         self.shareBtn.addBorder(width: 2)
         self.showOnMapBtn.addBorder(width: 2)
         self.favorateBtn.addBorder(width: 2)
-        navigationController!.navigationBar.isTranslucent = false
-        
-        // The navigation bar's shadowImage is set to a transparent image.  In
-        // addition to providing a custom background image, this removes
-        // the grey hairline at the bottom of the navigation bar.  The
-        // ExtendedNavBarView will draw its own hairline.
-        navigationController!.navigationBar.shadowImage = #imageLiteral(resourceName: "TransparentPixel")
-        // "Pixel" is a solid white 1x1 image.
-        navigationController!.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "Pixel"), for: .default)
-
-        navigationItem.prompt = ""
         addBtnOnStackV()
     }
     func configurePageControl() {
@@ -216,6 +240,9 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     // MARK - Btn Action methods
     func goBack(_ sender:AnyObject) -> ()
     {
+        if self.navigationController!.viewControllers[0] === self{
+            self.navigationController!.dismiss(animated: true, completion: nil)
+        }
         self.navigationController!.popViewController(animated: true)
     }
     

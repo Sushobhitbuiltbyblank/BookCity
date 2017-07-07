@@ -12,13 +12,14 @@ import PKHUD
 class LatestShopListVC: UIViewController,UITableViewDelegate, UITableViewDataSource {
 
     var cellIdentifier = "citiCells"
+    var storeID:String?
+    var cityName:String?
     var notificationList:Array<Any>{
         return CoreDataManager.sharedInstance().getNotifications()
     }
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(UINib(nibName: "CitiesTVCell", bundle: nil), forCellReuseIdentifier:cellIdentifier)
         navigationController!.navigationBar.isTranslucent = false
         
         // The navigation bar's shadowImage is set to a transparent image.  In
@@ -29,17 +30,54 @@ class LatestShopListVC: UIViewController,UITableViewDelegate, UITableViewDataSou
         // "Pixel" is a solid white 1x1 image.
         navigationController!.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "Pixel"), for: .default)
         navigationItem.prompt = ""
-        self.navigationItem.title = "Notification"
+        //        self.navigationItem.title = "Notification"
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName: UIColor.black,
             NSFontAttributeName: UIFont(name: Constants.Font.TypeHelvetica, size: CGFloat(Constants.Font.Size))!
         ]
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "cross")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: .plain, target: self, action: #selector(closeBtnAction))
+        //        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "cross")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: .plain, target: self, action: #selector(closeBtnAction))
+        if let storeid = self.storeID{
+        HUD.show(.progress)
+        if Reachable.isConnectedToNetwork(){
+            BookCitiesClient.sharedInstance().getStore(storeid, { (response, error) in
+                HUD.hide()
+                let store = response![0]
+                store.cityName = self.cityName
+                let next = self.storyboard?.instantiateViewController(withIdentifier:"ShopDetailVC") as! ShopDetailVC
+                next.store = store
+                next.tit = store.name
+                let nv = UINavigationController(rootViewController: next)
+                self.present(nv, animated: true, completion: nil)
+            })
+        }
+        }
+        else{
+            HUD.hide()
+            let alert = UIAlertController.init(title: Constants.Alert.Title, message: Constants.Alert.Message, preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction.init(title: "OK", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction) in
+                self.dismiss(animated:true, completion: nil)
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+        tableView.register(UINib(nibName: "CitiesTVCell", bundle: nil), forCellReuseIdentifier:cellIdentifier)
         // Do any additional setup after loading the view.
     }
 
     override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
+        if let _ = self.storeID{
+        }
+        else{
+        if self.notificationList.isEmpty {
+            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+            let mainView = storyboard.instantiateViewController(withIdentifier:"MainView") as! MainView
+            self.present(mainView, animated: false, completion: nil)
+        }
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        self.storeID = nil
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -777,14 +777,22 @@
                                     <outlet property="delegate" destination="3ED-PT-Y9h" id="ALL-MZ-W93"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yk9-uG-8Cc">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="dmR-mr-Q5q" firstAttribute="top" secondItem="Ljt-ba-DrG" secondAttribute="bottom" id="8dn-Uz-vUO"/>
+                            <constraint firstItem="Yk9-uG-8Cc" firstAttribute="top" secondItem="bRk-Pa-ZxE" secondAttribute="bottom" id="S5q-XZ-BTq"/>
                             <constraint firstItem="E30-Gh-Ikf" firstAttribute="leading" secondItem="Lbt-dm-sUH" secondAttribute="leading" id="Wtq-Pc-XyO"/>
                             <constraint firstItem="E30-Gh-Ikf" firstAttribute="top" secondItem="Lbt-dm-sUH" secondAttribute="top" id="c9S-sP-Cff"/>
                             <constraint firstItem="Ljt-ba-DrG" firstAttribute="leading" secondItem="Lbt-dm-sUH" secondAttribute="leading" id="eHe-FL-OY6"/>
+                            <constraint firstAttribute="trailing" secondItem="Yk9-uG-8Cc" secondAttribute="trailing" id="eRt-zA-UhC"/>
+                            <constraint firstItem="dmR-mr-Q5q" firstAttribute="top" secondItem="Yk9-uG-8Cc" secondAttribute="bottom" id="frH-bI-zyM"/>
                             <constraint firstItem="Ljt-ba-DrG" firstAttribute="top" secondItem="E30-Gh-Ikf" secondAttribute="bottom" id="gfc-Cb-ANz"/>
+                            <constraint firstItem="Yk9-uG-8Cc" firstAttribute="leading" secondItem="Lbt-dm-sUH" secondAttribute="leading" id="ggj-AN-vrM"/>
                             <constraint firstAttribute="trailing" secondItem="E30-Gh-Ikf" secondAttribute="trailing" id="omj-71-sfu"/>
                             <constraint firstAttribute="trailing" secondItem="Ljt-ba-DrG" secondAttribute="trailing" id="pDv-Tp-NzS"/>
                         </constraints>
