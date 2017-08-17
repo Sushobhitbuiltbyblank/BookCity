@@ -50,7 +50,6 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
         headerCellIdentifier = "headerViewCell"
         tableView.register(UINib(nibName: "BookStoreTVCell", bundle: nil), forCellReuseIdentifier:cellIdentifier)
         tableView.register(UINib(nibName: "headerViewCell", bundle: nil), forCellReuseIdentifier: headerCellIdentifier)
-        
     }
     
     override func didReceiveMemoryWarning() {

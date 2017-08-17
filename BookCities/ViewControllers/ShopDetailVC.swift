@@ -62,6 +62,15 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // update navigation bar
+        guard let height = navigationController?.navigationBar.frame.size.height else {return}
+        
+        let titleLabel = UILabel(frame: CGRect(x:0,y:0,width: 480,height: height))
+
+        titleLabel.numberOfLines = 0
+        titleLabel.textAlignment = .center
+        titleLabel.text = tit
+        titleLabel.font = UIFont(name: Constants.Font.TypeHelvetica, size: CGFloat(Constants.Font.Size))!
+        navigationItem.titleView = titleLabel
         self.navigationItem.title = tit
         navigationController!.navigationBar.isTranslucent = false
         
@@ -272,8 +281,7 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
                 activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
                 
                 // exclude some activity types from the list (optional)
-                activityViewController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook ]
-                
+                activityViewController.excludedActivityTypes = [ UIActivityType.airDrop]
                 // present the view controller
                 self.present(activityViewController, animated: true, completion: nil)
             })
@@ -289,7 +297,7 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
             activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
             
             // exclude some activity types from the list (optional)
-            activityViewController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook ]
+            activityViewController.excludedActivityTypes = [ UIActivityType.airDrop]
             
             // present the view controller
             self.present(activityViewController, animated: true, completion: nil)
