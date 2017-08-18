@@ -179,8 +179,12 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         if CoreDataManager.sharedInstance().haveStore((store?.id)!){
             favorateBtn.isSelected = CoreDataManager.sharedInstance().getStore((store?.id)!).isFavorate
         }
-        self.categoryLable.text = getcatergories()
-        
+        let catergoryString = getcatergories()
+        let attributedText = NSMutableAttributedString(string: catergoryString)
+        let style = NSMutableParagraphStyle()
+        style.lineSpacing = CGFloat(3.0)
+        attributedText.addAttributes([NSParagraphStyleAttributeName : style], range: NSMakeRange(0,attributedText.length))
+        categoriesLabel.attributedText = attributedText
         UIView.animate(withDuration: 0.01, animations: { () -> Void in
             self.leftStackView.isHidden = true
             self.rightStackView.isHidden = true
