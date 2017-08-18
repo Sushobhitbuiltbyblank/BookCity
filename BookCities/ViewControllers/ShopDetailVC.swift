@@ -24,7 +24,7 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     @IBOutlet weak var shareBtn: BorderButton!
     @IBOutlet weak var showOnMapBtn: BorderButton!
     @IBOutlet weak var categoriesLabel: UILabel!
-    @IBOutlet weak var addressLable: UILabel!
+    @IBOutlet weak var addressLable: SRCopyableLabel!
     @IBOutlet weak var address2Lable: UILabel!
     @IBOutlet weak var categoryLable: UILabel!
     @IBOutlet weak var contentOfScrollView: UIView!
@@ -759,5 +759,11 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
             weblink = webLink.replacingOccurrences(of: "http://", with: "")
         }
         return weblink
+    }
+}
+extension ShopDetailVC : UITextFieldDelegate {
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        return false
     }
 }

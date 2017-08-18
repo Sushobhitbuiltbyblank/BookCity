@@ -50,6 +50,7 @@
 		2B81BB181DEEFFF400318859 /* JSONCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81BB171DEEFFF400318859 /* JSONCategory.swift */; };
 		2B8AA7D21DEDAFEC0024F011 /* JSONStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8AA7D11DEDAFEC0024F011 /* JSONStore.swift */; };
 		2B919DEA1EFA43CC00048903 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B919DE91EFA43CC00048903 /* NotificationCell.swift */; };
+		2BB488611F46AF7000760208 /* SRCopyableLable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB488601F46AF7000760208 /* SRCopyableLable.swift */; };
 		2BDB3DC61DF1B616004AC4FC /* categoriescdExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDB3DC51DF1B616004AC4FC /* categoriescdExtension.swift */; };
 		90A10771576CFEA06A1F17FA /* Pods_BookCities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4E7342CCD0E719848D26A94 /* Pods_BookCities.framework */; };
 /* End PBXBuildFile section */
@@ -102,6 +103,7 @@
 		2B81BB171DEEFFF400318859 /* JSONCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONCategory.swift; sourceTree = "<group>"; };
 		2B8AA7D11DEDAFEC0024F011 /* JSONStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONStore.swift; sourceTree = "<group>"; };
 		2B919DE91EFA43CC00048903 /* NotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
+		2BB488601F46AF7000760208 /* SRCopyableLable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRCopyableLable.swift; sourceTree = "<group>"; };
 		2BDB3DC51DF1B616004AC4FC /* categoriescdExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = categoriescdExtension.swift; sourceTree = "<group>"; };
 		A240B5DB20F3E8440EBDF64C /* Pods-BookCities.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookCities.release.xcconfig"; path = "Pods/Target Support Files/Pods-BookCities/Pods-BookCities.release.xcconfig"; sourceTree = "<group>"; };
 		AF25DD344DE010CE098E7B94 /* Pods-BookCities.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookCities.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BookCities/Pods-BookCities.debug.xcconfig"; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 				2B4B90F41DF19802008FE99B /* Reachable.swift */,
 				2B81936C1DE6FE34008879B2 /* Constants.swift */,
 				2B0C39851DFEB58E00108B1A /* ViewControllerHelper.swift */,
+				2BB488601F46AF7000760208 /* SRCopyableLable.swift */,
 			);
 			path = helper;
 			sourceTree = "<group>";
@@ -436,7 +439,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -472,6 +475,7 @@
 				2B8193871DE6FE34008879B2 /* MyMapVC.swift in Sources */,
 				2B2BBF1E1E261E760098AFF5 /* CustomeNavBar.swift in Sources */,
 				2B81938C1DE6FE34008879B2 /* BookStoreAnnotation.swift in Sources */,
+				2BB488611F46AF7000760208 /* SRCopyableLable.swift in Sources */,
 				2B8193851DE6FE34008879B2 /* MainView.swift in Sources */,
 				2B81934F1DE6FD69008879B2 /* AppDelegate.swift in Sources */,
 				2B4B90F51DF19802008FE99B /* Reachable.swift in Sources */,
