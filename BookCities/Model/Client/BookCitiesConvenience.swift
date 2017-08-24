@@ -42,12 +42,12 @@ extension BookCitiesClient
         })
     }
     
-    func getCountry(_ completionHandlerForCountry: @escaping (_ response : Array<JSONCountry>? ,_ error : Error?) -> Void) -> Void {
+    func getCountries(_ parameters:[String:AnyObject], _ completionHandlerForCounties: @escaping (_ response : Array<JSONCountry>? ,_ error : Error?) -> Void) -> Void {
         let mutableMethod: String = Constants.Methods.Countries
-        getMethod(mutableMethod, parameters: [String:AnyObject](), completionHandlerForGET: {
+        getMethod(mutableMethod, parameters: parameters, completionHandlerForGET: {
             (response,error) in
             let response = JSONCountry.countryFromResults(response as! [[String : AnyObject]])
-            completionHandlerForCountry(response as Array<JSONCountry>?,error)
+            completionHandlerForCounties(response as Array<JSONCountry>?,error)
         })
     }
     

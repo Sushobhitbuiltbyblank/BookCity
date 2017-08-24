@@ -21,6 +21,7 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var arary:Array<Any>!
     let appdelegate = UIApplication.shared.delegate as! AppDelegate
     let searchController = UISearchController(searchResultsController: nil)
+    var countryID:String?
     var filteredCities = [JSONCity]()
     
     override func viewWillAppear(_ animated: Bool) {
@@ -31,7 +32,8 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         super.viewDidLoad()
         // NavigationBar Update
         cities = Array<JSONCity>()
-        let parameter = ["per_page":tableIndex,"page":page,"hide_empty":1];
+        guard let countryID = self.countryID else{return}
+        let parameter = ["hide_empty":1,"country":countryID] as [String : AnyObject]
         page = page+1
         if Reachable.isConnectedToNetwork() == true {
             BookCitiesClient.sharedInstance().getCities(parameter as [String : AnyObject], completionHandlerForCities: {
@@ -68,7 +70,7 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 }
             }
         }
-        self.navigationItem.title = "Cities"
+//        self.navigationItem.title = "Cities"
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName: UIColor.black,
             NSFontAttributeName: UIFont(name: Constants.Font.TypeHelvetica, size: CGFloat(Constants.Font.Size))!
@@ -99,6 +101,8 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         // "Pixel" is a solid white 1x1 image.
         navigationController!.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "Pixel"), for: .default)
         navigationItem.prompt = ""
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(goBack))
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
     }
     
     override func didReceiveMemoryWarning() {
@@ -130,38 +134,38 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
         return cell;
     }
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-       
-
-        if indexPath.row >= (cities.count)-1
-        {
-            let parameter = ["per_page":tableIndex,"page":page,"hide_empty":1];
-            page = page+1
-            if Reachable.isConnectedToNetwork() == true {
-                BookCitiesClient.sharedInstance().getCities(parameter as [String : AnyObject], completionHandlerForCities: {
-                    (response,error) in
-                    if error == nil{
-                        let data = response as Array<JSONCity>!
-                        for city in data!{
-                            self.cities.append(city)
-                        }
-                        self.tableView.reloadData()
-                        
-                    }
-                    else
-                    {
-                        print(error ?? "error to fetch cities")
-                    }
-                })
-            }
-            else{
-                let alert = UIAlertController(title: Constants.Alert.Title, message: Constants.Alert.Message, preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-            }
-        }
-        
-    }
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//       
+//
+//        if indexPath.row >= (cities.count)-1
+//        {
+//            let parameter = ["per_page":tableIndex,"page":page,"hide_empty":1];
+//            page = page+1
+//            if Reachable.isConnectedToNetwork() == true {
+//                BookCitiesClient.sharedInstance().getCities(parameter as [String : AnyObject], completionHandlerForCities: {
+//                    (response,error) in
+//                    if error == nil{
+//                        let data = response as Array<JSONCity>!
+//                        for city in data!{
+//                            self.cities.append(city)
+//                        }
+//                        self.tableView.reloadData()
+//                        
+//                    }
+//                    else
+//                    {
+//                        print(error ?? "error to fetch cities")
+//                    }
+//                })
+//            }
+//            else{
+//                let alert = UIAlertController(title: Constants.Alert.Title, message: Constants.Alert.Message, preferredStyle: UIAlertControllerStyle.alert)
+//                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+//                self.present(alert, animated: true, completion: nil)
+//            }
+//        }
+//        
+//    }
     
     // MARK: - Table View Delegate Function
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -217,6 +221,11 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         self.dismiss(animated: true, completion: nil)
     }
     
+    func goBack(_ sender:AnyObject) -> ()
+    {
+        self.navigationController!.popViewController(animated: true)
+    }
+
     // MARK: - SearchController Delegate method
     func filterContentForSearchText(searchText: String, scope: String = "All") {
         filteredCities = cities.filter { city in

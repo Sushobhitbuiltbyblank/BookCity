@@ -49,6 +49,7 @@
 		2B81BB161DEEF18800318859 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81BB151DEEF18800318859 /* CoreDataManager.swift */; };
 		2B81BB181DEEFFF400318859 /* JSONCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B81BB171DEEFFF400318859 /* JSONCategory.swift */; };
 		2B8AA7D21DEDAFEC0024F011 /* JSONStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8AA7D11DEDAFEC0024F011 /* JSONStore.swift */; };
+		2B8F533F1F4EB68100CFF65C /* CountriesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8F533E1F4EB68100CFF65C /* CountriesVC.swift */; };
 		2B919DEA1EFA43CC00048903 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B919DE91EFA43CC00048903 /* NotificationCell.swift */; };
 		2BB488611F46AF7000760208 /* SRCopyableLable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB488601F46AF7000760208 /* SRCopyableLable.swift */; };
 		2BDB3DC61DF1B616004AC4FC /* categoriescdExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDB3DC51DF1B616004AC4FC /* categoriescdExtension.swift */; };
@@ -102,6 +103,7 @@
 		2B81BB151DEEF18800318859 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		2B81BB171DEEFFF400318859 /* JSONCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONCategory.swift; sourceTree = "<group>"; };
 		2B8AA7D11DEDAFEC0024F011 /* JSONStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONStore.swift; sourceTree = "<group>"; };
+		2B8F533E1F4EB68100CFF65C /* CountriesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountriesVC.swift; sourceTree = "<group>"; };
 		2B919DE91EFA43CC00048903 /* NotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		2BB488601F46AF7000760208 /* SRCopyableLable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRCopyableLable.swift; sourceTree = "<group>"; };
 		2BDB3DC51DF1B616004AC4FC /* categoriescdExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = categoriescdExtension.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				2B8193691DE6FE34008879B2 /* ShopDetailVC.swift */,
 				2B2BBF1D1E261E760098AFF5 /* CustomeNavBar.swift */,
 				2B5F5BF31EF94A3800BD5444 /* LatestShopListVC.swift */,
+				2B8F533E1F4EB68100CFF65C /* CountriesVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -456,6 +459,7 @@
 				2B8193931DE6FE34008879B2 /* BookCitiesConvenience.swift in Sources */,
 				2B2BBF241E2621D30098AFF5 /* NVViewController.swift in Sources */,
 				2B81BB161DEEF18800318859 /* CoreDataManager.swift in Sources */,
+				2B8F533F1F4EB68100CFF65C /* CountriesVC.swift in Sources */,
 				2B81BB181DEEFFF400318859 /* JSONCategory.swift in Sources */,
 				2B8193861DE6FE34008879B2 /* MyListVC.swift in Sources */,
 				2B8193921DE6FE34008879B2 /* BookCitiesClient.swift in Sources */,
