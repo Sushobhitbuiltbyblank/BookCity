@@ -100,6 +100,10 @@ class Constants: NSObject {
         static let fri_by_appointment = "fri_by_appointment"
         static let sat_by_appointment = "sat_by_appointment"
         static let sun_by_appointment = "sun_by_appointment"
+        static let on_holiday = "on_holiday"
+        static let holiday_from = "holiday_from"
+        static let holiday_to = "holiday_to"
+        static let holiday_message = "holiday_message"
     }
     
     struct JSONCountryResponseKey {

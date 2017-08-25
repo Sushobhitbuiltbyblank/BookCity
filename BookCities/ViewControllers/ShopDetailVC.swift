@@ -99,9 +99,10 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         imageView.frame = CGRect.init(x: 0, y: 0, width: 24, height: 24) //CGRectMake(0, 0, 24, 24)
         let barButton = UIBarButtonItem.init(customView: imageView)
         self.navigationItem.rightBarButtonItem = barButton
-    
-        tapGesture = UITapGestureRecognizer(target: self, action: #selector(openCloseTime))
-        self.hoursStackView.addGestureRecognizer(tapGesture!)
+        if store?.on_holiday == "0" && !isTodayHoliday(){
+            tapGesture = UITapGestureRecognizer(target: self, action: #selector(openCloseTime))
+            self.hoursStackView.addGestureRecognizer(tapGesture!)
+        }
         var city = ""
         if let cityNam = self.cityName{
            city = cityNam
@@ -431,62 +432,63 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     
     func setTimelable()
     {
-        if store!.sun_by_appointment != "1" {
-            sunTimeL.text = getString(fromHr: (store?.sun_from_hr)!, fromMin: (store?.sun_from_mins)!, toHr: (store?.sun_to_hr)!, toMin: (store?.sun_to_mins)!)
-            days.append(sunTimeL.text!)
-        }
-        else{
-            sunTimeL.text = byAppointment
-            days.append(sunTimeL.text!)
-        }
-        if store!.mon_by_appointment != "1" {
-            monTimeL.text = getString(fromHr: (store?.mon_from_hr)!, fromMin: (store?.mon_from_mins)!, toHr: (store?.mon_to_hr)!, toMin: (store?.mon_to_mins)!)
-            days.append(monTimeL.text!)
-
-        }
-        else{
-            monTimeL.text = byAppointment
-            days.append(monTimeL.text!)
-        }
-        if store!.tue_by_appointment != "1" {
-            tueTimeL.text = getString(fromHr: (store?.tue_from_hr)!, fromMin: (store?.tue_from_mins)!, toHr: (store?.tue_to_hr)!, toMin: (store?.tue_to_mins)!)
-            days.append(tueTimeL.text!)
-        }
-        else{
-            tueTimeL.text = byAppointment
-            days.append(tueTimeL.text!)
-        }
-        if store!.wed_by_appointment != "1" {
-            wedTimeL.text = getString(fromHr: (store?.wed_from_hr)!, fromMin: (store?.wed_from_mins)!, toHr: (store?.wed_to_hr)!, toMin: (store?.wed_to_mins)!)
-            days.append(wedTimeL.text!)
-        }
-        else{
-            wedTimeL.text = byAppointment
-            days.append(wedTimeL.text!)
-        }
-        if store!.thurs_by_appointment != "1" {
-            thuTimeL.text = getString(fromHr: (store?.thurs_from_hr)!, fromMin: (store?.thurs_from_mins)!, toHr: (store?.thurs_to_hr)!, toMin: (store?.thurs_to_mins)!)
-            days.append(thuTimeL.text!)
-        }
-        else{
-            thuTimeL.text = byAppointment
-            days.append(thuTimeL.text!)
-        }
-        if store!.fri_by_appointment != "1" {
-            friTimeL.text = getString(fromHr: (store?.fri_from_hr)!, fromMin: (store?.fri_from_mins)!, toHr: (store?.fri_to_hr)!, toMin: (store?.fri_to_mins)!)
-            days.append(friTimeL.text!)        }
-        else{
-            friTimeL.text = byAppointment
-            days.append(friTimeL.text!)
-        }
-        if store!.sat_by_appointment != "1" {
-            satTimeL.text = getString(fromHr: (store?.sat_from_hr)!, fromMin: (store?.sat_from_mins)!, toHr: (store?.sat_to_hr)!, toMin: (store?.sat_to_mins)!)
-            days.append(satTimeL.text!)
-        }
-        else{
-            satTimeL.text = byAppointment
-            days.append(satTimeL.text!)
-        }
+            if store!.sun_by_appointment != "1" {
+                sunTimeL.text = getString(fromHr: (store?.sun_from_hr)!, fromMin: (store?.sun_from_mins)!, toHr: (store?.sun_to_hr)!, toMin: (store?.sun_to_mins)!)
+                days.append(sunTimeL.text!)
+            }
+            else{
+                sunTimeL.text = byAppointment
+                days.append(sunTimeL.text!)
+            }
+            if store!.mon_by_appointment != "1" {
+                monTimeL.text = getString(fromHr: (store?.mon_from_hr)!, fromMin: (store?.mon_from_mins)!, toHr: (store?.mon_to_hr)!, toMin: (store?.mon_to_mins)!)
+                days.append(monTimeL.text!)
+                
+            }
+            else{
+                monTimeL.text = byAppointment
+                days.append(monTimeL.text!)
+            }
+            if store!.tue_by_appointment != "1" {
+                tueTimeL.text = getString(fromHr: (store?.tue_from_hr)!, fromMin: (store?.tue_from_mins)!, toHr: (store?.tue_to_hr)!, toMin: (store?.tue_to_mins)!)
+                days.append(tueTimeL.text!)
+            }
+            else{
+                tueTimeL.text = byAppointment
+                days.append(tueTimeL.text!)
+            }
+            if store!.wed_by_appointment != "1" {
+                wedTimeL.text = getString(fromHr: (store?.wed_from_hr)!, fromMin: (store?.wed_from_mins)!, toHr: (store?.wed_to_hr)!, toMin: (store?.wed_to_mins)!)
+                days.append(wedTimeL.text!)
+            }
+            else{
+                wedTimeL.text = byAppointment
+                days.append(wedTimeL.text!)
+            }
+            if store!.thurs_by_appointment != "1" {
+                thuTimeL.text = getString(fromHr: (store?.thurs_from_hr)!, fromMin: (store?.thurs_from_mins)!, toHr: (store?.thurs_to_hr)!, toMin: (store?.thurs_to_mins)!)
+                days.append(thuTimeL.text!)
+            }
+            else{
+                thuTimeL.text = byAppointment
+                days.append(thuTimeL.text!)
+            }
+            if store!.fri_by_appointment != "1" {
+                friTimeL.text = getString(fromHr: (store?.fri_from_hr)!, fromMin: (store?.fri_from_mins)!, toHr: (store?.fri_to_hr)!, toMin: (store?.fri_to_mins)!)
+                days.append(friTimeL.text!)        }
+            else{
+                friTimeL.text = byAppointment
+                days.append(friTimeL.text!)
+            }
+            if store!.sat_by_appointment != "1" {
+                satTimeL.text = getString(fromHr: (store?.sat_from_hr)!, fromMin: (store?.sat_from_mins)!, toHr: (store?.sat_to_hr)!, toMin: (store?.sat_to_mins)!)
+                days.append(satTimeL.text!)
+            }
+            else{
+                satTimeL.text = byAppointment
+                days.append(satTimeL.text!)
+            }
+        
     }
     
     func getString(fromHr:String,fromMin:String,toHr:String,toMin:String) ->String
@@ -547,35 +549,51 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         stack.spacing = 8.0
         var textforTime = ""
         let timeInNumber = UILabel()
-        if isByAppoinment(){
-            textforTime = byAppointment
+        //        print(store?.on_holiday)
+        //        print(store?.holiday_message)
+        //        print(store?.holiday_from)
+        //        print(store?.holiday_to)
+        if store!.on_holiday == "1" && isTodayHoliday()
+        {
+            textforTime = (store?.holiday_message)!
+            let timeInWordlable = UILabel()
+            timeInWordlable.text = textforTime
+            timeInWordlable.font = UIFont.systemFont(ofSize: 19)
+            stack.addArrangedSubview(timeInWordlable)
         }
         else{
-            if isOpen() {
-                textforTime = "Open now"
-                let date = Date()
-                let calendar = NSCalendar.current
-                let components = calendar.component(.weekday, from: date)
-                let day = Int(components.description)! - 1
-                
-                timeInNumber.text = days[Int(day)]
+            if isByAppoinment(){
+                textforTime = byAppointment
             }
             else{
-                textforTime = "closed"
+                if isOpen() {
+                    textforTime = "Open now"
+                    let date = Date()
+                    let calendar = NSCalendar.current
+                    let components = calendar.component(.weekday, from: date)
+                    let day = Int(components.description)! - 1
+                    
+                    timeInNumber.text = days[Int(day)]
+                }
+                else{
+                    textforTime = "closed"
+                }
             }
+            
+            let timeInWordlable = UILabel()
+            timeInWordlable.text = textforTime
+            timeInWordlable.font = UIFont.systemFont(ofSize: 19)
+            timeInNumber.font = UIFont.systemFont(ofSize: 19)
+            let arrowButton = UIButton(type: .roundedRect)
+            arrowButton.setImage(UIImage(named: "downArrow")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal),for: .normal)
+            arrowButton.setTitle("", for: .normal)
+            arrowButton.addTarget(self, action:#selector(showFullTime(sender:)), for: .touchUpInside)
+            stack.addArrangedSubview(timeInWordlable)
+            stack.addArrangedSubview(timeInNumber)
+            stack.addArrangedSubview(arrowButton)
+            
         }
         
-        let timeInWordlable = UILabel()
-        timeInWordlable.text = textforTime
-        timeInWordlable.font = UIFont.systemFont(ofSize: 19)
-        timeInNumber.font = UIFont.systemFont(ofSize: 19)
-        let arrowButton = UIButton(type: .roundedRect)
-        arrowButton.setImage(UIImage(named: "downArrow")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal),for: .normal)
-        arrowButton.setTitle("", for: .normal)
-        arrowButton.addTarget(self, action:#selector(showFullTime(sender:)), for: .touchUpInside)
-        stack.addArrangedSubview(timeInWordlable)
-        stack.addArrangedSubview(timeInNumber)
-        stack.addArrangedSubview(arrowButton)
         return stack
     }
     
@@ -763,6 +781,21 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
             weblink = webLink.replacingOccurrences(of: "http://", with: "")
         }
         return weblink
+    }
+    
+    func isTodayHoliday() -> Bool
+    {
+        let currentDate = Date()
+        let startDate = Date(timeIntervalSince1970: Double(store!.holiday_from!)!)
+        let endDate = Date(timeIntervalSince1970: Double(store!.holiday_to!)!)
+        if currentDate >= startDate && currentDate <= endDate
+        {
+            return true
+        }
+//        let df = DateFormatter()
+//        df.dateFormat = "dd-MM-yyyy"
+//        print(df.string(from: date))
+        return false
     }
 }
 extension ShopDetailVC : UITextFieldDelegate {
