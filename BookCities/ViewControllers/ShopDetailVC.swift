@@ -39,6 +39,7 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
      @IBOutlet weak var websiteBtnHeight: NSLayoutConstraint!
     @IBOutlet weak var upperofAddress2: NSLayoutConstraint!
     
+    @IBOutlet weak var OpeningHStackW: NSLayoutConstraint!
     
     // add lable for daywise time.
     @IBOutlet weak var monTimeL: UILabel!
@@ -54,6 +55,7 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     var cityName:String?
     var isFull = false
     var days = [String]()
+    var lunchTimes = [String]()
     var dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
     var delegate:UpdateFavorate?
     var indexPath:IndexPath?
@@ -99,10 +101,10 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         imageView.frame = CGRect.init(x: 0, y: 0, width: 24, height: 24) //CGRectMake(0, 0, 24, 24)
         let barButton = UIBarButtonItem.init(customView: imageView)
         self.navigationItem.rightBarButtonItem = barButton
-        if store?.on_holiday == "0" && !isTodayHoliday(){
-            tapGesture = UITapGestureRecognizer(target: self, action: #selector(openCloseTime))
-            self.hoursStackView.addGestureRecognizer(tapGesture!)
-        }
+        
+        tapGesture = UITapGestureRecognizer(target: self, action: #selector(openCloseTime))
+        self.hoursStackView.addGestureRecognizer(tapGesture!)
+        
         var city = ""
         if let cityNam = self.cityName{
            city = cityNam
@@ -140,6 +142,7 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         configurePageControl()
         configureImageScroller()
         setTimelable()
+        setLunchTime()
         setView()
     }
     
@@ -154,6 +157,10 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     
     func setView()
     {
+        if store!.on_holiday == "1" && isTodayHoliday()
+        {
+            self.contentOfScrollView.addConstraint(NSLayoutConstraint(item: self.contentOfScrollView, attribute:.trailing, relatedBy: .equal, toItem: self.hoursStackView, attribute: .trailing, multiplier: 1, constant: 8))
+        }
         let attribute = [NSForegroundColorAttributeName:UIColor.black] as [String : Any]
         let buttonText = NSMutableAttributedString(string: self.removeHttp((store?.website)!), attributes: attribute)
         self.websiteLinkBtn.setAttributedTitle(buttonText, for: UIControlState.normal)
@@ -183,7 +190,7 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         let catergoryString = getcatergories()
         let attributedText = NSMutableAttributedString(string: catergoryString)
         let style = NSMutableParagraphStyle()
-        style.lineSpacing = CGFloat(3.0)
+        style.lineSpacing = CGFloat(4.0)
         attributedText.addAttributes([NSParagraphStyleAttributeName : style], range: NSMakeRange(0,attributedText.length))
         categoriesLabel.attributedText = attributedText
         UIView.animate(withDuration: 0.01, animations: { () -> Void in
@@ -491,6 +498,66 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         
     }
     
+    func setLunchTime()
+    {
+        if store!.sun_by_appointment != "1" {
+            sunTimeL.text = getString(fromHr: (store?.sun_lunch_from_hr)!, fromMin: (store?.sun_lunch_from_mins)!, toHr: (store?.sun_lunch_to_hr)!, toMin: (store?.sun_lunch_to_mins)!)
+            lunchTimes.append(sunTimeL.text!)
+        }
+        else{
+            sunTimeL.text = byAppointment
+            lunchTimes.append(sunTimeL.text!)
+        }
+        if store!.mon_by_appointment != "1" {
+            monTimeL.text = getString(fromHr: (store?.mon_lunch_from_hr)!, fromMin: (store?.mon_lunch_from_mins)!, toHr: (store?.mon_lunch_to_hr)!, toMin: (store?.mon_lunch_to_mins)!)
+            lunchTimes.append(monTimeL.text!)
+            
+        }
+        else{
+            monTimeL.text = byAppointment
+            lunchTimes.append(monTimeL.text!)
+        }
+        if store!.tue_by_appointment != "1" {
+            tueTimeL.text = getString(fromHr: (store?.tue_lunch_from_hr)!, fromMin: (store?.tue_lunch_from_mins)!, toHr: (store?.tue_lunch_to_hr)!, toMin: (store?.tue_lunch_to_mins)!)
+            lunchTimes.append(tueTimeL.text!)
+        }
+        else{
+            tueTimeL.text = byAppointment
+            lunchTimes.append(tueTimeL.text!)
+        }
+        if store!.wed_by_appointment != "1" {
+            wedTimeL.text = getString(fromHr: (store?.wed_lunch_from_hr)!, fromMin: (store?.wed_lunch_from_mins)!, toHr: (store?.wed_lunch_to_hr)!, toMin: (store?.wed_lunch_to_mins)!)
+            lunchTimes.append(wedTimeL.text!)
+        }
+        else{
+            wedTimeL.text = byAppointment
+            lunchTimes.append(wedTimeL.text!)
+        }
+        if store!.thurs_by_appointment != "1" {
+            thuTimeL.text = getString(fromHr: (store?.thurs_lunch_from_hr)!, fromMin: (store?.thurs_lunch_from_mins)!, toHr: (store?.thurs_lunch_to_hr)!, toMin: (store?.thurs_lunch_to_mins)!)
+            lunchTimes.append(thuTimeL.text!)
+        }
+        else{
+            thuTimeL.text = byAppointment
+            lunchTimes.append(thuTimeL.text!)
+        }
+        if store!.fri_by_appointment != "1" {
+            friTimeL.text = getString(fromHr: (store?.fri_lunch_from_hr)!, fromMin: (store?.fri_lunch_from_mins)!, toHr: (store?.fri_lunch_to_hr)!, toMin: (store?.fri_lunch_to_mins)!)
+            lunchTimes.append(friTimeL.text!)        }
+        else{
+            friTimeL.text = byAppointment
+            lunchTimes.append(friTimeL.text!)
+        }
+        if store!.sat_by_appointment != "1" {
+            satTimeL.text = getString(fromHr: (store?.sat_lunch_from_hr)!, fromMin: (store?.sat_lunch_from_mins)!, toHr: (store?.sat_lunch_to_hr)!, toMin: (store?.sat_lunch_to_mins)!)
+            lunchTimes.append(satTimeL.text!)
+        }
+        else{
+            satTimeL.text = byAppointment
+            lunchTimes.append(satTimeL.text!)
+        }
+    }
+    
     func getString(fromHr:String,fromMin:String,toHr:String,toMin:String) ->String
     {
         var fromhr = fromHr
@@ -542,44 +609,56 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     }
     
     func createEntry() ->UIView{
-        let stack = UIStackView()
-        stack.axis = .horizontal
-        stack.alignment = .firstBaseline
-        stack.distribution = .fillProportionally
-        stack.spacing = 8.0
-        var textforTime = ""
-        let timeInNumber = UILabel()
-        //        print(store?.on_holiday)
-        //        print(store?.holiday_message)
-        //        print(store?.holiday_from)
-        //        print(store?.holiday_to)
         if store!.on_holiday == "1" && isTodayHoliday()
         {
-            textforTime = (store?.holiday_message)!
+            let stack = UIStackView()
+            stack.axis = .horizontal
+            stack.alignment = .bottom
+            stack.distribution = .fillProportionally
+            stack.spacing = 2.0
+            let textforTime = (store?.holiday_message)!
             let timeInWordlable = UILabel()
+            timeInWordlable.numberOfLines = 0
             timeInWordlable.text = textforTime
             timeInWordlable.font = UIFont.systemFont(ofSize: 19)
+            let arrowButton = UIButton(type: .roundedRect)
+            arrowButton.setImage(UIImage(named: "downArrow")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal),for: .normal)
+            arrowButton.setTitle("", for: .normal)
+            arrowButton.addTarget(self, action:#selector(showFullTime(sender:)), for: .touchUpInside)
+            arrowButton.setContentCompressionResistancePriority(1000, for: UILayoutConstraintAxis.horizontal);
             stack.addArrangedSubview(timeInWordlable)
+            stack.addArrangedSubview(arrowButton)
+            return stack
         }
         else{
+            let stack = UIStackView()
+            stack.axis = .horizontal
+            stack.alignment = .firstBaseline
+            stack.distribution = .fillProportionally
+            stack.spacing = 8.0
+            var textforTime = ""
+            let timeInNumber = UILabel()
             if isByAppoinment(){
                 textforTime = byAppointment
             }
             else{
                 if isOpen() {
-                    textforTime = "Open now"
-                    let date = Date()
-                    let calendar = NSCalendar.current
-                    let components = calendar.component(.weekday, from: date)
-                    let day = Int(components.description)! - 1
-                    
-                    timeInNumber.text = days[Int(day)]
+                    if isLunchBreak() {
+                        textforTime = "Lunch Break"
+                    }
+                    else{
+                        textforTime = "Open now"
+                        let date = Date()
+                        let calendar = NSCalendar.current
+                        let components = calendar.component(.weekday, from: date)
+                        let day = Int(components.description)! - 1
+                        timeInNumber.text = days[Int(day)]
+                    }
                 }
                 else{
                     textforTime = "closed"
                 }
             }
-            
             let timeInWordlable = UILabel()
             timeInWordlable.text = textforTime
             timeInWordlable.font = UIFont.systemFont(ofSize: 19)
@@ -589,12 +668,13 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
             arrowButton.setTitle("", for: .normal)
             arrowButton.addTarget(self, action:#selector(showFullTime(sender:)), for: .touchUpInside)
             stack.addArrangedSubview(timeInWordlable)
-            stack.addArrangedSubview(timeInNumber)
+            if (timeInNumber.text != nil){
+                stack.addArrangedSubview(timeInNumber)
+            }
             stack.addArrangedSubview(arrowButton)
             
+            return stack
         }
-        
-        return stack
     }
     
     func showFullTime(sender:UIButton){
@@ -792,10 +872,57 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         {
             return true
         }
-//        let df = DateFormatter()
-//        df.dateFormat = "dd-MM-yyyy"
-//        print(df.string(from: date))
         return false
+    }
+    
+    func isLunchBreak() -> Bool {
+        let date = Date()
+        let calendar = NSCalendar.current
+        let components = calendar.component(.weekday, from: date)
+        let day = Int(components.description)! - 1
+        let hour = calendar.component(.hour, from: date as Date)
+        let minutes = calendar.component(.minute, from: date as Date)
+        let currentTime = hour * 60 + minutes
+        print("current -------------------------------->>>>>>>>>>>> \(currentTime)")
+        var time = lunchTimes[Int(day)] as String
+        if time == "closed"{
+            return false
+        }
+        time = time.trimmingCharacters(in: .whitespaces)
+        let times = time.characters.split{$0 == "-"}.map(String.init)
+        
+        var uppertime = times[0].characters.split(separator: ":").map(String.init)
+        var lowertime = times[1].characters.split(separator: ":").map(String.init)
+        uppertime[0] = uppertime[0].trimmingCharacters(in: .whitespaces)
+        uppertime[1] = uppertime[1].trimmingCharacters(in: .whitespaces)
+        lowertime[0] = lowertime[0].trimmingCharacters(in: .whitespaces)
+        lowertime[1] = lowertime[1].trimmingCharacters(in: .whitespaces)
+        
+        var upper = 0
+        var lower = 23
+        
+        if let upperLimit = Int(uppertime[0]){
+            upper = upperLimit * 60 + Int(uppertime[1])!
+        }
+        if let lowerLimit = Int(lowertime[0]) {
+            if Int(uppertime[0])! > lowerLimit {
+                lower = lowerLimit * 60 + Int(lowertime[1])!
+                if currentTime < lower || currentTime > upper {
+                    return true
+                }
+                lower = (lowerLimit + 24) * 60 + Int(lowertime[1])!
+            }
+            else{
+                lower = lowerLimit * 60 + Int(lowertime[1])!
+            }
+        }
+        
+        if upper < currentTime && lower > currentTime {
+            return true
+        }
+        else{
+            return false
+        }
     }
 }
 extension ShopDetailVC : UITextFieldDelegate {

@@ -37,8 +37,15 @@
         <attribute name="fri_by_appointment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fri_from_hr" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fri_from_mins" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fri_lunch_from_hr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fri_lunch_from_mins" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fri_lunch_to_hr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fri_lunch_to_mins" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fri_to_hr" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fri_to_mins" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="holiday_from" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="holiday_message" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="holiday_to" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="image1" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="image2" optional="YES" attributeType="String" syncable="YES"/>
@@ -53,35 +60,60 @@
         <attribute name="mon_by_appointment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="mon_from_hr" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="mon_from_mins" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mon_lunch_from_hr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mon_lunch_from_mins" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mon_lunch_to_hr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mon_lunch_to_mins" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="mon_to_hr" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="mon_to_mins" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="on_holiday" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sat_by_appointment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sat_from_hr" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sat_from_mins" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sat_lunch_from_hr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sat_lunch_from_mins" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sat_lunch_to_hr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sat_lunch_to_mins" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sat_to_hr" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sat_to_mins" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sun_by_appointment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sun_from_hr" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sun_from_mins" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sun_lunch_from_hr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sun_lunch_from_mins" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sun_lunch_to_hr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sun_lunch_to_mins" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sun_to_hr" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sun_to_mins" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="thurs_by_appointment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="thurs_from_hr" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="thurs_from_mins" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thurs_lunch_from_hr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thurs_lunch_from_mins" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thurs_lunch_to_hr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thurs_lunch_to_mins" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="thurs_to_hr" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="thurs_to_mins" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tue_by_appointment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tue_from_hr" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tue_from_mins" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tue_lunch_from_hr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tue_lunch_from_mins" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tue_lunch_to_hr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tue_lunch_to_mins" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tue_to_hr" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tue_to_mins" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="website" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="wed_by_appointment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="wed_from_hr" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="wed_from_mins" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="wed_lunch_from_hr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="wed_lunch_from_mins" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="wed_lunch_to_hr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="wed_lunch_to_mins" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="wed_to_hr" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="wed_to_mins" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="working_hours" optional="YES" attributeType="String" syncable="YES"/>
@@ -94,6 +126,6 @@
         <element name="Country" positionX="-6824" positionY="-576" width="128" height="90"/>
         <element name="Notification" positionX="-6822" positionY="-675" width="128" height="75"/>
         <element name="State" positionX="-7011" positionY="-549" width="128" height="90"/>
-        <element name="Store" positionX="-6626" positionY="-828" width="128" height="960"/>
+        <element name="Store" positionX="-6626" positionY="-828" width="128" height="1440"/>
     </elements>
 </model>

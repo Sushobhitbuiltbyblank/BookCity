@@ -74,6 +74,35 @@ class JSONStore: NSObject {
     let sat_by_appointment:String?
     let sun_by_appointment:String?
     
+    let mon_lunch_from_hr:String?
+    let mon_lunch_from_mins:String?
+    let mon_lunch_to_hr:String?
+    let mon_lunch_to_mins:String?
+    let tue_lunch_from_hr:String?
+    let tue_lunch_from_mins:String?
+    let tue_lunch_to_hr:String?
+    let tue_lunch_to_mins:String?
+    let wed_lunch_from_hr:String?
+    let wed_lunch_from_mins:String?
+    let wed_lunch_to_hr:String?
+    let wed_lunch_to_mins:String?
+    let thurs_lunch_from_hr:String?
+    let thurs_lunch_from_mins:String?
+    let thurs_lunch_to_hr:String?
+    let thurs_lunch_to_mins:String?
+    let fri_lunch_from_hr:String?
+    let fri_lunch_from_mins:String?
+    let fri_lunch_to_hr:String?
+    let fri_lunch_to_mins:String?
+    let sat_lunch_from_hr:String?
+    let sat_lunch_from_mins:String?
+    let sat_lunch_to_hr:String?
+    let sat_lunch_to_mins:String?
+    let sun_lunch_from_hr:String?
+    let sun_lunch_from_mins:String?
+    let sun_lunch_to_hr:String?
+    let sun_lunch_to_mins:String?
+    
     let descriptions:String?
     var cityName:String?
     
@@ -159,6 +188,34 @@ class JSONStore: NSObject {
         self.holiday_from = dictionary[Constants.JSONStoreResponseKey.holiday_from] as? String
         self.holiday_to = dictionary[Constants.JSONStoreResponseKey.holiday_to] as? String
         self.holiday_message = dictionary[Constants.JSONStoreResponseKey.holiday_message] as? String
+        self.mon_lunch_from_hr = dictionary[Constants.JSONStoreResponseKey.mon_lunch_from_hr] as? String
+        self.mon_lunch_from_mins = dictionary[Constants.JSONStoreResponseKey.mon_lunch_from_mins] as? String
+        self.mon_lunch_to_hr = dictionary[Constants.JSONStoreResponseKey.mon_lunch_to_hr] as? String
+        self.mon_lunch_to_mins = dictionary[Constants.JSONStoreResponseKey.mon_lunch_to_mins] as? String
+        self.tue_lunch_from_hr = dictionary[Constants.JSONStoreResponseKey.tue_lunch_from_hr] as? String
+        self.tue_lunch_from_mins = dictionary[Constants.JSONStoreResponseKey.tue_lunch_from_mins] as? String
+        self.tue_lunch_to_hr = dictionary[Constants.JSONStoreResponseKey.tue_lunch_to_hr] as? String
+        self.tue_lunch_to_mins = dictionary[Constants.JSONStoreResponseKey.tue_lunch_to_mins] as? String
+        self.wed_lunch_from_hr = dictionary[Constants.JSONStoreResponseKey.wed_lunch_from_hr] as? String
+        self.wed_lunch_from_mins = dictionary[Constants.JSONStoreResponseKey.wed_lunch_from_mins] as? String
+        self.wed_lunch_to_hr = dictionary[Constants.JSONStoreResponseKey.wed_lunch_to_hr] as? String
+        self.wed_lunch_to_mins = dictionary[Constants.JSONStoreResponseKey.wed_lunch_to_mins] as? String
+        self.thurs_lunch_from_hr = dictionary[Constants.JSONStoreResponseKey.thurs_lunch_from_hr] as? String
+        self.thurs_lunch_from_mins = dictionary[Constants.JSONStoreResponseKey.thurs_lunch_from_mins] as? String
+        self.thurs_lunch_to_hr = dictionary[Constants.JSONStoreResponseKey.thurs_lunch_to_hr] as? String
+        self.thurs_lunch_to_mins = dictionary[Constants.JSONStoreResponseKey.thurs_lunch_to_mins] as? String
+        self.sat_lunch_from_hr = dictionary[Constants.JSONStoreResponseKey.sat_lunch_from_hr] as? String
+        self.sat_lunch_from_mins = dictionary[Constants.JSONStoreResponseKey.sat_lunch_from_mins] as? String
+        self.sat_lunch_to_hr = dictionary[Constants.JSONStoreResponseKey.sat_lunch_to_hr] as? String
+        self.sat_lunch_to_mins = dictionary[Constants.JSONStoreResponseKey.sat_lunch_to_mins] as? String
+        self.fri_lunch_from_hr = dictionary[Constants.JSONStoreResponseKey.fri_lunch_from_hr] as? String
+        self.fri_lunch_from_mins = dictionary[Constants.JSONStoreResponseKey.fri_lunch_from_mins] as? String
+        self.fri_lunch_to_hr = dictionary[Constants.JSONStoreResponseKey.fri_lunch_to_hr] as? String
+        self.fri_lunch_to_mins = dictionary[Constants.JSONStoreResponseKey.fri_lunch_to_mins] as? String
+        self.sun_lunch_from_hr = dictionary[Constants.JSONStoreResponseKey.sun_lunch_from_hr] as? String
+        self.sun_lunch_from_mins = dictionary[Constants.JSONStoreResponseKey.sun_lunch_from_mins] as? String
+        self.sun_lunch_to_hr = dictionary[Constants.JSONStoreResponseKey.sun_lunch_to_hr] as? String
+        self.sun_lunch_to_mins = dictionary[Constants.JSONStoreResponseKey.sun_lunch_to_mins] as? String
     }
     
     init(dictionary: [String:AnyObject],storeImageDir:String) {
@@ -238,6 +295,34 @@ class JSONStore: NSObject {
         self.holiday_from = dictionary[Constants.JSONStoreResponseKey.holiday_from] as? String
         self.holiday_to = dictionary[Constants.JSONStoreResponseKey.holiday_to] as? String
         self.holiday_message = dictionary[Constants.JSONStoreResponseKey.holiday_message] as? String
+        self.mon_lunch_from_hr = dictionary[Constants.JSONStoreResponseKey.mon_lunch_from_hr] as? String
+        self.mon_lunch_from_mins = dictionary[Constants.JSONStoreResponseKey.mon_lunch_from_mins] as? String
+        self.mon_lunch_to_hr = dictionary[Constants.JSONStoreResponseKey.mon_lunch_to_hr] as? String
+        self.mon_lunch_to_mins = dictionary[Constants.JSONStoreResponseKey.mon_lunch_to_mins] as? String
+        self.tue_lunch_from_hr = dictionary[Constants.JSONStoreResponseKey.tue_lunch_from_hr] as? String
+        self.tue_lunch_from_mins = dictionary[Constants.JSONStoreResponseKey.tue_lunch_from_mins] as? String
+        self.tue_lunch_to_hr = dictionary[Constants.JSONStoreResponseKey.tue_lunch_to_hr] as? String
+        self.tue_lunch_to_mins = dictionary[Constants.JSONStoreResponseKey.tue_lunch_to_mins] as? String
+        self.wed_lunch_from_hr = dictionary[Constants.JSONStoreResponseKey.wed_lunch_from_hr] as? String
+        self.wed_lunch_from_mins = dictionary[Constants.JSONStoreResponseKey.wed_lunch_from_mins] as? String
+        self.wed_lunch_to_hr = dictionary[Constants.JSONStoreResponseKey.wed_lunch_to_hr] as? String
+        self.wed_lunch_to_mins = dictionary[Constants.JSONStoreResponseKey.wed_lunch_to_mins] as? String
+        self.thurs_lunch_from_hr = dictionary[Constants.JSONStoreResponseKey.thurs_lunch_from_hr] as? String
+        self.thurs_lunch_from_mins = dictionary[Constants.JSONStoreResponseKey.thurs_lunch_from_mins] as? String
+        self.thurs_lunch_to_hr = dictionary[Constants.JSONStoreResponseKey.thurs_lunch_to_hr] as? String
+        self.thurs_lunch_to_mins = dictionary[Constants.JSONStoreResponseKey.thurs_lunch_to_mins] as? String
+        self.sat_lunch_from_hr = dictionary[Constants.JSONStoreResponseKey.sat_lunch_from_hr] as? String
+        self.sat_lunch_from_mins = dictionary[Constants.JSONStoreResponseKey.sat_lunch_from_mins] as? String
+        self.sat_lunch_to_hr = dictionary[Constants.JSONStoreResponseKey.sat_lunch_to_hr] as? String
+        self.sat_lunch_to_mins = dictionary[Constants.JSONStoreResponseKey.sat_lunch_to_mins] as? String
+        self.fri_lunch_from_hr = dictionary[Constants.JSONStoreResponseKey.fri_lunch_from_hr] as? String
+        self.fri_lunch_from_mins = dictionary[Constants.JSONStoreResponseKey.fri_lunch_from_mins] as? String
+        self.fri_lunch_to_hr = dictionary[Constants.JSONStoreResponseKey.fri_lunch_to_hr] as? String
+        self.fri_lunch_to_mins = dictionary[Constants.JSONStoreResponseKey.fri_lunch_to_mins] as? String
+        self.sun_lunch_from_hr = dictionary[Constants.JSONStoreResponseKey.sun_lunch_from_hr] as? String
+        self.sun_lunch_from_mins = dictionary[Constants.JSONStoreResponseKey.sun_lunch_from_mins] as? String
+        self.sun_lunch_to_hr = dictionary[Constants.JSONStoreResponseKey.sun_lunch_to_hr] as? String
+        self.sun_lunch_to_mins = dictionary[Constants.JSONStoreResponseKey.sun_lunch_to_mins] as? String
     }
 
     
@@ -320,7 +405,34 @@ class JSONStore: NSObject {
             dictionary[Constants.JSONStoreResponseKey.holiday_from] = result.value(forKey: Constants.JSONStoreResponseKey.holiday_from) as AnyObject?
             dictionary[Constants.JSONStoreResponseKey.holiday_to] = result.value(forKey: Constants.JSONStoreResponseKey.holiday_to) as AnyObject?
             dictionary[Constants.JSONStoreResponseKey.holiday_message] = result.value(forKey: Constants.JSONStoreResponseKey.holiday_message) as AnyObject?
-            
+            dictionary[Constants.JSONStoreResponseKey.mon_lunch_from_hr] = result.value(forKey: Constants.JSONStoreResponseKey.mon_lunch_from_hr) as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.mon_lunch_from_mins] = result.value(forKey: Constants.JSONStoreResponseKey.mon_lunch_from_mins) as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.mon_lunch_to_hr] = result.value(forKey: Constants.JSONStoreResponseKey.mon_lunch_to_hr) as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.mon_lunch_to_mins] = result.value(forKey: Constants.JSONStoreResponseKey.mon_lunch_to_mins) as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.tue_lunch_from_hr] = result.value(forKey: Constants.JSONStoreResponseKey.tue_lunch_from_hr) as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.tue_lunch_from_mins] = result.value(forKey: Constants.JSONStoreResponseKey.tue_lunch_from_mins) as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.tue_lunch_to_hr] = result.value(forKey: Constants.JSONStoreResponseKey.tue_lunch_to_hr) as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.tue_lunch_to_mins] = result.value(forKey: Constants.JSONStoreResponseKey.tue_lunch_to_mins) as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.wed_lunch_from_hr] = result.value(forKey: Constants.JSONStoreResponseKey.wed_lunch_from_hr) as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.wed_lunch_from_mins] = result.value(forKey: Constants.JSONStoreResponseKey.wed_lunch_from_mins) as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.wed_lunch_to_hr] = result.value(forKey: Constants.JSONStoreResponseKey.wed_lunch_to_hr) as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.wed_lunch_to_mins] = result.value(forKey: Constants.JSONStoreResponseKey.wed_lunch_to_mins) as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.thurs_lunch_from_hr] = result.value(forKey: Constants.JSONStoreResponseKey.thurs_lunch_from_hr) as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.thurs_lunch_from_mins] = result.value(forKey: Constants.JSONStoreResponseKey.thurs_lunch_from_mins) as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.thurs_lunch_to_hr] = result.value(forKey: Constants.JSONStoreResponseKey.thurs_lunch_to_hr) as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.thurs_lunch_to_mins] = result.value(forKey: Constants.JSONStoreResponseKey.thurs_lunch_to_mins) as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.sat_lunch_from_hr] = result.value(forKey: Constants.JSONStoreResponseKey.sat_lunch_from_hr) as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.sat_lunch_from_mins] = result.value(forKey: Constants.JSONStoreResponseKey.sat_lunch_from_mins) as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.sat_lunch_to_hr] = result.value(forKey: Constants.JSONStoreResponseKey.sat_lunch_to_hr) as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.sat_lunch_to_mins] = result.value(forKey: Constants.JSONStoreResponseKey.sat_lunch_to_mins) as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.fri_lunch_from_hr] = result.value(forKey: Constants.JSONStoreResponseKey.fri_lunch_from_hr) as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.fri_lunch_from_mins] = result.value(forKey: Constants.JSONStoreResponseKey.fri_lunch_from_mins) as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.fri_lunch_to_hr] = result.value(forKey: Constants.JSONStoreResponseKey.fri_lunch_to_hr) as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.fri_lunch_to_mins] = result.value(forKey: Constants.JSONStoreResponseKey.fri_lunch_to_mins) as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.sun_lunch_from_hr] = result.value(forKey: Constants.JSONStoreResponseKey.sun_lunch_from_hr) as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.sun_lunch_from_mins] = result.value(forKey: Constants.JSONStoreResponseKey.sun_lunch_from_mins) as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.sun_lunch_to_hr] = result.value(forKey: Constants.JSONStoreResponseKey.sun_lunch_to_hr) as AnyObject?
+            dictionary[Constants.JSONStoreResponseKey.sun_lunch_to_mins] = result.value(forKey: Constants.JSONStoreResponseKey.sun_lunch_to_mins) as AnyObject?
             stores.append(JSONStore(dictionary: dictionary))
         }
         return stores
@@ -393,7 +505,34 @@ class JSONStore: NSObject {
         dictionary[Constants.JSONStoreResponseKey.holiday_from] = store.value(forKey: Constants.JSONStoreResponseKey.holiday_from) as AnyObject?
         dictionary[Constants.JSONStoreResponseKey.holiday_to] = store.value(forKey: Constants.JSONStoreResponseKey.holiday_to) as AnyObject?
         dictionary[Constants.JSONStoreResponseKey.holiday_message] = store.value(forKey: Constants.JSONStoreResponseKey.holiday_message) as AnyObject?
-
+        dictionary[Constants.JSONStoreResponseKey.mon_lunch_from_hr] = store.value(forKey: Constants.JSONStoreResponseKey.mon_lunch_from_hr) as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.mon_lunch_from_mins] = store.value(forKey: Constants.JSONStoreResponseKey.mon_lunch_from_mins) as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.mon_lunch_to_hr] = store.value(forKey: Constants.JSONStoreResponseKey.mon_lunch_to_hr) as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.mon_lunch_to_mins] = store.value(forKey: Constants.JSONStoreResponseKey.mon_lunch_to_mins) as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.tue_lunch_from_hr] = store.value(forKey: Constants.JSONStoreResponseKey.tue_lunch_from_hr) as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.tue_lunch_from_mins] = store.value(forKey: Constants.JSONStoreResponseKey.tue_lunch_from_mins) as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.tue_lunch_to_hr] = store.value(forKey: Constants.JSONStoreResponseKey.tue_lunch_to_hr) as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.tue_lunch_to_mins] = store.value(forKey: Constants.JSONStoreResponseKey.tue_lunch_to_mins) as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.wed_lunch_from_hr] = store.value(forKey: Constants.JSONStoreResponseKey.wed_lunch_from_hr) as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.wed_lunch_from_mins] = store.value(forKey: Constants.JSONStoreResponseKey.wed_lunch_from_mins) as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.wed_lunch_to_hr] = store.value(forKey: Constants.JSONStoreResponseKey.wed_lunch_to_hr) as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.wed_lunch_to_mins] = store.value(forKey: Constants.JSONStoreResponseKey.wed_lunch_to_mins) as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.thurs_lunch_from_hr] = store.value(forKey: Constants.JSONStoreResponseKey.thurs_lunch_from_hr) as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.thurs_lunch_from_mins] = store.value(forKey: Constants.JSONStoreResponseKey.thurs_lunch_from_mins) as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.thurs_lunch_to_hr] = store.value(forKey: Constants.JSONStoreResponseKey.thurs_lunch_to_hr) as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.thurs_lunch_to_mins] = store.value(forKey: Constants.JSONStoreResponseKey.thurs_lunch_to_mins) as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.sat_lunch_from_hr] = store.value(forKey: Constants.JSONStoreResponseKey.sat_lunch_from_hr) as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.sat_lunch_from_mins] = store.value(forKey: Constants.JSONStoreResponseKey.sat_lunch_from_mins) as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.sat_lunch_to_hr] = store.value(forKey: Constants.JSONStoreResponseKey.sat_lunch_to_hr) as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.sat_lunch_to_mins] = store.value(forKey: Constants.JSONStoreResponseKey.sat_lunch_to_mins) as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.fri_lunch_from_hr] = store.value(forKey: Constants.JSONStoreResponseKey.fri_lunch_from_hr) as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.fri_lunch_from_mins] = store.value(forKey: Constants.JSONStoreResponseKey.fri_lunch_from_mins) as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.fri_lunch_to_hr] = store.value(forKey: Constants.JSONStoreResponseKey.fri_lunch_to_hr) as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.fri_lunch_to_mins] = store.value(forKey: Constants.JSONStoreResponseKey.fri_lunch_to_mins) as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.sun_lunch_from_hr] = store.value(forKey: Constants.JSONStoreResponseKey.sun_lunch_from_hr) as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.sun_lunch_from_mins] = store.value(forKey: Constants.JSONStoreResponseKey.sun_lunch_from_mins) as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.sun_lunch_to_hr] = store.value(forKey: Constants.JSONStoreResponseKey.sun_lunch_to_hr) as AnyObject?
+        dictionary[Constants.JSONStoreResponseKey.sun_lunch_to_mins] = store.value(forKey: Constants.JSONStoreResponseKey.sun_lunch_to_mins) as AnyObject?
         return JSONStore(dictionary:dictionary)
 
     }

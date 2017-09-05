@@ -84,6 +84,7 @@ class MainView: UIViewController {
                                 CoreDataManager.sharedInstance().deleteStore(storeID: value.id!)
                             }
                         }
+                        citiWiseStore = self.updateCoreData(citiWiseStore,response!)
                         var citiArray = Array<String>()
                         for store in citiWiseStore {
                             let city = store.cityName
@@ -133,137 +134,6 @@ class MainView: UIViewController {
         let nv:UINavigationController = UINavigationController(rootViewController: next)
         present(nv, animated: true, completion: nil)
     }
-    @IBAction func saveOfflineDataBtnAction(_ sender: Any) {
-        var storeCount = 0
-        
-        DispatchQueue(label: "com.bookcity.coredata").async{
-            let queue = DispatchQueue(label: "com.bookcity.getcities")
-            queue.async{
-                if !CoreDataManager.sharedInstance().haveCity(){
-                    DispatchQueue.main.async {
-                        HUD.show(.progress)
-                    }
-                    BookCitiesClient.sharedInstance().getCities([String : AnyObject](), completionHandlerForCities:{
-                        (response, error) in
-                        if(error == nil)
-                        {
-                            print("get city")
-                            DispatchQueue.global(qos: .default).async{
-                                for data in response!{
-                                    CoreDataManager.sharedInstance().saveCity(data.value(forKey:Constants.JSONCityResponseKey.Name) as! String, id: data.value(forKey:Constants.JSONCityResponseKey.Id) as! String, stateId: data.value(forKey:Constants.JSONCityResponseKey.State_id) as! String, countryId: data.value(forKey:Constants.JSONCityResponseKey.Country_id) as! String)
-                                }
-                                storeCount += 1
-                                print("offline city save")
-                                DispatchQueue.main.async {
-                                    HUD.flash(.success, delay: 1.0)
-                                }
-                            }
-                        }
-                        
-                    })
-                }
-            }
-            if !CoreDataManager.sharedInstance().haveStore(){
-                let storeQueue = DispatchQueue(label: "com.bookcity.getstores")
-                storeQueue.async {
-                    DispatchQueue.main.async {
-                        HUD.show(.progress)
-                    }
-                    BookCitiesClient.sharedInstance().getStores({
-                        (response, error) in
-                        if(error == nil)
-                        {
-                            print("get store")
-                            DispatchQueue.global(qos: .default).async{
-                                for data in response!{
-                                    if !CoreDataManager.sharedInstance().haveStore(data.id!)
-                                    {
-                                        //                                    CoreDataManager.sharedInstance().saveStores(data)
-                                    }
-                                }
-                                storeCount += 1
-                                print("offline store save")
-                                DispatchQueue.main.async {
-                                    HUD.hide()
-                                }
-                            }
-                        }
-                    })
-                    
-                }
-            }
-            
-            if !CoreDataManager.sharedInstance().haveState(){
-                let stateQueue = DispatchQueue(label: "com.bookcity.getstates")
-                stateQueue.async {
-                    DispatchQueue.main.async {
-                        HUD.show(.progress)
-                    }
-                    BookCitiesClient.sharedInstance().getState({
-                        (response, error) in
-                        if(error == nil)
-                        {
-                            print("get state")
-                            DispatchQueue.global(qos: .default).async{
-                                for data in response!{
-                                    CoreDataManager.sharedInstance().saveState(data.value(forKey:Constants.JSONStateResponseKey.Name) as! String, id: data.value(forKey:Constants.JSONStateResponseKey.Id) as! String, countryId: data.value(forKey:Constants.JSONStateResponseKey.Country_id) as! String)
-                                }
-                                
-                                storeCount += 1
-                                print("offline state save")
-                                DispatchQueue.main.async {
-                                    HUD.hide()
-                                }
-                            }
-                        }
-                    })
-                    
-                }
-            }
-            
-            
-            if !CoreDataManager.sharedInstance().haveCountry(){
-                let stateQueue = DispatchQueue(label: "com.bookcity.getcountry")
-                stateQueue.async {
-                    DispatchQueue.main.async {
-                        HUD.show(.progress)
-                    }
-//                    BookCitiesClient.sharedInstance().getCountry({
-//                        (response, error) in
-//                        if(error == nil)
-//                        {
-//                            print("get country")
-//                            DispatchQueue.global(qos: .default).async{
-//                                for data in response!{
-//                                    CoreDataManager.sharedInstance().saveCountry(data.value(forKey:Constants.JSONCountryResponseKey.Name) as! String, id: data.value(forKey:Constants.JSONCountryResponseKey.Id) as! String, sortName:data.value(forKey:Constants.JSONCountryResponseKey.SortName) as! String)
-//                                }
-//                                storeCount += 1
-//                                print("offline country save")
-//                                DispatchQueue.main.async {
-//                                    HUD.hide()
-//                                }
-//                            }
-//                        }
-//                    })
-                    
-                }
-            }
-            DispatchQueue.main.async {
-                if Reachable.isConnectedToNetwork() == false
-                {
-                    HUD.flash(.success, delay: 1.0)
-                }
-            }
-        }
-        //        let  countries = JSONCountry.countryFromCoreData(CoreDataManager.sharedInstance().getCountry() as! [Country])
-        //        for con in countries{
-        //            print(con.id+"  "+con.name)
-        //        }
-        let  states = JSONState.stateFromCoreData(CoreDataManager.sharedInstance().getState() as! [State])
-        for stat in states{
-            print(stat.id+"  "+stat.name)
-        }
-    }
     
     // MARK: - Navigation
     
@@ -283,4 +153,15 @@ class MainView: UIViewController {
         return false
     }
     
+    func updateCoreData(_ cdstores:[JSONStore], _ stores:[JSONStore]) -> [JSONStore]
+    {
+        for cdstore in cdstores {
+            for store in stores {
+                if store.id == cdstore.id {
+                    CoreDataManager.sharedInstance().saveStores(store, cityName: cdstore.cityName!)
+                }
+            }
+        }
+        return JSONStore.storeFromCoreData(CoreDataManager.sharedInstance().getStores() as! [Store])
+    }
 }
