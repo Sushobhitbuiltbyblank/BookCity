@@ -27,7 +27,7 @@ class BookStoreTVCell: UITableViewCell {
     }
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         if highlighted {
-            self.backgroundColor = UIColor.init(colorLiteralRed: 217/255, green: 217/255, blue: 217/255, alpha: 1)
+            self.backgroundColor = UIColor(red: 217/255, green: 217/255, blue: 217/255, alpha: 1)
         }
         else{
             self.backgroundColor = UIColor.white

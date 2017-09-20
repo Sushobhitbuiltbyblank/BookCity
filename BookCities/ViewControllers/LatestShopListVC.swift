@@ -107,7 +107,7 @@ class LatestShopListVC: UIViewController,UITableViewDelegate, UITableViewDataSou
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
-        cell?.contentView.backgroundColor = UIColor(colorLiteralRed: 217/255, green: 217/255, blue: 217/255, alpha: 1)
+        cell?.contentView.backgroundColor = UIColor(red: 217/255, green: 217/255, blue: 217/255, alpha: 1)
         HUD.show(.progress)
         let id = ((notificationList[indexPath.row] as AnyObject).value(forKeyPath: "id") as? String)!
         if Reachable.isConnectedToNetwork(){

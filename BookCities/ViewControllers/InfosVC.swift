@@ -19,7 +19,7 @@ class InfosVC: UIViewController {
             NSForegroundColorAttributeName: UIColor.black,
             NSFontAttributeName: UIFont(name: Constants.Font.TypeHelvetica, size: CGFloat(Constants.Font.Size))!
         ]
-        self.navigationController?.navigationBar.barTintColor = UIColor(colorLiteralRed: 255/255, green: 0/255, blue: 0/255, alpha: 0.5)
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 255/255, green: 0/255, blue: 0/255, alpha: 0.5)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "cross")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: .plain, target: self, action: #selector(closeBtnAction))
         self.textView.contentInset.top = 9
         HUD.show(.progress)

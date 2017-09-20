@@ -35,7 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if granted == true
             {
                 print("Allow")
-                application.registerForRemoteNotifications()
+                DispatchQueue.main.async(execute: {
+                    application.registerForRemoteNotifications()
+                })
             }
             else
             {

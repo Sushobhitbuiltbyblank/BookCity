@@ -341,7 +341,7 @@ class CoreDataManager: NSObject {
         storeEntity.setValue(store.image2, forKey: Constants.JSONStoreResponseKey.Image2)
         storeEntity.setValue(store.image3, forKey: Constants.JSONStoreResponseKey.Image3)
         storeEntity.setValue(store.image4, forKey: Constants.JSONStoreResponseKey.Image4)
-        storeEntity.setValue(true, forKey: Constants.JSONStoreResponseKey.IsFavorate)                                         
+        storeEntity.setValue(true, forKey: Constants.JSONStoreResponseKey.IsFavorate)
         storeEntity.setValue(cityName, forKey: Constants.CDStoreKey.CityName)
         storeEntity.setValue(store.by_appointment, forKey: Constants.JSONStoreResponseKey.by_appointment)
         storeEntity.setValue(store.mon_by_appointment, forKey: Constants.JSONStoreResponseKey.mon_by_appointment)

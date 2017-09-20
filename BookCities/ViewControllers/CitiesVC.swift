@@ -171,7 +171,7 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.isUserInteractionEnabled = false
         let cell = tableView.cellForRow(at: indexPath)
-        cell?.contentView.backgroundColor = UIColor(colorLiteralRed: 217/255, green: 217/255, blue: 217/255, alpha: 1)
+        cell?.contentView.backgroundColor = UIColor(red: 217/255, green: 217/255, blue: 217/255, alpha: 1.0)
 //        tableView.deselectRow(at: indexPath, animated: true)
         var currentCity:JSONCity!
         if searchController.isActive && searchController.searchBar.text != "" {
