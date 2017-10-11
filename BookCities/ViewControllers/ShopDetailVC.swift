@@ -612,9 +612,9 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         if store!.on_holiday == "1" && isTodayHoliday()
         {
             let stack = UIStackView()
-            stack.axis = .horizontal
-            stack.alignment = .bottom
-            stack.distribution = .fillProportionally
+            stack.axis = .vertical
+            stack.alignment = .fill
+            stack.distribution = .fill
             stack.spacing = 2.0
             let textforTime = (store?.holiday_message)!
             let timeInWordlable = UILabel()
@@ -623,9 +623,11 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
             timeInWordlable.font = UIFont.systemFont(ofSize: 19)
             let arrowButton = UIButton(type: .roundedRect)
             arrowButton.setImage(UIImage(named: "downArrow")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal),for: .normal)
-            arrowButton.setTitle("", for: .normal)
+            arrowButton.contentVerticalAlignment = .top
+            arrowButton.contentHorizontalAlignment = .right
+//            arrowButton.setTitle("", for: .normal)
             arrowButton.addTarget(self, action:#selector(showFullTime(sender:)), for: .touchUpInside)
-            arrowButton.setContentCompressionResistancePriority(1000, for: UILayoutConstraintAxis.horizontal);
+//            arrowButton.setContentCompressionResistancePriority(1000, for: UILayoutConstraintAxis.horizontal);
             stack.addArrangedSubview(timeInWordlable)
             stack.addArrangedSubview(arrowButton)
             return stack
@@ -741,7 +743,13 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         let d = Int(components.description)! - 1
         
         for day in d ..< 7 {
-            stack.addArrangedSubview(createStack(day: dayNames[day], time: days[day]))
+            if lunchTimes[day] != "closed"
+            {
+                stack.addArrangedSubview(createStack(day: dayNames[day], time: "\(days[day]) / \(lunchTimes[day])"))
+            }
+            else{
+                stack.addArrangedSubview(createStack(day: dayNames[day], time:days[day]))
+            }
         }
         for day in 0 ..< d {
             stack.addArrangedSubview(createStack(day: dayNames[day], time: days[day]))
