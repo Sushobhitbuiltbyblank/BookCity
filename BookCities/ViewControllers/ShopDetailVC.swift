@@ -752,7 +752,13 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
             }
         }
         for day in 0 ..< d {
-            stack.addArrangedSubview(createStack(day: dayNames[day], time: days[day]))
+            if lunchTimes[day] != "closed"
+            {
+                stack.addArrangedSubview(createStack(day: dayNames[day], time: "\(days[day]) / \(lunchTimes[day])"))
+            }
+            else{
+                stack.addArrangedSubview(createStack(day: dayNames[day], time:days[day]))
+            }
         }
         for i in 0 ..< 6 {
             let view0:UIStackView = stack.arrangedSubviews[i] as! UIStackView
