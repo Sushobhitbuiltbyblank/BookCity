@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Helvetica.ttc">
+            <string>Helvetica</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -19,7 +25,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jGk-HA-0OP">
-                        <rect key="frame" x="279" y="18" width="24" height="24"/>
+                        <rect key="frame" x="280" y="18" width="24" height="24"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="24" id="8AZ-Ak-TLd"/>
                             <constraint firstAttribute="width" constant="24" id="q39-pm-YM2"/>
@@ -44,12 +50,12 @@
                 <constraints>
                     <constraint firstItem="jGk-HA-0OP" firstAttribute="leading" secondItem="xeq-dc-hRK" secondAttribute="trailing" priority="250" id="2Vd-P4-caN"/>
                     <constraint firstAttribute="bottom" secondItem="RbV-e8-aAN" secondAttribute="bottom" id="3ID-Nh-7JA"/>
-                    <constraint firstAttribute="trailing" secondItem="jGk-HA-0OP" secondAttribute="trailing" constant="17" id="Jde-cd-e41"/>
                     <constraint firstItem="xeq-dc-hRK" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ORg-p9-PUM"/>
                     <constraint firstAttribute="trailing" secondItem="RbV-e8-aAN" secondAttribute="trailing" id="OZK-I1-rpI"/>
                     <constraint firstItem="jGk-HA-0OP" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Sbs-Bv-oLR"/>
                     <constraint firstItem="RbV-e8-aAN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ZcU-Wc-bsT"/>
                     <constraint firstItem="xeq-dc-hRK" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="jhZ-ZA-Hur"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="jGk-HA-0OP" secondAttribute="trailing" constant="8" id="vPr-YL-92e"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

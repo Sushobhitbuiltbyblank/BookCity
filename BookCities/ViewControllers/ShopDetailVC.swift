@@ -65,15 +65,19 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         super.viewDidLoad()
         // update navigation bar
         guard let height = navigationController?.navigationBar.frame.size.height else {return}
-        
-        let titleLabel = UILabel(frame: CGRect(x:0,y:0,width: 480,height: height))
 
-        titleLabel.numberOfLines = 0
+        let titleLabel = UILabel(frame: CGRect(x:0,y:0,width: 200,height: height))
+
+        titleLabel.numberOfLines = 2
         titleLabel.textAlignment = .center
         titleLabel.text = tit
         titleLabel.font = UIFont(name: Constants.Font.TypeHelvetica, size: CGFloat(Constants.Font.Size))!
+//        titleLabel.sizeToFit()
+        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.minimumScaleFactor = 0.5
         navigationItem.titleView = titleLabel
-        self.navigationItem.title = tit
+        
+//        self.navigationItem.title = tit
         navigationController!.navigationBar.isTranslucent = false
         
         // The navigation bar's shadowImage is set to a transparent image.  In
@@ -97,11 +101,16 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
             self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(goBack))
         }
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
-        let imageView = UIImageView(image: UIImage(named: self.getStoreTypeImage()))
-        imageView.frame = CGRect.init(x: 0, y: 0, width: 24, height: 24) //CGRectMake(0, 0, 24, 24)
-        let barButton = UIBarButtonItem.init(customView: imageView)
+        //create a new button
+        let button: UIButton = UIButton(type: .custom)
+        //set image for button
+        button.setImage(UIImage(named: self.getStoreTypeImage()), for: UIControlState.normal)
+        //set frame
+        button.frame = CGRect.init(x: 0, y: 0, width: 24, height: 24)//CGRectMake(0, 0, 24, 24)
+        button.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5)
+        let barButton = UIBarButtonItem(customView: button)
+//        let barButton = UIBarButtonItem.init(customView: imageView)
         self.navigationItem.rightBarButtonItem = barButton
-        
         tapGesture = UITapGestureRecognizer(target: self, action: #selector(openCloseTime))
         self.hoursStackView.addGestureRecognizer(tapGesture!)
         
