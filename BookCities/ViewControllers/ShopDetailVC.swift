@@ -73,8 +73,6 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         titleLabel.text = tit
         titleLabel.font = UIFont(name: Constants.Font.TypeHelvetica, size: CGFloat(Constants.Font.Size))!
 //        titleLabel.sizeToFit()
-        titleLabel.adjustsFontSizeToFitWidth = true
-        titleLabel.minimumScaleFactor = 0.5
         navigationItem.titleView = titleLabel
         
 //        self.navigationItem.title = tit
@@ -633,7 +631,7 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
             let arrowButton = UIButton(type: .roundedRect)
             arrowButton.setImage(UIImage(named: "downArrow")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal),for: .normal)
             arrowButton.contentVerticalAlignment = .top
-            arrowButton.contentHorizontalAlignment = .right
+            arrowButton.contentHorizontalAlignment = .center
 //            arrowButton.setTitle("", for: .normal)
             arrowButton.addTarget(self, action:#selector(showFullTime(sender:)), for: .touchUpInside)
 //            arrowButton.setContentCompressionResistancePriority(1000, for: UILayoutConstraintAxis.horizontal);
@@ -752,18 +750,18 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         let d = Int(components.description)! - 1
         
         for day in d ..< 7 {
-            if lunchTimes[day] != "closed"
+            if lunchTimes[day] != "closed" && lunchTimes[day] != "by appointment"
             {
-                stack.addArrangedSubview(createStack(day: dayNames[day], time: "\(days[day]) / \(lunchTimes[day])"))
+                stack.addArrangedSubview(createStack(day: dayNames[day], time: self.changeFormat(days[day], lunchTimes[day])))
             }
             else{
                 stack.addArrangedSubview(createStack(day: dayNames[day], time:days[day]))
             }
         }
         for day in 0 ..< d {
-            if lunchTimes[day] != "closed"
+            if lunchTimes[day] != "closed" && lunchTimes[day] != "by appointment"
             {
-                stack.addArrangedSubview(createStack(day: dayNames[day], time: "\(days[day]) / \(lunchTimes[day])"))
+                stack.addArrangedSubview(createStack(day: dayNames[day], time: self.changeFormat(days[day], lunchTimes[day])))
             }
             else{
                 stack.addArrangedSubview(createStack(day: dayNames[day], time:days[day]))
@@ -778,6 +776,14 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
             stack.addConstraint(width)
         }
         return stack
+    }
+    
+    func changeFormat(_ day:String, _ lunch:String)->String
+    {
+        let fullTime = day.components(separatedBy: "-")
+        let lunchTime = lunch.components(separatedBy: "-")
+        let finalTime = "\(fullTime[0])- \(lunchTime[0])/\(lunchTime[1]) -\(fullTime[1])"
+        return finalTime
     }
     
     func createStack(day:String,time:String) ->UIStackView
