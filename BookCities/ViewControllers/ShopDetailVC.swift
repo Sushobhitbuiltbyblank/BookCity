@@ -16,6 +16,9 @@ protocol UpdateFavorate {
 
 class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     
+    @IBOutlet weak var navRightImv: UIImageView!
+    @IBOutlet weak var titleL: UILabel!
+    @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var titleLable: UILabel!
@@ -64,16 +67,7 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // update navigation bar
-        guard let height = navigationController?.navigationBar.frame.size.height else {return}
-
-        let titleLabel = UILabel(frame: CGRect(x:0,y:0,width: 200,height: height))
-
-        titleLabel.numberOfLines = 2
-        titleLabel.textAlignment = .center
-        titleLabel.text = tit
-        titleLabel.font = UIFont(name: Constants.Font.TypeHelvetica, size: CGFloat(Constants.Font.Size))!
-//        titleLabel.sizeToFit()
-        navigationItem.titleView = titleLabel
+        
         
 //        self.navigationItem.title = tit
         navigationController!.navigationBar.isTranslucent = false
@@ -87,6 +81,7 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         navigationController!.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "Pixel"), for: .default)
         
         navigationItem.prompt = ""
+        self.navigationController?.navigationBar.isHidden = true
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName: UIColor.black,
             NSFontAttributeName: UIFont(name: Constants.Font.TypeHelvetica, size: CGFloat(Constants.Font.Size))!
@@ -99,6 +94,29 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
             self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(goBack))
         }
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
+        self.titleL.text = tit!
+        let titleLabel = UILabel(frame: CGRect(x:0,y:0,width: 270,height: 60.0))
+        titleLabel.font = UIFont(name: Constants.Font.TypeHelvetica, size: CGFloat(Constants.Font.Size))!
+        let attrString = NSMutableAttributedString(string: tit!)
+        let style = NSMutableParagraphStyle()
+        style.lineSpacing = -2// change line spacing between paragraph like 36 or 48
+        style.minimumLineHeight = 0 // change line spacing between each line like 30 or 40
+        style.lineHeightMultiple = 0.81
+        attrString.addAttribute(NSParagraphStyleAttributeName, value: style, range: NSRange(location: 0, length: tit!.count))
+        attrString.addAttribute(NSFontAttributeName, value: UIFont(name: Constants.Font.TypeHelvetica, size: CGFloat(Constants.Font.Size))!, range: NSMakeRange(0,tit!.count))
+        titleLabel.attributedText = attrString
+        titleLabel.textAlignment = .center
+        titleLabel.backgroundColor =  UIColor.red
+        titleLabel.numberOfLines = 2
+        titleLabel.sizeToFit()
+        let titleView = CustomTitleView(frame: CGRect(x:0,y:0,width: 250,height: 60.0))
+        titleView.addSubview(titleLabel)
+        titleView.addConstraint(NSLayoutConstraint(item: titleView, attribute: .centerX, relatedBy: .equal, toItem: titleLabel, attribute: .centerX, multiplier: 1, constant: 0))
+        titleView.sizeToFit()
+        self.navigationItem.titleView = titleView
+      
+        //setnavrightimage
+        self.navRightImv.image = UIImage(named: self.getStoreTypeImage())
         //create a new button
         let button: UIButton = UIButton(type: .custom)
         //set image for button
@@ -153,6 +171,28 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         setView()
     }
     
+//    override func viewDidAppear(_ animated: Bool) {
+//        self.navigationController?.navigationBar.setTitleVerticalPositionAdjustment(-20.0, for: .default)
+//        self.navigationController?.navigationBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 100.0)
+//    }
+    override func viewWillDisappear(_ animated: Bool) {
+//        self.navigationController?.navigationBar.isHidden = false
+    }
+    override func viewWillLayoutSubviews() {
+//        guard let height = navigationController?.navigationBar.frame.size.height else {return}
+        
+//        let titleLabel = UILabel(frame: CGRect(x:0,y:0,width: 400,height: height+60.0))
+//
+//
+//        titleLabel.font = UIFont(name: Constants.Font.TypeHelvetica, size: CGFloat(Constants.Font.Size))!
+//        titleLabel.text = tit
+//        titleLabel.textAlignment = .center
+//        titleLabel.backgroundColor =  UIColor.red
+//        titleLabel.numberOfLines = 0
+//        titleLabel.sizeToFit()
+//        self.navigationItem.titleView = titleLabel
+        //navigationItem.titleView = titleLabel
+    }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 //        self.descriptionLable.setContentOffset(CGPoint.zero, animated: false)
@@ -274,6 +314,12 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
         self.navigationController!.popViewController(animated: true)
     }
     
+    @IBAction func backAction(_ sender: Any) {
+        if self.navigationController!.viewControllers[0] === self{
+            self.navigationController!.dismiss(animated: true, completion: nil)
+        }
+        self.navigationController!.popViewController(animated: true)
+    }
     @IBAction func showOnMapAction(_ sender: Any) {
         var stores = [JSONStore]()
         stores.append(self.store!)
@@ -431,7 +477,7 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
     {
         let categoryIds = store?.books_category_ids
         var categoryString = ""
-        let catergoryArray = categoryIds?.characters.split{$0 == ":"}.map(String.init)
+        let catergoryArray = categoryIds?.split{$0 == ":"}.map(String.init)
         for value in catergoryArray!{
             categoryString.append(CoreDataManager.sharedInstance().getCategoryName(id: value)+", ")
         }
@@ -827,10 +873,10 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
 //            print("current - > \(currentTime)")
             var time = days[Int(day)] as String
             time = time.trimmingCharacters(in: .whitespaces)
-            let times = time.characters.split{$0 == "-"}.map(String.init)
+            let times = time.split{$0 == "-"}.map(String.init)
             
-            var uppertime = times[0].characters.split(separator: ":").map(String.init)
-            var lowertime = times[1].characters.split(separator: ":").map(String.init)
+            var uppertime = times[0].split(separator: ":").map(String.init)
+            var lowertime = times[1].split(separator: ":").map(String.init)
             uppertime[0] = uppertime[0].trimmingCharacters(in: .whitespaces)
             uppertime[1] = uppertime[1].trimmingCharacters(in: .whitespaces)
             lowertime[0] = lowertime[0].trimmingCharacters(in: .whitespaces)
@@ -918,10 +964,10 @@ class ShopDetailVC: UIViewController , UIScrollViewDelegate {
             return false
         }
         time = time.trimmingCharacters(in: .whitespaces)
-        let times = time.characters.split{$0 == "-"}.map(String.init)
+        let times = time.split{$0 == "-"}.map(String.init)
         
-        var uppertime = times[0].characters.split(separator: ":").map(String.init)
-        var lowertime = times[1].characters.split(separator: ":").map(String.init)
+        var uppertime = times[0].split(separator: ":").map(String.init)
+        var lowertime = times[1].split(separator: ":").map(String.init)
         uppertime[0] = uppertime[0].trimmingCharacters(in: .whitespaces)
         uppertime[1] = uppertime[1].trimmingCharacters(in: .whitespaces)
         lowertime[0] = lowertime[0].trimmingCharacters(in: .whitespaces)
@@ -960,3 +1006,4 @@ extension ShopDetailVC : UITextFieldDelegate {
         return false
     }
 }
+

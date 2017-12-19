@@ -11,6 +11,8 @@ import UIKit
 class CountriesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     
+    @IBOutlet weak var closeBtn: UIButton!
+    @IBOutlet weak var titleL: UILabel!
     @IBOutlet weak var tableView: UITableView!
     var cellIdentifier:String!
     var index:Int!
@@ -24,6 +26,7 @@ class CountriesVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.isHidden = true
         countries = Array<JSONCountry>()
         let parameter = ["hide_empty":1]
         if Reachable.isConnectedToNetwork() == true {
@@ -47,6 +50,8 @@ class CountriesVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
             }))
             self.present(alert, animated: true, completion: nil)
         }
+        self.titleL.font = UIFont(name: Constants.Font.TypeHelvetica, size: CGFloat(Constants.Font.Size))
+        self.titleL.text = "Countries"
         self.navigationItem.title = "Countries"
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName: UIColor.black,
@@ -60,6 +65,7 @@ class CountriesVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         // Searching Controller
         
         searchController.searchResultsUpdater = self
+        searchController.delegate = self
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
         
@@ -88,10 +94,10 @@ class CountriesVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     // MARK: - Button Actions
-    func closeBtnAction(_ sender:AnyObject)
-    {
-        self.dismiss(animated: true, completion: nil)
+    @IBAction func closeBtnAction(_ sender: Any) {
+      self.dismiss(animated: true, completion: nil)
     }
+    
 
     //MARK: - TableView Data Source function
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -139,6 +145,7 @@ class CountriesVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         }
         
     }
+    
     /*
     // MARK: - Navigation
 
@@ -151,10 +158,26 @@ class CountriesVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
 
 }
 
-extension CountriesVC: UISearchResultsUpdating {
+extension CountriesVC: UISearchResultsUpdating,UISearchControllerDelegate {
     
     func updateSearchResults(for searchController: UISearchController){
         filterContentForSearchText(searchText: searchController.searchBar.text!)
     }
+
     
+    func willPresentSearchController(_ searchController: UISearchController) {
+        
+    }
+    
+    func didPresentSearchController(_ searchController: UISearchController) {
+        
+    }
+    
+    func willDismissSearchController(_ searchController: UISearchController) {
+        
+    }
+    
+    func didDismissSearchController(_ searchController: UISearchController) {
+        
+    }
 }

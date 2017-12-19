@@ -11,8 +11,8 @@ import UIKit
 class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var closeBtn: UIButton!
+    @IBOutlet weak var titleL: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var titleLable: UILabel!
     var cellIdentifier:String!
     var index:Int!
     var cities:Array<JSONCity>!
@@ -31,6 +31,8 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         // NavigationBar Update
+        self.navigationController?.navigationBar.isHidden = true
+
         cities = Array<JSONCity>()
         guard let countryID = self.countryID else{return}
         let parameter = ["hide_empty":1,"country":countryID] as [String : AnyObject]
@@ -70,12 +72,12 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 }
             }
         }
-//        self.navigationItem.title = "Cities"
+        self.titleL.font = UIFont(name: Constants.Font.TypeHelvetica, size: CGFloat(Constants.Font.Size))
+        self.titleL.text = title
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName: UIColor.black,
             NSFontAttributeName: UIFont(name: Constants.Font.TypeHelvetica, size: CGFloat(Constants.Font.Size))!
         ]
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "cross")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: .plain, target: self, action: #selector(closeBtnAction))
         
         cellIdentifier = "citiCells"
         tableView.register(UINib(nibName: "CitiesTVCell", bundle: nil), forCellReuseIdentifier:cellIdentifier)
@@ -101,8 +103,6 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         // "Pixel" is a solid white 1x1 image.
         navigationController!.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "Pixel"), for: .default)
         navigationItem.prompt = ""
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(goBack))
-        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
     }
     
     override func didReceiveMemoryWarning() {
@@ -134,6 +134,7 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
         return cell;
     }
+    
 //    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 //       
 //
@@ -216,13 +217,11 @@ class CitiesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     // MARK: - Button Actions
-    func closeBtnAction(_ sender:AnyObject)
-    {
+    @IBAction func closeBtnAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func goBack(_ sender:AnyObject) -> ()
-    {
+    @IBAction func goBackAction(_ sender: Any) {
         self.navigationController!.popViewController(animated: true)
     }
 

@@ -10,6 +10,8 @@ import UIKit
 
 class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UpdateFavorate {
     
+    @IBOutlet weak var backBtn: UIButton!
+    @IBOutlet weak var titleL: UILabel!
     @IBOutlet weak var closeBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var resetFiltersBtn: UIButton!
@@ -50,6 +52,8 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
         headerCellIdentifier = "headerViewCell"
         tableView.register(UINib(nibName: "BookStoreTVCell", bundle: nil), forCellReuseIdentifier:cellIdentifier)
         tableView.register(UINib(nibName: "headerViewCell", bundle: nil), forCellReuseIdentifier: headerCellIdentifier)
+        tableView.estimatedRowHeight = 60
+        tableView.rowHeight = UITableViewAutomaticDimension
     }
     
     override func didReceiveMemoryWarning() {
@@ -190,12 +194,15 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
     //MARK: - Change View setting
     func defaultViewSetting() {
         // NavigationBar Update
-        self.navigationItem.title = "\n"+tit!+"\n"
+        self.navigationController?.navigationBar.isHidden = true
+        self.titleL.font = UIFont(name: Constants.Font.TypeHelvetica, size: CGFloat(Constants.Font.Size))
+        if let titleString = tit {
+            self.titleL.text = titleString
+        }
         // Add left button arrow image for pushed views
         let n: Int! = self.navigationController?.viewControllers.count
-        if (n>1){
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(goBack))
-        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
+        if !(n>1){
+            self.backBtn.isHidden = true
         }
         // change the title font of navigation bar
         self.navigationController?.navigationBar.titleTextAttributes = [
@@ -244,13 +251,12 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
             }
     }
     // MARK: - Button Actions
-    func goBack(_ sender:AnyObject) -> ()
-    {
+    
+    @IBAction func backBtnAction(_ sender: Any) {
         self.navigationController!.popViewController(animated: true)
     }
     
-    func closeBtnAction(_ sender:AnyObject)
-    {
+    @IBAction func closeBtnAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     

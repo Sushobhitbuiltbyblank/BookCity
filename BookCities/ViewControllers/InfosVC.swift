@@ -11,10 +11,15 @@ import PKHUD
 class InfosVC: UIViewController {
 
     @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var titleL: UILabel!
+    @IBOutlet weak var closeBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         // NavigationBar Update
-        self.navigationItem.title = "Infos"
+        self.navigationController?.navigationBar.isHidden = true
+
+        self.titleL.font = UIFont(name: Constants.Font.TypeHelvetica, size: CGFloat(Constants.Font.Size))
+        self.titleL.text = "Infos"
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName: UIColor.black,
             NSFontAttributeName: UIFont(name: Constants.Font.TypeHelvetica, size: CGFloat(Constants.Font.Size))!
@@ -67,10 +72,10 @@ class InfosVC: UIViewController {
     
    
     // MARK: - Button Actions
-    func closeBtnAction(_ sender:AnyObject)
-    {
+    @IBAction func closeBtnAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+    
     /*
     // MARK: - Navigation
 

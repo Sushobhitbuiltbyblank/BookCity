@@ -11,6 +11,9 @@ import MapKit
 import PKHUD
 class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
+    @IBOutlet weak var titleL: UILabel!
+    @IBOutlet weak var closeBtn: UIButton!
+    @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var mapView: MKMapView!
     var locationManager:CLLocationManager!
     var geocoder:CLGeocoder!
@@ -31,13 +34,17 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // NavigationBar Update
-        self.navigationItem.title = tit
+        self.navigationController?.navigationBar.isHidden = true
+
+        self.titleL.font = UIFont(name: Constants.Font.TypeHelvetica, size: CGFloat(Constants.Font.Size))
+        self.titleL.text = tit
+        
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSForegroundColorAttributeName: UIColor.black,
             NSFontAttributeName: UIFont(name: Constants.Font.TypeHelvetica, size: CGFloat(Constants.Font.Size))!
         ]
-        if (self.navigationController?.viewControllers.count) != 1 {
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(goBack))
+        if (self.navigationController?.viewControllers.count) == 1 {
+            self.backBtn.isHidden = true
         }
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor.black
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "cross")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), style: .plain, target: self, action: #selector(closeBtnAction))
@@ -111,12 +118,11 @@ class MyMapVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     // MARK: - Button Actions
     
-    func goBack(_ sender:AnyObject) -> ()
-    {
+    @IBAction func backBtnAction(_ sender: Any) {
         self.navigationController!.popViewController(animated: true)
     }
-    func closeBtnAction(_ sender:AnyObject)
-    {
+    
+    @IBAction func closeBtnAction(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
    
