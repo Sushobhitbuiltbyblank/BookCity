@@ -21,9 +21,9 @@ class CountriesVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     var page = 1
     var array:Array<Any>!
     let appdelegate = UIApplication.shared.delegate as! AppDelegate
-    let searchController = UISearchController(searchResultsController: nil)
+    var searchBar:UISearchBar?
     var filteredCountries = [JSONCountry]()
-
+    var searchActive:Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
@@ -62,20 +62,12 @@ class CountriesVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         cellIdentifier = "citiCells"
         tableView.register(UINib(nibName: "CitiesTVCell", bundle: nil), forCellReuseIdentifier:cellIdentifier)
         
-        // Searching Controller
+        // Searching Bar Configuration
+        searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height: 60))
+        searchBar?.delegate = self
+        searchBar?.placeholder = "Search Country Here"
         
-        searchController.searchResultsUpdater = self
-        searchController.delegate = self
-        searchController.dimsBackgroundDuringPresentation = false
-        definesPresentationContext = true
-        
-        let lowerBoader = CALayer()
-        lowerBoader.backgroundColor = UIColor.black.cgColor
-        lowerBoader.frame = CGRect(x: 0, y: searchController.searchBar.bounds.height-1, width: self.view.frame.width, height: 2.0)
-        self.searchController.searchBar.layer.addSublayer(lowerBoader)
-        self.searchController.searchBar.backgroundImage = UIImage()
         navigationController!.navigationBar.isTranslucent = false
-        
         // The navigation bar's shadowImage is set to a transparent image.  In
         // addition to providing a custom background image, this removes
         // the grey hairline at the bottom of the navigation bar.  The
@@ -101,7 +93,7 @@ class CountriesVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
 
     //MARK: - TableView Data Source function
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchController.isActive && searchController.searchBar.text != "" {
+        if searchActive && searchBar?.text != "" {
             return filteredCountries.count
         }
         return countries.count
@@ -114,7 +106,7 @@ class CountriesVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! CitiesTVCell
         
-        if searchController.isActive && searchController.searchBar.text != "" {
+        if searchActive && searchBar?.text != "" {
             cell.titleLable?.text = filteredCountries[indexPath.row].name
         } else {
             cell.titleLable?.text = countries[indexPath.row].name
@@ -124,10 +116,16 @@ class CountriesVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let country:JSONCountry = self.countries[indexPath.row]
+        let country:JSONCountry?
+        if searchActive && searchBar?.text != "" {
+            country = self.filteredCountries[indexPath.row]
+        }
+        else{
+            country = self.countries[indexPath.row]
+        }
         let next = self.storyboard?.instantiateViewController(withIdentifier: "CitiesVC") as! CitiesVC
-        next.countryID = country.id
-        next.title = country.name
+        next.countryID = country?.id
+        next.title = country?.name
         self.navigationController?.pushViewController(next, animated: true)
     }
     // MARK: - SearchController Delegate method
@@ -141,7 +139,7 @@ class CountriesVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if tableView.contentOffset.y < -100{
-            self.tableView.tableHeaderView = searchController.searchBar
+            self.tableView.tableHeaderView = searchBar
         }
         
     }
@@ -158,26 +156,38 @@ class CountriesVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
 
 }
 
-extension CountriesVC: UISearchResultsUpdating,UISearchControllerDelegate {
+extension CountriesVC: UISearchBarDelegate {
     
     func updateSearchResults(for searchController: UISearchController){
         filterContentForSearchText(searchText: searchController.searchBar.text!)
     }
 
-    
-    func willPresentSearchController(_ searchController: UISearchController) {
-        
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchActive = true;
     }
     
-    func didPresentSearchController(_ searchController: UISearchController) {
-        
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchActive = false;
     }
     
-    func willDismissSearchController(_ searchController: UISearchController) {
-        
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false;
     }
     
-    func didDismissSearchController(_ searchController: UISearchController) {
-        
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false;
     }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredCountries = countries.filter { countries in
+            return (countries.name?.lowercased().hasPrefix(searchText.lowercased()))!
+        }
+        if filteredCountries.count == 0 {
+            searchActive = false
+        } else {
+            searchActive = true
+        }
+        self.tableView.reloadData()
+    }
+    
 }

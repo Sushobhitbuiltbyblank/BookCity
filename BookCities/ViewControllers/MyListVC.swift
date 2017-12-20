@@ -494,7 +494,7 @@ class MyListVC: UIViewController,UITableViewDataSource, UITableViewDelegate, UIP
         let categoryString = store.books_category_ids
         let value:Categories = category as! Categories
         let id = value.value(forKeyPath: "id") as! String
-        let catergoryArray = categoryString?.characters.split{$0 == ":"}.map(String.init)
+        let catergoryArray = categoryString?.split{$0 == ":"}.map(String.init)
         for cat in catergoryArray! {
             if cat == id {
                 return true
